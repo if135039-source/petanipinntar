@@ -39,19 +39,23 @@ html{
 
 body{
     background:
-        radial-gradient(circle at 10% 10%,rgba(98,211,132,.13),transparent 25%),
-        radial-gradient(circle at 90% 20%,rgba(245,185,66,.12),transparent 25%),
-        radial-gradient(circle at 50% 90%,rgba(139,94,52,.07),transparent 25%),
+        radial-gradient(circle at 10% 10%,rgba(98,211,132,.16),transparent 28%),
+        radial-gradient(circle at 90% 20%,rgba(245,185,66,.13),transparent 28%),
+        radial-gradient(circle at 50% 90%,rgba(139,94,52,.08),transparent 28%),
         #f4fbf6;
     color:var(--text);
     min-height:100vh;
 }
 
+/* =========================
+HEADER
+========================= */
+
 header{
     position:sticky;
     top:0;
     z-index:1000;
-    background:rgba(255,255,255,.94);
+    background:rgba(255,255,255,.95);
     backdrop-filter:blur(15px);
     border-bottom:1px solid rgba(25,135,84,.10);
     padding:13px 5%;
@@ -112,6 +116,10 @@ header{
     transform:translateY(-2px);
 }
 
+/* =========================
+MAIN
+========================= */
+
 main{
     max-width:1300px;
     margin:auto;
@@ -139,7 +147,7 @@ main{
 }
 
 /* =========================
-DASHBOARD BACKGROUND
+DASHBOARD
 ========================= */
 
 #dashboard{
@@ -148,6 +156,8 @@ DASHBOARD BACKGROUND
     border-radius:30px;
     min-height:700px;
 }
+
+/* BACKGROUND DAUN DIPERJELAS */
 
 .plant-background{
     position:absolute;
@@ -159,70 +169,83 @@ DASHBOARD BACKGROUND
 
 .plant{
     position:absolute;
-    opacity:.19;
-    font-size:55px;
-    filter:blur(.2px);
-    animation:plantFloat 7s ease-in-out infinite;
+    display:block;
+    opacity:.30;
+    font-size:75px;
+    filter:drop-shadow(0 7px 7px rgba(25,135,84,.12));
+    animation:plantFloat 8s ease-in-out infinite;
+    user-select:none;
 }
 
+/* Daun besar kiri atas */
 .plant:nth-child(1){
-    left:2%;
-    top:10%;
+    left:-10px;
+    top:70px;
+    font-size:95px;
     color:#198754;
+    transform:rotate(-20deg);
 }
 
+/* Daun kanan atas */
 .plant:nth-child(2){
-    right:5%;
-    top:15%;
-    font-size:65px;
+    right:10px;
+    top:80px;
+    font-size:105px;
     color:#c6a93c;
     animation-delay:1s;
+    transform:rotate(18deg);
 }
 
+/* Daun kiri bawah */
 .plant:nth-child(3){
-    left:10%;
-    bottom:10%;
-    font-size:70px;
+    left:15px;
+    bottom:25px;
+    font-size:115px;
     color:#8b5e34;
     animation-delay:2s;
 }
 
+/* Daun kanan bawah */
 .plant:nth-child(4){
-    right:15%;
-    bottom:5%;
-    font-size:55px;
+    right:30px;
+    bottom:15px;
+    font-size:100px;
     color:#d2a72e;
     animation-delay:3s;
 }
 
+/* Tengah atas */
 .plant:nth-child(5){
-    left:45%;
-    top:4%;
-    font-size:42px;
+    left:43%;
+    top:5px;
+    font-size:65px;
     color:#4e9e58;
     animation-delay:1.5s;
 }
 
+/* Tengah bawah */
 .plant:nth-child(6){
-    right:40%;
-    bottom:8%;
-    font-size:48px;
+    right:38%;
+    bottom:5px;
+    font-size:75px;
     color:#8b5e34;
     animation-delay:2.5s;
 }
 
+/* Tengah kiri */
 .plant:nth-child(7){
-    left:25%;
+    left:23%;
     top:30%;
-    font-size:38px;
+    font-size:65px;
     color:#d7bd3e;
     animation-delay:3.5s;
 }
 
+/* Tengah kanan */
 .plant:nth-child(8){
-    right:28%;
+    right:24%;
     top:43%;
-    font-size:46px;
+    font-size:75px;
     color:#237c4b;
     animation-delay:4s;
 }
@@ -231,8 +254,49 @@ DASHBOARD BACKGROUND
     0%,100%{
         transform:translateY(0) rotate(-5deg);
     }
+
     50%{
         transform:translateY(-18px) rotate(7deg);
+    }
+}
+
+/* Tambahan pola daun kecil */
+
+.plant-background::before,
+.plant-background::after{
+    content:"🍃   🌿   🍀   🌱   🍃";
+    position:absolute;
+    font-size:38px;
+    letter-spacing:28px;
+    opacity:.20;
+    color:#198754;
+    white-space:nowrap;
+    animation:leafMove 14s linear infinite;
+}
+
+.plant-background::before{
+    top:24%;
+    left:-80px;
+}
+
+.plant-background::after{
+    bottom:23%;
+    right:-120px;
+    transform:rotate(180deg);
+    animation-duration:17s;
+}
+
+@keyframes leafMove{
+    0%{
+        transform:translateX(0) rotate(-3deg);
+    }
+
+    50%{
+        transform:translateX(80px) rotate(3deg);
+    }
+
+    100%{
+        transform:translateX(0) rotate(-3deg);
     }
 }
 
@@ -262,11 +326,11 @@ DASHBOARD BACKGROUND
 }
 
 /* =========================
-GENERAL CARD
+CARD
 ========================= */
 
 .card{
-    background:rgba(255,255,255,.93);
+    background:rgba(255,255,255,.94);
     border:1px solid rgba(25,135,84,.09);
     border-radius:var(--radius);
     padding:22px;
@@ -347,6 +411,10 @@ GENERAL CARD
     white-space:nowrap;
 }
 
+/* =========================
+COIN
+========================= */
+
 .coin-card{
     background:linear-gradient(135deg,rgba(25,135,84,.97),rgba(45,172,104,.95));
     color:white;
@@ -416,6 +484,10 @@ GENERAL CARD
     color:var(--green);
     border:1px solid #bde4ca;
 }
+
+/* =========================
+STATS
+========================= */
 
 .stats{
     display:grid;
@@ -739,7 +811,7 @@ FERTILIZER
 }
 
 /* =========================
-SMART FARM CARDS
+SMART FARM
 ========================= */
 
 .smart-grid{
@@ -1220,9 +1292,11 @@ POPUP
         opacity:0;
         transform:scale(.55) translateY(40px);
     }
+
     70%{
         transform:scale(1.05);
     }
+
     100%{
         opacity:1;
         transform:scale(1);
@@ -1246,6 +1320,7 @@ POPUP
     from{
         transform:translateY(0) rotate(-3deg);
     }
+
     to{
         transform:translateY(-12px) rotate(3deg);
     }
@@ -1350,6 +1425,10 @@ RESPONSIVE
     .fertilizer-grid{
         grid-template-columns:repeat(2,1fr);
     }
+
+    .plant{
+        opacity:.22;
+    }
 }
 
 @media(max-width:700px){
@@ -1417,6 +1496,27 @@ RESPONSIVE
     .sensor-card{
         grid-template-columns:1fr 1fr;
     }
+
+    .plant:nth-child(1){
+        font-size:70px;
+    }
+
+    .plant:nth-child(2){
+        font-size:75px;
+    }
+
+    .plant:nth-child(3){
+        font-size:80px;
+    }
+
+    .plant:nth-child(4){
+        font-size:75px;
+    }
+
+    .plant:nth-child(7),
+    .plant:nth-child(8){
+        opacity:.15;
+    }
 }
 
 @media(max-width:480px){
@@ -1458,6 +1558,13 @@ RESPONSIVE
 
     .harvest-date{
         font-size:22px;
+    }
+
+    .plant:nth-child(5),
+    .plant:nth-child(6),
+    .plant:nth-child(7),
+    .plant:nth-child(8){
+        display:none;
     }
 }
 </style>
@@ -1948,9 +2055,7 @@ id="fertilizerGrid">
 ℹ️ HET yang digunakan dalam aplikasi:
 Urea Rp1.800/kg, NPK Rp1.840/kg,
 NPK Kakao Rp2.640/kg, ZA Rp1.360/kg,
-dan Organik Rp640/kg. Harga ini merupakan
-harga eceran tertinggi pupuk bersubsidi,
-bukan harga pupuk non-subsidi.
+dan Organik Rp640/kg.
 
 </div>
 
@@ -2219,6 +2324,7 @@ dan tanggal tanam.
 <option value="semangka">🍉 Semangka</option>
 <option value="melon">🍈 Melon</option>
 <option value="pepaya">🥭 Pepaya</option>
+
 </select>
 
 </div>
@@ -2306,7 +2412,7 @@ Jadi tanggal yang ditampilkan adalah
 </section>
 
 <!-- =====================================================
-SMART IRRIGATION
+IRRIGATION
 ===================================================== -->
 
 <section id="irrigation" class="page">
@@ -2633,9 +2739,7 @@ Kirim
 
 </main>
 
-<!-- =====================================================
-REWARD POPUP
-===================================================== -->
+<!-- POPUP -->
 
 <div class="reward-overlay"
 id="rewardOverlay">
@@ -2702,7 +2806,7 @@ if(!user.history) user.history=[];
 if(!user.harvest) user.harvest=null;
 if(!user.irrigation) user.irrigation=null;
 
-const levels = [
+const levels=[
 "Pemula",
 "Pejuang Hijau",
 "Petani Hijau",
@@ -2742,8 +2846,7 @@ function updateDashboard(){
 const level=calculateLevel();
 const levelName=levels[level-1];
 
-document.getElementById("usernameText")
-.textContent=user.username;
+document.getElementById("usernameText").textContent=user.username;
 
 document.getElementById("levelText")
 .textContent=`Level ${level} • ${levelName}`;
@@ -2915,7 +3018,7 @@ behavior:"smooth"
 }
 
 /* =====================================================
-WASTE DEPOSIT
+WASTE
 ===================================================== */
 
 const wasteType=document.getElementById("wasteType");
@@ -3266,7 +3369,12 @@ ${item.category}
 
 ${priceHTML}
 
-<div class="commodity-status">
+<div style="
+margin-top:10px;
+font-size:10px;
+color:#198754;
+font-weight:700;
+">
 📊 Data Referensi
 </div>
 
@@ -3638,10 +3746,21 @@ let captured=false;
 async function startCamera(){
 
 const video=document.getElementById("video");
+
 const placeholder=
 document.getElementById("cameraPlaceholder");
 
 try{
+
+if(!navigator.mediaDevices||
+!navigator.mediaDevices.getUserMedia){
+
+showToast(
+"Browser ini tidak mendukung akses kamera."
+);
+
+return;
+}
 
 stream=
 await navigator.mediaDevices.getUserMedia({
@@ -3657,9 +3776,12 @@ audio:false
 video.srcObject=stream;
 
 video.style.display="block";
+
 placeholder.style.display="none";
 
-showToast("📷 Kamera berhasil dibuka.");
+showToast(
+"📷 Kamera berhasil dibuka."
+);
 
 }catch(error){
 
@@ -3674,6 +3796,7 @@ showToast(
 function capturePhoto(){
 
 const video=document.getElementById("video");
+
 const canvas=document.getElementById("canvas");
 
 if(video.style.display==="none"){
@@ -3686,6 +3809,7 @@ return;
 }
 
 canvas.width=video.videoWidth||640;
+
 canvas.height=video.videoHeight||480;
 
 const ctx=canvas.getContext("2d");
@@ -3699,29 +3823,40 @@ canvas.height
 );
 
 canvas.style.display="block";
+
 video.style.display="none";
 
 captured=true;
 
-showToast("📸 Foto berhasil diambil.");
+showToast(
+"📸 Foto berhasil diambil."
+);
 
 }
 
 function retakePhoto(){
 
 const video=document.getElementById("video");
+
 const canvas=document.getElementById("canvas");
+
 const placeholder=
 document.getElementById("cameraPlaceholder");
 
 canvas.style.display="none";
 
 if(stream){
+
 video.style.display="block";
+
 placeholder.style.display="none";
+
 }else{
+
 video.style.display="none";
+
 placeholder.style.display="block";
+
 }
 
 captured=false;
@@ -3734,7 +3869,9 @@ document.getElementById("analysisResult")
 function analyzePhoto(){
 
 const canvas=document.getElementById("canvas");
-const result=document.getElementById("analysisResult");
+
+const result=
+document.getElementById("analysisResult");
 
 if(!captured){
 
@@ -3761,6 +3898,7 @@ blue=0,
 brightness=0;
 
 const step=20;
+
 let count=0;
 
 for(
@@ -3770,7 +3908,9 @@ i+=4*step
 ){
 
 red+=image.data[i];
+
 green+=image.data[i+1];
+
 blue+=image.data[i+2];
 
 brightness+=
@@ -3785,8 +3925,11 @@ count++;
 }
 
 red/=count;
+
 green/=count;
+
 blue/=count;
+
 brightness/=count;
 
 let status;
@@ -3800,7 +3943,9 @@ green-((red+blue)/2);
 if(brightness<55){
 
 status="Foto terlalu gelap";
+
 color="Pencahayaan rendah";
+
 priority="Perbaiki foto";
 
 recommendation=`
@@ -3817,7 +3962,9 @@ recommendation=`
 }else if(greenRatio>20){
 
 status="Daun dominan hijau";
+
 color="Hijau relatif normal";
+
 priority="Pantau";
 
 recommendation=`
@@ -3838,18 +3985,20 @@ red>blue
 ){
 
 status="Ada warna cokelat/kemerahan";
+
 color="Perlu pemeriksaan";
+
 priority="Periksa bagian daun";
 
 recommendation=`
 
-<b>Langkah penanganan yang disarankan:</b>
+<b>Langkah penanganan:</b>
 
 1. Periksa apakah bagian tersebut benar-benar kering atau hanya efek pencahayaan.
 2. Cek kelembapan tanah.
 3. Periksa apakah terdapat bercak yang meluas.
 4. Lihat bagian bawah daun untuk tanda hama.
-5. Jika kerusakan terus meluas, pisahkan bagian tanaman yang sangat rusak dan lakukan pemeriksaan lebih lanjut.
+5. Jika kerusakan terus meluas, lakukan pemeriksaan lebih lanjut.
 
 ⚠️ Sistem tidak langsung menyatakan tanaman terkena penyakit tertentu.
 
@@ -3860,19 +4009,21 @@ red>green-10
 ){
 
 status="Ada indikasi warna kekuningan";
+
 color="Hijau kekuningan";
+
 priority="Periksa air & nutrisi";
 
 recommendation=`
 
-<b>Langkah penanganan yang lebih aman:</b>
+<b>Langkah penanganan:</b>
 
 1. Periksa kelembapan tanah terlebih dahulu.
 2. Jika tanah sangat kering, lakukan penyiraman secukupnya.
 3. Jika tanah terlalu basah, kurangi penyiraman dan pastikan drainase baik.
 4. Periksa cahaya yang diterima tanaman.
 5. Periksa kondisi akar jika tanaman terus menguning.
-6. Pertimbangkan kebutuhan nutrisi hanya setelah kondisi air dan akar diperiksa.
+6. Pertimbangkan kebutuhan nutrisi setelah kondisi air dan akar diperiksa.
 
 ⚠️ Daun kuning tidak selalu berarti kekurangan pupuk.
 
@@ -3881,7 +4032,9 @@ recommendation=`
 }else{
 
 status="Warna campuran";
+
 color="Belum dapat disimpulkan";
+
 priority="Perlu foto lebih jelas";
 
 recommendation=`
@@ -3941,12 +4094,13 @@ result.innerHTML=`
 user.cameraUsed=true;
 
 saveUser();
+
 updateDashboard();
 
 }
 
 /* =====================================================
-HARVEST DATA
+HARVEST
 ===================================================== */
 
 const harvestData={
@@ -4074,9 +4228,11 @@ if(condition==="lambat"){
 days+=14;
 }
 
-const planting=new Date(dateValue+"T00:00:00");
+const planting=
+new Date(dateValue+"T00:00:00");
 
-const harvest=new Date(planting);
+const harvest=
+new Date(planting);
 
 harvest.setDate(
 harvest.getDate()+days
@@ -4086,20 +4242,27 @@ const today=new Date();
 
 const diff=
 Math.ceil(
-(harvest-today)/(1000*60*60*24)
+(harvest-today)/
+(1000*60*60*24)
 );
 
 let countdownText;
 
 if(diff>0){
+
 countdownText=
 `⏳ Sekitar ${diff} hari lagi`;
+
 }else if(diff===0){
+
 countdownText=
 "🌾 Perkiraan panen hari ini";
+
 }else{
+
 countdownText=
 "⚠️ Perkiraan tanggal panen sudah lewat. Periksa kondisi tanaman.";
+
 }
 
 const result=
@@ -4153,11 +4316,15 @@ condition==="normal"
 <div class="timeline">
 
 <div class="timeline-step active"></div>
+
 <div class="timeline-step active"></div>
+
 <div class="timeline-step active"></div>
+
 <div class="timeline-step ${
 diff<=Math.round(days*.75)?"active":""
 }"></div>
+
 <div class="timeline-step ${
 diff<=0?"active":""
 }"></div>
@@ -4200,20 +4367,25 @@ updateDashboardSmartCards();
 }
 
 /* =====================================================
-DASHBOARD SMART CARDS
+DASHBOARD SMART
 ===================================================== */
 
 function updateDashboardSmartCards(){
 
 const harvestStatus=
-document.getElementById("dashboardHarvestStatus");
+document.getElementById(
+"dashboardHarvestStatus"
+);
 
 const harvestText=
-document.getElementById("dashboardHarvestText");
+document.getElementById(
+"dashboardHarvestText"
+);
 
 if(user.harvest){
 
-const date=new Date(user.harvest.date);
+const date=
+new Date(user.harvest.date);
 
 const diff=
 Math.ceil(
@@ -4240,10 +4412,14 @@ harvestText.textContent=
 }
 
 const irrigationStatus=
-document.getElementById("dashboardIrrigationStatus");
+document.getElementById(
+"dashboardIrrigationStatus"
+);
 
 const irrigationText=
-document.getElementById("dashboardIrrigationText");
+document.getElementById(
+"dashboardIrrigationText"
+);
 
 if(user.irrigation){
 
@@ -4266,71 +4442,106 @@ irrigationText.textContent=
 }
 
 /* =====================================================
-SMART IRRIGATION
+IRRIGATION
 ===================================================== */
 
 function updateIrrigationPreview(){
 
 const moisture=
 Number(
-document.getElementById("soilMoisture").value
+document.getElementById(
+"soilMoisture"
+).value
 )||0;
 
 const temperature=
 Number(
-document.getElementById("airTemperature").value
+document.getElementById(
+"airTemperature"
+).value
 )||0;
 
 const weather=
-document.getElementById("weatherCondition");
+document.getElementById(
+"weatherCondition"
+);
 
 const phase=
-document.getElementById("plantPhase");
+document.getElementById(
+"plantPhase"
+);
 
-document.getElementById("sensorMoisture")
-.textContent=`${moisture}%`;
+document.getElementById(
+"sensorMoisture"
+).textContent=
+`${moisture}%`;
 
-document.getElementById("sensorTemperature")
-.textContent=`${temperature}°C`;
+document.getElementById(
+"sensorTemperature"
+).textContent=
+`${temperature}°C`;
 
-document.getElementById("sensorWeather")
-.textContent=
-weather.options[weather.selectedIndex].text
-.replace(/^[^\s]+\s/,"");
+document.getElementById(
+"sensorWeather"
+).textContent=
+weather.options[
+weather.selectedIndex
+].text.replace(
+/^[^\s]+\s/,""
+);
 
-document.getElementById("sensorPhase")
-.textContent=
-phase.options[phase.selectedIndex].text
-.replace(/^[^\s]+\s/,"");
+document.getElementById(
+"sensorPhase"
+).textContent=
+phase.options[
+phase.selectedIndex
+].text.replace(
+/^[^\s]+\s/,""
+);
 
 const fill=
-document.getElementById("irrigationFill");
+document.getElementById(
+"irrigationFill"
+);
 
 fill.style.width=
-`${Math.max(0,Math.min(100,moisture))}%`;
+`${Math.max(
+0,
+Math.min(100,moisture)
+)}%`;
 
 }
 
 function calculateIrrigation(){
 
 const plant=
-document.getElementById("irrigationPlant").value;
+document.getElementById(
+"irrigationPlant"
+).value;
 
 const moisture=
 Number(
-document.getElementById("soilMoisture").value
+document.getElementById(
+"soilMoisture"
+).value
 );
 
 const temperature=
 Number(
-document.getElementById("airTemperature").value
+document.getElementById(
+"airTemperature"
+).value
 );
 
 const weather=
-document.getElementById("weatherCondition").value;
+document.getElementById(
+"weatherCondition"
+).value;
 
 const phase=
-document.getElementById("plantPhase").value;
+document.getElementById(
+"plantPhase"
+).value;
 
 if(
 isNaN(moisture)||
@@ -4358,15 +4569,19 @@ if(weather==="hujan"){
 if(moisture<45){
 
 status="🟡 Pantau tanah";
+
 advice=
 "Hujan membantu menambah air, tetapi kelembapan tanah masih rendah. Periksa kembali setelah hujan sebelum menentukan penyiraman.";
+
 className="status-warning";
 
 }else{
 
 status="🟢 Tidak perlu menyiram";
+
 advice=
 "Cuaca hujan dan kelembapan tanah sudah cukup. Hindari penyiraman tambahan agar tanah tidak terlalu basah.";
+
 className="status-good";
 
 }
@@ -4374,8 +4589,10 @@ className="status-good";
 }else if(moisture<30){
 
 status="🔵 Disarankan menyiram";
+
 advice=
 "Tanah tergolong kering. Lakukan penyiraman secara bertahap sampai kelembapan mencukupi dan pastikan air dapat meresap dengan baik.";
+
 className="status-danger";
 
 needWater=true;
@@ -4383,8 +4600,10 @@ needWater=true;
 }else if(moisture<45){
 
 status="🟡 Siapkan penyiraman";
+
 advice=
 "Kelembapan mulai rendah. Pantau kembali beberapa jam kemudian. Jika cuaca panas atau daun mulai layu, lakukan penyiraman secukupnya.";
+
 className="status-warning";
 
 needWater=true;
@@ -4392,15 +4611,19 @@ needWater=true;
 }else if(moisture<=75){
 
 status="🟢 Kelembapan cukup";
+
 advice=
 "Kelembapan tanah berada pada kisaran yang cukup. Tidak perlu menambah air jika tanaman terlihat normal. Tetap pantau karena kebutuhan tiap tanaman berbeda.";
+
 className="status-good";
 
 }else{
 
 status="🔴 Terlalu basah";
+
 advice=
 "Tanah sangat lembap. Jangan menambah air. Periksa drainase dan pastikan tidak terjadi genangan berkepanjangan.";
+
 className="status-danger";
 
 }
@@ -4442,20 +4665,28 @@ advice+=
 }
 
 const statusEl=
-document.getElementById("irrigationStatus");
+document.getElementById(
+"irrigationStatus"
+);
 
 statusEl.className=className;
 
 statusEl.textContent=status;
 
-document.getElementById("irrigationAdvice")
-.textContent=advice;
+document.getElementById(
+"irrigationAdvice"
+).textContent=advice;
 
 const fill=
-document.getElementById("irrigationFill");
+document.getElementById(
+"irrigationFill"
+);
 
 fill.style.width=
-`${Math.max(0,Math.min(100,moisture))}%`;
+`${Math.max(
+0,
+Math.min(100,moisture)
+)}%`;
 
 user.irrigation={
 status:status,
@@ -4496,14 +4727,16 @@ msg.textContent=text;
 
 chat.appendChild(msg);
 
-chat.scrollTop=chat.scrollHeight;
+chat.scrollTop=
+chat.scrollHeight;
 
 }
 
 function askSuggestion(text){
 
-document.getElementById("aiInput")
-.value=text;
+document.getElementById(
+"aiInput"
+).value=text;
 
 sendAI();
 
@@ -4512,7 +4745,9 @@ sendAI();
 function sendAI(){
 
 const input=
-document.getElementById("aiInput");
+document.getElementById(
+"aiInput"
+);
 
 const question=
 input.value.trim();
@@ -4529,6 +4764,7 @@ input.value="";
 user.aiUsed=true;
 
 saveUser();
+
 updateDashboard();
 
 setTimeout(()=>{
@@ -4545,13 +4781,10 @@ answer,
 
 }
 
-/* =====================================================
-AI ANSWER
-===================================================== */
-
 function generateAIAnswer(question){
 
-const q=question.toLowerCase();
+const q=
+question.toLowerCase();
 
 /* DAUN KUNING */
 
@@ -4708,15 +4941,30 @@ q.includes("tomat")
 let result="";
 
 if(q.includes("padi")){
-result="Padi pada aplikasi menggunakan estimasi awal sekitar 115 hari setelah tanam.";
+
+result=
+"Padi pada aplikasi menggunakan estimasi awal sekitar 115 hari setelah tanam.";
+
 }else if(q.includes("jagung")){
-result="Jagung menggunakan estimasi awal sekitar 100 hari setelah tanam.";
+
+result=
+"Jagung menggunakan estimasi awal sekitar 100 hari setelah tanam.";
+
 }else if(q.includes("cabai")){
-result="Cabai menggunakan estimasi awal sekitar 90 hari sebagai perkiraan awal.";
+
+result=
+"Cabai menggunakan estimasi awal sekitar 90 hari sebagai perkiraan awal.";
+
 }else if(q.includes("tomat")){
-result="Tomat menggunakan estimasi awal sekitar 75 hari.";
+
+result=
+"Tomat menggunakan estimasi awal sekitar 75 hari.";
+
 }else{
-result="Umur panen berbeda menurut tanaman dan varietas.";
+
+result=
+"Umur panen berbeda menurut tanaman dan varietas.";
+
 }
 
 return `🌾 ${result}
@@ -4911,7 +5159,8 @@ let toastTimer;
 
 function showToast(message){
 
-const toast=document.getElementById("toast");
+const toast=
+document.getElementById("toast");
 
 toast.textContent=message;
 
@@ -4919,7 +5168,8 @@ toast.classList.add("show");
 
 clearTimeout(toastTimer);
 
-toastTimer=setTimeout(()=>{
+toastTimer=
+setTimeout(()=>{
 
 toast.classList.remove("show");
 
@@ -4954,11 +5204,14 @@ new Date(user.harvest.date);
 
 if(!isNaN(harvestDate)){
 
-document.getElementById("harvestPlant")
-.value=
+document.getElementById(
+"harvestPlant"
+).value=
 Object.keys(harvestData)
 .find(
-key=>harvestData[key].name===user.harvest.plant
+key=>
+harvestData[key].name===
+user.harvest.plant
 )||"padi";
 
 }
