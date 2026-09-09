@@ -1,0 +1,3485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#20a464">
+<title>EcoMaggot - Smart Farming</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#eef8f1;
+    color:#183b2a;
+    min-height:100vh;
+}
+
+header{
+    background:linear-gradient(135deg,#0b7a45,#20b866);
+    color:white;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#d9ff8a;
+}
+
+.menu{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.menu button{
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:white;
+    padding:10px 14px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.menu button:hover{
+    background:rgba(255,255,255,.3);
+}
+
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 20px 80px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.welcome{
+    margin-bottom:20px;
+}
+
+.welcome h1{
+    font-size:30px;
+}
+
+.welcome p{
+    color:#658071;
+    margin-top:5px;
+}
+
+/* PROFILE */
+
+.profile-card{
+    background:white;
+    border-radius:25px;
+    padding:25px;
+    display:grid;
+    grid-template-columns:80px 1fr auto;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 8px 25px rgba(24,95,55,.08);
+    margin-bottom:20px;
+}
+
+.avatar{
+    width:75px;
+    height:75px;
+    background:linear-gradient(135deg,#8be28b,#20a464);
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:38px;
+}
+
+.level{
+    color:#159354;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.xp-bar{
+    width:100%;
+    height:12px;
+    background:#e1eee6;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.xp-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#20a464,#8fdc50);
+    border-radius:20px;
+    transition:.5s;
+}
+
+.xp-text{
+    font-size:13px;
+    color:#71867a;
+    margin-top:5px;
+}
+
+.level-badge{
+    background:#e9f9df;
+    color:#29883d;
+    padding:12px 18px;
+    border-radius:18px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* COIN */
+
+.coin-card{
+    background:linear-gradient(135deg,#154c32,#20a464);
+    color:white;
+    border-radius:25px;
+    padding:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 25px rgba(12,103,56,.2);
+    margin-bottom:20px;
+}
+
+.coin-title{
+    opacity:.8;
+    font-size:14px;
+}
+
+.coins{
+    font-size:35px;
+    font-weight:bold;
+    margin:5px 0;
+}
+
+.coin-icon{
+    font-size:48px;
+}
+
+.deposit-btn{
+    border:none;
+    background:#f4ffca;
+    color:#17633d;
+    padding:14px 22px;
+    border-radius:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.deposit-btn:hover{
+    transform:scale(1.04);
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 7px 20px rgba(0,0,0,.05);
+}
+
+.stat-icon{
+    font-size:28px;
+}
+
+.stat h3{
+    margin:10px 0 5px;
+}
+
+.stat p{
+    color:#71867a;
+    font-size:13px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    padding:23px;
+    box-shadow:0 7px 22px rgba(0,0,0,.05);
+}
+
+.card h2{
+    margin-bottom:15px;
+}
+
+/* MISSION */
+
+.mission{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    background:#f4faf5;
+    border-radius:17px;
+    margin-bottom:10px;
+}
+
+.mission-icon{
+    width:45px;
+    height:45px;
+    background:#dff5e5;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+}
+
+.mission-info{
+    flex:1;
+}
+
+.mission-info strong{
+    display:block;
+}
+
+.mission-info small{
+    color:#71867a;
+}
+
+.reward{
+    color:#d28a00;
+    font-weight:bold;
+}
+
+/* DEPOSIT */
+
+.deposit-box{
+    text-align:center;
+    max-width:700px;
+    margin:auto;
+}
+
+.deposit-big-icon{
+    font-size:70px;
+    margin:10px;
+}
+
+.input-group{
+    text-align:left;
+    margin:15px 0;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+.input-group input,
+.input-group select,
+.chat-input{
+    width:100%;
+    border:2px solid #e0eee5;
+    padding:13px;
+    border-radius:13px;
+    outline:none;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.chat-input:focus{
+    border-color:#20a464;
+}
+
+.primary-btn{
+    border:none;
+    background:#20a464;
+    color:white;
+    padding:14px 22px;
+    border-radius:14px;
+    font-weight:bold;
+    cursor:pointer;
+    width:100%;
+}
+
+.primary-btn:hover{
+    background:#168b51;
+}
+
+/* REWARD */
+
+.reward-header{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.reward-header h1{
+    font-size:30px;
+}
+
+.reward-header p{
+    color:#71867a;
+    margin-top:8px;
+}
+
+.reward-balance{
+    background:linear-gradient(135deg,#154c32,#20a464);
+    color:white;
+    padding:20px;
+    border-radius:22px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.reward-balance small{
+    opacity:.8;
+}
+
+.reward-balance strong{
+    display:block;
+    font-size:35px;
+    margin-top:5px;
+}
+
+.reward-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.reward-card{
+    background:white;
+    border-radius:22px;
+    padding:20px;
+    border:2px solid #e3eee6;
+    box-shadow:0 7px 20px rgba(0,0,0,.05);
+    transition:.2s;
+    position:relative;
+}
+
+.reward-card:hover{
+    transform:translateY(-4px);
+}
+
+.reward-card.locked{
+    opacity:.58;
+}
+
+.reward-icon{
+    font-size:50px;
+    text-align:center;
+    margin:5px 0 12px;
+}
+
+.reward-card h3{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.reward-card p{
+    color:#71867a;
+    text-align:center;
+    font-size:13px;
+    min-height:38px;
+}
+
+.price{
+    text-align:center;
+    color:#d28a00;
+    font-weight:bold;
+    font-size:18px;
+    margin:15px 0;
+}
+
+.stock{
+    text-align:center;
+    color:#668071;
+    font-size:12px;
+    margin-bottom:12px;
+}
+
+.reward-btn{
+    width:100%;
+    border:none;
+    padding:12px;
+    border-radius:13px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#20a464;
+    color:white;
+}
+
+.reward-btn:disabled{
+    background:#b9c7be;
+    cursor:not-allowed;
+}
+
+.lock-text{
+    text-align:center;
+    color:#78877d;
+    font-size:12px;
+    margin-top:8px;
+}
+
+/* HISTORY */
+
+.history{
+    margin-top:25px;
+}
+
+.history-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px;
+    background:#f5faf6;
+    border-radius:15px;
+    margin-bottom:8px;
+}
+
+.history-icon{
+    width:42px;
+    height:42px;
+    background:#dff5e5;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+}
+
+.history-info{
+    flex:1;
+}
+
+.history-info strong{
+    display:block;
+}
+
+.history-info small{
+    color:#71867a;
+}
+
+.history-cost{
+    color:#d36f00;
+    font-weight:bold;
+}
+
+/* CAMERA */
+
+.camera-container{
+    max-width:800px;
+    margin:auto;
+}
+
+.camera-box{
+    background:#102c20;
+    border-radius:25px;
+    overflow:hidden;
+    position:relative;
+    min-height:300px;
+}
+
+#video{
+    width:100%;
+    display:none;
+    max-height:500px;
+    object-fit:cover;
+}
+
+#photoCanvas{
+    display:none;
+}
+
+.camera-placeholder{
+    min-height:300px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+.camera-placeholder div{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.camera-controls{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.camera-controls button{
+    flex:1;
+}
+
+.camera-btn{
+    border:none;
+    padding:15px;
+    border-radius:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.start-camera{
+    background:#20a464;
+    color:white;
+}
+
+.capture-btn{
+    background:#f3bd35;
+    color:#553e00;
+}
+
+.stop-btn{
+    background:#ef6d6d;
+    color:white;
+}
+
+.preview{
+    margin-top:20px;
+    display:none;
+}
+
+.preview img{
+    width:100%;
+    max-height:400px;
+    object-fit:contain;
+    border-radius:20px;
+    background:#102c20;
+}
+
+.photo-actions{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.photo-actions button{
+    flex:1;
+}
+
+/* ANALYSIS */
+
+.analysis-report{
+    margin-top:20px;
+    background:white;
+    border-radius:25px;
+    padding:22px;
+    box-shadow:0 8px 25px rgba(24,95,55,.08);
+    border:2px solid #e0f1e5;
+    animation:fadeUp .5s ease;
+}
+
+.analysis-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.analysis-header-icon{
+    width:52px;
+    height:52px;
+    background:#e1f6e7;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.analysis-header h2{
+    margin:0;
+    color:#145b37;
+}
+
+.analysis-header p{
+    color:#71867a;
+    font-size:13px;
+    margin-top:4px;
+}
+
+.analysis-status{
+    padding:15px;
+    border-radius:17px;
+    background:#eef9f1;
+    margin-bottom:15px;
+}
+
+.analysis-status strong{
+    color:#167b47;
+}
+
+.analysis-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.analysis-item{
+    background:#f7fbf8;
+    padding:16px;
+    border-radius:16px;
+    border:1px solid #e4efe7;
+}
+
+.analysis-item .icon{
+    font-size:23px;
+    margin-bottom:7px;
+}
+
+.analysis-item strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.analysis-item span{
+    color:#607568;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.analysis-suggestion{
+    margin-top:15px;
+    padding:18px;
+    background:#f2f9d9;
+    border-radius:18px;
+}
+
+.analysis-suggestion strong{
+    color:#587a16;
+}
+
+.analysis-suggestion p{
+    color:#52695c;
+    line-height:1.6;
+    margin-top:7px;
+}
+
+.analysis-note{
+    margin-top:15px;
+    padding:13px;
+    background:#fff7df;
+    color:#79611b;
+    border-radius:14px;
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* AI */
+
+.ai-header{
+    background:linear-gradient(135deg,#173e2b,#20a464);
+    color:white;
+    padding:25px;
+    border-radius:25px 25px 0 0;
+}
+
+.ai-header h2{
+    margin-bottom:7px;
+}
+
+.chat-area{
+    background:#f5faf6;
+    min-height:350px;
+    max-height:450px;
+    overflow-y:auto;
+    padding:20px;
+}
+
+.message{
+    display:flex;
+    margin-bottom:15px;
+}
+
+.message.user{
+    justify-content:flex-end;
+}
+
+.bubble{
+    max-width:80%;
+    padding:13px 16px;
+    border-radius:17px;
+    line-height:1.5;
+}
+
+.message.ai .bubble{
+    background:white;
+    border-bottom-left-radius:4px;
+}
+
+.message.user .bubble{
+    background:#20a464;
+    color:white;
+    border-bottom-right-radius:4px;
+}
+
+.chat-tools{
+    padding:15px;
+    background:white;
+    display:flex;
+    gap:8px;
+}
+
+.chat-input{
+    flex:1;
+}
+
+.chat-send{
+    border:none;
+    background:#20a464;
+    color:white;
+    padding:0 20px;
+    border-radius:13px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.chat-photo{
+    border:none;
+    background:#e9f7ed;
+    padding:0 15px;
+    border-radius:13px;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.ai-photo-preview{
+    display:none;
+    padding:10px 15px;
+    background:white;
+}
+
+.ai-photo-preview img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:500;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:500px;
+    border-radius:25px;
+    padding:25px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:15px;
+    border:none;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#183b2a;
+    color:white;
+    padding:15px 20px;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:999;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .reward-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:800px){
+
+    header{
+        padding:15px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .menu button{
+        padding:8px;
+        font-size:12px;
+    }
+
+    main{
+        padding:20px 12px 70px;
+    }
+
+    .profile-card{
+        grid-template-columns:60px 1fr;
+    }
+
+    .avatar{
+        width:60px;
+        height:60px;
+        font-size:30px;
+    }
+
+    .level-badge{
+        grid-column:1/-1;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .coin-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .coin-icon{
+        display:none;
+    }
+
+    .welcome h1{
+        font-size:24px;
+    }
+
+    .analysis-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .reward-grid{
+        grid-template-columns:1fr;
+    }
+
+    .camera-controls,
+    .photo-actions{
+        flex-direction:column;
+    }
+
+    .chat-tools{
+        flex-wrap:wrap;
+    }
+
+    .chat-input{
+        width:100%;
+        flex-basis:100%;
+    }
+
+    .chat-send,
+    .chat-photo{
+        height:45px;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .menu{
+        gap:3px;
+    }
+
+    .menu button{
+        font-size:10px;
+        padding:7px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🌱 Eco<span>Maggot</span>
+    </div>
+
+    <div class="menu">
+        <button onclick="showPage('dashboard')">🏠</button>
+        <button onclick="showPage('deposit')">♻️</button>
+        <button onclick="showPage('reward')">🎁</button>
+        <button onclick="showPage('camera')">📷</button>
+        <button onclick="showPage('ai')">🤖</button>
+    </div>
+
+</header>
+
+<main>
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section id="dashboard" class="page active">
+
+    <div class="welcome">
+
+        <h1>Halo, Eco Farmer! 👋</h1>
+
+        <p>
+            Selamat datang di perjalanan pertanian hijau.
+        </p>
+
+    </div>
+
+
+    <div class="profile-card">
+
+        <div class="avatar">
+            👨‍🌾
+        </div>
+
+        <div>
+
+            <div class="level" id="userLevel">
+                🌱 LEVEL 1 — PEMULA
+            </div>
+
+            <h2 id="username">
+                Eco Farmer
+            </h2>
+
+            <div class="xp-bar">
+                <div class="xp-fill" id="xpFill"></div>
+            </div>
+
+            <div class="xp-text">
+                <span id="xpText">0 / 1000 XP</span>
+                menuju level berikutnya
+            </div>
+
+        </div>
+
+        <div class="level-badge" id="levelBadge">
+            🌱<br>
+            PEMULA
+        </div>
+
+    </div>
+
+
+    <div class="coin-card">
+
+        <div>
+
+            <div class="coin-title">
+                DOMPET ECO COIN
+            </div>
+
+            <div class="coins">
+                🪙 <span id="coinBalance">0</span>
+            </div>
+
+            <div style="opacity:.8">
+                Koin diperoleh dari setor limbah
+            </div>
+
+        </div>
+
+        <button
+            class="deposit-btn"
+            onclick="showPage('reward')"
+        >
+            🎁 TUKAR PUPUK
+        </button>
+
+        <div class="coin-icon">
+            🪙
+        </div>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ♻️
+            </div>
+
+            <h3 id="wasteTotal">
+                0 Kg
+            </h3>
+
+            <p>
+                Limbah diolah
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🪙
+            </div>
+
+            <h3 id="coinStat">
+                0
+            </h3>
+
+            <p>
+                Eco Coin
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🎁
+            </div>
+
+            <h3 id="exchangeTotal">
+                0
+            </h3>
+
+            <p>
+                Pupuk ditukar
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🏆
+            </div>
+
+            <h3 id="achievementTotal">
+                0
+            </h3>
+
+            <p>
+                Achievement
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h2>
+                🎯 Misi Hari Ini
+            </h2>
+
+            <div class="mission">
+
+                <div class="mission-icon">
+                    ♻️
+                </div>
+
+                <div class="mission-info">
+
+                    <strong>
+                        Setor 5 Kg Limbah
+                    </strong>
+
+                    <small>
+                        Dapatkan Eco Coin
+                    </small>
+
+                </div>
+
+                <div class="reward">
+                    +100 🪙
+                </div>
+
+            </div>
+
+
+            <div class="mission">
+
+                <div class="mission-icon">
+                    🎁
+                </div>
+
+                <div class="mission-info">
+
+                    <strong>
+                        Tukarkan Eco Coin
+                    </strong>
+
+                    <small>
+                        Dapatkan pupuk untuk pertanian
+                    </small>
+
+                </div>
+
+                <div class="reward">
+                    +XP
+                </div>
+
+            </div>
+
+
+            <div class="mission">
+
+                <div class="mission-icon">
+                    🤖
+                </div>
+
+                <div class="mission-info">
+
+                    <strong>
+                        Tanya EcoAI
+                    </strong>
+
+                    <small>
+                        Konsultasi masalah pertanian
+                    </small>
+
+                </div>
+
+                <div class="reward">
+                    +10 🪙
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                🏆 Perjalanan Level
+            </h2>
+
+            <div class="mission">
+
+                <div class="mission-icon">
+                    🌱
+                </div>
+
+                <div class="mission-info">
+                    <strong>Level 1 — Pemula</strong>
+                    <small>Petani baru</small>
+                </div>
+
+                <span id="level1Status">✓</span>
+
+            </div>
+
+
+            <div class="mission">
+
+                <div class="mission-icon">
+                    🌿
+                </div>
+
+                <div class="mission-info">
+                    <strong>Level 2 — Pejuang Hijau</strong>
+                    <small>Mulai aktif mengolah limbah</small>
+                </div>
+
+                <span id="level2Status">🔒</span>
+
+            </div>
+
+
+            <div class="mission">
+
+                <div class="mission-icon">
+                    🌳
+                </div>
+
+                <div class="mission-info">
+                    <strong>Level 3 — Petani Hijau</strong>
+                    <small>Aktif menjaga pertanian</small>
+                </div>
+
+                <span id="level3Status">🔒</span>
+
+            </div>
+
+
+            <div class="mission">
+
+                <div class="mission-icon">
+                    👑
+                </div>
+
+                <div class="mission-info">
+                    <strong>Level 10 — Eco Master</strong>
+                    <small>Target akhir</small>
+                </div>
+
+                <span id="level10Status">🔒</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SETOR LIMBAH
+========================= -->
+
+<section id="deposit" class="page">
+
+    <div class="card deposit-box">
+
+        <h1>
+            ♻️ Setor Limbah
+        </h1>
+
+        <p style="color:#71867a;margin-top:8px">
+            Ubah limbah organik menjadi Eco Coin!
+        </p>
+
+        <div class="deposit-big-icon">
+            ♻️
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Jenis Limbah
+            </label>
+
+            <select id="wasteType">
+
+                <option value="sayuran">
+                    🥬 Sisa Sayuran
+                </option>
+
+                <option value="buah">
+                    🍎 Kulit / Sisa Buah
+                </option>
+
+                <option value="jerami">
+                    🌾 Jerami
+                </option>
+
+                <option value="daun">
+                    🍃 Daun Kering
+                </option>
+
+                <option value="lainnya">
+                    ♻️ Limbah Organik Lain
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Jumlah Limbah (Kg)
+            </label>
+
+            <input
+                type="number"
+                id="wasteAmount"
+                placeholder="Contoh: 5"
+                min="0.1"
+                step="0.1"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Catatan
+            </label>
+
+            <input
+                type="text"
+                id="wasteNote"
+                placeholder="Contoh: sisa sayuran panen"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="depositWaste()"
+        >
+            ♻️ KONFIRMASI SETOR LIMBAH
+        </button>
+
+        <p style="margin-top:15px;color:#71867a;font-size:13px">
+            Setiap 1 Kg limbah = 20 Eco Coin + 10 XP
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REWARD PUPUK
+========================= -->
+
+<section id="reward" class="page">
+
+    <div class="reward-header">
+
+        <h1>
+            🎁 Tukar Eco Coin
+        </h1>
+
+        <p>
+            Gunakan Eco Coin untuk mendapatkan pupuk.
+        </p>
+
+    </div>
+
+
+    <div class="reward-balance">
+
+        <small>
+            SALDO ECO COIN KAMU
+        </small>
+
+        <strong>
+            🪙 <span id="rewardCoinBalance">0</span>
+        </strong>
+
+    </div>
+
+
+    <div class="reward-grid" id="rewardGrid"></div>
+
+
+    <div class="card history">
+
+        <h2>
+            📜 Riwayat Penukaran
+        </h2>
+
+        <div id="historyList">
+
+            <p style="color:#71867a;text-align:center;padding:20px">
+                Belum ada penukaran pupuk.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CAMERA
+========================= -->
+
+<section id="camera" class="page">
+
+    <div class="camera-container">
+
+        <div class="card">
+
+            <h1>
+                📷 Kamera EcoAI
+            </h1>
+
+            <p style="color:#71867a;margin:8px 0 20px">
+                Foto daun, tanaman, atau limbah untuk dianalisis.
+            </p>
+
+
+            <div class="camera-box">
+
+                <video
+                    id="video"
+                    autoplay
+                    playsinline
+                ></video>
+
+                <div
+                    class="camera-placeholder"
+                    id="cameraPlaceholder"
+                >
+
+                    <div>📷</div>
+
+                    <h2>
+                        Kamera belum aktif
+                    </h2>
+
+                    <p>
+                        Tekan tombol "Buka Kamera" untuk memulai.
+                    </p>
+
+                </div>
+
+                <canvas id="photoCanvas"></canvas>
+
+            </div>
+
+
+            <div class="camera-controls">
+
+                <button
+                    class="camera-btn start-camera"
+                    onclick="startCamera()"
+                >
+                    📷 BUKA KAMERA
+                </button>
+
+                <button
+                    class="camera-btn capture-btn"
+                    onclick="capturePhoto()"
+                >
+                    📸 AMBIL FOTO
+                </button>
+
+                <button
+                    class="camera-btn stop-btn"
+                    onclick="stopCamera()"
+                >
+                    ⛔ TUTUP
+                </button>
+
+            </div>
+
+
+            <div
+                class="preview"
+                id="cameraPreview"
+            >
+
+                <h3 style="margin-bottom:10px">
+                    📸 Hasil Foto
+                </h3>
+
+                <img id="capturedImage">
+
+                <div class="photo-actions">
+
+                    <button
+                        class="primary-btn"
+                        onclick="analyzePhoto()"
+                    >
+                        🤖 ANALISIS ECOAI
+                    </button>
+
+                    <button
+                        class="camera-btn"
+                        style="background:#e8f5eb"
+                        onclick="retakePhoto()"
+                    >
+                        🔄 FOTO ULANG
+                    </button>
+
+                </div>
+
+                <div
+                    id="cameraAnalysis"
+                    style="display:none"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ECOAI
+========================= -->
+
+<section id="ai" class="page">
+
+    <div
+        class="card"
+        style="padding:0;overflow:hidden"
+    >
+
+        <div class="ai-header">
+
+            <h2>
+                🤖 EcoAI
+            </h2>
+
+            <p>
+                Asisten pintar untuk pertanian dan pengolahan limbah.
+            </p>
+
+        </div>
+
+
+        <div
+            class="chat-area"
+            id="chatArea"
+        >
+
+            <div class="message ai">
+
+                <div class="bubble">
+
+                    👋 Halo! Saya <b>EcoAI</b>.
+
+                    <br><br>
+
+                    Saya bisa membantu mengenai:
+
+                    <br>
+                    🌱 kesehatan tanaman
+                    <br>
+                    🐛 hama dan penyakit
+                    <br>
+                    ♻️ pengolahan limbah
+                    <br>
+                    🌾 pertanian
+                    <br>
+                    🪱 budidaya maggot
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="ai-photo-preview"
+            id="aiPhotoPreview"
+        >
+
+            <img id="aiPhoto">
+
+        </div>
+
+
+        <div class="chat-tools">
+
+            <button
+                class="chat-photo"
+                onclick="openAIPhoto()"
+            >
+                📷
+            </button>
+
+            <input
+                type="file"
+                id="aiFile"
+                accept="image/*"
+                capture="environment"
+                style="display:none"
+                onchange="handleAIPhoto(event)"
+            >
+
+            <input
+                class="chat-input"
+                id="chatInput"
+                placeholder="Tulis pertanyaan..."
+                onkeydown="if(event.key==='Enter') sendMessage()"
+            >
+
+            <button
+                class="chat-send"
+                onclick="sendMessage()"
+            >
+                KIRIM
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            onclick="closeModal()"
+        >
+            ×
+        </button>
+
+        <h2 id="modalTitle">
+            EcoMaggot
+        </h2>
+
+        <p
+            id="modalText"
+            style="margin-top:15px;line-height:1.6;color:#52695c"
+        ></p>
+
+        <button
+            class="primary-btn"
+            style="margin-top:20px"
+            onclick="closeModal()"
+        >
+            Mengerti
+        </button>
+
+    </div>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+>
+    Berhasil!
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATA USER
+   DATA DISIMPAN DI LOCAL STORAGE
+===================================================== */
+
+let defaultUser = {
+    name:"Eco Farmer",
+    coins:0,
+    xp:0,
+    waste:0,
+    level:1,
+    exchanges:0,
+    achievements:0
+};
+
+
+let savedUser =
+localStorage.getItem("ecoMaggotUser");
+
+
+let user =
+savedUser
+? JSON.parse(savedUser)
+: defaultUser;
+
+
+/* =====================================================
+   LEVEL
+===================================================== */
+
+const levelData = {
+
+    1:{name:"Pemula",icon:"🌱"},
+    2:{name:"Pejuang Hijau",icon:"🌿"},
+    3:{name:"Petani Hijau",icon:"🌳"},
+    4:{name:"Pengolah Limbah",icon:"♻️"},
+    5:{name:"Ahli Maggot",icon:"🪱"},
+    6:{name:"Eco Farmer",icon:"🌱"},
+    7:{name:"Penjaga Lingkungan",icon:"🌍"},
+    8:{name:"Eco Expert",icon:"⭐"},
+    9:{name:"Eco Champion",icon:"🏆"},
+    10:{name:"Eco Master",icon:"👑"}
+
+};
+
+
+/* =====================================================
+   REWARD PUPUK
+===================================================== */
+
+const rewards = [
+
+    {
+        id:1,
+        name:"Pupuk Organik",
+        description:"Pupuk organik untuk membantu menyuburkan tanaman.",
+        icon:"🌱",
+        cost:100,
+        stock:20
+    },
+
+    {
+        id:2,
+        name:"Kompos Organik",
+        description:"Kompos dari bahan organik untuk tanah.",
+        icon:"🍂",
+        cost:250,
+        stock:15
+    },
+
+    {
+        id:3,
+        name:"Pupuk Organik Premium",
+        description:"Pupuk organik premium untuk perawatan tanaman.",
+        icon:"🌿",
+        cost:500,
+        stock:10
+    },
+
+    {
+        id:4,
+        name:"Paket Pupuk + Kompos",
+        description:"Kombinasi pupuk organik dan kompos.",
+        icon:"📦",
+        cost:1000,
+        stock:8
+    },
+
+    {
+        id:5,
+        name:"Paket Pupuk Lengkap",
+        description:"Paket lengkap untuk mendukung pertanian hijau.",
+        icon:"🎁",
+        cost:2000,
+        stock:5
+    }
+
+];
+
+
+/* =====================================================
+   RIWAYAT
+===================================================== */
+
+let exchangeHistory =
+JSON.parse(
+    localStorage.getItem("ecoMaggotHistory") || "[]"
+);
+
+
+/* =====================================================
+   SIMPAN DATA
+===================================================== */
+
+function saveData(){
+
+    localStorage.setItem(
+        "ecoMaggotUser",
+        JSON.stringify(user)
+    );
+
+    localStorage.setItem(
+        "ecoMaggotHistory",
+        JSON.stringify(exchangeHistory)
+    );
+
+}
+
+
+/* =====================================================
+   HITUNG LEVEL
+===================================================== */
+
+function calculateLevel(){
+
+    return Math.min(
+        Math.floor(user.xp / 1000) + 1,
+        10
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE LEVEL
+===================================================== */
+
+function updateLevel(){
+
+    let oldLevel =
+        user.level;
+
+
+    user.level =
+        calculateLevel();
+
+
+    let data =
+        levelData[user.level];
+
+
+    document.getElementById("userLevel")
+        .textContent =
+        data.icon +
+        " LEVEL " +
+        user.level +
+        " — " +
+        data.name.toUpperCase();
+
+
+    document.getElementById("levelBadge")
+        .innerHTML =
+        data.icon +
+        "<br>" +
+        data.name.toUpperCase();
+
+
+    if(user.level >= 10){
+
+        document.getElementById("xpFill")
+            .style.width = "100%";
+
+        document.getElementById("xpText")
+            .textContent = "MAX LEVEL";
+
+    }else{
+
+        let currentXP =
+            user.xp % 1000;
+
+        let percent =
+            currentXP / 1000 * 100;
+
+        document.getElementById("xpFill")
+            .style.width =
+            percent + "%";
+
+        document.getElementById("xpText")
+            .textContent =
+            currentXP +
+            " / 1000 XP";
+
+    }
+
+
+    document.getElementById("level1Status")
+        .textContent =
+        user.level >= 1 ? "✓" : "🔒";
+
+
+    document.getElementById("level2Status")
+        .textContent =
+        user.level >= 2 ? "✓" : "🔒";
+
+
+    document.getElementById("level3Status")
+        .textContent =
+        user.level >= 3 ? "✓" : "🔒";
+
+
+    document.getElementById("level10Status")
+        .textContent =
+        user.level >= 10 ? "✓" : "🔒";
+
+
+    if(user.level > oldLevel){
+
+        showModal(
+            "🎉 LEVEL UP!",
+            "Selamat! Kamu berhasil naik ke <b>Level " +
+            user.level +
+            " — " +
+            data.name +
+            "</b>!<br><br>" +
+            "Terus kumpulkan limbah dan tukarkan Eco Coin untuk mendapatkan pupuk. 🌱"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   NAVIGASI
+===================================================== */
+
+function showPage(page){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p =>
+            p.classList.remove("active")
+        );
+
+
+    document
+        .getElementById(page)
+        .classList.add("active");
+
+
+    if(page === "reward"){
+        renderRewards();
+        renderHistory();
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function updateDashboard(){
+
+    document.getElementById("coinBalance")
+        .textContent =
+        user.coins.toLocaleString("id-ID");
+
+
+    document.getElementById("coinStat")
+        .textContent =
+        user.coins.toLocaleString("id-ID");
+
+
+    document.getElementById("rewardCoinBalance")
+        .textContent =
+        user.coins.toLocaleString("id-ID");
+
+
+    document.getElementById("wasteTotal")
+        .textContent =
+        user.waste.toLocaleString("id-ID") +
+        " Kg";
+
+
+    document.getElementById("username")
+        .textContent =
+        user.name;
+
+
+    document.getElementById("exchangeTotal")
+        .textContent =
+        user.exchanges;
+
+
+    document.getElementById("achievementTotal")
+        .textContent =
+        user.achievements;
+
+
+    updateLevel();
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   SETOR LIMBAH
+===================================================== */
+
+function depositWaste(){
+
+    let amount =
+        parseFloat(
+            document.getElementById("wasteAmount").value
+        );
+
+
+    if(!amount || amount <= 0){
+
+        showToast(
+            "Masukkan jumlah limbah terlebih dahulu!"
+        );
+
+        return;
+
+    }
+
+
+    let coinReward =
+        Math.round(amount * 20);
+
+
+    let xpReward =
+        Math.round(amount * 10);
+
+
+    user.coins +=
+        coinReward;
+
+
+    user.xp +=
+        xpReward;
+
+
+    user.waste +=
+        amount;
+
+
+    updateDashboard();
+
+
+    document.getElementById("wasteAmount")
+        .value = "";
+
+
+    document.getElementById("wasteNote")
+        .value = "";
+
+
+    showToast(
+        "+" +
+        coinReward +
+        " 🪙 Eco Coin | +" +
+        xpReward +
+        " XP"
+    );
+
+}
+
+
+/* =====================================================
+   RENDER REWARD
+===================================================== */
+
+function renderRewards(){
+
+    let container =
+        document.getElementById("rewardGrid");
+
+
+    container.innerHTML = "";
+
+
+    rewards.forEach(reward => {
+
+        let canExchange =
+            user.coins >= reward.cost &&
+            reward.stock > 0;
+
+
+        let card =
+        document.createElement("div");
+
+
+        card.className =
+            "reward-card " +
+            (!canExchange ? "locked" : "");
+
+
+        card.innerHTML = `
+
+            <div class="reward-icon">
+                ${reward.icon}
+            </div>
+
+            <h3>
+                ${reward.name}
+            </h3>
+
+            <p>
+                ${reward.description}
+            </p>
+
+            <div class="price">
+                🪙 ${reward.cost.toLocaleString("id-ID")}
+            </div>
+
+            <div class="stock">
+                Stok: ${reward.stock}
+            </div>
+
+            <button
+                class="reward-btn"
+                ${!canExchange ? "disabled" : ""}
+                onclick="exchangeReward(${reward.id})"
+            >
+                ${
+                    reward.stock <= 0
+                    ? "STOK HABIS"
+                    : canExchange
+                    ? "🎁 TUKAR SEKARANG"
+                    : "🔒 COIN BELUM CUKUP"
+                }
+            </button>
+
+            ${
+                !canExchange && reward.stock > 0
+                ? `<div class="lock-text">
+                    Butuh ${(
+                        reward.cost - user.coins
+                    ).toLocaleString("id-ID")} Coin lagi
+                   </div>`
+                : ""
+            }
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   TUKAR PUPUK
+===================================================== */
+
+function exchangeReward(id){
+
+    let reward =
+        rewards.find(r => r.id === id);
+
+
+    if(!reward){
+        return;
+    }
+
+
+    if(user.coins < reward.cost){
+
+        showToast(
+            "Eco Coin kamu belum cukup!"
+        );
+
+        return;
+
+    }
+
+
+    if(reward.stock <= 0){
+
+        showToast(
+            "Stok pupuk habis!"
+        );
+
+        return;
+
+    }
+
+
+    showModal(
+        "🎁 Konfirmasi Penukaran",
+        `
+        Kamu akan menukar
+        <b>${reward.cost.toLocaleString("id-ID")} Eco Coin</b>
+        untuk mendapatkan:
+
+        <br><br>
+
+        <b>
+        ${reward.icon} ${reward.name}
+        </b>
+
+        <br><br>
+
+        Saldo setelah penukaran:
+        <b>
+        ${(
+            user.coins - reward.cost
+        ).toLocaleString("id-ID")} Coin
+        </b>
+
+        <br><br>
+
+        <button
+            class="primary-btn"
+            onclick="confirmExchange(${reward.id})"
+        >
+            ✅ YA, TUKARKAN
+        </button>
+        `
+    );
+
+}
+
+
+/* =====================================================
+   KONFIRMASI PENUKARAN
+===================================================== */
+
+function confirmExchange(id){
+
+    closeModal();
+
+
+    let reward =
+        rewards.find(r => r.id === id);
+
+
+    if(!reward){
+        return;
+    }
+
+
+    if(user.coins < reward.cost){
+
+        showToast(
+            "Eco Coin tidak cukup!"
+        );
+
+        return;
+
+    }
+
+
+    if(reward.stock <= 0){
+
+        showToast(
+            "Stok pupuk habis!"
+        );
+
+        return;
+
+    }
+
+
+    user.coins -=
+        reward.cost;
+
+
+    reward.stock--;
+
+
+    user.exchanges++;
+
+
+    user.achievements =
+        Math.floor(
+            user.exchanges / 3
+        );
+
+
+    exchangeHistory.unshift({
+
+        name:reward.name,
+
+        icon:reward.icon,
+
+        cost:reward.cost,
+
+        date:new Date().toLocaleString(
+            "id-ID"
+        )
+
+    });
+
+
+    saveData();
+
+    updateDashboard();
+
+    renderRewards();
+
+    renderHistory();
+
+
+    showModal(
+        "🎉 Penukaran Berhasil!",
+        `
+        Selamat! Kamu berhasil mendapatkan:
+
+        <br><br>
+
+        <div style="
+            text-align:center;
+            font-size:45px;
+        ">
+            ${reward.icon}
+        </div>
+
+        <h3 style="
+            text-align:center;
+            margin:10px 0;
+        ">
+            ${reward.name}
+        </h3>
+
+        <p>
+            Pupuk berhasil ditukar menggunakan
+            ${reward.cost.toLocaleString("id-ID")}
+            Eco Coin.
+        </p>
+
+        <br>
+
+        Sisa Eco Coin:
+        <b>
+        ${user.coins.toLocaleString("id-ID")} 🪙
+        </b>
+        `
+    );
+
+}
+
+
+/* =====================================================
+   RIWAYAT PENUKARAN
+===================================================== */
+
+function renderHistory(){
+
+    let container =
+        document.getElementById("historyList");
+
+
+    if(exchangeHistory.length === 0){
+
+        container.innerHTML = `
+
+            <p style="
+                color:#71867a;
+                text-align:center;
+                padding:20px;
+            ">
+                Belum ada penukaran pupuk.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    exchangeHistory
+        .slice(0,10)
+        .forEach(item => {
+
+            let row =
+                document.createElement("div");
+
+
+            row.className =
+                "history-item";
+
+
+            row.innerHTML = `
+
+                <div class="history-icon">
+                    ${item.icon}
+                </div>
+
+                <div class="history-info">
+
+                    <strong>
+                        ${item.name}
+                    </strong>
+
+                    <small>
+                        ${item.date}
+                    </small>
+
+                </div>
+
+                <div class="history-cost">
+                    -${item.cost} 🪙
+                </div>
+
+            `;
+
+
+            container.appendChild(row);
+
+        });
+
+}
+
+
+/* =====================================================
+   CAMERA
+===================================================== */
+
+let stream = null;
+
+
+async function startCamera(){
+
+    try{
+
+        stream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video:{
+                    facingMode:{
+                        ideal:"environment"
+                    }
+                },
+
+                audio:false
+
+            });
+
+
+        let video =
+            document.getElementById("video");
+
+
+        video.srcObject =
+            stream;
+
+
+        video.style.display =
+            "block";
+
+
+        document.getElementById("cameraPlaceholder")
+            .style.display =
+            "none";
+
+
+        showToast(
+            "Kamera berhasil dibuka 📷"
+        );
+
+    }
+
+    catch(error){
+
+        showModal(
+            "📷 Kamera tidak dapat dibuka",
+            "Pastikan browser memiliki izin kamera. Jika menggunakan GitHub Pages, gunakan HTTPS dan izinkan akses kamera."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   AMBIL FOTO
+===================================================== */
+
+function capturePhoto(){
+
+    if(!stream){
+
+        showToast(
+            "Buka kamera terlebih dahulu!"
+        );
+
+        return;
+
+    }
+
+
+    let video =
+        document.getElementById("video");
+
+
+    let canvas =
+        document.getElementById("photoCanvas");
+
+
+    canvas.width =
+        video.videoWidth;
+
+
+    canvas.height =
+        video.videoHeight;
+
+
+    let ctx =
+        canvas.getContext("2d");
+
+
+    ctx.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    let image =
+        canvas.toDataURL(
+            "image/jpeg",
+            .9
+        );
+
+
+    document.getElementById("capturedImage")
+        .src =
+        image;
+
+
+    document.getElementById("cameraPreview")
+        .style.display =
+        "block";
+
+
+    document.getElementById("cameraAnalysis")
+        .style.display =
+        "none";
+
+
+    showToast(
+        "Foto berhasil diambil 📸"
+    );
+
+}
+
+
+/* =====================================================
+   STOP CAMERA
+===================================================== */
+
+function stopCamera(){
+
+    if(stream){
+
+        stream
+            .getTracks()
+            .forEach(track =>
+                track.stop()
+            );
+
+        stream = null;
+
+    }
+
+
+    let video =
+        document.getElementById("video");
+
+
+    video.srcObject =
+        null;
+
+
+    video.style.display =
+        "none";
+
+
+    document.getElementById("cameraPlaceholder")
+        .style.display =
+        "flex";
+
+
+    showToast(
+        "Kamera ditutup"
+    );
+
+}
+
+
+/* =====================================================
+   FOTO ULANG
+===================================================== */
+
+function retakePhoto(){
+
+    document.getElementById("cameraPreview")
+        .style.display =
+        "none";
+
+
+    document.getElementById("cameraAnalysis")
+        .style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   ANALISIS FOTO
+===================================================== */
+
+function analyzePhoto(){
+
+    let image =
+        document.getElementById("capturedImage").src;
+
+
+    if(!image){
+
+        showToast(
+            "Belum ada foto!"
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        "EcoAI sedang menganalisis..."
+    );
+
+
+    let report =
+        document.getElementById("cameraAnalysis");
+
+
+    setTimeout(() => {
+
+        report.innerHTML = `
+
+            <div class="analysis-report">
+
+                <div class="analysis-header">
+
+                    <div class="analysis-header-icon">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Hasil Analisis EcoAI
+                        </h2>
+
+                        <p>
+                            Laporan pemeriksaan visual
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-status">
+
+                    <strong>
+                        🌱 Objek: Tanaman / Daun
+                    </strong>
+
+                    <br>
+
+                    <span style="
+                        color:#607568;
+                        font-size:13px
+                    ">
+                        Foto berhasil diterima oleh EcoAI.
+                    </span>
+
+                </div>
+
+
+                <div class="analysis-grid">
+
+                    <div class="analysis-item">
+
+                        <div class="icon">
+                            🌱
+                        </div>
+
+                        <strong>
+                            Kondisi Tanaman
+                        </strong>
+
+                        <span>
+                            Sehat dan perlu pemantauan rutin.
+                        </span>
+
+                    </div>
+
+
+                    <div class="analysis-item">
+
+                        <div class="icon">
+                            🎨
+                        </div>
+
+                        <strong>
+                            Warna Daun
+                        </strong>
+
+                        <span>
+                            Hijau normal berdasarkan pemeriksaan visual demo.
+                        </span>
+
+                    </div>
+
+
+                    <div class="analysis-item">
+
+                        <div class="icon">
+                            🐛
+                        </div>
+
+                        <strong>
+                            Indikasi Masalah
+                        </strong>
+
+                        <span>
+                            Belum ditemukan indikasi masalah yang jelas.
+                        </span>
+
+                    </div>
+
+
+                    <div class="analysis-item">
+
+                        <div class="icon">
+                            💧
+                        </div>
+
+                        <strong>
+                            Kelembapan
+                        </strong>
+
+                        <span>
+                            Periksa kondisi tanah secara langsung.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-suggestion">
+
+                    <strong>
+                        💡 Saran Perawatan
+                    </strong>
+
+                    <p>
+
+                        • Periksa kelembapan tanah secara rutin.
+                        <br>
+                        • Pastikan tanaman mendapatkan cahaya yang cukup.
+                        <br>
+                        • Periksa bagian bawah daun untuk melihat kemungkinan hama.
+                        <br>
+                        • Hindari penyiraman berlebihan.
+
+                    </p>
+
+                </div>
+
+
+                <div class="analysis-note">
+
+                    ⚠️ <b>Catatan:</b>
+                    Hasil ini merupakan simulasi EcoAI untuk versi demo.
+                    Sistem belum menggunakan AI Vision sungguhan.
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        report.style.display =
+            "block";
+
+
+        showPage("ai");
+
+
+        addMessage(
+            "user",
+            "📸 Saya mengirim foto untuk dianalisis."
+        );
+
+
+        setTimeout(() => {
+
+            addMessage(
+                "ai",
+                createAIReport()
+            );
+
+        },500);
+
+    },1000);
+
+}
+
+
+/* =====================================================
+   AI REPORT
+===================================================== */
+
+function createAIReport(){
+
+    return `
+
+        <div class="analysis-report"
+             style="margin-top:0">
+
+            <div class="analysis-header">
+
+                <div class="analysis-header-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <h2>
+                        Hasil Analisis EcoAI
+                    </h2>
+
+                    <p>
+                        Pemeriksaan foto tanaman
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="analysis-status">
+
+                <strong>
+                    🌱 Objek: Tanaman / Daun
+                </strong>
+
+                <br>
+
+                <span style="
+                    color:#607568;
+                    font-size:13px
+                ">
+                    Foto diproses dalam mode demo EcoAI.
+                </span>
+
+            </div>
+
+
+            <div class="analysis-grid">
+
+                <div class="analysis-item">
+
+                    <div class="icon">🌱</div>
+
+                    <strong>Kondisi</strong>
+
+                    <span>
+                        Sehat / perlu pemantauan.
+                    </span>
+
+                </div>
+
+
+                <div class="analysis-item">
+
+                    <div class="icon">🎨</div>
+
+                    <strong>Warna Daun</strong>
+
+                    <span>
+                        Hijau normal.
+                    </span>
+
+                </div>
+
+
+                <div class="analysis-item">
+
+                    <div class="icon">🐛</div>
+
+                    <strong>Indikasi Masalah</strong>
+
+                    <span>
+                        Tidak ada indikasi visual yang jelas pada mode demo.
+                    </span>
+
+                </div>
+
+
+                <div class="analysis-item">
+
+                    <div class="icon">💧</div>
+
+                    <strong>Perawatan</strong>
+
+                    <span>
+                        Periksa air, cahaya, tanah dan hama.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="analysis-suggestion">
+
+                <strong>
+                    💡 Saran EcoAI
+                </strong>
+
+                <p>
+                    Lakukan pemantauan tanaman secara rutin
+                    dan periksa daun jika muncul bercak,
+                    perubahan warna atau tanda hama.
+                </p>
+
+            </div>
+
+
+            <div class="analysis-note">
+
+                ⚠️ Mode demo:
+                analisis gambar belum menggunakan model
+                AI Vision sungguhan.
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   CHAT AI
+===================================================== */
+
+function sendMessage(){
+
+    let input =
+        document.getElementById("chatInput");
+
+
+    let text =
+        input.value.trim();
+
+
+    if(!text){
+        return;
+    }
+
+
+    addMessage(
+        "user",
+        text
+    );
+
+
+    input.value = "";
+
+
+    setTimeout(() => {
+
+        let answer =
+            generateAIAnswer(text);
+
+
+        addMessage(
+            "ai",
+            answer
+        );
+
+
+        user.coins += 10;
+
+
+        updateDashboard();
+
+
+        showToast(
+            "+10 🪙 Eco Coin dari konsultasi"
+        );
+
+    },700);
+
+}
+
+
+/* =====================================================
+   ADD MESSAGE
+===================================================== */
+
+function addMessage(type,text){
+
+    let chat =
+        document.getElementById("chatArea");
+
+
+    let message =
+        document.createElement("div");
+
+
+    message.className =
+        "message " + type;
+
+
+    let bubble =
+        document.createElement("div");
+
+
+    bubble.className =
+        "bubble";
+
+
+    bubble.innerHTML =
+        text;
+
+
+    message.appendChild(
+        bubble
+    );
+
+
+    chat.appendChild(
+        message
+    );
+
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/* =====================================================
+   ECOAI
+===================================================== */
+
+function generateAIAnswer(question){
+
+    let q =
+        question.toLowerCase();
+
+
+    if(
+        q.includes("daun") ||
+        q.includes("tanaman") ||
+        q.includes("layu")
+    ){
+
+        return `
+
+        🌱 <b>EcoAI:</b>
+
+        <br><br>
+
+        Jika daun tanaman terlihat layu,
+        periksa kondisi tanah, kelembapan,
+        intensitas cahaya dan kemungkinan hama.
+
+        <br><br>
+
+        💡 <b>Saran:</b>
+
+        <br>
+        • Periksa kelembapan tanah.
+        <br>
+        • Pastikan drainase tidak tersumbat.
+        <br>
+        • Periksa bagian bawah daun.
+        <br>
+        • Hindari penyiraman berlebihan.
+
+        `;
+
+    }
+
+
+    if(
+        q.includes("ulat") ||
+        q.includes("hama") ||
+        q.includes("serangga")
+    ){
+
+        return `
+
+        🐛 <b>EcoAI:</b>
+
+        <br><br>
+
+        Jika tanaman terkena hama,
+        lakukan pemeriksaan pada daun
+        dan batang secara rutin.
+
+        <br><br>
+
+        Untuk serangan ringan,
+        hama dapat dikurangi secara manual.
+
+        `;
+
+    }
+
+
+    if(
+        q.includes("limbah") ||
+        q.includes("sampah") ||
+        q.includes("organik")
+    ){
+
+        return `
+
+        ♻️ <b>EcoAI:</b>
+
+        <br><br>
+
+        Limbah organik seperti sisa sayuran,
+        buah, daun dan sebagian limbah pertanian
+        dapat dimanfaatkan kembali.
+
+        <br><br>
+
+        🌱 Kompos
+        <br>
+        🪱 Budidaya maggot
+        <br>
+        🌾 Pupuk organik
+        <br>
+        ♻️ Fermentasi bahan organik
+
+        `;
+
+    }
+
+
+    if(
+        q.includes("maggot") ||
+        q.includes("bsf")
+    ){
+
+        return `
+
+        🪱 <b>EcoAI:</b>
+
+        <br><br>
+
+        Maggot BSF dapat membantu mengolah
+        limbah organik menjadi biomassa
+        yang bermanfaat.
+
+        <br><br>
+
+        Limbah perlu dipilah terlebih dahulu
+        dan kondisi media perlu dijaga agar
+        tidak terlalu basah atau terlalu kering.
+
+        `;
+
+    }
+
+
+    if(
+        q.includes("pupuk") ||
+        q.includes("kompos")
+    ){
+
+        return `
+
+        🌱 <b>EcoAI:</b>
+
+        <br><br>
+
+        Pupuk organik dapat digunakan
+        untuk membantu meningkatkan
+        kesuburan tanah.
+
+        <br><br>
+
+        Pastikan pupuk yang digunakan
+        sesuai dengan kebutuhan tanaman
+        dan kondisi tanah.
+
+        `;
+
+    }
+
+
+    if(
+        q.includes("coin") ||
+        q.includes("koin") ||
+        q.includes("tukar")
+    ){
+
+        return `
+
+        🪙 <b>EcoAI:</b>
+
+        <br><br>
+
+        Eco Coin bisa kamu gunakan
+        untuk menukarkan berbagai
+        pilihan pupuk.
+
+        <br><br>
+
+        🎁 Semakin banyak Eco Coin,
+        semakin banyak pilihan reward
+        yang bisa dibuka.
+
+        `;
+
+    }
+
+
+    return `
+
+    🤖 <b>EcoAI:</b>
+
+    <br><br>
+
+    Pertanyaan menarik!
+
+    <br><br>
+
+    Coba jelaskan kondisi tanaman
+    atau limbah secara lebih detail.
+
+    <br><br>
+
+    Kamu juga bisa 📷
+    <b>mengirim foto</b>
+    melalui tombol kamera.
+
+    `;
+
+}
+
+
+/* =====================================================
+   FOTO AI
+===================================================== */
+
+function openAIPhoto(){
+
+    document
+        .getElementById("aiFile")
+        .click();
+
+}
+
+
+function handleAIPhoto(event){
+
+    let file =
+        event.target.files[0];
+
+
+    if(!file){
+        return;
+    }
+
+
+    let reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e){
+
+            document
+                .getElementById("aiPhoto")
+                .src =
+                e.target.result;
+
+
+            document
+                .getElementById("aiPhotoPreview")
+                .style.display =
+                "block";
+
+
+            addMessage(
+                "user",
+                "📷 Saya mengirim foto untuk konsultasi."
+            );
+
+
+            setTimeout(() => {
+
+                addMessage(
+                    "ai",
+                    createAIReport()
+                );
+
+            },700);
+
+        };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function showModal(title,text){
+
+    document
+        .getElementById("modalTitle")
+        .textContent =
+        title;
+
+
+    document
+        .getElementById("modalText")
+        .innerHTML =
+        text;
+
+
+    document
+        .getElementById("modal")
+        .classList
+        .add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList
+        .remove("show");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    let toast =
+        document.getElementById("toast");
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList
+        .add("show");
+
+
+    setTimeout(() => {
+
+        toast.classList
+            .remove("show");
+
+    },3000);
+
+}
+
+
+/* =====================================================
+   MULAI APLIKASI
+===================================================== */
+
+updateDashboard();
+
+renderRewards();
+
+renderHistory();
+
+</script>
+
+</body>
+</html>
