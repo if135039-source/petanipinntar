@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -368,8 +369,12 @@ GENERAL CARD
     white-space:nowrap;
 }
 
+/* =========================
+ECO COIN HIJAU
+========================= */
+
 .coin-card{
-    background:linear-gradient(135deg,rgba(25,135,84,.97),rgba(45,172,104,.95));
+    background:#198754;
     color:white;
     display:flex;
     justify-content:space-between;
@@ -1526,10 +1531,6 @@ title="EcoAI">🤖</button>
 
 <main>
 
-<!-- =====================================================
-DASHBOARD
-===================================================== -->
-
 <section id="dashboard" class="page active">
 
 <div class="plant-background" aria-hidden="true">
@@ -1561,8 +1562,6 @@ atur kebutuhan air, dan jadikan pertanian lebih berkelanjutan.
 </p>
 
 </div>
-
-<!-- PROFILE -->
 
 <div class="card profile-card">
 
@@ -1611,7 +1610,7 @@ Level 1 • Pemula
 
 </div>
 
-<!-- COIN -->
+<!-- COIN HIJAU -->
 
 <div class="card coin-card">
 
@@ -1641,8 +1640,6 @@ onclick="showPage('reward')">
 </button>
 
 </div>
-
-<!-- STATS -->
 
 <div class="stats">
 
@@ -1691,8 +1688,6 @@ onclick="showPage('reward')">
 </div>
 
 </div>
-
-<!-- MISSION + LEVEL -->
 
 <div class="grid">
 
@@ -1788,8 +1783,6 @@ Dapatkan tips pertanian
 
 </div>
 
-<!-- SMART TOOLS -->
-
 <div class="smart-grid">
 
 <div class="card smart-card">
@@ -1857,8 +1850,6 @@ onclick="showPage('irrigation')">
 </div>
 
 </div>
-
-<!-- INFO PERTANIAN -->
 
 <div class="card agri-card">
 
@@ -1934,8 +1925,6 @@ Harga dapat berubah berdasarkan periode dan wilayah.
 
 </div>
 
-<!-- HARGA PUPUK -->
-
 <div class="card agri-card">
 
 <div class="section-head">
@@ -1980,10 +1969,6 @@ bukan harga pupuk non-subsidi.
 </div>
 
 </section>
-
-<!-- =====================================================
-DEPOSIT
-===================================================== -->
 
 <section id="deposit" class="page">
 
@@ -2077,10 +2062,6 @@ onclick="depositWaste()">
 
 </section>
 
-<!-- =====================================================
-REWARD
-===================================================== -->
-
 <section id="reward" class="page">
 
 <div class="page-title">
@@ -2110,10 +2091,6 @@ id="rewardGrid">
 </div>
 
 </section>
-
-<!-- =====================================================
-CAMERA
-===================================================== -->
 
 <section id="camera" class="page">
 
@@ -2200,10 +2177,6 @@ penyakit hanya dari foto.
 </div>
 
 </section>
-
-<!-- =====================================================
-PREDIKSI PANEN
-===================================================== -->
 
 <section id="harvest" class="page">
 
@@ -2325,10 +2298,6 @@ Jadi tanggal yang ditampilkan adalah
 </div>
 
 </section>
-
-<!-- =====================================================
-SMART IRRIGATION
-===================================================== -->
 
 <section id="irrigation" class="page">
 
@@ -2555,10 +2524,6 @@ data otomatis.
 
 </section>
 
-<!-- =====================================================
-ECO AI
-===================================================== -->
-
 <section id="ai" class="page">
 
 <div class="page-title">
@@ -2654,10 +2619,6 @@ Kirim
 
 </main>
 
-<!-- =====================================================
-REWARD POPUP
-===================================================== -->
-
 <div class="reward-overlay"
 id="rewardOverlay">
 
@@ -2697,10 +2658,6 @@ id="toast">
 </div>
 
 <script>
-
-/* =====================================================
-USER DATA
-===================================================== */
 
 let user =
 JSON.parse(localStorage.getItem("ecoFarmingUser")) || {
@@ -2744,10 +2701,6 @@ JSON.stringify(user)
 );
 
 }
-
-/* =====================================================
-LEVEL
-===================================================== */
 
 function calculateLevel(){
 
@@ -2883,10 +2836,6 @@ container.appendChild(row);
 
 }
 
-/* =====================================================
-PAGE NAVIGATION
-===================================================== */
-
 function showPage(pageId,button){
 
 document.querySelectorAll(".page")
@@ -2934,10 +2883,6 @@ behavior:"smooth"
 });
 
 }
-
-/* =====================================================
-WASTE DEPOSIT
-===================================================== */
 
 const wasteType=document.getElementById("wasteType");
 const wasteWeight=document.getElementById("wasteWeight");
@@ -3005,10 +2950,6 @@ showToast(
 showPage("dashboard");
 
 }
-
-/* =====================================================
-COMMODITIES
-===================================================== */
 
 const commodities=[
 
@@ -3321,10 +3262,6 @@ showToast(
 
 }
 
-/* =====================================================
-FERTILIZER
-===================================================== */
-
 const fertilizers=[
 
 {
@@ -3417,10 +3354,6 @@ grid.appendChild(card);
 });
 
 }
-
-/* =====================================================
-REWARD
-===================================================== */
 
 const rewards=[
 
@@ -3648,10 +3581,6 @@ piece.remove();
 }
 
 }
-
-/* =====================================================
-CAMERA
-===================================================== */
 
 let stream=null;
 let captured=false;
@@ -3966,10 +3895,6 @@ updateDashboard();
 
 }
 
-/* =====================================================
-HARVEST DATA
-===================================================== */
-
 const harvestData={
 
 padi:{
@@ -4220,10 +4145,6 @@ updateDashboardSmartCards();
 
 }
 
-/* =====================================================
-DASHBOARD SMART CARDS
-===================================================== */
-
 function updateDashboardSmartCards(){
 
 const harvestStatus=
@@ -4285,10 +4206,6 @@ irrigationText.textContent=
 }
 
 }
-
-/* =====================================================
-SMART IRRIGATION
-===================================================== */
 
 function updateIrrigationPreview(){
 
@@ -4498,10 +4415,6 @@ needWater
 
 }
 
-/* =====================================================
-ECO AI
-===================================================== */
-
 function addMessage(text,type){
 
 const chat=
@@ -4566,15 +4479,9 @@ answer,
 
 }
 
-/* =====================================================
-AI ANSWER
-===================================================== */
-
 function generateAIAnswer(question){
 
 const q=question.toLowerCase();
-
-/* DAUN KUNING */
 
 if(
 q.includes("kuning")||
@@ -4604,8 +4511,6 @@ Saran EcoAI: lakukan pemeriksaan penyebab terlebih dahulu sebelum menambah pupuk
 
 }
 
-/* LAYU */
-
 if(
 q.includes("layu")||
 q.includes("lemas")
@@ -4623,8 +4528,6 @@ return `🌱 Jika tanaman layu:
 ⚠️ Tanaman layu tidak selalu berarti kekurangan air. Akar bermasalah, panas berlebihan, atau kondisi tanah juga dapat menyebabkan layu.`;
 
 }
-
-/* PUPUK */
 
 if(
 q.includes("pupuk")||
@@ -4648,8 +4551,6 @@ Jangan memberikan pupuk hanya karena tanaman terlihat kurang sehat. Periksa jeni
 
 }
 
-/* HAMA */
-
 if(
 q.includes("hama")||
 q.includes("ulat")||
@@ -4670,8 +4571,6 @@ return `🐛 Untuk menangani hama:
 
 }
 
-/* KOMPOS */
-
 if(
 q.includes("kompos")||
 q.includes("sampah organik")||
@@ -4689,8 +4588,6 @@ Limbah dapat diarahkan menjadi:
 EcoFarming memberikan Eco Coin berdasarkan berat limbah yang disetorkan.`;
 
 }
-
-/* MAGGOT */
 
 if(
 q.includes("maggot")||
@@ -4712,8 +4609,6 @@ Hal penting:
 Pengolahan harus disesuaikan dengan jenis limbah dan tujuan pemanfaatannya.`;
 
 }
-
-/* PANEN */
 
 if(
 q.includes("panen")||
@@ -4758,8 +4653,6 @@ Gunakan menu "Prediksi Panen" di EcoFarming untuk menghitung tanggal perkiraan b
 
 }
 
-/* IRIGASI */
-
 if(
 q.includes("irigasi")||
 q.includes("menyiram")||
@@ -4786,8 +4679,6 @@ EcoFarming memiliki menu "Smart Irrigation" untuk memberikan rekomendasi berdasa
 
 }
 
-/* HARGA */
-
 if(
 q.includes("harga")||
 q.includes("komoditas")||
@@ -4806,8 +4697,6 @@ EcoFarming menampilkan beberapa harga produsen nasional sebagai referensi.
 ⚠️ Jangan menganggap harga aplikasi sebagai harga jual pasti di daerahmu. Untuk transaksi, cek sumber harga terbaru dan kondisi pasar setempat.`;
 
 }
-
-/* CAMERA */
 
 if(
 q.includes("kamera")||
@@ -4831,8 +4720,6 @@ Hasilnya digunakan untuk menentukan langkah pemeriksaan awal.
 Karena itu respons penanganan dibuat bertahap: cek air, cahaya, akar, hama, dan nutrisi sebelum mengambil tindakan.`;
 
 }
-
-/* COIN */
 
 if(
 q.includes("coin")||
@@ -4860,8 +4747,6 @@ Semakin banyak limbah yang dimanfaatkan, semakin besar kontribusi terhadap pengu
 
 }
 
-/* TANAMAN */
-
 if(
 q.includes("tanaman")||
 q.includes("daun")||
@@ -4888,8 +4773,6 @@ Periksa tanaman secara rutin.
 Perubahan daun tidak selalu berarti penyakit. Air, cahaya, umur daun, akar, nutrisi, dan hama juga dapat memengaruhinya.`;
 
 }
-
-/* GENERIC */
 
 return `🤖 Saya bisa membantu dengan beberapa topik:
 
@@ -4924,10 +4807,6 @@ Untuk diagnosis penyakit atau keputusan budidaya yang membutuhkan pemeriksaan la
 
 }
 
-/* =====================================================
-TOAST
-===================================================== */
-
 let toastTimer;
 
 function showToast(message){
@@ -4947,10 +4826,6 @@ toast.classList.remove("show");
 },3500);
 
 }
-
-/* =====================================================
-INIT
-===================================================== */
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -4993,3 +4868,4 @@ key=>harvestData[key].name===user.harvest.plant
 
 </body>
 </html>
+```
