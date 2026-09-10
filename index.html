@@ -280,7 +280,6 @@ button{
     transition:width .5s;
 }
 
-/* ECO COIN */
 .coin-card{
     background:#198754;
     color:white;
@@ -473,8 +472,6 @@ button{
     font-size:13px;
 }
 
-/* KOMODITAS */
-
 .commodity-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -563,8 +560,6 @@ button{
     font-size:11px;
     line-height:1.6;
 }
-
-/* PUPUK */
 
 .fertilizer-grid{
     display:grid;
@@ -712,6 +707,15 @@ select:focus{
 .btn-gold{
     background:#fff1c7;
     color:#936c0d;
+}
+
+.btn-reset{
+    background:#ffe5e5;
+    color:#b83232;
+}
+
+.btn-reset:hover{
+    background:#ffd2d2;
 }
 
 .waste-grid{
@@ -891,10 +895,6 @@ canvas{
     flex:1;
 }
 
-/* =========================
-   RIWAYAT
-========================= */
-
 .history-summary{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -1028,10 +1028,10 @@ canvas{
 .history-actions{
     display:flex;
     justify-content:flex-end;
+    gap:10px;
     margin-top:17px;
+    flex-wrap:wrap;
 }
-
-/* FOOTER */
 
 .footer{
     text-align:center;
@@ -1182,6 +1182,14 @@ canvas{
     .history-left{
         align-items:flex-start;
     }
+
+    .history-actions{
+        justify-content:stretch;
+    }
+
+    .history-actions .btn{
+        width:100%;
+    }
 }
 </style>
 </head>
@@ -1198,54 +1206,41 @@ canvas{
 
 <div class="nav-menu">
 
-<button class="nav-btn active"
-onclick="showPage('dashboard',this)">
+<button class="nav-btn active" onclick="showPage('dashboard',this)">
 🏠 Dashboard
 </button>
 
-<button class="nav-btn"
-onclick="showPage('deposit',this)">
+<button class="nav-btn" onclick="showPage('deposit',this)">
 ♻️ Setor Limbah
 </button>
 
-<button class="nav-btn"
-onclick="showPage('reward',this)">
+<button class="nav-btn" onclick="showPage('reward',this)">
 🎁 Reward
 </button>
 
-<button class="nav-btn"
-onclick="showPage('history',this)">
+<button class="nav-btn" onclick="showPage('history',this)">
 📋 Riwayat
 </button>
 
-<button class="nav-btn"
-onclick="showPage('camera',this)">
+<button class="nav-btn" onclick="showPage('camera',this)">
 📷 Kamera Tanaman
 </button>
 
-<button class="nav-btn"
-onclick="showPage('harvest',this)">
+<button class="nav-btn" onclick="showPage('harvest',this)">
 🌾 Prediksi Panen
 </button>
 
-<button class="nav-btn"
-onclick="showPage('irrigation',this)">
+<button class="nav-btn" onclick="showPage('irrigation',this)">
 💧 Irigasi Pintar
 </button>
 
-<button class="nav-btn"
-onclick="showPage('ai',this)">
+<button class="nav-btn" onclick="showPage('ai',this)">
 🤖 EcoAI
 </button>
 
 </div>
 </nav>
 </header>
-
-
-<!-- =========================
-DASHBOARD
-========================= -->
 
 <section id="dashboard" class="page active">
 
@@ -1268,7 +1263,6 @@ dan mendapatkan informasi pertanian.
 </div>
 </div>
 
-
 <div class="profile-grid">
 
 <div class="card profile-card">
@@ -1286,10 +1280,7 @@ Level 1 • Pemula
 </div>
 
 <div class="xp-bar">
-<div class="xp-fill"
-id="xpFill"
-style="width:0%">
-</div>
+<div class="xp-fill" id="xpFill" style="width:0%"></div>
 </div>
 
 <small id="xpText">
@@ -1299,7 +1290,6 @@ style="width:0%">
 </div>
 </div>
 
-
 <div class="card coin-card">
 
 <div>
@@ -1308,8 +1298,7 @@ style="width:0%">
 ECO COIN ANDA
 </div>
 
-<div class="coin-value"
-id="coinDisplay">
+<div class="coin-value" id="coinDisplay">
 0
 </div>
 
@@ -1327,107 +1316,51 @@ Gunakan Eco Coin untuk menukar reward
 
 </div>
 
-
 <div class="section-title">
-
 <h2>📊 Statistik Anda</h2>
-
-<span>
-Data tersimpan otomatis
-</span>
-
+<span>Data tersimpan otomatis</span>
 </div>
-
 
 <div class="stats">
 
 <div class="stat">
-
 <div class="stat-icon">♻️</div>
-
-<div class="stat-value"
-id="wasteDisplay">
-0
+<div class="stat-value" id="wasteDisplay">0</div>
+<div class="stat-label">Kg Limbah Disetor</div>
 </div>
-
-<div class="stat-label">
-Kg Limbah Disetor
-</div>
-
-</div>
-
 
 <div class="stat">
-
 <div class="stat-icon">🪙</div>
-
-<div class="stat-value"
-id="coinStat">
-0
+<div class="stat-value" id="coinStat">0</div>
+<div class="stat-label">Eco Coin</div>
 </div>
-
-<div class="stat-label">
-Eco Coin
-</div>
-
-</div>
-
 
 <div class="stat">
-
 <div class="stat-icon">🎁</div>
-
-<div class="stat-value"
-id="exchangeDisplay">
-0
+<div class="stat-value" id="exchangeDisplay">0</div>
+<div class="stat-label">Reward Ditukar</div>
 </div>
-
-<div class="stat-label">
-Reward Ditukar
-</div>
-
-</div>
-
 
 <div class="stat">
-
 <div class="stat-icon">🏆</div>
-
-<div class="stat-value"
-id="achievementDisplay">
-0
-</div>
-
-<div class="stat-label">
-Pencapaian
+<div class="stat-value" id="achievementDisplay">0</div>
+<div class="stat-label">Pencapaian</div>
 </div>
 
 </div>
-
-</div>
-
 
 <div class="section-title">
-
 <h2>🎯 Misi Harian</h2>
-
-<span>
-Dapatkan XP tambahan
-</span>
-
+<span>Dapatkan XP tambahan</span>
 </div>
-
 
 <div class="missions">
 
 <div class="card mission">
 
 <div class="mission-top">
-
 <div class="mission-icon">♻️</div>
-
 <div class="badge">+20 XP</div>
-
 </div>
 
 <h3>Setor Limbah</h3>
@@ -1437,22 +1370,16 @@ Setorkan minimal 1 kg limbah organik.
 </p>
 
 <div class="progress">
-<div id="missionWaste"
-style="width:0%">
-</div>
+<div id="missionWaste" style="width:0%"></div>
 </div>
 
 </div>
-
 
 <div class="card mission">
 
 <div class="mission-top">
-
 <div class="mission-icon">📷</div>
-
 <div class="badge">+15 XP</div>
-
 </div>
 
 <h3>Cek Tanaman</h3>
@@ -1462,22 +1389,16 @@ Gunakan kamera tanaman untuk melakukan pengecekan.
 </p>
 
 <div class="progress">
-<div id="missionCamera"
-style="width:0%">
-</div>
+<div id="missionCamera" style="width:0%"></div>
 </div>
 
 </div>
-
 
 <div class="card mission">
 
 <div class="mission-top">
-
 <div class="mission-icon">🤖</div>
-
 <div class="badge">+15 XP</div>
-
 </div>
 
 <h3>Tanya EcoAI</h3>
@@ -1487,20 +1408,16 @@ Tanyakan sesuatu tentang tanaman atau pertanian.
 </p>
 
 <div class="progress">
-<div id="missionAI"
-style="width:0%">
-</div>
+<div id="missionAI" style="width:0%"></div>
 </div>
 
 </div>
 
 </div>
-
 
 <div class="section-title">
 <h2>🌱 Perjalanan Level</h2>
 </div>
-
 
 <div class="journey">
 
@@ -1536,11 +1453,9 @@ style="width:0%">
 
 </div>
 
-
 <div class="section-title">
 <h2>🧠 Fitur Pintar</h2>
 </div>
-
 
 <div class="smart-grid">
 
@@ -1563,7 +1478,6 @@ Buka Prediksi
 
 </div>
 
-
 <div class="card smart-card">
 
 <div class="smart-icon">💧</div>
@@ -1585,17 +1499,13 @@ Cek Irigasi
 
 </div>
 
-
 <div class="section-title">
 
 <h2>📈 Harga Komoditas Pertanian</h2>
 
-<span>
-Contoh harga produsen
-</span>
+<span>Contoh harga produsen</span>
 
 </div>
-
 
 <div class="commodity-grid">
 
@@ -1611,7 +1521,6 @@ Contoh harga produsen
 </div>
 </div>
 
-
 <div class="commodity-card">
 <div class="commodity-image">
 <span class="commodity-emoji">🌽</span>
@@ -1623,7 +1532,6 @@ Contoh harga produsen
 <span class="status">✓ Stabil</span>
 </div>
 </div>
-
 
 <div class="commodity-card">
 <div class="commodity-image">
@@ -1637,7 +1545,6 @@ Contoh harga produsen
 </div>
 </div>
 
-
 <div class="commodity-card">
 <div class="commodity-image">
 <span class="commodity-emoji">🌶️</span>
@@ -1649,7 +1556,6 @@ Contoh harga produsen
 <span class="status">↕ Berfluktuasi</span>
 </div>
 </div>
-
 
 <div class="commodity-card">
 <div class="commodity-image">
@@ -1663,7 +1569,6 @@ Contoh harga produsen
 </div>
 </div>
 
-
 <div class="commodity-card">
 <div class="commodity-image">
 <span class="commodity-emoji">🍅</span>
@@ -1675,7 +1580,6 @@ Contoh harga produsen
 <span class="status">✓ Normal</span>
 </div>
 </div>
-
 
 <div class="commodity-card">
 <div class="commodity-image">
@@ -1689,7 +1593,6 @@ Contoh harga produsen
 </div>
 </div>
 
-
 <div class="commodity-card">
 <div class="commodity-image">
 <span class="commodity-emoji">🥒</span>
@@ -1701,7 +1604,6 @@ Contoh harga produsen
 <span class="status">✓ Normal</span>
 </div>
 </div>
-
 
 <div class="commodity-card">
 <div class="commodity-image">
@@ -1717,7 +1619,6 @@ Contoh harga produsen
 
 </div>
 
-
 <div class="price-note">
 💡 <b>Catatan harga:</b> Harga di atas merupakan contoh/perkiraan
 untuk tampilan aplikasi. Harga komoditas sebenarnya dapat berbeda
@@ -1725,17 +1626,13 @@ berdasarkan wilayah, kualitas, musim, pasokan, permintaan,
 dan kondisi pasar.
 </div>
 
-
 <div class="section-title">
 
 <h2>🌱 Informasi Harga Pupuk</h2>
 
-<span>
-Contoh harga/HET
-</span>
+<span>Contoh harga/HET</span>
 
 </div>
-
 
 <div class="fertilizer-grid">
 
@@ -1773,7 +1670,6 @@ HET Contoh
 </div>
 </div>
 
-
 <div class="fertilizer-card">
 
 <div class="fertilizer-image">
@@ -1807,7 +1703,6 @@ HET Contoh
 
 </div>
 </div>
-
 
 <div class="fertilizer-card">
 
@@ -1845,7 +1740,6 @@ Perkiraan
 
 </div>
 
-
 <div class="price-note">
 🌿 <b>Catatan pupuk:</b> Harga pupuk dapat berbeda berdasarkan
 jenis, merek, kemasan, wilayah, dan kebijakan harga yang berlaku.
@@ -1853,23 +1747,15 @@ jenis, merek, kemasan, wilayah, dan kebijakan harga yang berlaku.
 
 </section>
 
-
-<!-- =========================
-DEPOSIT
-========================= -->
-
 <section id="deposit" class="page">
 
 <div class="section-title">
 
 <h2>♻️ Setor Limbah Organik</h2>
 
-<span>
-Ubah limbah menjadi Eco Coin
-</span>
+<span>Ubah limbah menjadi Eco Coin</span>
 
 </div>
-
 
 <div class="card">
 
@@ -1877,77 +1763,64 @@ Ubah limbah menjadi Eco Coin
 Pilih Jenis Limbah
 </h3>
 
-
 <div class="waste-grid">
 
-<button class="waste-option"
-onclick="selectWaste(this,'Sisa Sayuran')">
+<button class="waste-option" onclick="selectWaste(this,'Sisa Sayuran')">
 <span>🥬</span>
 Sisa Sayuran
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Kulit Buah')">
+<button class="waste-option" onclick="selectWaste(this,'Kulit Buah')">
 <span>🍊</span>
 Kulit Buah
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Jerami')">
+<button class="waste-option" onclick="selectWaste(this,'Jerami')">
 <span>🌾</span>
 Jerami
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Daun Kering')">
+<button class="waste-option" onclick="selectWaste(this,'Daun Kering')">
 <span>🍂</span>
 Daun Kering
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Batang Tanaman')">
+<button class="waste-option" onclick="selectWaste(this,'Batang Tanaman')">
 <span>🌿</span>
 Batang Tanaman
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Sisa Jagung')">
+<button class="waste-option" onclick="selectWaste(this,'Sisa Jagung')">
 <span>🌽</span>
 Sisa Jagung
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Sekam Padi')">
+<button class="waste-option" onclick="selectWaste(this,'Sekam Padi')">
 <span>🌾</span>
 Sekam Padi
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Tongkol Jagung')">
+<button class="waste-option" onclick="selectWaste(this,'Tongkol Jagung')">
 <span>🌽</span>
 Tongkol Jagung
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Ampas Sayuran')">
+<button class="waste-option" onclick="selectWaste(this,'Ampas Sayuran')">
 <span>🥕</span>
 Ampas Sayuran
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Limbah Buah')">
+<button class="waste-option" onclick="selectWaste(this,'Limbah Buah')">
 <span>🍎</span>
 Limbah Buah
 </button>
 
-<button class="waste-option"
-onclick="selectWaste(this,'Limbah Organik Lain')">
+<button class="waste-option" onclick="selectWaste(this,'Limbah Organik Lain')">
 <span>♻️</span>
 Limbah Organik Lain
 </button>
 
 </div>
-
 
 <div class="form-group">
 
@@ -1964,7 +1837,6 @@ oninput="previewWaste()">
 
 </div>
 
-
 <div class="preview">
 
 <b>Preview Setoran</b>
@@ -1975,7 +1847,6 @@ Pilih jenis limbah dan masukkan beratnya.
 </p>
 
 </div>
-
 
 <button class="btn btn-green"
 style="margin-top:15px"
@@ -1989,11 +1860,6 @@ onclick="depositWaste()">
 
 </section>
 
-
-<!-- =========================
-REWARD
-========================= -->
-
 <section id="reward" class="page">
 
 <div class="section-title">
@@ -2005,7 +1871,6 @@ Eco Coin: 0
 </span>
 
 </div>
-
 
 <div class="reward-grid">
 
@@ -2030,7 +1895,6 @@ Tukar
 
 </div>
 
-
 <div class="card reward-card">
 
 <div class="reward-image">🍃</div>
@@ -2051,7 +1915,6 @@ Tukar
 </button>
 
 </div>
-
 
 <div class="card reward-card">
 
@@ -2074,7 +1937,6 @@ Tukar
 
 </div>
 
-
 <div class="card reward-card">
 
 <div class="reward-image">🌱</div>
@@ -2095,7 +1957,6 @@ Tukar
 </button>
 
 </div>
-
 
 <div class="card reward-card">
 
@@ -2122,25 +1983,15 @@ Tukar
 
 </section>
 
-
-<!-- =========================
-RIWAYAT
-========================= -->
-
 <section id="history" class="page">
 
 <div class="section-title">
 
-<h2>
-📋 Riwayat Aktivitas
-</h2>
+<h2>📋 Riwayat Aktivitas</h2>
 
-<span>
-Setoran limbah & penukaran reward
-</span>
+<span>Setoran limbah & penukaran reward</span>
 
 </div>
-
 
 <div class="history-summary">
 
@@ -2161,7 +2012,6 @@ Total Setoran
 
 </div>
 
-
 <div class="history-stat">
 
 <div class="history-stat-icon">
@@ -2178,7 +2028,6 @@ Reward Ditukar
 </div>
 
 </div>
-
 
 <div class="history-stat">
 
@@ -2199,7 +2048,6 @@ Total Coin dari Setoran
 
 </div>
 
-
 <div class="card">
 
 <div id="historyList"
@@ -2213,16 +2061,16 @@ onclick="clearHistory()">
 🗑️ Hapus Semua Riwayat
 </button>
 
+<button class="btn btn-reset"
+onclick="resetEcoFarming()">
+🔄 Reset Data
+</button>
+
 </div>
 
 </div>
 
 </section>
-
-
-<!-- =========================
-CAMERA
-========================= -->
 
 <section id="camera" class="page">
 
@@ -2230,12 +2078,9 @@ CAMERA
 
 <h2>📷 Kamera Tanaman</h2>
 
-<span>
-Cek kondisi visual tanaman
-</span>
+<span>Cek kondisi visual tanaman</span>
 
 </div>
-
 
 <div class="card">
 
@@ -2249,7 +2094,6 @@ playsinline>
 <canvas id="canvas"
 style="display:none">
 </canvas>
-
 
 <div class="camera-controls">
 
@@ -2266,7 +2110,6 @@ onclick="capturePlant()">
 </div>
 
 </div>
-
 
 <div id="cameraAnalysis"
 class="analysis">
@@ -2286,10 +2129,7 @@ dan bukan alat diagnosis penyakit tanaman.
 
 </section>
 
-
-<!-- =========================
-HARVEST
-========================= -->
+<!-- PREDIKSI PANEN -->
 
 <section id="harvest" class="page">
 
@@ -2297,12 +2137,9 @@ HARVEST
 
 <h2>🌾 Prediksi Panen</h2>
 
-<span>
-Perkiraan berdasarkan umur tanaman
-</span>
+<span>Perkiraan berdasarkan umur tanaman</span>
 
 </div>
-
 
 <div class="card">
 
@@ -2316,23 +2153,25 @@ Jenis Tanaman
 
 <select id="plantType">
 
-<option value="padi">Padi</option>
-<option value="jagung">Jagung</option>
-<option value="kedelai">Kedelai</option>
-<option value="cabai">Cabai</option>
-<option value="tomat">Tomat</option>
-<option value="kentang">Kentang</option>
-<option value="bawang">Bawang Merah</option>
-<option value="kacang">Kacang Tanah</option>
-<option value="mentimun">Mentimun</option>
-<option value="semangka">Semangka</option>
-<option value="melon">Melon</option>
-<option value="pepaya">Pepaya</option>
+<option value="padi">🌾 Padi</option>
+<option value="jagung">🌽 Jagung</option>
+<option value="kedelai">🫘 Kedelai</option>
+<option value="cabai">🌶️ Cabai</option>
+<option value="tomat">🍅 Tomat</option>
+<option value="kentang">🥔 Kentang</option>
+<option value="bawang">🧅 Bawang Merah</option>
+<option value="kacang">🥜 Kacang Tanah</option>
+<option value="mentimun">🥒 Mentimun</option>
+<option value="semangka">🍉 Semangka</option>
+<option value="melon">🍈 Melon</option>
+<option value="pepaya">🍈 Pepaya</option>
+
+<!-- TAMBAHAN TEMBAKAU -->
+<option value="tembakau">🌿 Tembakau</option>
 
 </select>
 
 </div>
-
 
 <div class="form-group">
 
@@ -2352,14 +2191,10 @@ Kondisi Pertumbuhan
 
 </div>
 
-
 <button class="btn btn-green"
 onclick="predictHarvest()">
-
 🌾 Prediksi Waktu Panen
-
 </button>
-
 
 <div id="harvestResult"
 class="harvest-result">
@@ -2369,10 +2204,7 @@ class="harvest-result">
 
 </section>
 
-
-<!-- =========================
-IRRIGATION
-========================= -->
+<!-- IRIGASI PINTAR -->
 
 <section id="irrigation" class="page">
 
@@ -2380,12 +2212,9 @@ IRRIGATION
 
 <h2>💧 Irigasi Pintar</h2>
 
-<span>
-Rekomendasi penyiraman
-</span>
+<span>Rekomendasi penyiraman</span>
 
 </div>
-
 
 <div class="card">
 
@@ -2399,17 +2228,17 @@ Jenis Tanaman
 
 <select id="irPlant">
 
-<option>Padi</option>
-<option>Jagung</option>
-<option>Cabai</option>
-<option>Tomat</option>
-<option>Sayuran</option>
-<option>Buah-buahan</option>
+<option value="Padi">🌾 Padi</option>
+<option value="Jagung">🌽 Jagung</option>
+<option value="Cabai">🌶️ Cabai</option>
+<option value="Tomat">🍅 Tomat</option>
+<option value="Tembakau">🌿 Tembakau</option>
+<option value="Sayuran">🥬 Sayuran</option>
+<option value="Buah-buahan">🍉 Buah-buahan</option>
 
 </select>
 
 </div>
-
 
 <div class="form-group">
 
@@ -2425,7 +2254,6 @@ placeholder="Contoh: 40">
 
 </div>
 
-
 <div class="form-group">
 
 <label>
@@ -2437,7 +2265,6 @@ type="number"
 placeholder="Contoh: 30">
 
 </div>
-
 
 <div class="form-group">
 
@@ -2454,7 +2281,6 @@ Cuaca
 </select>
 
 </div>
-
 
 <div class="form-group">
 
@@ -2476,14 +2302,10 @@ Fase Tanaman
 
 </div>
 
-
 <button class="btn btn-green"
 onclick="checkIrrigation()">
-
 💧 Buat Rekomendasi
-
 </button>
-
 
 <div id="irrigationResult"
 class="smart-result"
@@ -2494,23 +2316,15 @@ style="display:none">
 
 </section>
 
-
-<!-- =========================
-AI
-========================= -->
-
 <section id="ai" class="page">
 
 <div class="section-title">
 
 <h2>🤖 EcoAI</h2>
 
-<span>
-Asisten pertanian EcoFarming
-</span>
+<span>Asisten pertanian EcoFarming</span>
 
 </div>
-
 
 <div class="card ai-chat">
 
@@ -2535,7 +2349,6 @@ harga komoditas, atau pertanian secara umum.
 
 </div>
 
-
 <div class="chat-input">
 
 <input id="aiInput"
@@ -2553,15 +2366,11 @@ Kirim
 
 </section>
 
-
 <footer class="footer">
 
 🌱 EcoFarming • Smart Farming & Pengolahan Limbah Organik
 
 </footer>
-
-
-<!-- MODAL -->
 
 <div class="modal"
 id="rewardModal">
@@ -2589,12 +2398,9 @@ Tutup
 
 </div>
 
-
 <script>
 
-/* =========================
-DATA PENGGUNA
-========================= */
+/* DATA PENGGUNA */
 
 let user =
 JSON.parse(localStorage.getItem("ecoFarmingUser")) || {
@@ -2613,18 +2419,14 @@ irrigation:null
 
 };
 
-
-/*
-  Memastikan pengguna lama yang sudah memiliki data
-  tetap mendapatkan properti history.
-*/
 if(!Array.isArray(user.history)){
     user.history = [];
 }
 
-
 let selectedWaste = "";
 
+
+/* DATA UMUR TANAMAN */
 
 const plantDays = {
 
@@ -2639,14 +2441,15 @@ kacang:100,
 mentimun:50,
 semangka:75,
 melon:70,
-pepaya:240
+pepaya:240,
+
+/* TAMBAHAN TEMBAKAU */
+tembakau:100
 
 };
 
 
-/* =========================
-LOCAL STORAGE
-========================= */
+/* LOCAL STORAGE */
 
 function saveUser(){
 
@@ -2658,9 +2461,7 @@ JSON.stringify(user)
 }
 
 
-/* =========================
-LEVEL
-========================= */
+/* LEVEL */
 
 function getLevel(xp){
 
@@ -2673,7 +2474,6 @@ min:1000,
 next:1500
 };
 
-
 if(xp >= 500)
 
 return {
@@ -2682,7 +2482,6 @@ name:"Petani Hebat",
 min:500,
 next:1000
 };
-
 
 if(xp >= 250)
 
@@ -2693,7 +2492,6 @@ min:250,
 next:500
 };
 
-
 if(xp >= 100)
 
 return {
@@ -2702,7 +2500,6 @@ name:"Petani Muda",
 min:100,
 next:250
 };
-
 
 return {
 level:1,
@@ -2714,58 +2511,46 @@ next:100
 }
 
 
-/* =========================
-UPDATE DASHBOARD
-========================= */
+/* UPDATE DASHBOARD */
 
 function updateDashboard(){
 
 const level =
 getLevel(user.xp);
 
-
 document.getElementById("usernameDisplay")
 .textContent =
 user.username;
-
 
 document.getElementById("levelDisplay")
 .textContent =
 `Level ${level.level} • ${level.name}`;
 
-
 document.getElementById("coinDisplay")
 .textContent =
 user.coins.toLocaleString("id-ID");
-
 
 document.getElementById("coinStat")
 .textContent =
 user.coins.toLocaleString("id-ID");
 
-
 document.getElementById("wasteDisplay")
 .textContent =
 Number(user.waste).toFixed(1);
-
 
 document.getElementById("exchangeDisplay")
 .textContent =
 user.exchanges;
 
-
 document.getElementById("achievementDisplay")
 .textContent =
 user.achievements;
 
-
 let currentXP =
 user.xp - level.min;
 
-
 let requiredXP =
 level.next - level.min;
-
 
 let percentage =
 Math.min(
@@ -2773,37 +2558,30 @@ Math.min(
 (currentXP / requiredXP) * 100
 );
 
-
 document.getElementById("xpFill")
 .style.width =
 percentage + "%";
 
-
 document.getElementById("xpText")
 .textContent =
 `${currentXP} / ${requiredXP} XP`;
-
 
 document.getElementById("rewardCoinText")
 .textContent =
 "Eco Coin: " +
 user.coins.toLocaleString("id-ID");
 
-
 document.getElementById("missionWaste")
 .style.width =
 Math.min(100,user.waste * 100) + "%";
-
 
 document.getElementById("missionCamera")
 .style.width =
 user.cameraUsed ? "100%" : "0%";
 
-
 document.getElementById("missionAI")
 .style.width =
 user.aiUsed ? "100%" : "0%";
-
 
 for(let i=1;i<=5;i++){
 
@@ -2819,82 +2597,57 @@ i === level.level
 
 }
 
-
 renderHistory();
 
 }
 
 
-/* =========================
-PAGE NAVIGATION
-========================= */
+/* PAGE NAVIGATION */
 
 function showPage(pageId,button){
 
 document.querySelectorAll(".page")
 .forEach(page=>{
-
 page.classList.remove("active");
-
 });
-
 
 const target =
 document.getElementById(pageId);
 
-
 if(target)
-
 target.classList.add("active");
-
 
 document.querySelectorAll(".nav-btn")
 .forEach(btn=>{
-
 btn.classList.remove("active");
-
 });
-
 
 if(button)
-
 button.classList.add("active");
 
-
 window.scrollTo({
-
 top:0,
-
 behavior:"smooth"
-
 });
-
 
 updateDashboard();
 
 }
 
 
-/* =========================
-WASTE DEPOSIT
-========================= */
+/* WASTE */
 
 function selectWaste(element,type){
 
 document.querySelectorAll(".waste-option")
 .forEach(item=>{
-
 item.classList.remove("selected");
-
 });
-
 
 element.classList.add("selected");
 
-
 selectedWaste =
 type;
-
 
 previewWaste();
 
@@ -2908,10 +2661,8 @@ parseFloat(
 document.getElementById("wasteWeight").value
 ) || 0;
 
-
 const preview =
 document.getElementById("wastePreview");
-
 
 if(!selectedWaste){
 
@@ -2922,7 +2673,6 @@ return;
 
 }
 
-
 if(weight <= 0){
 
 preview.textContent =
@@ -2932,14 +2682,11 @@ return;
 
 }
 
-
 const coins =
 Math.floor(weight * 20);
 
-
 const xp =
 Math.floor(weight * 10);
-
 
 preview.innerHTML =
 
@@ -2967,7 +2714,6 @@ parseFloat(
 document.getElementById("wasteWeight").value
 ) || 0;
 
-
 if(!selectedWaste){
 
 alert(
@@ -2977,7 +2723,6 @@ alert(
 return;
 
 }
-
 
 if(weight <= 0){
 
@@ -2989,25 +2734,17 @@ return;
 
 }
 
-
 const coins =
 Math.floor(weight * 20);
 
-
 const xp =
 Math.floor(weight * 10);
-
 
 user.waste += weight;
 
 user.coins += coins;
 
 user.xp += xp;
-
-
-/* =========================
-CATAT RIWAYAT SETORAN
-========================= */
 
 user.history.push({
 
@@ -3023,7 +2760,6 @@ date:new Date().toLocaleString("id-ID")
 
 });
 
-
 if(user.waste >= 1)
 
 user.achievements =
@@ -3032,50 +2768,37 @@ user.achievements,
 1
 );
 
-
 saveUser();
 
 updateDashboard();
-
 
 alert(
 
 `Setoran berhasil!\n\n` +
 
 `Jenis: ${selectedWaste}\n` +
-
 `Berat: ${weight} kg\n` +
-
 `+${coins} Eco Coin\n` +
-
 `+${xp} XP`
 
 );
 
-
 document.getElementById("wasteWeight")
 .value = "";
 
-
 selectedWaste = "";
-
 
 document.querySelectorAll(".waste-option")
 .forEach(item=>{
-
 item.classList.remove("selected");
-
 });
-
 
 previewWaste();
 
 }
 
 
-/* =========================
-REWARD
-========================= */
+/* REWARD */
 
 function exchangeReward(name,cost){
 
@@ -3084,9 +2807,7 @@ if(user.coins < cost){
 alert(
 
 `Eco Coin kamu belum cukup.\n` +
-
 `Dibutuhkan: ${cost} Coin\n` +
-
 `Coin kamu: ${user.coins}`
 
 );
@@ -3095,15 +2816,9 @@ return;
 
 }
 
-
 user.coins -= cost;
 
 user.exchanges++;
-
-
-/* =========================
-CATAT RIWAYAT TUKAR REWARD
-========================= */
 
 user.history.push({
 
@@ -3117,7 +2832,6 @@ date:new Date().toLocaleString("id-ID")
 
 });
 
-
 if(user.exchanges >= 1)
 
 user.achievements =
@@ -3126,11 +2840,9 @@ user.achievements,
 2
 );
 
-
 saveUser();
 
 updateDashboard();
-
 
 document.getElementById("modalText")
 .innerHTML =
@@ -3148,10 +2860,8 @@ Sisa Eco Coin kamu:
 
 `;
 
-
 document.getElementById("rewardModal")
 .classList.add("show");
-
 
 createConfetti();
 
@@ -3173,30 +2883,22 @@ for(let i=0;i<80;i++){
 const piece =
 document.createElement("div");
 
-
 piece.className =
 "confetti";
-
 
 piece.style.left =
 Math.random()*100 + "vw";
 
-
 piece.style.animationDelay =
 Math.random()*1.5 + "s";
-
 
 piece.style.transform =
 `rotate(${Math.random()*360}deg)`;
 
-
 document.body.appendChild(piece);
 
-
 setTimeout(()=>{
-
 piece.remove();
-
 },3000);
 
 }
@@ -3204,31 +2906,25 @@ piece.remove();
 }
 
 
-/* =========================
-RIWAYAT
-========================= */
+/* RIWAYAT */
 
 function renderHistory(){
 
 const list =
 document.getElementById("historyList");
 
-
 if(!list)
 return;
-
 
 const depositCount =
 user.history.filter(
 item=>item.type === "deposit"
 ).length;
 
-
 const rewardCount =
 user.history.filter(
 item=>item.type === "reward"
 ).length;
-
 
 const totalCoin =
 user.history
@@ -3238,21 +2934,17 @@ user.history
 0
 );
 
-
 document.getElementById("historyDepositCount")
 .textContent =
 depositCount;
-
 
 document.getElementById("historyRewardCount")
 .textContent =
 rewardCount;
 
-
 document.getElementById("historyCoinTotal")
 .textContent =
 totalCoin.toLocaleString("id-ID");
-
 
 if(user.history.length === 0){
 
@@ -3281,13 +2973,8 @@ return;
 
 }
 
-
-/*
-  Aktivitas terbaru ditampilkan paling atas.
-*/
 const sortedHistory =
 [...user.history].reverse();
-
 
 list.innerHTML =
 sortedHistory.map((item,index)=>{
@@ -3322,7 +3009,6 @@ Mendapatkan ${Number(item.coins).toLocaleString("id-ID")} Eco Coin
 
 </div>
 
-
 <div class="history-right">
 
 <div class="history-coins plus">
@@ -3340,7 +3026,6 @@ ${item.date}
 `;
 
 }
-
 
 if(item.type === "reward"){
 
@@ -3370,7 +3055,6 @@ Menggunakan ${Number(item.cost).toLocaleString("id-ID")} Eco Coin
 
 </div>
 
-
 <div class="history-right">
 
 <div class="history-coins minus">
@@ -3396,9 +3080,7 @@ return "";
 }
 
 
-/* =========================
-HAPUS RIWAYAT
-========================= */
+/* HAPUS RIWAYAT */
 
 function clearHistory(){
 
@@ -3410,16 +3092,13 @@ return;
 
 }
 
-
 const confirmDelete =
 confirm(
 "Yakin ingin menghapus semua riwayat aktivitas?"
 );
 
-
 if(!confirmDelete)
 return;
-
 
 user.history = [];
 
@@ -3432,12 +3111,127 @@ alert("Semua riwayat berhasil dihapus.");
 }
 
 
-/* =========================
-CAMERA
-========================= */
+/* RESET SEMUA DATA */
+
+function resetEcoFarming(){
+
+const yakin =
+confirm(
+
+"⚠️ Yakin ingin mereset semua data EcoFarming?\n\n" +
+
+"Semua data berikut akan dihapus:\n" +
+
+"• Eco Coin\n" +
+"• XP dan Level\n" +
+"• Total limbah\n" +
+"• Reward yang ditukar\n" +
+"• Pencapaian\n" +
+"• Riwayat aktivitas\n" +
+"• Data kamera\n" +
+"• Data prediksi panen\n" +
+"• Data irigasi\n\n" +
+
+"Data yang sudah di-reset tidak dapat dikembalikan."
+
+);
+
+if(!yakin)
+return;
+
+user = {
+
+username:"Petani Eco",
+coins:0,
+xp:0,
+waste:0,
+exchanges:0,
+achievements:0,
+cameraUsed:false,
+aiUsed:false,
+history:[],
+harvest:null,
+irrigation:null
+
+};
+
+selectedWaste = "";
+
+localStorage.removeItem(
+"ecoFarmingUser"
+);
+
+saveUser();
+
+updateDashboard();
+
+const wasteInput =
+document.getElementById("wasteWeight");
+
+if(wasteInput)
+wasteInput.value = "";
+
+document.querySelectorAll(".waste-option")
+.forEach(item=>{
+item.classList.remove("selected");
+});
+
+const harvestResult =
+document.getElementById("harvestResult");
+
+if(harvestResult){
+
+harvestResult.classList.remove("show");
+harvestResult.innerHTML = "";
+
+}
+
+const irrigationResult =
+document.getElementById("irrigationResult");
+
+if(irrigationResult){
+
+irrigationResult.style.display = "none";
+irrigationResult.innerHTML = "";
+
+}
+
+const cameraAnalysis =
+document.getElementById("cameraAnalysis");
+
+if(cameraAnalysis){
+
+cameraAnalysis.innerHTML = `
+
+Kamera dapat digunakan untuk mengambil gambar tanaman.
+
+<br>
+
+<small>
+Catatan: fitur ini hanya melakukan analisis visual sederhana
+dan bukan alat diagnosis penyakit tanaman.
+</small>
+
+`;
+
+}
+
+previewWaste();
+
+alert(
+
+"✅ Semua data EcoFarming berhasil di-reset.\n\n" +
+
+"Kamu kembali ke Level 1 • Pemula dengan 0 Eco Coin."
+
+);
+
+}
+
+
+/* CAMERA */
 
 let stream = null;
-
 
 async function startCamera(){
 
@@ -3447,7 +3241,6 @@ stream =
 await navigator.mediaDevices.getUserMedia({
 video:true
 });
-
 
 document.getElementById("video")
 .srcObject =
@@ -3470,10 +3263,8 @@ function capturePlant(){
 const video =
 document.getElementById("video");
 
-
 const canvas =
 document.getElementById("canvas");
-
 
 if(!video.videoWidth){
 
@@ -3485,18 +3276,14 @@ return;
 
 }
 
-
 canvas.width =
 video.videoWidth;
-
 
 canvas.height =
 video.videoHeight;
 
-
 const ctx =
 canvas.getContext("2d");
-
 
 ctx.drawImage(
 video,
@@ -3506,7 +3293,6 @@ canvas.width,
 canvas.height
 );
 
-
 const data =
 ctx.getImageData(
 0,
@@ -3515,15 +3301,12 @@ canvas.width,
 canvas.height
 ).data;
 
-
 let r=0;
 let g=0;
 let b=0;
 
-
 const total =
 data.length / 4;
-
 
 for(let i=0;i<data.length;i+=4){
 
@@ -3533,15 +3316,12 @@ b += data[i+2];
 
 }
 
-
 r /= total;
 g /= total;
 b /= total;
 
-
 const analysis =
 document.getElementById("cameraAnalysis");
-
 
 if(g > r * 1.05 && g > b * 1.05){
 
@@ -3619,16 +3399,13 @@ dan bukan diagnosis penyakit.
 
 }
 
-
 user.cameraUsed = true;
-
 
 user.achievements =
 Math.max(
 user.achievements,
 3
 );
-
 
 saveUser();
 
@@ -3637,9 +3414,7 @@ updateDashboard();
 }
 
 
-/* =========================
-HARVEST
-========================= */
+/* PREDIKSI PANEN */
 
 function predictHarvest(){
 
@@ -3647,50 +3422,46 @@ const plant =
 document.getElementById("plantType")
 .value;
 
-
 const condition =
 document.getElementById("growthCondition")
 .value;
 
-
 let days =
 plantDays[plant];
-
 
 if(condition === "cepat")
 days -= 7;
 
-
 if(condition === "lambat")
 days += 14;
-
 
 const today =
 new Date();
 
-
 const harvestDate =
 new Date(today);
-
 
 harvestDate.setDate(
 today.getDate() + days
 );
 
-
 const result =
 document.getElementById("harvestResult");
 
-
 result.classList.add("show");
 
+let icon = "🌾";
+
+if(plant === "tembakau"){
+    icon = "🌿";
+}
 
 result.innerHTML =
 
 `
 
 <div>
-🌾 Perkiraan waktu panen
+${icon} Perkiraan waktu panen
 </div>
 
 <div class="days">
@@ -3699,7 +3470,7 @@ ${days} hari
 
 <p>
 Tanaman:
-<b>${capitalize(plant)}</b>
+<b>${getPlantName(plant)}</b>
 </p>
 
 <p>
@@ -3721,7 +3492,26 @@ year:"numeric"
 </b>
 </p>
 
-<small>
+${plant === "tembakau" ? `
+
+<div style="
+margin-top:15px;
+padding:13px;
+border-radius:14px;
+background:#f5faf7;
+">
+
+🌿 <b>Catatan Tembakau:</b><br>
+
+Waktu panen tembakau dapat berbeda menurut
+jenis atau varietas, umur tanaman, kondisi lahan,
+cuaca, dan tingkat kematangan daun.
+
+</div>
+
+` : ""}
+
+<small style="display:block;margin-top:15px">
 Hasil ini merupakan perkiraan.
 Waktu panen sebenarnya dapat dipengaruhi
 varietas, cuaca, air, nutrisi, hama,
@@ -3729,7 +3519,6 @@ penyakit, dan kondisi lahan.
 </small>
 
 `;
-
 
 user.harvest = {
 
@@ -3739,8 +3528,34 @@ date:harvestDate.toISOString()
 
 };
 
-
 saveUser();
+
+}
+
+
+/* NAMA TANAMAN */
+
+function getPlantName(plant){
+
+const names = {
+
+padi:"Padi",
+jagung:"Jagung",
+kedelai:"Kedelai",
+cabai:"Cabai",
+tomat:"Tomat",
+kentang:"Kentang",
+bawang:"Bawang Merah",
+kacang:"Kacang Tanah",
+mentimun:"Mentimun",
+semangka:"Semangka",
+melon:"Melon",
+pepaya:"Pepaya",
+tembakau:"Tembakau"
+
+};
+
+return names[plant] || capitalize(plant);
 
 }
 
@@ -3753,9 +3568,7 @@ return text.charAt(0).toUpperCase()
 }
 
 
-/* =========================
-IRRIGATION
-========================= */
+/* IRIGASI PINTAR */
 
 function checkIrrigation(){
 
@@ -3765,28 +3578,23 @@ document.getElementById("soilMoisture")
 .value
 );
 
-
 const temp =
 parseFloat(
 document.getElementById("temperature")
 .value
 );
 
-
 const weather =
 document.getElementById("weather")
 .value;
-
 
 const plant =
 document.getElementById("irPlant")
 .value;
 
-
 const phase =
 document.getElementById("plantPhase")
 .value;
-
 
 if(isNaN(moisture) || isNaN(temp)){
 
@@ -3798,9 +3606,122 @@ return;
 
 }
 
-
 let recommendation = "";
 
+
+/*
+=========================================
+KHUSUS TEMBAKAU
+=========================================
+*/
+
+if(plant === "Tembakau"){
+
+if(weather === "hujan"){
+
+recommendation =
+
+"🌧️ <b>Tembakau:</b> penyiraman sebaiknya " +
+"dikurangi atau ditunda karena sedang hujan. " +
+"Pastikan drainase lahan berjalan baik dan " +
+"hindari genangan air.";
+
+}
+
+else if(moisture < 30){
+
+recommendation =
+
+"🌿 <b>Tembakau:</b> tanah cukup kering. " +
+"Tanaman kemungkinan membutuhkan penyiraman " +
+"secukupnya. Berikan air secara bertahap dan " +
+"hindari membuat tanah terlalu becek.";
+
+}
+
+else if(moisture < 50){
+
+recommendation =
+
+"🌿 <b>Tembakau:</b> kelembapan tanah sedang. " +
+"Pertahankan kelembapan secara stabil dan " +
+"pantau kembali kondisi tanah sebelum penyiraman berikutnya.";
+
+}
+
+else if(moisture < 70){
+
+recommendation =
+
+"✅ <b>Tembakau:</b> kelembapan tanah cukup baik. " +
+"Belum perlu menambah banyak air. Pertahankan " +
+"drainase agar tanah tidak terlalu basah.";
+
+}
+
+else{
+
+recommendation =
+
+"⚠️ <b>Tembakau:</b> kelembapan tanah cukup tinggi. " +
+"Kurangi penyiraman dan pastikan air dapat mengalir " +
+"dengan baik karena tembakau tidak cocok dengan kondisi tanah tergenang.";
+
+}
+
+
+/* Suhu tinggi */
+
+if(temp >= 33 && weather === "cerah"){
+
+recommendation +=
+
+"<br><br>☀️ Suhu cukup tinggi. Pantau kondisi daun " +
+"dan kelembapan tanah lebih sering. Jika tanah mulai " +
+"terlalu kering, lakukan penyiraman secukupnya.";
+
+}
+
+
+/* Fase pertumbuhan */
+
+if(
+phase === "Pertumbuhan" ||
+phase === "Berbunga" ||
+phase === "Pembuahan"
+){
+
+recommendation +=
+
+"<br><br>🌱 Pada fase pertumbuhan aktif, " +
+"ketersediaan air perlu dijaga tetap stabil " +
+"tanpa menyebabkan genangan.";
+
+}
+
+
+/* Menjelang panen */
+
+if(phase === "Menjelang Panen"){
+
+recommendation +=
+
+"<br><br>🌿 Menjelang panen, perhatikan kondisi " +
+"kelembapan dan jangan melakukan penyiraman berlebihan. " +
+"Sesuaikan dengan kondisi lahan dan cuaca.";
+
+}
+
+}
+
+
+/*
+=========================================
+TANAMAN LAIN
+=========================================
+*/
+
+else{
 
 if(weather === "hujan"){
 
@@ -3849,14 +3770,16 @@ recommendation +=
 
 }
 
+}
+
+
+/* HASIL */
 
 const result =
 document.getElementById("irrigationResult");
 
-
 result.style.display =
 "block";
-
 
 result.innerHTML =
 
@@ -3903,42 +3826,33 @@ phase
 
 };
 
-
 saveUser();
 
 }
 
 
-/* =========================
-ECO AI
-========================= */
+/* ECO AI */
 
 function sendAI(){
 
 const input =
 document.getElementById("aiInput");
 
-
 const question =
 input.value.trim();
 
-
 if(!question)
 return;
-
 
 addMessage(
 question,
 "user"
 );
 
-
 input.value = "";
-
 
 const answer =
 getAIResponse(question);
-
 
 setTimeout(()=>{
 
@@ -3949,17 +3863,14 @@ answer,
 
 },400);
 
-
 user.aiUsed =
 true;
-
 
 user.achievements =
 Math.max(
 user.achievements,
 4
 );
-
 
 saveUser();
 
@@ -3973,36 +3884,28 @@ function addMessage(text,type){
 const messages =
 document.getElementById("chatMessages");
 
-
 const message =
 document.createElement("div");
-
 
 message.className =
 "message " + type;
 
-
 const bubble =
 document.createElement("div");
-
 
 bubble.className =
 "bubble";
 
-
 bubble.innerHTML =
 text;
-
 
 message.appendChild(
 bubble
 );
 
-
 messages.appendChild(
 message
 );
-
 
 messages.scrollTop =
 messages.scrollHeight;
@@ -4014,6 +3917,79 @@ function getAIResponse(question){
 
 const q =
 question.toLowerCase();
+
+
+/* TEMBAKAU */
+
+if(
+q.includes("tembakau")
+){
+
+if(
+q.includes("panen") ||
+q.includes("umur")
+){
+
+return `
+
+🌿 <b>Tembakau</b> umumnya membutuhkan waktu
+beberapa bulan hingga daun mencapai tingkat kematangan
+yang sesuai untuk dipanen.
+
+<br><br>
+
+Waktu panen dapat berbeda berdasarkan varietas,
+kondisi lingkungan, pemeliharaan, dan perkembangan daun.
+
+<br><br>
+
+Kamu juga bisa menggunakan fitur
+<b>Prediksi Panen</b> EcoFarming untuk mendapatkan
+perkiraan waktu panen.
+
+`;
+
+}
+
+if(
+q.includes("air") ||
+q.includes("siram") ||
+q.includes("irigasi")
+){
+
+return `
+
+💧 <b>Tembakau</b> membutuhkan kelembapan tanah
+yang cukup tetapi tidak menyukai kondisi tergenang.
+
+<br><br>
+
+Pantau kelembapan tanah dan sesuaikan penyiraman
+dengan cuaca, suhu, fase pertumbuhan, dan kondisi lahan.
+
+<br><br>
+
+Kamu bisa menggunakan fitur
+<b>Irigasi Pintar</b> untuk mendapatkan rekomendasi.
+
+`;
+
+}
+
+return `
+
+🌿 <b>Tembakau</b> membutuhkan pengelolaan
+air, nutrisi, cahaya, dan kondisi tanah yang baik.
+
+<br><br>
+
+Perhatikan perkembangan daun dan kondisi tanaman
+secara rutin. Waktu panen dapat berbeda menurut
+varietas dan lingkungan.
+
+`;
+
+}
 
 
 if(
@@ -4333,23 +4309,21 @@ Coba tanyakan misalnya:
 • Apa fungsi pupuk NPK?<br>
 • Bagaimana mengatasi hama tanaman?<br>
 • Berapa harga komoditas?<br>
-• Apa fungsi pupuk Urea?
+• Apa fungsi pupuk Urea?<br>
+• Bagaimana cara merawat tembakau?<br>
+• Kapan tembakau bisa dipanen?
 
 `;
 
 }
 
 
-/* =========================
-INITIALIZE
-========================= */
+/* INITIALIZE */
 
 updateDashboard();
 
 
-/* =========================
-CLOSE MODAL
-========================= */
+/* CLOSE MODAL */
 
 document.getElementById("rewardModal")
 .addEventListener(
