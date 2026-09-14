@@ -1697,6 +1697,7 @@ canvas{
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
 </head>
 
 <body>
@@ -1842,7 +1843,7 @@ style="width:0%">
 <div>
 
 <div class="coin-label">
-SMART COIN ANDA
+COIN
 </div>
 
 <div class="coin-value"
@@ -2805,14 +2806,19 @@ onclick="resetEcoFarming()">
 <canvas id="canvas" style="display:none"></canvas>
 <div class="camera-controls">
 <button class="btn btn-green" onclick="startCamera()">📷 Aktifkan Kamera</button>
-<button class="btn btn-light" onclick="capturePlant()">📸 Analisis Foto</button>
-<label class="btn btn-light" style="cursor:pointer">🖼️ Pilih Foto<input id="plantImageInput" type="file" accept="image/*" style="display:none" onchange="analyzeUploadedPlant(event)"></label>
+<button class="btn btn-light" onclick="capturePlant()">📸 Ambil Gambar</button>
+<button class="btn btn-light" onclick="document.getElementById('plantImageFile').click()">🖼️ Pilih Gambar dari Perangkat</button>
 <button class="btn btn-light" onclick="stopCamera()">⏹️ Matikan Kamera</button>
+<input id="plantImageFile" type="file" accept="*/*" style="display:none" onchange="analyzeUploadedPlant(event)">
+</div>
+<div id="capturedPreview" style="display:none;margin-top:15px;text-align:center;padding:12px;border-radius:14px;background:#f4fbf6;border:1px solid #cfe9d7">
+<div style="font-weight:700;color:#11643d;margin-bottom:10px">🖼️ Gambar yang digunakan</div>
+<img id="capturedImage" alt="Gambar tanaman yang diambil" style="display:block;max-width:100%;max-height:420px;margin:auto;border-radius:12px;object-fit:contain">
 </div>
 </div>
 <div id="cameraAnalysis" class="analysis">
 <b>🔎 Kamera Pendeteksi</b><br><br>
-Arahkan kamera ke tanaman atau pilih foto. Smart Farming Technology akan memeriksa ciri visual seperti bentuk/warna daun, lubang atau bercak pada daun, keberadaan objek kecil menyerupai serangga, serta vegetasi yang berbeda dari tanaman utama.<br><br>
+Arahkan kamera ke tanaman lalu tekan tombol <b>Ambil Gambar</b>. Smart Farming Technology akan memeriksa ciri visual seperti bentuk/warna daun, lubang atau bercak pada daun, keberadaan objek kecil menyerupai serangga, serta vegetasi yang berbeda dari tanaman utama.<br><br>
 <small>Catatan: deteksi ini adalah skrining visual. Hasil dapat keliru jika foto buram, terlalu gelap, atau objek terlalu jauh.</small>
 </div>
 </div>
@@ -4344,7 +4350,7 @@ async function startCamera(){
         const video=document.getElementById("video");
         video.srcObject=window.stream;
         await video.play();
-        document.getElementById("cameraAnalysis").innerHTML=`<b>📷 Kamera aktif.</b><br><br>Arahkan kamera sedekat mungkin ke daun dan batang tanaman. Pastikan objek terang dan fokus, lalu tekan <b>Analisis Foto</b>.`;
+        document.getElementById("cameraAnalysis").innerHTML=`<b>📷 Kamera aktif.</b><br><br>Arahkan kamera sedekat mungkin ke daun dan batang tanaman. Pastikan objek terang dan fokus, lalu tekan <b>Ambil Gambar</b> untuk mengambil foto dan menganalisisnya.`;
     }catch(error){
         alert("Kamera tidak dapat digunakan. Pastikan izin kamera diberikan dan gunakan HTTPS/localhost.");
     }
@@ -4354,21 +4360,74 @@ function stopCamera(){
     const video=document.getElementById("video");
     if(video) video.srcObject=null;
 }
+function showCapturedPreview(src){
+    const wrap=document.getElementById("capturedPreview");
+    const image=document.getElementById("capturedImage");
+    if(!wrap || !image) return;
+    image.src=src;
+    wrap.style.display="block";
+}
 function capturePlant(){
     const video=document.getElementById("video"), canvas=document.getElementById("canvas");
-    if(!video || !video.videoWidth){ alert("Aktifkan kamera terlebih dahulu atau pilih foto dari perangkat."); return; }
+    if(!video || !video.videoWidth){ alert("Aktifkan kamera terlebih dahulu sebelum mengambil gambar."); return; }
     canvas.width=video.videoWidth; canvas.height=video.videoHeight;
     canvas.getContext("2d").drawImage(video,0,0,canvas.width,canvas.height);
-    canvas.toBlob(blob=>analyzePlantBlob(blob),"image/jpeg",0.92);
+    canvas.toBlob(blob=>{
+        const previewUrl=URL.createObjectURL(blob);
+        showCapturedPreview(previewUrl);
+        analyzePlantBlob(blob);
+    },"image/jpeg",0.92);
 }
-function analyzeUploadedPlant(event){
+async function analyzeUploadedPlant(event){
     const file=event.target.files && event.target.files[0];
-    if(file) analyzePlantBlob(file);
+    if(!file) return;
+
+    // File picker menerima gambar dari Galeri/Foto/Dokumen tanpa membatasi ekstensi.
+    // Beberapa HP menyimpan foto sebagai HEIC/HEIF; format tersebut dikonversi ke JPEG
+    // terlebih dahulu agar bisa diproses browser.
+    const name=(file.name||"").toLowerCase();
+    const isHeic = /\.(heic|heif)$/.test(name) || /image\/(heic|heif)/i.test(file.type||"");
+
+    try {
+        let source=file;
+        if(isHeic){
+            if(typeof heic2any !== "function"){
+                throw new Error("Konverter HEIC belum tersedia");
+            }
+            const converted=await heic2any({blob:file, type:"image/jpeg", quality:0.9});
+            source=Array.isArray(converted) ? converted[0] : converted;
+        }
+
+        const previewUrl=URL.createObjectURL(source);
+        showCapturedPreview(previewUrl);
+        analyzePlantBlob(source);
+    } catch(err) {
+        console.error(err);
+        // Tetap tampilkan file yang dipilih jika perangkat/browser bisa menampilkannya.
+        try { showCapturedPreview(URL.createObjectURL(file)); } catch(e) {}
+        document.getElementById("cameraAnalysis").innerHTML=`
+          <div style="padding:14px;border-radius:12px;background:#fff8df;border:1px solid #eadb9a">
+            <b>⚠️ Gambar berhasil dipilih, tetapi belum bisa dianalisis di browser ini.</b><br><br>
+            Foto tetap ditampilkan di atas. Untuk analisis, coba JPG/PNG/WEBP atau ambil gambar langsung dengan tombol <b>Ambil Gambar</b>.
+          </div>`;
+    } finally {
+        event.target.value="";
+    }
 }
 function analyzePlantBlob(blob){
     const img=new Image();
-    img.onload=()=>analyzePlantImage(img);
-    img.onerror=()=>{ document.getElementById("cameraAnalysis").innerHTML="❌ Foto tidak dapat dibaca. Coba gunakan JPG/PNG yang lain."; };
+    img.onload=()=>{
+        analyzePlantImage(img);
+        URL.revokeObjectURL(img.src);
+    };
+    img.onerror=()=>{
+        document.getElementById("cameraAnalysis").innerHTML=`
+          <div style="padding:14px;border-radius:12px;background:#fff8df;border:1px solid #eadb9a">
+            <b>⚠️ Gambar sudah dipilih dan ditampilkan, tetapi format ini tidak dapat dibaca untuk analisis oleh browser.</b><br><br>
+            Pilih gambar dari perangkat atau ambil gambar langsung dari kamera.
+          </div>`;
+        try { URL.revokeObjectURL(img.src); } catch(e) {}
+    };
     img.src=URL.createObjectURL(blob);
 }
 function analyzePlantImage(img){
@@ -4413,6 +4472,12 @@ function analyzePlantImage(img){
       </div>
       <h4 style="margin:8px 0">📋 Temuan & langkah pemeriksaan</h4>
       ${findings.map((f,i)=>`<div style="padding:12px 0;border-bottom:1px solid #e5efe8"><b>${i+1}. ${f.title}</b><br><span>${f.detail}</span></div>`).join("")}
+      <div style="margin-top:15px;padding:14px;border-radius:12px;background:#eef9f1;border:1px solid #cfe9d7">
+        <h4 style="margin:0 0 10px;color:#11643d">🌱 Rekomendasi Perawatan Tanaman</h4>
+        <div style="margin-bottom:10px"><b>💧 Cara Perawatan:</b><br>Jaga kelembapan tanah sesuai kebutuhan tanaman, pastikan drainase baik, bersihkan gulma di sekitar tanaman, dan lakukan pemeriksaan daun, batang, serta pangkal tanaman secara rutin.</div>
+        <div style="margin-bottom:10px"><b>🛡️ Pencegahan Hama:</b><br>Periksa bagian bawah daun dan pucuk secara berkala, buang bagian tanaman yang terserang berat, jaga kebersihan lahan, gunakan perangkap atau pengendalian yang sesuai, dan hindari penyemprotan pestisida tanpa mengetahui penyebab serangan.</div>
+        <div><b>🌿 Pemberian Pupuk:</b><br>Berikan pupuk sesuai jenis dan umur tanaman serta kondisi tanah. Gunakan dosis sesuai petunjuk produk dan jangan menambah pupuk hanya karena daun menguning sebelum penyebabnya diperiksa.</div>
+      </div>
       <div style="margin-top:15px;padding:12px;border-radius:12px;background:#fff8df;color:#6d5a16"><b>🌱 Cara mendapatkan hasil lebih akurat:</b><br>1) Foto seluruh tanaman untuk melihat gulma. 2) Foto close-up daun yang rusak untuk hama. 3) Foto bagian bawah daun. 4) Foto pangkal tanaman dan permukaan tanah. 5) Gunakan cahaya cukup dan hindari foto buram.</div>
       </div>`;
     user.cameraUsed=true; user.achievements=Math.max(user.achievements,3); saveUser(); updateDashboard();
