@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#198754">
-<meta name="description" content="EcoFarming - Smart Farming dan Pengolahan Limbah Organik">
-<title>EcoFarming - Smart Farming</title>
+<meta name="description" content="Smart Farming Technology - Smart Farming dan Pengolahan Limbah Organik">
+<title>Smart Farming Technology</title>
 
 <style>
 
@@ -1293,6 +1293,197 @@ canvas{
     color:var(--muted);
 }
 
+
+/* GRAFIK PENJUALAN TANAMAN BERDASARKAN MUSIM & WILAYAH */
+.sales-chart-card{
+    margin-top:22px;
+    overflow:hidden;
+}
+
+.sales-chart-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.sales-chart-head h3{
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+.sales-chart-head p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
+}
+
+.sales-total{
+    background:var(--green-light);
+    color:var(--green-dark);
+    padding:10px 14px;
+    border-radius:14px;
+    font-weight:900;
+    font-size:14px;
+    white-space:nowrap;
+}
+
+.sales-filters{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.sales-filter label{
+    display:block;
+    margin-bottom:6px;
+    font-size:11px;
+    font-weight:800;
+    color:var(--muted);
+}
+
+.sales-filter select{
+    padding:11px 12px;
+    border-radius:12px;
+    font-size:12px;
+}
+
+.sales-chart{
+    min-height:280px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-around;
+    gap:14px;
+    padding:20px 12px 0;
+    border-bottom:2px solid #dfece4;
+    background:
+        linear-gradient(to top,rgba(25,135,84,.035) 1px,transparent 1px);
+    background-size:100% 52px;
+}
+
+.sales-season{
+    height:100%;
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    gap:8px;
+}
+
+.sales-value{
+    font-size:11px;
+    font-weight:800;
+    color:var(--green-dark);
+    text-align:center;
+}
+
+.sales-bar-wrap{
+    width:100%;
+    height:190px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.sales-bar{
+    width:min(58px,72%);
+    min-height:8px;
+    background:linear-gradient(180deg,#49b878,#198754);
+    border-radius:10px 10px 3px 3px;
+    box-shadow:0 7px 16px rgba(25,135,84,.16);
+    transition:.3s ease;
+}
+
+.sales-season:hover .sales-bar{
+    transform:translateY(-5px);
+    filter:brightness(1.05);
+}
+
+.sales-label{
+    font-size:11px;
+    color:var(--muted);
+    font-weight:700;
+    text-align:center;
+}
+
+.sales-caption{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:14px;
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.5;
+}
+
+.sales-caption strong{
+    color:var(--green);
+}
+
+.sales-region-summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:16px;
+}
+
+.region-mini{
+    background:#f5faf7;
+    border:1px solid #e0eee5;
+    border-radius:13px;
+    padding:11px;
+}
+
+.region-mini b{
+    display:block;
+    font-size:11px;
+    margin-bottom:4px;
+}
+
+.region-mini span{
+    font-size:12px;
+    color:var(--green-dark);
+    font-weight:900;
+}
+
+@media(max-width:650px){
+    .sales-filters{
+        grid-template-columns:1fr;
+    }
+
+    .sales-chart{
+        min-height:245px;
+        gap:6px;
+        padding-left:3px;
+        padding-right:3px;
+    }
+
+    .sales-bar-wrap{
+        height:155px;
+    }
+
+    .sales-bar{
+        width:32px;
+    }
+
+    .sales-total{
+        font-size:12px;
+        padding:8px 10px;
+    }
+
+    .sales-chart-head{
+        flex-direction:column;
+    }
+
+    .sales-region-summary{
+        grid-template-columns:1fr;
+    }
+}
+
 @media(max-width:950px){
 
     .nav-menu{
@@ -1328,6 +1519,107 @@ canvas{
     .fertilizer-grid{
         grid-template-columns:1fr 1fr;
     }
+}
+
+
+/* E-VOUCHER DARI RIWAYAT PENUKARAN */
+.history-item.reward-clickable{
+    cursor:pointer;
+}
+.history-item.reward-clickable:hover{
+    border-color:var(--green);
+    box-shadow:0 10px 28px rgba(25,135,84,.12);
+}
+.history-voucher-hint{
+    display:inline-block;
+    margin-top:7px;
+    padding:5px 9px;
+    border-radius:10px;
+    background:var(--green-light);
+    color:var(--green-dark);
+    font-size:10px;
+    font-weight:800;
+}
+.voucher-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(9,25,17,.68);
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+    padding:18px;
+}
+.voucher-modal.show{display:flex;}
+.voucher-card{
+    width:min(470px,100%);
+    background:white;
+    border-radius:26px;
+    overflow:hidden;
+    box-shadow:0 25px 80px rgba(0,0,0,.28);
+    animation:pop .25s ease;
+}
+.voucher-head{
+    position:relative;
+    padding:22px 24px;
+    color:white;
+    background:linear-gradient(135deg,#198754,#11643d);
+    text-align:center;
+}
+.voucher-head .voucher-logo{font-size:34px;margin-bottom:5px;}
+.voucher-head h2{font-size:22px;margin-bottom:4px;}
+.voucher-head p{font-size:11px;opacity:.9;}
+.voucher-close{
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.18);
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+.voucher-body{padding:24px;}
+.voucher-reward{
+    text-align:center;
+    padding:18px;
+    border:2px dashed #bfe4ca;
+    border-radius:18px;
+    background:#f7fcf8;
+}
+.voucher-reward .voucher-icon{font-size:48px;margin-bottom:7px;}
+.voucher-reward h3{color:var(--green-dark);font-size:20px;margin-bottom:5px;}
+.voucher-reward p{color:var(--muted);font-size:12px;}
+.voucher-code-box{
+    margin:18px 0;
+    padding:15px;
+    border-radius:15px;
+    background:#fff7dc;
+    border:1px solid #f0d98c;
+    text-align:center;
+}
+.voucher-code-label{color:#8c6b12;font-size:10px;font-weight:800;letter-spacing:1px;}
+.voucher-code{margin-top:5px;font-size:24px;letter-spacing:3px;font-weight:900;color:#70540b;}
+.voucher-details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:18px;
+}
+.voucher-detail{padding:11px;border-radius:13px;background:#f5faf7;}
+.voucher-detail span{display:block;color:var(--muted);font-size:10px;margin-bottom:4px;}
+.voucher-detail b{font-size:12px;color:var(--text);}
+.voucher-validity{background:#fff8e8;border:1px solid #f0d98c;}
+.voucher-validity b{color:#9a7410;}
+.voucher-actions{display:flex;gap:9px;flex-wrap:wrap;}
+.voucher-actions .btn{flex:1;min-width:130px;}
+.voucher-note{margin-top:14px;text-align:center;color:var(--muted);font-size:10px;line-height:1.5;}
+@media(max-width:650px){
+    .voucher-details{grid-template-columns:1fr;}
 }
 
 @media(max-width:650px){
@@ -1420,7 +1712,7 @@ canvas{
 </div>
 
 <span>
-EcoFarming
+Smart Farming Technology
 </span>
 
 </div>
@@ -1430,6 +1722,21 @@ EcoFarming
 <button class="nav-btn active"
 onclick="showPage('dashboard',this)">
 🏠 Dashboard
+</button>
+
+<button class="nav-btn"
+onclick="showPage('commodity',this)">
+📈 Harga Komoditas
+</button>
+
+<button class="nav-btn"
+onclick="showPage('fertilizer',this)">
+🌱 Harga Pupuk
+</button>
+
+<button class="nav-btn"
+onclick="showPage('sales',this)">
+📈 Grafik Penjualan
 </button>
 
 <button class="nav-btn"
@@ -1484,7 +1791,7 @@ onclick="showPage('ai',this)">
 <div class="hero-content">
 
 <h1>
-Selamat Datang di EcoFarming 🌱
+Smart Farming Technology 🌱
 </h1>
 
 <p>
@@ -1506,7 +1813,7 @@ dan mendapatkan informasi pertanian.
 <div class="profile-info">
 
 <h3 id="usernameDisplay">
-Petani Eco
+Petani Smart
 </h3>
 
 <div class="level" id="levelDisplay">
@@ -1535,7 +1842,7 @@ style="width:0%">
 <div>
 
 <div class="coin-label">
-ECO COIN ANDA
+SMART COIN ANDA
 </div>
 
 <div class="coin-value"
@@ -1589,6 +1896,7 @@ Gunakan Eco Coin untuk menukar reward
 </div>
 
 </div>
+
 
 <div class="section-title">
 <h2>🎯 Misi Harian</h2>
@@ -1740,6 +2048,12 @@ Cek Irigasi
 
 </div>
 
+</section>
+
+
+
+<section id="commodity" class="page">
+
 <div class="section-title">
 <h2>📈 Harga Komoditas Pertanian</h2>
 <span>Contoh harga produsen</span>
@@ -1791,7 +2105,7 @@ Cek Irigasi
 <h3>Cabai Merah</h3>
 <div class="commodity-price">Rp35.000</div>
 <div class="commodity-unit">per kg</div>
-<span class="status">↕ Berfluktuasi</span>
+<span class="status">↕ Naik Turun</span>
 </div>
 </div>
 
@@ -1803,7 +2117,7 @@ Cek Irigasi
 <h3>Bawang Merah</h3>
 <div class="commodity-price">Rp28.000</div>
 <div class="commodity-unit">per kg</div>
-<span class="status">↕ Berfluktuasi</span>
+<span class="status">↕ Naik Turun</span>
 </div>
 </div>
 
@@ -1866,6 +2180,10 @@ berdasarkan wilayah, kualitas, musim, pasokan, permintaan,
 dan kondisi pasar.
 
 </div>
+
+</section>
+
+<section id="fertilizer" class="page">
 
 <div class="section-title">
 <h2>🌱 Informasi Harga Pupuk</h2>
@@ -1982,6 +2300,136 @@ Harga pupuk dapat berbeda berdasarkan
 jenis, merek, kemasan, wilayah, dan kebijakan harga yang berlaku.
 
 </div>
+
+</section>
+
+<section id="sales" class="page">
+
+<div class="section-title">
+<h2>📈 Grafik Penjualan Tanaman</h2>
+<span>Musim • wilayah • komoditas</span>
+</div>
+
+<div class="card sales-chart-card">
+
+    <div class="sales-chart-head">
+        <div>
+            <h3>Penjualan Tanaman Berdasarkan Musim</h3>
+            <p>
+                Bandingkan jumlah tanaman terjual pada beberapa musim
+                di berbagai wilayah Indonesia. Data yang ditampilkan
+                adalah data contoh/simulasi untuk dashboard.
+            </p>
+        </div>
+
+        <div class="sales-total" id="salesTotal">
+            Total: 0 tanaman
+        </div>
+    </div>
+
+    <div class="sales-filters">
+
+        <div class="sales-filter">
+            <label for="salesPlant">🌱 Pilih tanaman</label>
+            <select id="salesPlant" onchange="updateSalesChart()">
+                <option value="Padi">Padi</option>
+                <option value="Jagung">Jagung</option>
+                <option value="Cabai">Cabai</option>
+                <option value="Kedelai">Kedelai</option>
+                <option value="Bawang Merah">Bawang Merah</option>
+                <option value="Tomat">Tomat</option>
+                <option value="Kentang">Kentang</option>
+                <option value="Mentimun">Mentimun</option>
+                <option value="Semangka">Semangka</option>
+                <option value="Tembakau">Tembakau</option>
+                <option value="Kangkung">Kangkung</option>
+            </select>
+        </div>
+
+        <div class="sales-filter">
+            <label for="salesCitySearch">📍 Cari kota/wilayah</label>
+            <div class="sales-search" style="margin-bottom:10px;">
+                <input
+                    type="text"
+                    id="salesCitySearch"
+                    placeholder="🔎 Ketik nama kota, misalnya Malang..."
+                    oninput="searchSalesCityDirect()"
+                    autocomplete="off"
+                    style="width:100%;padding:10px 12px;border:1px solid #d7e4d8;border-radius:10px;box-sizing:border-box;"
+                >
+            </div>
+            <select id="salesRegion" onchange="updateSalesChart()" style="display:none;">
+        <option value="Semua Kota">Semua Kota</option>
+        <option value="Bangkalan">Bangkalan</option>
+        <option value="Banyuwangi">Banyuwangi</option>
+        <option value="Blitar">Blitar</option>
+        <option value="Bojonegoro">Bojonegoro</option>
+        <option value="Bondowoso">Bondowoso</option>
+        <option value="Gresik">Gresik</option>
+        <option value="Jember">Jember</option>
+        <option value="Jombang">Jombang</option>
+        <option value="Kediri">Kediri</option>
+        <option value="Lamongan">Lamongan</option>
+        <option value="Lumajang">Lumajang</option>
+        <option value="Madiun">Madiun</option>
+        <option value="Magetan">Magetan</option>
+        <option value="Malang">Malang</option>
+        <option value="Mojokerto">Mojokerto</option>
+        <option value="Nganjuk">Nganjuk</option>
+        <option value="Ngawi">Ngawi</option>
+        <option value="Pacitan">Pacitan</option>
+        <option value="Pamekasan">Pamekasan</option>
+        <option value="Pasuruan">Pasuruan</option>
+        <option value="Ponorogo">Ponorogo</option>
+        <option value="Probolinggo">Probolinggo</option>
+        <option value="Sampang">Sampang</option>
+        <option value="Sidoarjo">Sidoarjo</option>
+        <option value="Situbondo">Situbondo</option>
+        <option value="Sumenep">Sumenep</option>
+        <option value="Trenggalek">Trenggalek</option>
+        <option value="Tuban">Tuban</option>
+        <option value="Tulungagung">Tulungagung</option>
+        <option value="Banjarnegara">Banjarnegara</option>
+        <option value="Banyumas">Banyumas</option>
+        <option value="Batang">Batang</option>
+        <option value="Blora">Blora</option>
+        <option value="Boyolali">Boyolali</option>
+        <option value="Brebes">Brebes</option>
+        <option value="Cilacap">Cilacap</option>
+        <option value="Demak">Demak</option>
+        <option value="Grobogan">Grobogan</option>
+        <option value="Jepara">Jepara</option>
+        <option value="Karanganyar">Karanganyar</option>
+        <option value="Kebumen">Kebumen</option>
+        <option value="Kendal">Kendal</option>
+        <option value="Klaten">Klaten</option>
+        <option value="Kudus">Kudus</option>
+        <option value="Magelang">Magelang</option>
+        <option value="Pati">Pati</option>
+        <option value="Pekalongan">Pekalongan</option>
+        <option value="Pemalang">Pemalang</option>
+        <option value="Purbalingga">Purbalingga</option>
+</select>
+        </div>
+
+    </div>
+
+    <div class="sales-chart" id="salesChart"></div>
+
+    <div class="sales-caption">
+        <span id="salesCaption">
+            📊 Menampilkan simulasi penjualan Padi di semua kota.
+        </span>
+        <strong id="salesPrice" style="display:block;margin-top:6px;">Harga: -</strong>
+        <strong id="salesHighest">
+            Musim tertinggi: -
+        </strong>
+    </div>
+
+    <div class="sales-region-summary" id="salesRegionSummary"></div>
+
+</div>
+
 
 </section>
 
@@ -2112,7 +2560,7 @@ onclick="depositWaste()">
 <div class="section-title">
 
 <h2>
-🎁 Reward EcoFarming
+🎁 Reward Smart Farming Technology
 </h2>
 
 <span id="rewardCoinText">
@@ -2347,69 +2795,27 @@ onclick="resetEcoFarming()">
 </section>
 
 <section id="camera" class="page">
-
 <div class="section-title">
-
-<h2>
-📷 Kamera Tanaman
-</h2>
-
-<span>
-Cek kondisi visual tanaman
-</span>
-
+<h2>📷 Kamera Pendeteksi</h2>
+<span>Analisis visual tanaman dari kamera atau foto</span>
 </div>
-
 <div class="card">
-
 <div class="camera-box">
-
-<video
-id="video"
-autoplay
-playsinline>
-</video>
-
-<canvas
-id="canvas"
-style="display:none">
-</canvas>
-
+<video id="video" autoplay playsinline></video>
+<canvas id="canvas" style="display:none"></canvas>
 <div class="camera-controls">
-
-<button
-class="btn btn-green"
-onclick="startCamera()">
-📷 Aktifkan Kamera
-</button>
-
-<button
-class="btn btn-light"
-onclick="capturePlant()">
-📸 Ambil Foto
-</button>
-
+<button class="btn btn-green" onclick="startCamera()">📷 Aktifkan Kamera</button>
+<button class="btn btn-light" onclick="capturePlant()">📸 Analisis Foto</button>
+<label class="btn btn-light" style="cursor:pointer">🖼️ Pilih Foto<input id="plantImageInput" type="file" accept="image/*" style="display:none" onchange="analyzeUploadedPlant(event)"></label>
+<button class="btn btn-light" onclick="stopCamera()">⏹️ Matikan Kamera</button>
 </div>
-
 </div>
-
-<div
-id="cameraAnalysis"
-class="analysis">
-
-Kamera dapat digunakan untuk mengambil gambar tanaman.
-
-<br>
-
-<small>
-Catatan: fitur ini hanya melakukan analisis visual sederhana
-dan bukan alat diagnosis penyakit tanaman.
-</small>
-
+<div id="cameraAnalysis" class="analysis">
+<b>🔎 Kamera Pendeteksi</b><br><br>
+Arahkan kamera ke tanaman atau pilih foto. Smart Farming Technology akan memeriksa ciri visual seperti bentuk/warna daun, lubang atau bercak pada daun, keberadaan objek kecil menyerupai serangga, serta vegetasi yang berbeda dari tanaman utama.<br><br>
+<small>Catatan: deteksi ini adalah skrining visual. Hasil dapat keliru jika foto buram, terlalu gelap, atau objek terlalu jauh.</small>
 </div>
-
 </div>
-
 </section>
 
 <section id="harvest" class="page">
@@ -2616,7 +3022,7 @@ style="display:none">
 </h2>
 
 <span>
-Asisten pertanian EcoFarming
+Asisten pertanian Smart Farming Technology
 </span>
 
 </div>
@@ -2668,7 +3074,7 @@ Kirim
 
 <footer class="footer">
 
-🌱 EcoFarming • Dikembangkan oleh VIVITAN
+🌱 Smart Farming Technology • Dikembangkan oleh Taniotentik.id
 
 </footer>
 
@@ -2699,6 +3105,58 @@ Tutup
 
 </div>
 
+</div>
+
+
+<div class="voucher-modal" id="voucherModal">
+    <div class="voucher-card">
+        <div class="voucher-head">
+            <button class="voucher-close" onclick="closeVoucher()" aria-label="Tutup">×</button>
+            <div class="voucher-logo">🌱</div>
+            <h2>E-VOUCHER ECOFARMING</h2>
+            <p>Voucher reward hasil penukaran Eco Coin</p>
+        </div>
+        <div class="voucher-body">
+            <div class="voucher-reward">
+                <div class="voucher-icon" id="voucherIcon">🎁</div>
+                <h3 id="voucherRewardName">Pupuk Organik</h3>
+                <p>Voucher ini merupakan bukti penukaran reward Smart Farming Technology.</p>
+            </div>
+            <div class="voucher-code-box">
+                <div class="voucher-code-label">KODE VOUCHER</div>
+                <div class="voucher-code" id="voucherCode">ECO-XXXXXX</div>
+            </div>
+            <div class="voucher-details">
+                <div class="voucher-detail">
+                    <span>👤 Pemilik</span>
+                    <b id="voucherOwner">Petani Smart</b>
+                </div>
+                <div class="voucher-detail">
+                    <span>🪙 Nilai Penukaran</span>
+                    <b id="voucherCost">100 Coin</b>
+                </div>
+                <div class="voucher-detail">
+                    <span>📅 Tanggal Penukaran</span>
+                    <b id="voucherDate">-</b>
+                </div>
+                <div class="voucher-detail voucher-validity">
+                    <span>⏳ Berlaku Sampai</span>
+                    <b id="voucherExpiry">-</b>
+                </div>
+                <div class="voucher-detail">
+                    <span>✅ Status</span>
+                    <b style="color:var(--green)">Voucher Diperoleh</b>
+                </div>
+            </div>
+            <div class="voucher-actions">
+                <button class="btn btn-green" onclick="downloadVoucher()">⬇️ Unduh E-Voucher</button>
+                <button class="btn btn-light" onclick="closeVoucher()">Tutup</button>
+            </div>
+            <div class="voucher-note">
+                Tunjukkan kode voucher ini saat mengambil reward pupuk/kompos.
+            </div>
+        </div>
+    </div>
 </div>
 
 <div
@@ -2746,7 +3204,7 @@ Mantap! 🌱
 let user =
 JSON.parse(localStorage.getItem("ecoFarmingUser")) || {
 
-username:"Petani Eco",
+username:"Petani Smart",
 coins:0,
 xp:0,
 waste:0,
@@ -3130,12 +3588,16 @@ function exchangeReward(name,cost){
     user.coins -= cost;
     user.exchanges++;
 
+    const voucherHistoryIndex = user.history.length;
+
     user.history.push({
 
         type:"reward",
         rewardName:name,
         cost:cost,
-        date:new Date().toLocaleString("id-ID")
+        date:new Date().toLocaleString("id-ID"),
+        voucherCode:generateVoucherCode(),
+        voucherExpiry:calculateVoucherExpiry(new Date())
 
     });
 
@@ -3160,6 +3622,152 @@ function exchangeReward(name,cost){
         }
     );
 
+    // Setelah notifikasi sukses tampil sebentar, langsung buka E-Voucher.
+    setTimeout(()=>{
+        closeSurprise();
+        openVoucher(voucherHistoryIndex);
+    }, 1200);
+
+}
+
+
+function generateVoucherCode(){
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let code = "ECO-";
+    for(let i=0;i<6;i++){
+        code += chars[Math.floor(Math.random()*chars.length)];
+    }
+    return code;
+}
+
+function calculateVoucherExpiry(date){
+    const expiry = new Date(date);
+    expiry.setDate(expiry.getDate() + 1);
+    return expiry.toLocaleDateString("id-ID", {
+        day:"2-digit",
+        month:"long",
+        year:"numeric"
+    });
+}
+
+function getVoucherExpiry(item){
+    if(item.voucherExpiry) return item.voucherExpiry;
+
+    // Riwayat lama: masa berlaku dihitung 1 hari sejak penukaran.
+    const match = String(item.date || "").match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+    if(match){
+        const d = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
+        if(!isNaN(d.getTime())){
+            item.voucherExpiry = calculateVoucherExpiry(d);
+            saveUser();
+            return item.voucherExpiry;
+        }
+    }
+
+    return "1 hari sejak penukaran";
+}
+
+function getVoucherIcon(name){
+    const n = String(name || "").toLowerCase();
+    if(n.includes("kompos")) return "🍃";
+    if(n.includes("pupuk")) return "🌱";
+    if(n.includes("paket")) return "🎁";
+    return "🎟️";
+}
+
+function openVoucher(historyIndex){
+    const item = user.history[historyIndex];
+
+    if(!item || item.type !== "reward") return;
+
+    // Riwayat lama tetap bisa dibuka: kode dibuat otomatis dan disimpan.
+    if(!item.voucherCode){
+        item.voucherCode = generateVoucherCode();
+        saveUser();
+    }
+
+    document.getElementById("voucherIcon").textContent =
+        getVoucherIcon(item.rewardName);
+
+    document.getElementById("voucherRewardName").textContent =
+        item.rewardName || "Reward Smart Farming Technology";
+
+    document.getElementById("voucherCode").textContent =
+        item.voucherCode;
+
+    document.getElementById("voucherOwner").textContent =
+        user.username || "Petani Smart";
+
+    document.getElementById("voucherCost").textContent =
+        `${Number(item.cost || 0).toLocaleString("id-ID")} Coin`;
+
+    document.getElementById("voucherDate").textContent =
+        item.date || "-";
+
+    document.getElementById("voucherExpiry").textContent =
+        getVoucherExpiry(item);
+
+    document.getElementById("voucherModal").classList.add("show");
+}
+
+function closeVoucher(){
+    document.getElementById("voucherModal").classList.remove("show");
+}
+
+function downloadVoucher(){
+    const name = document.getElementById("voucherRewardName").textContent;
+    const code = document.getElementById("voucherCode").textContent;
+    const owner = document.getElementById("voucherOwner").textContent;
+    const cost = document.getElementById("voucherCost").textContent;
+    const date = document.getElementById("voucherDate").textContent;
+    const expiry = document.getElementById("voucherExpiry").textContent;
+
+    const html = `<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>E-Voucher EcoFarming - ${code}</title>
+<style>
+body{margin:0;padding:30px 15px;background:#eef8f1;font-family:Arial,Helvetica,sans-serif;color:#183528}
+.voucher{max-width:520px;margin:auto;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.15)}
+.head{padding:28px;text-align:center;color:#fff;background:linear-gradient(135deg,#198754,#11643d)}
+.icon{font-size:48px} h1{font-size:23px;margin:8px 0 4px}.sub{font-size:12px;opacity:.9}
+.body{padding:28px}.reward{padding:20px;text-align:center;border:2px dashed #bfe4ca;border-radius:18px;background:#f7fcf8}
+.reward-icon{font-size:55px}h2{color:#11643d;margin:8px 0;font-size:21px}
+.code{margin:20px 0;padding:18px;text-align:center;border-radius:16px;background:#fff7dc;border:1px solid #f0d98c}
+.label{font-size:10px;font-weight:800;letter-spacing:1px;color:#8c6b12}.code b{display:block;margin-top:7px;font-size:28px;letter-spacing:4px;color:#70540b}
+.detail{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid #e8f2eb;font-size:13px}
+.detail span{color:#6b7d73}.status{color:#198754;font-weight:800}
+.note{margin-top:20px;padding:13px;border-radius:13px;background:#effcf4;color:#52655b;font-size:11px;line-height:1.6;text-align:center}
+</style>
+</head>
+<body>
+<div class="voucher">
+<div class="head"><div class="icon">🌱</div><h1>E-VOUCHER ECOFARMING</h1><div class="sub">Bukti penukaran reward Eco Coin</div></div>
+<div class="body">
+<div class="reward"><div class="reward-icon">${getVoucherIcon(name)}</div><h2>${name}</h2><div>Reward berhasil diperoleh melalui Smart Farming Technology.</div></div>
+<div class="code"><div class="label">KODE VOUCHER</div><b>${code}</b></div>
+<div class="detail"><span>Pemilik</span><b>${owner}</b></div>
+<div class="detail"><span>Nilai Penukaran</span><b>${cost}</b></div>
+<div class="detail"><span>Tanggal Penukaran</span><b>${date}</b></div>
+<div class="detail"><span>Berlaku Sampai</span><b>${expiry}</b></div>
+<div class="detail"><span>Status</span><b class="status">Voucher Diperoleh</b></div>
+<div class="note">Voucher berlaku sampai 1 hari setelah tanggal penukaran. Tunjukkan kode voucher ini saat mengambil reward pupuk/kompos. Simpan file ini sebagai bukti penukaran.</div>
+</div>
+</div>
+</body>
+</html>`;
+
+    const blob = new Blob([html], {type:"text/html;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `E-Voucher-Smart-Farming-Technology-${code}.html`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
 function showSurprise(type,data={}){
@@ -3414,7 +4022,12 @@ function renderHistory(){
     }
 
     const sortedHistory =
-        [...user.history].reverse();
+        user.history
+        .map((item,_historyIndex)=>({
+            ...item,
+            _historyIndex
+        }))
+        .reverse();
 
     list.innerHTML =
         sortedHistory.map((item,index)=>{
@@ -3481,7 +4094,9 @@ function renderHistory(){
             if(item.type === "reward"){
 
                 return `
-                <div class="history-item">
+                <div class="history-item reward-clickable"
+                     onclick="openVoucher(${item._historyIndex})"
+                     title="Klik untuk melihat E-Voucher">
 
                     <div class="history-left">
 
@@ -3505,6 +4120,11 @@ function renderHistory(){
                                 ${Number(item.cost)
                                     .toLocaleString("id-ID")}
                                 Eco Coin
+
+                                <br>
+                                <span class="history-voucher-hint">
+                                    🎟️ Klik untuk lihat E-Voucher
+                                </span>
 
                             </p>
 
@@ -3599,7 +4219,7 @@ function resetEcoFarming(){
 
     user = {
 
-        username:"Petani Eco",
+        username:"Petani Smart",
         coins:0,
         xp:0,
         waste:0,
@@ -3718,176 +4338,84 @@ function resetEcoFarming(){
 }
 
 async function startCamera(){
-
     try{
-
-        stream =
-            await navigator.mediaDevices.getUserMedia({
-                video:true
-            });
-
-        document.getElementById("video")
-            .srcObject =
-            stream;
-
+        if(window.stream){ stopCamera(); }
+        window.stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
+        const video=document.getElementById("video");
+        video.srcObject=window.stream;
+        await video.play();
+        document.getElementById("cameraAnalysis").innerHTML=`<b>📷 Kamera aktif.</b><br><br>Arahkan kamera sedekat mungkin ke daun dan batang tanaman. Pastikan objek terang dan fokus, lalu tekan <b>Analisis Foto</b>.`;
     }catch(error){
-
-        alert(
-            "Kamera tidak dapat digunakan. " +
-            "Pastikan izin kamera telah diberikan."
-        );
-
+        alert("Kamera tidak dapat digunakan. Pastikan izin kamera diberikan dan gunakan HTTPS/localhost.");
     }
-
 }
-
+function stopCamera(){
+    if(window.stream){ window.stream.getTracks().forEach(t=>t.stop()); window.stream=null; }
+    const video=document.getElementById("video");
+    if(video) video.srcObject=null;
+}
 function capturePlant(){
-
-    const video =
-        document.getElementById("video");
-
-    const canvas =
-        document.getElementById("canvas");
-
-    if(!video.videoWidth){
-
-        alert(
-            "Aktifkan kamera terlebih dahulu."
-        );
-
-        return;
-
+    const video=document.getElementById("video"), canvas=document.getElementById("canvas");
+    if(!video || !video.videoWidth){ alert("Aktifkan kamera terlebih dahulu atau pilih foto dari perangkat."); return; }
+    canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+    canvas.getContext("2d").drawImage(video,0,0,canvas.width,canvas.height);
+    canvas.toBlob(blob=>analyzePlantBlob(blob),"image/jpeg",0.92);
+}
+function analyzeUploadedPlant(event){
+    const file=event.target.files && event.target.files[0];
+    if(file) analyzePlantBlob(file);
+}
+function analyzePlantBlob(blob){
+    const img=new Image();
+    img.onload=()=>analyzePlantImage(img);
+    img.onerror=()=>{ document.getElementById("cameraAnalysis").innerHTML="❌ Foto tidak dapat dibaca. Coba gunakan JPG/PNG yang lain."; };
+    img.src=URL.createObjectURL(blob);
+}
+function analyzePlantImage(img){
+    const canvas=document.getElementById("canvas"), max=900;
+    const scale=Math.min(1,max/Math.max(img.width,img.height));
+    canvas.width=Math.max(1,Math.round(img.width*scale)); canvas.height=Math.max(1,Math.round(img.height*scale));
+    const ctx=canvas.getContext("2d",{willReadFrequently:true}); ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    const d=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+    let green=0,yellow=0,brown=0,dark=0,bright=0,red=0,total=0;
+    for(let i=0;i<d.length;i+=16){
+        const r=d[i],g=d[i+1],b=d[i+2]; total++;
+        const mx=Math.max(r,g,b), mn=Math.min(r,g,b);
+        if(g>r*1.12 && g>b*1.05 && g>70) green++;
+        if(r>105 && g>85 && b<90 && r>g*0.9) yellow++;
+        if(r>75 && g<95 && b<75) brown++;
+        if(mx<55) dark++;
+        if(mx>220) bright++;
+        if(r>g*1.35 && r>b*1.3) red++;
     }
-
-    canvas.width =
-        video.videoWidth;
-
-    canvas.height =
-        video.videoHeight;
-
-    const ctx =
-        canvas.getContext("2d");
-
-    ctx.drawImage(
-        video,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    const data =
-        ctx.getImageData(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        ).data;
-
-    let r=0;
-    let g=0;
-    let b=0;
-
-    const total =
-        data.length / 4;
-
-    for(let i=0;i<data.length;i+=4){
-
-        r += data[i];
-        g += data[i+1];
-        b += data[i+2];
-
-    }
-
-    r /= total;
-    g /= total;
-    b /= total;
-
-    const analysis =
-        document.getElementById("cameraAnalysis");
-
-    if(g > r * 1.05 && g > b * 1.05){
-
-        analysis.innerHTML =
-        `
-        🌿 <b>
-        Visual tanaman terdeteksi dominan hijau.
-        </b>
-
-        <br><br>
-
-        Secara visual, objek memiliki warna hijau
-        yang cukup dominan. Pastikan tanaman mendapatkan
-        cahaya, air, dan nutrisi yang sesuai.
-
-        <br><br>
-
-        <small>
-        Analisis ini hanya berdasarkan warna gambar
-        dan bukan diagnosis penyakit.
-        </small>
-        `;
-
-    }
-
-    else if(r > g * 1.15){
-
-        analysis.innerHTML =
-        `
-        🍂 <b>
-        Warna objek cukup kemerahan/cokelat.
-        </b>
-
-        <br><br>
-
-        Jika ini bagian tanaman, periksa kondisi daun,
-        kelembapan tanah, pencahayaan, dan kebutuhan nutrisinya.
-
-        <br><br>
-
-        <small>
-        Analisis ini hanya berdasarkan warna gambar
-        dan bukan diagnosis penyakit.
-        </small>
-        `;
-
-    }
-
-    else{
-
-        analysis.innerHTML =
-        `
-        🔎 <b>
-        Hasil visual belum dapat menentukan kondisi tanaman.
-        </b>
-
-        <br><br>
-
-        Coba gunakan foto dengan pencahayaan yang cukup,
-        tanaman terlihat jelas, dan tidak terlalu jauh.
-
-        <br><br>
-
-        <small>
-        Analisis ini hanya berdasarkan gambar
-        dan bukan diagnosis penyakit.
-        </small>
-        `;
-
-    }
-
-    user.cameraUsed = true;
-
-    user.achievements =
-        Math.max(
-            user.achievements,
-            3
-        );
-
-    saveUser();
-
-    updateDashboard();
-
+    const pct=x=>Math.round(x/total*100);
+    const greenP=pct(green), yellowP=pct(yellow), brownP=pct(brown), darkP=pct(dark), redP=pct(red);
+    let findings=[];
+    if(greenP<18 && (yellowP+brownP)>15) findings.push({type:"warning",title:"Tanaman tampak mengalami perubahan warna",detail:"Bagian hijau yang rendah disertai warna kuning/cokelat dapat berkaitan dengan stres, kekurangan nutrisi, gangguan akar, kekurangan/kelebihan air, atau penyakit. Periksa daun tua dan muda secara terpisah."});
+    if(brownP>10) findings.push({type:"warning",title:"Ada area cokelat/nekrosis yang perlu diperiksa",detail:"Bercak cokelat dapat muncul akibat penyakit, jaringan rusak, kekeringan, atau luka. Periksa apakah bercak berbentuk bulat, menyebar, memiliki tepi jelas, atau disertai jamur."});
+    if(yellowP>12) findings.push({type:"warning",title:"Ada area kekuningan",detail:"Daun menguning dapat dipengaruhi kekurangan nitrogen, masalah akar, penyiraman berlebih, atau penyakit. Jangan langsung menambah pupuk sebelum kondisi tanah dan pola penyiraman diperiksa."});
+    if(darkP>8) findings.push({type:"pest",title:"Ada area gelap/objek kecil yang perlu diperiksa untuk hama",detail:"Periksa bagian bawah daun, pucuk, batang, dan celah daun. Cari kutu daun, thrips, tungau, ulat, telur, kotoran hama, atau jaring halus. Foto jarak dekat diperlukan untuk memastikan jenisnya."});
+    if(greenP>20) findings.push({type:"plant",title:"Vegetasi hijau terdeteksi",detail:"Foto menunjukkan cukup banyak area hijau. Untuk membedakan tanaman utama dengan gulma, ambil foto yang memperlihatkan pangkal tanaman dan permukaan tanah sehingga bentuk gulma dapat dibandingkan dengan tanaman utama."});
+    if(redP>8) findings.push({type:"check",title:"Ada area kemerahan",detail:"Area merah dapat berasal dari buah, bunga, tanah, objek lain, atau perubahan jaringan tanaman. Periksa objek secara langsung sebelum menyimpulkan adanya penyakit atau hama."});
+    if(!findings.length) findings.push({type:"check",title:"Belum ada indikasi visual yang cukup kuat",detail:"Foto belum memberikan ciri yang cukup untuk menentukan hama atau gulma. Ambil foto lebih dekat, fokus pada daun yang rusak dan pangkal tanaman, dengan pencahayaan merata."});
+    const hama=findings.filter(x=>x.type==="pest").length;
+    const gulma=(greenP>20 && greenP<75) ? 1 : 0;
+    const status=hama?"⚠️ Perlu pemeriksaan hama lebih lanjut":gulma?"🌿 Perlu pemeriksaan gulma di sekitar tanaman":"🔎 Belum terdeteksi kuat";
+    document.getElementById("cameraAnalysis").innerHTML=`
+      <div style="padding:15px;border-radius:16px;background:#f4fbf6;border:1px solid #cfe9d7">
+      <h3 style="margin:0 0 8px;color:#11643d">${status}</h3>
+      <p style="margin:0 0 14px;color:#52655b">Analisis visual awal berdasarkan foto. Ini bukan diagnosis pasti.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:15px">
+        <div style="padding:10px;background:white;border-radius:10px"><b>${greenP}%</b><br><small>area hijau</small></div>
+        <div style="padding:10px;background:white;border-radius:10px"><b>${yellowP}%</b><br><small>area kuning</small></div>
+        <div style="padding:10px;background:white;border-radius:10px"><b>${brownP}%</b><br><small>area cokelat</small></div>
+        <div style="padding:10px;background:white;border-radius:10px"><b>${darkP}%</b><br><small>area gelap</small></div>
+      </div>
+      <h4 style="margin:8px 0">📋 Temuan & langkah pemeriksaan</h4>
+      ${findings.map((f,i)=>`<div style="padding:12px 0;border-bottom:1px solid #e5efe8"><b>${i+1}. ${f.title}</b><br><span>${f.detail}</span></div>`).join("")}
+      <div style="margin-top:15px;padding:12px;border-radius:12px;background:#fff8df;color:#6d5a16"><b>🌱 Cara mendapatkan hasil lebih akurat:</b><br>1) Foto seluruh tanaman untuk melihat gulma. 2) Foto close-up daun yang rusak untuk hama. 3) Foto bagian bawah daun. 4) Foto pangkal tanaman dan permukaan tanah. 5) Gunakan cahaya cukup dan hindari foto buram.</div>
+      </div>`;
+    user.cameraUsed=true; user.achievements=Math.max(user.achievements,3); saveUser(); updateDashboard();
 }
 
 function predictHarvest(){
@@ -4344,351 +4872,869 @@ function addMessage(text,type){
 
 }
 
-function getAIResponse(question){
+/* =========================================================
+   ECOAI - MESIN JAWABAN YANG LEBIH LENGKAP
+   ---------------------------------------------------------
+   Catatan:
+   - Versi ini dapat menjawab jauh lebih banyak variasi
+     pertanyaan tanpa harus memakai kata kunci yang persis sama.
+   - Untuk benar-benar menjawab pertanyaan apa pun seperti
+     ChatGPT, sambungkan fungsi askEcoAIToServer() ke backend
+     AI milik Anda. Jangan menaruh API key rahasia di HTML.
+========================================================= */
 
-    const q =
-        question.toLowerCase();
+const ECOAI_API_URL = ""; 
+// Contoh jika nanti punya backend:
+// const ECOAI_API_URL = "/api/ecoai";
 
-    if(q.includes("tembakau")){
+function escapeEcoAI(text){
+    return String(text).replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",
+        '"':"&quot;","'":"&#039;"
+    }[m]));
+}
 
-        if(
-            q.includes("panen") ||
-            q.includes("umur")
-        ){
+function normalizeEcoQuestion(question){
+    return question
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/[^\w\s?%°.-]/g," ")
+        .replace(/\s+/g," ")
+        .trim();
+}
 
-            return `
-            🌿 <b>Tembakau</b> umumnya membutuhkan waktu
-            beberapa bulan hingga daun mencapai tingkat kematangan
-            yang sesuai untuk dipanen.
+function hasAny(q, words){
+    return words.some(w => q.includes(w));
+}
 
-            <br><br>
+function getPlantName(q){
+    const plants = [
+        ["padi","Padi 🌾"],["jagung","Jagung 🌽"],["cabai","Cabai 🌶️"],
+        ["tomat","Tomat 🍅"],["tembakau","Tembakau 🌿"],
+        ["kedelai","Kedelai 🫘"],["bawang merah","Bawang Merah 🧅"],
+        ["kentang","Kentang 🥔"],["mentimun","Mentimun 🥒"],
+        ["semangka","Semangka 🍉"],["kangkung","Kangkung 🥬"],
+        ["terong","Terong 🍆"],["sawi","Sawi 🥬"],
+        ["bayam","Bayam 🥬"],["wortel","Wortel 🥕"],
+        ["singkong","Singkong"],["ubi","Ubi"],
+        ["tebu","Tebu"],["kacang","Kacang"]
+    ];
+    const found = plants.find(([key]) => q.includes(key));
+    return found ? found[1] : null;
+}
 
-            Waktu panen dapat berbeda berdasarkan varietas,
-            kondisi lingkungan, pemeliharaan, dan perkembangan daun.
+/*
+ * Jika backend AI tersedia, fungsi ini menjadi jalur utama.
+ * Backend menerima {message, context} dan mengembalikan:
+ * { answer: "..." }
+ */
+async function askEcoAIToServer(question){
+    if(!ECOAI_API_URL) return null;
 
-            <br><br>
+    try{
+        const response = await fetch(ECOAI_API_URL,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                message:question,
+                context:{
+                    app:"Smart Farming Technology",
+                    language:"id",
+                    username:user?.username || "Petani Smart",
+                    coins:user?.coins || 0,
+                    level:user?.xp || 0
+                }
+            })
+        });
 
-            Kamu juga bisa menggunakan fitur
-            <b>Prediksi Panen</b> EcoFarming untuk mendapatkan
-            perkiraan waktu panen.
-            `;
+        if(!response.ok) return null;
 
+        const data = await response.json();
+
+        if(data && data.answer){
+            return String(data.answer)
+                .replace(/\n/g,"<br>");
         }
-
-        if(
-            q.includes("air") ||
-            q.includes("siram") ||
-            q.includes("irigasi")
-        ){
-
-            return `
-            💧 <b>Tembakau</b> membutuhkan kelembapan tanah
-            yang cukup tetapi tidak menyukai kondisi tergenang.
-
-            <br><br>
-
-            Pantau kelembapan tanah dan sesuaikan penyiraman
-            dengan cuaca, suhu, fase pertumbuhan, dan kondisi lahan.
-
-            <br><br>
-
-            Kamu bisa menggunakan fitur
-            <b>Irigasi Pintar</b> untuk mendapatkan rekomendasi.
-            `;
-
-        }
-
-        return `
-        🌿 <b>Tembakau</b> membutuhkan pengelolaan
-        air, nutrisi, cahaya, dan kondisi tanah yang baik.
-
-        <br><br>
-
-        Perhatikan perkembangan daun dan kondisi tanaman
-        secara rutin. Waktu panen dapat berbeda menurut
-        varietas dan lingkungan.
-        `;
-
+    }catch(error){
+        console.warn("EcoAI backend tidak tersedia:",error);
     }
 
-    if(
-        q.includes("kuning") ||
-        q.includes("daun kuning")
-    ){
+    return null;
+}
 
-        return `
-        🍃 <b>Daun menguning</b> dapat disebabkan oleh beberapa hal,
-        seperti kekurangan nutrisi, terlalu banyak air,
-        kurang cahaya, atau kondisi akar yang terganggu.
+/* Jawaban lokal sebagai fallback agar EcoAI tetap berjalan
+   walaupun website hanya berupa HTML di GitHub Pages. */
+function getLocalEcoAIResponse(question){
+    const q = normalizeEcoQuestion(question);
+    const plant = getPlantName(q);
 
-        <br><br>
+    // EcoAI lokal dibuat lebih rinci: setiap jawaban memiliki
+    // penjelasan, kemungkinan penyebab, langkah penanganan,
+    // pencegahan, dan pertanyaan lanjutan yang relevan.
 
-        Coba periksa kelembapan tanah, kondisi akar,
-        pencahayaan, dan pola pemupukan.
-        `;
+    const answer = (title, intro, sections=[], closing="") => {
+        let html = `<b>${title}</b><br><br>${intro}`;
+        sections.forEach(sec => {
+            html += `<br><br><b>${sec[0]}</b><br>${sec[1]}`;
+        });
+        if(closing) html += `<br><br><i>${closing}</i>`;
+        return html;
+    };
 
+    /* SAPAAN */
+    if(hasAny(q,["halo","hai","hello","hi","selamat pagi","selamat siang","selamat sore","selamat malam","apa kabar"])){
+        return answer(
+            "👋 Halo! Saya EcoAI 🌱",
+            "Saya siap membantu kamu memahami masalah pertanian secara lebih rinci.",
+            [
+                ["🌱 Tanaman", "Menjelaskan cara menanam, pemeliharaan, pemupukan, gejala tanaman, penyakit, hama, dan panen."],
+                ["🧪 Pupuk & tanah", "Membantu memahami NPK, urea, pupuk organik, pH tanah, bahan organik, dan pemupukan."],
+                ["💧 Air & irigasi", "Membantu menentukan kebutuhan penyiraman berdasarkan kondisi tanah, cuaca, fase tanaman, dan jenis tanaman."],
+                ["♻️ Limbah & kompos", "Menjelaskan pengolahan sisa tanaman dan sampah organik menjadi kompos atau bahan bernilai."],
+                ["🐛 Hama & penyakit", "Membantu mengenali kemungkinan penyebab berdasarkan gejala dan memberikan langkah pengendalian yang aman."],
+                ["📊 Panen & komoditas", "Menjelaskan indikator panen, penanganan setelah panen, dan faktor yang memengaruhi harga."]
+            ],
+            "Agar jawaban semakin tepat, tuliskan nama tanaman dan ceritakan gejala, umur tanaman, kondisi tanah, serta cuaca jika berkaitan."
+        );
     }
 
-    if(
-        q.includes("layu") ||
-        q.includes("lemas")
-    ){
-
-        return `
-        🌱 Jika tanaman layu, periksa kelembapan tanah terlebih dahulu.
-        Tanah terlalu kering maupun terlalu basah sama-sama dapat
-        menyebabkan masalah.
-
-        <br><br>
-
-        Periksa juga akar, suhu, dan kondisi lingkungan tanaman.
-        `;
-
+    /* IDENTITAS ECOFARMING */
+    if(hasAny(q,["ecofarming","eco farming","fitur","aplikasi ini","website ini","platform ini","tentang aplikasi","apa itu ecoai","siapa kamu"])){
+        return answer(
+            "🤖 Tentang EcoAI & Smart Farming Technology",
+            "EcoAI adalah asisten pertanian di dalam Smart Farming Technology. Fungsinya membantu pengguna memperoleh penjelasan dan panduan praktis terkait aktivitas pertanian.",
+            [
+                ["🏠 Dashboard", "Menampilkan ringkasan aktivitas dan informasi yang tersedia di Smart Farming Technology."],
+                ["♻️ Setor Limbah", "Digunakan untuk aktivitas pengelolaan atau penyetoran limbah yang terhubung dengan sistem Eco Coin."],
+                ["🎁 Reward", "Eco Coin dapat digunakan untuk menukarkan reward yang tersedia."],
+                ["📋 Riwayat", "Menyimpan riwayat aktivitas penukaran sehingga pengguna dapat melihat kembali voucher yang diperoleh."],
+                ["📷 Kamera Tanaman", "Mendukung alur pemeriksaan tanaman yang tersedia pada aplikasi."],
+                ["🌾 Prediksi Panen", "Membantu memperkirakan waktu panen berdasarkan data yang dimasukkan ke sistem."],
+                ["💧 Irigasi Pintar", "Memberikan rekomendasi penyiraman berdasarkan jenis tanaman, kelembapan tanah, suhu, cuaca, dan fase tanaman."],
+                ["💬 EcoAI", "Menjadi tempat bertanya mengenai pertanian dengan penjelasan yang lebih mudah dipahami."]
+            ],
+            "Gunakan pertanyaan yang spesifik agar saya dapat memberikan langkah yang lebih terarah."
+        );
     }
 
-    if(
-        q.includes("pupuk") ||
-        q.includes("pemupukan")
-    ){
-
-        return `
-        🌿 Pemupukan sebaiknya disesuaikan dengan jenis tanaman,
-        umur tanaman, kondisi tanah, dan kebutuhan nutrisinya.
-
-        <br><br>
-
-        Jangan memberikan pupuk secara berlebihan karena dapat
-        mengganggu tanaman dan kondisi tanah.
-        `;
-
+    /* ECO COIN / REWARD / VOUCHER */
+    if(hasAny(q,["eco coin","ecocoin","koin","poin","reward","hadiah","voucher","e voucher","e-voucher","penukaran"])){
+        return answer(
+            "🎁 Eco Coin, Reward & E-Voucher",
+            "Eco Coin pada Smart Farming Technology digunakan sebagai bagian dari mekanisme reward. Ketika saldo mencukupi, pengguna dapat melakukan penukaran terhadap reward yang tersedia.",
+            [
+                ["💰 Eco Coin", "Perhatikan jumlah saldo sebelum menukarkan reward. Pastikan jumlah koin yang dibutuhkan sesuai dengan reward yang dipilih."],
+                ["🎟️ E-Voucher", "Setelah penukaran berhasil, sistem dapat menampilkan kode voucher beserta informasi pemilik, nilai penukaran, tanggal penukaran, dan masa berlaku."],
+                ["📅 Masa berlaku", "Pada sistem saat ini, voucher dirancang berlaku sampai 1 hari setelah tanggal penukaran. Periksa tanggal yang ditampilkan pada voucher sebelum digunakan."],
+                ["📋 Riwayat", "Riwayat penukaran dapat digunakan untuk membuka kembali detail voucher yang pernah diperoleh."],
+                ["⚠️ Jika voucher tidak muncul", "Periksa riwayat penukaran, pastikan penukaran benar-benar berhasil, kemudian buka item riwayat tersebut untuk melihat detail voucher."]
+            ],
+            "Jika kamu ingin mengetahui proses penukaran, tanyakan misalnya: 'bagaimana cara menukar Eco Coin menjadi voucher?'"
+        );
     }
 
-    if(
-        q.includes("hama") ||
-        q.includes("ulat") ||
-        q.includes("kutu")
-    ){
-
-        return `
-        🐛 Untuk masalah hama, amati bagian daun,
-        batang, dan bawah daun secara rutin.
-
-        <br><br>
-
-        Pengendalian dapat dimulai dari menjaga kebersihan lahan,
-        mengambil hama secara manual jika memungkinkan,
-        serta menggunakan metode pengendalian yang sesuai.
-        `;
-
+    /* KOMPOS / LIMBAH */
+    if(hasAny(q,["kompos","limbah","sampah organik","sisa dapur","sisa makanan","daun kering","pupuk kompos"])){
+        return answer(
+            "♻️ Cara Mengolah Limbah Organik Menjadi Kompos",
+            "Kompos dibuat dengan menguraikan bahan organik secara terkendali. Bahan perlu memiliki keseimbangan antara bahan kaya karbon dan bahan kaya nitrogen serta kelembapan dan aerasi yang cukup.",
+            [
+                ["1. Pilih bahan", "Gunakan daun kering, rumput, sisa sayuran, sisa buah, dan bahan organik lain yang sesuai. Hindari bahan yang mengandung bahan kimia berbahaya."],
+                ["2. Seimbangkan bahan", "Campurkan bahan kering/cokelat sebagai sumber karbon dengan bahan hijau/basah sebagai sumber nitrogen. Jika terlalu basah, tambahkan bahan kering."],
+                ["3. Atur kelembapan", "Bahan sebaiknya lembap tetapi tidak tergenang. Kondisi terlalu basah dapat menurunkan aerasi dan menimbulkan bau."],
+                ["4. Beri udara", "Aduk atau balik kompos secara berkala agar oksigen masuk dan proses penguraian berlangsung lebih baik."],
+                ["5. Periksa kematangan", "Kompos matang umumnya berwarna gelap, teksturnya remah, suhunya sudah turun, dan bau menyengat berkurang."],
+                ["6. Gunakan", "Kompos matang dapat digunakan sebagai bahan organik untuk memperbaiki kondisi tanah dan mendukung pertumbuhan tanaman."]
+            ],
+            "Kalau komposmu bau, terlalu basah, atau tidak kunjung terurai, jelaskan kondisinya agar penyebabnya bisa dianalisis."
+        );
     }
 
-    if(
-        q.includes("kompos") ||
-        q.includes("limbah")
-    ){
-
-        return `
-        ♻️ Limbah organik seperti sisa sayuran,
-        kulit buah, daun kering, jerami, dan sisa tanaman
-        dapat dimanfaatkan sebagai bahan kompos.
-
-        <br><br>
-
-        Pisahkan limbah organik dari plastik, logam,
-        kaca, dan bahan berbahaya.
-        `;
-
+    /* MAGGOT / BSF */
+    if(hasAny(q,["maggot","bsf","black soldier fly","lalat tentara hitam"])){
+        return answer(
+            "🪰 Panduan Dasar Budidaya Maggot BSF",
+            "Maggot BSF (Black Soldier Fly) banyak dimanfaatkan untuk membantu mengolah bahan organik sekaligus menghasilkan biomassa yang bernilai.",
+            [
+                ["1. Siapkan wadah", "Gunakan wadah yang aman, memiliki sirkulasi udara baik, dan mudah dibersihkan."],
+                ["2. Siapkan media pakan", "Gunakan bahan organik yang sesuai dan tidak tercampur bahan berbahaya. Pakan jangan diberikan dalam jumlah berlebihan sekaligus."],
+                ["3. Jaga kondisi media", "Media terlalu basah dapat menimbulkan bau dan masalah lingkungan pemeliharaan. Atur jumlah pakan dan kelembapan."],
+                ["4. Pantau pertumbuhan", "Amati ukuran, aktivitas, bau, dan kondisi media secara rutin."],
+                ["5. Panen", "Maggot dapat dipanen sesuai tujuan pemanfaatannya. Sebagian populasi dapat dipertahankan untuk keberlanjutan siklus budidaya."]
+            ],
+            "Jika kamu ingin, tanyakan 'cara budidaya maggot dari telur sampai panen' untuk panduan berdasarkan tahap."
+        );
     }
 
-    if(
-        q.includes("maggot") ||
-        q.includes("bsf")
-    ){
-
-        return `
-        🪰 Maggot BSF dapat membantu menguraikan sebagian
-        limbah organik. Sisa pengolahan juga dapat dimanfaatkan
-        sebagai bahan organik setelah dikelola dengan benar.
-
-        <br><br>
-
-        Hindari memasukkan bahan yang tidak sesuai
-        dan jaga kondisi media tetap terkontrol.
-        `;
-
+    /* PUPUK */
+    if(hasAny(q,["pupuk","urea","npk","nitrogen","fosfor","kalium","kcl","za","dolomit","pemupukan"])){
+        return answer(
+            "🧪 Panduan Pemupukan Tanaman",
+            "Pemupukan bertujuan menyediakan unsur hara yang dibutuhkan tanaman. Dosis dan jenis pupuk tidak boleh disamaratakan karena kebutuhan tanaman dipengaruhi jenis tanaman, umur, kondisi tanah, dan tujuan budidaya.",
+            [
+                ["🌿 Nitrogen (N)", "Berperan penting dalam pertumbuhan vegetatif dan pembentukan daun. Kekurangan N dapat menyebabkan pertumbuhan kurang subur dan daun tua cenderung menguning."],
+                ["🌸 Fosfor (P)", "Berhubungan dengan perkembangan akar dan proses reproduktif tanaman, termasuk pembungaan dan pembentukan hasil."],
+                ["🍅 Kalium (K)", "Mendukung berbagai proses fisiologis tanaman dan berkaitan dengan kualitas serta ketahanan tanaman terhadap kondisi lingkungan tertentu."],
+                ["🌱 Pupuk organik", "Membantu menambah bahan organik dan mendukung kondisi fisik, kimia, serta biologis tanah."],
+                ["⚖️ Jangan berlebihan", "Pupuk berlebihan tidak otomatis membuat tanaman tumbuh lebih cepat. Kelebihan unsur atau garam pupuk dapat mengganggu akar dan lingkungan tanah."],
+                ["📌 Cara menentukan dosis", "Gunakan rekomendasi berdasarkan komoditas, umur/fase tanaman, kondisi tanah, dan label produk. Jika tersedia, hasil analisis tanah akan membantu menentukan pemupukan dengan lebih tepat."]
+            ],
+            "Sebutkan nama tanaman, umur tanaman, luas lahan, dan jenis pupuk yang tersedia jika kamu ingin dibuatkan contoh strategi pemupukan."
+        );
     }
 
-    if(
-        q.includes("panen") ||
-        q.includes("kapan panen")
-    ){
-
-        return `
-        🌾 Waktu panen berbeda-beda tergantung jenis dan varietas
-        tanaman, kondisi pertumbuhan, serta lingkungan.
-
-        <br><br>
-
-        Kamu bisa menggunakan fitur
-        <b>Prediksi Panen</b>
-        di EcoFarming untuk mendapatkan perkiraan
-        berdasarkan jenis tanaman.
-        `;
-
+    /* DAUN KUNING */
+    if(hasAny(q,["daun kuning","daunnya kuning","daun menguning","menguning","klorosis"])){
+        return answer(
+            "🍃 Mengapa Daun Tanaman Menguning?",
+            "Daun menguning bukan hanya disebabkan kekurangan pupuk. Penyebabnya dapat berasal dari nutrisi, air, akar, penyakit, hama, atau kondisi lingkungan.",
+            [
+                ["1. Kekurangan nitrogen", "Sering terlihat pada daun yang lebih tua terlebih dahulu karena nitrogen dapat dipindahkan dari jaringan tua ke jaringan muda."],
+                ["2. Terlalu banyak air", "Media yang terus-menerus jenuh dapat mengurangi oksigen di sekitar akar sehingga akar terganggu. Daun dapat menguning dan pertumbuhan melambat."],
+                ["3. Kekurangan air", "Tanaman yang kekurangan air dapat layu dan menunjukkan gejala stres, termasuk perubahan warna daun."],
+                ["4. Masalah akar", "Akar yang rusak, busuk, atau terganggu dapat mengurangi kemampuan tanaman menyerap air dan nutrisi."],
+                ["5. Hama atau penyakit", "Periksa permukaan dan bagian bawah daun, batang, serta akar. Cari bercak, lubang, serangga, lapisan seperti jamur, atau pola perubahan warna yang tidak biasa."],
+                ["6. Kondisi lingkungan", "Suhu ekstrem, cahaya yang tidak sesuai, dan kondisi tanah yang kurang baik juga dapat memengaruhi warna daun."],
+                ["🔎 Pemeriksaan awal", "Lihat daun mana yang menguning, mulai dari mana, apakah tanah basah/kering, dan apakah ada bercak atau hama. Jangan langsung menambah pupuk sebelum penyebabnya diketahui."]
+            ],
+            "Untuk diagnosis yang lebih tepat, tuliskan tanaman apa, umur tanaman, daun tua atau muda yang menguning, kondisi tanah, dan apakah ada bercak/hama."
+        );
     }
 
-    if(
-        q.includes("air") ||
-        q.includes("siram") ||
-        q.includes("irigasi")
-    ){
-
-        return `
-        💧 Kebutuhan air tanaman dipengaruhi oleh jenis tanaman,
-        umur, fase pertumbuhan, cuaca, suhu, dan kelembapan tanah.
-
-        <br><br>
-
-        Hindari penyiraman berlebihan dan pantau kelembapan tanah
-        secara berkala.
-        `;
-
+    /* LAYU */
+    if(hasAny(q,["layu","tanaman layu","daun lemas","daun lemas","tidak segar"])){
+        return answer(
+            "💧 Tanaman Layu: Penyebab dan Penanganan",
+            "Layu berarti keseimbangan air tanaman terganggu, tetapi penyebabnya tidak selalu kekurangan air.",
+            [
+                ["💧 Kekurangan air", "Periksa kelembapan tanah. Jika media sangat kering, tanaman mungkin mengalami stres kekeringan."],
+                ["🌧️ Kelebihan air", "Tanah yang terlalu basah dapat mengganggu akar karena kurang oksigen. Dalam kondisi tertentu tanaman justru layu meskipun tanah basah."],
+                ["🌱 Kerusakan akar", "Akar yang rusak atau membusuk dapat membuat tanaman tidak mampu menyerap air dengan baik."],
+                ["☀️ Panas berlebih", "Penguapan tinggi dapat membuat kehilangan air lebih cepat daripada kemampuan akar memasok air."],
+                ["🐛 Penyakit/hama", "Beberapa gangguan pada akar, batang, atau pembuluh tanaman dapat menyebabkan layu."],
+                ["✅ Langkah awal", "Periksa tanah, akar bila memungkinkan, batang, daun, dan kondisi cuaca. Sesuaikan penyiraman berdasarkan kondisi nyata, bukan hanya jadwal."]
+            ],
+            "Jangan langsung menyiram terus-menerus sebelum memeriksa apakah tanah sebenarnya sudah terlalu basah."
+        );
     }
 
-    if(
-        q.includes("harga") ||
-        q.includes("komoditas")
-    ){
-
-        return `
-        📈 Harga komoditas pertanian dapat berubah berdasarkan
-        wilayah, kualitas, musim, pasokan, permintaan,
-        dan kondisi pasar.
-
-        <br><br>
-
-        EcoFarming menyediakan kartu harga contoh
-        di Dashboard. Untuk transaksi nyata,
-        gunakan sumber harga resmi atau pasar setempat
-        sebagai acuan terbaru.
-        `;
-
+    /* HAMA */
+    if(hasAny(q,["hama","ulat","kutu","thrips","trips","aphid","kutu daun","wereng","belalang","penggerek","serangga"])){
+        return answer(
+            "🐛 Mengatasi Hama Tanaman Secara Terpadu",
+            "Pengendalian hama sebaiknya dimulai dengan identifikasi. Mengetahui jenis hama dan bagian tanaman yang diserang membantu menentukan tindakan yang tepat.",
+            [
+                ["1. Amati gejala", "Cari lubang pada daun, daun keriting, bekas gigitan, serangga kecil, telur, kotoran hama, atau kerusakan pada batang/buah."],
+                ["2. Periksa bagian bawah daun", "Banyak hama berukuran kecil bersembunyi di bagian bawah daun atau pada pucuk tanaman."],
+                ["3. Kendalikan secara mekanis", "Jika serangan ringan, hama tertentu dapat diambil secara manual atau bagian tanaman yang terserang berat dapat dipangkas secara tepat."],
+                ["4. Jaga kebersihan kebun", "Buang bagian tanaman yang terserang sesuai kebutuhan dan kurangi tempat yang mendukung perkembangan hama."],
+                ["5. Gunakan pengendalian biologis", "Musuh alami dapat membantu menekan populasi hama dan perlu dijaga keberadaannya."],
+                ["6. Pestisida sebagai pilihan terukur", "Jika diperlukan, gunakan produk yang sesuai label, sasaran, dosis, interval, dan aturan keselamatan. Jangan mencampur produk sembarangan."]
+            ],
+            "Kalau kamu bisa menyebutkan bentuk serangganya dan gejalanya, saya dapat membantu mempersempit kemungkinan hama."
+        );
     }
 
-    if(
-        q.includes("tanaman") ||
-        q.includes("menanam")
-    ){
-
-        return `
-        🌱 Agar tanaman tumbuh baik, perhatikan lima hal utama:
-
-        <br><br>
-
-        1. Kualitas tanah<br>
-        2. Ketersediaan air<br>
-        3. Cahaya matahari<br>
-        4. Nutrisi<br>
-        5. Pengendalian hama dan penyakit
-
-        <br><br>
-
-        Sesuaikan semuanya dengan jenis tanaman yang ditanam.
-        `;
-
+    /* PENYAKIT */
+    if(hasAny(q,["penyakit tanaman","jamur","busuk","bercak","antraknosa","layu fusarium","virus","bakteri","embun","mosaik","bercak daun"])){
+        return answer(
+            "🦠 Mengenali Penyakit Tanaman",
+            "Penyakit tanaman dapat disebabkan oleh jamur, bakteri, virus, atau faktor non-patogen. Gejalanya bisa mirip sehingga identifikasi perlu dilakukan secara hati-hati.",
+            [
+                ["🔍 Perhatikan pola gejala", "Catat apakah bercak berbentuk bulat, tidak beraturan, basah, kering, meluas dari tepi daun, atau mengikuti tulang daun."],
+                ["🌿 Periksa bagian lain", "Periksa daun, batang, buah, dan akar. Kondisi akar dan pangkal batang sering memberikan petunjuk penting."],
+                ["💧 Kelola kelembapan", "Kelembapan tinggi dan daun yang lama basah dapat mendukung perkembangan sebagian penyakit."],
+                ["✂️ Sanitasi", "Buang bagian tanaman yang terserang berat sesuai kebutuhan dan hindari penyebaran melalui alat atau bahan tanaman yang terkontaminasi."],
+                ["🧪 Pengendalian", "Gunakan pengendalian yang sesuai dengan penyebab yang diduga dan ikuti label produk. Hindari penggunaan fungisida/bakterisida secara membabi buta."]
+            ],
+            "Jika ada foto tanaman, gejala visual dapat membantu proses identifikasi, tetapi diagnosis pasti tetap memerlukan pemeriksaan yang memadai."
+        );
     }
 
-    if(
-        q.includes("coin") ||
-        q.includes("koin")
-    ){
-
-        return `
-        🪙 Eco Coin didapatkan dengan menyetorkan limbah.
-
-        <br><br>
-
-        Setiap <b>1 kg limbah = 20 Eco Coin</b>.
-
-        <br><br>
-
-        Eco Coin kemudian dapat digunakan untuk menukar
-        berbagai reward pada menu Reward.
-        `;
-
+    /* AIR / IRIGASI */
+    if(hasAny(q,["air","siram","penyiraman","irigasi","kelembapan","tanah kering","berapa kali siram"])){
+        return answer(
+            "💧 Cara Menentukan Kebutuhan Penyiraman",
+            "Tidak ada satu jadwal penyiraman yang cocok untuk semua tanaman. Kebutuhan air dipengaruhi jenis tanaman, umur/fase, jenis media, cuaca, suhu, kelembapan tanah, dan drainase.",
+            [
+                ["🌱 Persemaian", "Bibit biasanya memerlukan perhatian lebih terhadap kelembapan karena akar masih terbatas. Hindari media tergenang."],
+                ["🌿 Pertumbuhan", "Kebutuhan air meningkat seiring pertumbuhan, tetapi tetap harus disesuaikan dengan kondisi tanah."],
+                ["🌸 Berbunga & berbuah", "Kebutuhan air perlu stabil dan tidak boleh mengalami stres berat akibat kekeringan atau genangan."],
+                ["🌧️ Saat hujan", "Kurangi atau tunda penyiraman jika media sudah cukup lembap. Pastikan drainase berjalan baik."],
+                ["☀️ Saat panas", "Pantau media lebih sering karena penguapan meningkat. Jangan hanya mengikuti jadwal tanpa memeriksa kelembapan."],
+                ["📏 Praktik sederhana", "Periksa kelembapan tanah pada kedalaman zona akar dan lihat respons tanaman. Untuk lahan yang lebih besar, sensor kelembapan dapat membantu."]
+            ],
+            "EcoFarming juga memiliki fitur Irigasi Pintar yang menggunakan jenis tanaman, kelembapan tanah, suhu, cuaca, dan fase tanaman sebagai data rekomendasi."
+        );
     }
 
-    if(
-        q.includes("padi") ||
-        q.includes("beras")
-    ){
+    /* TANAH */
+    if(hasAny(q,["tanah","ph tanah","pH","tanah masam","tanah asam","tanah basa","drainase","subur","kesuburan tanah"])){
+        return answer(
+            "🌱 Cara Menjaga Kesuburan Tanah",
+            "Tanah yang produktif bukan hanya soal banyaknya pupuk. Struktur, bahan organik, pH, air, udara, dan aktivitas biologis semuanya berpengaruh.",
+            [
+                ["🧪 Periksa pH", "pH memengaruhi ketersediaan unsur hara. Jika pH terlalu rendah atau terlalu tinggi, beberapa unsur dapat menjadi kurang tersedia bagi tanaman."],
+                ["♻️ Tambahkan bahan organik", "Kompos dan bahan organik yang matang dapat membantu memperbaiki kondisi fisik dan biologis tanah."],
+                ["💧 Perbaiki drainase", "Air yang menggenang terlalu lama dapat mengganggu akar. Pastikan saluran atau struktur media memungkinkan kelebihan air keluar."],
+                ["🌿 Kurangi kerusakan struktur", "Pengolahan tanah yang berlebihan dapat merusak struktur dan kehidupan biologis tanah."],
+                ["🔬 Analisis tanah", "Untuk keputusan pemupukan yang lebih akurat, analisis tanah jauh lebih baik daripada menebak kebutuhan unsur hara."]
+            ],
+            "Jika kamu mengetahui hasil pH atau analisis tanah, masukkan nilainya dan saya dapat membantu menjelaskan artinya."
+        );
+    }
 
-        return `
-        🌾 <b>Padi</b> membutuhkan pengelolaan air,
-        nutrisi, dan gulma yang baik.
+    /* MENANAM */
+    if(hasAny(q,["cara menanam","menanam","tanam","bibit","benih","persemaian","budidaya"])){
+        return answer(
+            `🌱 Panduan Dasar Menanam${plant ? " " + plant : " Tanaman"}`,
+            "Keberhasilan budidaya dimulai dari benih/bibit yang baik, media yang sesuai, air yang cukup, nutrisi seimbang, dan pengamatan rutin.",
+            [
+                ["1. Tentukan komoditas dan tujuan", "Pilih tanaman yang sesuai dengan kondisi lingkungan, musim, lahan, dan kebutuhan pasar."],
+                ["2. Siapkan benih/bibit", "Gunakan bahan tanam yang sehat dan sesuai varietas. Bibit yang lemah atau terserang penyakit dapat meningkatkan risiko masalah sejak awal."],
+                ["3. Siapkan media/tanah", "Pastikan struktur cukup baik, memiliki bahan organik yang memadai, dan drainase tidak buruk."],
+                ["4. Atur jarak tanam", "Jarak harus menyesuaikan komoditas dan sistem budidaya agar tanaman mendapatkan ruang, cahaya, serta sirkulasi udara yang sesuai."],
+                ["5. Kelola air", "Jaga kelembapan sesuai fase tanaman dan hindari kekeringan maupun genangan berkepanjangan."],
+                ["6. Lakukan pemupukan terukur", "Sesuaikan jenis dan jumlah pupuk dengan kebutuhan tanaman serta kondisi tanah."],
+                ["7. Pantau hama dan penyakit", "Lakukan pemeriksaan rutin agar masalah dapat diketahui ketika masih ringan."],
+                ["8. Catat perkembangan", "Catatan tanggal tanam, pemupukan, penyiraman, cuaca, dan gejala tanaman akan membantu pengambilan keputusan."]
+            ],
+            "Jika kamu menyebutkan jenis tanaman dan luas lahan, panduan dapat dibuat lebih spesifik."
+        );
+    }
 
-        <br><br>
+    /* PANEN */
+    if(hasAny(q,["panen","kapan panen","siap panen","ciri panen","umur panen"])){
+        return answer(
+            "🌾 Menentukan Waktu Panen",
+            "Waktu panen tidak sebaiknya ditentukan hanya berdasarkan jumlah hari setelah tanam. Gunakan umur tanaman bersama indikator fisik dan tujuan pemasaran.",
+            [
+                ["📅 Umur tanaman", "Gunakan umur varietas sebagai acuan awal, tetapi kondisi lapangan dapat membuat waktu panen berbeda."],
+                ["👀 Warna dan bentuk", "Banyak komoditas memiliki perubahan warna, ukuran, tekstur, atau bentuk tertentu ketika mendekati matang."],
+                ["🌾 Kondisi bagian hasil", "Periksa biji, buah, umbi, atau bagian yang dipanen sesuai komoditas."],
+                ["💰 Tujuan pasar", "Tingkat kematangan yang optimal untuk konsumsi langsung dapat berbeda dari hasil yang akan dikirim atau disimpan."],
+                ["📦 Setelah panen", "Tangani hasil dengan hati-hati, kurangi benturan dan paparan kondisi yang mempercepat kerusakan."]
+            ],
+            "Sebutkan tanaman dan umur setelah tanam jika kamu ingin saya jelaskan indikator panennya."
+        );
+    }
 
-        Waktu panen bergantung pada varietas dan kondisi
-        pertumbuhan. Gunakan fitur Prediksi Panen
-        untuk mendapatkan perkiraan.
-        `;
+    /* HARGA */
+    if(hasAny(q,["harga","harga cabai","harga padi","harga jagung","harga komoditas","pasar","jual hasil","harga jual"])){
+        return answer(
+            "📊 Faktor yang Memengaruhi Harga Komoditas",
+            "Harga pertanian berubah karena interaksi antara pasokan, permintaan, musim, distribusi, kualitas, biaya produksi, dan kondisi pasar.",
+            [
+                ["📈 Pasokan", "Ketika produksi banyak sementara permintaan relatif tetap, harga dapat tertekan. Sebaliknya, pasokan yang terbatas dapat mendorong harga naik."],
+                ["🛒 Permintaan", "Perubahan kebutuhan konsumen, industri, atau pasar tertentu dapat memengaruhi harga."],
+                ["🌧️ Musim & cuaca", "Cuaca ekstrem dapat mengurangi produksi atau mengganggu distribusi sehingga memengaruhi harga."],
+                ["🚚 Distribusi", "Biaya transportasi, jarak pasar, dan kondisi logistik memengaruhi harga yang diterima petani."],
+                ["⭐ Kualitas", "Ukuran, tingkat kematangan, kebersihan, dan kondisi hasil dapat memengaruhi harga jual."],
+                ["💡 Strategi petani", "Pencatatan biaya produksi dan survei beberapa saluran pemasaran membantu menentukan keputusan penjualan."]
+            ],
+            "Jika kamu menanyakan harga terkini, data harga perlu diambil dari sumber pasar yang diperbarui karena harga berubah dari waktu ke waktu."
+        );
+    }
 
+    /* TANAMAN SPESIFIK */
+    if(q.includes("padi") || q.includes("beras")){
+        return answer(
+            "🌾 Panduan Dasar Budidaya Padi",
+            "Budidaya padi membutuhkan pengelolaan varietas, persemaian, air, nutrisi, gulma, hama, penyakit, dan waktu panen secara terpadu.",
+            [
+                ["🌱 Awal tanam", "Gunakan benih sehat dan atur persemaian dengan baik. Bibit perlu dipindahkan pada kondisi dan umur yang sesuai sistem budidaya."],
+                ["💧 Air", "Pengelolaan air perlu mengikuti fase tanaman dan kondisi lahan. Hindari genangan atau kekeringan yang tidak sesuai kebutuhan."],
+                ["🧪 Nutrisi", "Padi membutuhkan unsur hara makro dan mikro. Pemupukan sebaiknya mengikuti kondisi lahan dan rekomendasi setempat."],
+                ["🐛 Hama", "Pantau wereng, penggerek batang, dan organisme pengganggu lain sesuai kondisi lapangan."],
+                ["🦠 Penyakit", "Perhatikan perubahan warna, bercak, busuk, atau gejala khas pada daun dan malai."],
+                ["🌾 Panen", "Gunakan warna dan kondisi gabah/malai serta umur varietas sebagai indikator bersama untuk menentukan waktu panen."]
+            ],
+            "Sebutkan umur padi dan masalah yang sedang terjadi jika ingin diagnosis lebih spesifik."
+        );
     }
 
     if(q.includes("jagung")){
-
-        return `
-        🌽 <b>Jagung</b> membutuhkan cahaya matahari
-        yang cukup serta ketersediaan air dan nutrisi
-        yang sesuai.
-
-        <br><br>
-
-        Perhatikan juga gulma dan hama selama masa pertumbuhan.
-        `;
-
+        return answer(
+            "🌽 Panduan Dasar Budidaya Jagung",
+            "Jagung membutuhkan benih yang baik, tanah dengan drainase memadai, nutrisi seimbang, pengelolaan air, serta pengawasan hama dan penyakit.",
+            [
+                ["🌱 Penanaman", "Gunakan benih sehat dan atur jarak tanam sesuai varietas serta sistem budidaya."],
+                ["💧 Air", "Jaga kelembapan terutama pada fase kritis pertumbuhan dan pembentukan hasil, tanpa membuat tanah tergenang."],
+                ["🧪 Nutrisi", "Nitrogen, fosfor, kalium, dan unsur lain dibutuhkan dalam jumlah berbeda sepanjang pertumbuhan."],
+                ["🐛 Hama", "Periksa pucuk, daun, dan tongkol secara rutin untuk mendeteksi serangan lebih awal."],
+                ["🌽 Panen", "Tanda kematangan berbeda untuk jagung konsumsi segar dan jagung biji, sehingga tujuan panen perlu diperjelas."]
+            ],
+            "Sebutkan apakah jagungmu untuk konsumsi muda atau untuk biji agar panduannya lebih tepat."
+        );
     }
 
     if(q.includes("cabai")){
-
-        return `
-        🌶️ <b>Cabai</b> membutuhkan drainase yang baik,
-        cahaya cukup, air yang teratur, dan nutrisi seimbang.
-
-        <br><br>
-
-        Periksa tanaman secara rutin untuk mengetahui
-        adanya hama atau perubahan kondisi daun.
-        `;
-
+        return answer(
+            "🌶️ Panduan Dasar Budidaya Cabai",
+            "Cabai membutuhkan drainase baik, penyiraman stabil, nutrisi seimbang, dan pengawasan ketat terhadap hama serta penyakit.",
+            [
+                ["🌱 Bibit", "Gunakan bibit sehat dan hindari media yang terlalu basah."],
+                ["💧 Penyiraman", "Jaga kelembapan tanah tetap stabil dan sesuaikan dengan cuaca serta fase tanaman."],
+                ["🧪 Nutrisi", "Pemupukan harus seimbang dan disesuaikan fase vegetatif, berbunga, serta berbuah."],
+                ["🐛 Hama", "Kutu daun, trips, tungau, dan beberapa hama lain dapat menyebabkan keriting, perubahan warna, atau kerusakan buah."],
+                ["🦠 Penyakit", "Perhatikan bercak daun, busuk buah, layu, dan gejala lain. Sanitasi dan pengelolaan kelembapan penting."],
+                ["🌶️ Panen", "Tingkat kematangan dipilih berdasarkan kebutuhan pasar dan tujuan penggunaan."]
+            ],
+            "Jika daun cabai keriting, menguning, atau buah busuk, jelaskan gejalanya agar penyebabnya bisa dipersempit."
+        );
     }
 
-    return `
-    🤖 Saya bisa membantu menjelaskan berbagai topik
-    seputar pertanian.
+    if(q.includes("tomat")){
+        return answer(
+            "🍅 Panduan Dasar Budidaya Tomat",
+            "Tomat membutuhkan media dengan drainase baik, cahaya cukup, nutrisi seimbang, serta pengelolaan air yang konsisten.",
+            [
+                ["🌱 Penanaman", "Gunakan bibit sehat dan berikan ruang tumbuh serta penyangga sesuai tipe tanaman."],
+                ["💧 Air", "Hindari perubahan kelembapan yang terlalu ekstrem dan genangan berkepanjangan."],
+                ["🧪 Nutrisi", "Kebutuhan nutrisi berubah sepanjang pertumbuhan. Hindari pemupukan berlebihan tanpa mengetahui kebutuhan tanaman."],
+                ["🐛 Hama", "Periksa pucuk dan bagian bawah daun secara rutin."],
+                ["🦠 Penyakit", "Kelembapan tinggi dan daun yang lama basah dapat meningkatkan risiko beberapa penyakit."],
+                ["🍅 Panen", "Tentukan tingkat kematangan berdasarkan kebutuhan konsumsi atau tujuan distribusi."]
+            ],
+            "Jika tomatmu mengalami daun keriting, bercak, atau buah pecah/busuk, jelaskan gejalanya."
+        );
+    }
 
-    <br><br>
+    if(q.includes("tembakau")){
+        return answer(
+            "🌿 Panduan Dasar Budidaya Tembakau",
+            "Tembakau membutuhkan pengelolaan persemaian, tanah, air, nutrisi, hama, penyakit, dan waktu panen yang disesuaikan dengan varietas serta tujuan produksi.",
+            [
+                ["🌱 Persemaian", "Gunakan bibit sehat dan media yang memiliki drainase baik. Hindari kondisi terlalu basah."],
+                ["🌱 Pertumbuhan", "Pantau pertumbuhan daun dan kondisi tanaman secara rutin. Kebutuhan air dan nutrisi perlu disesuaikan dengan fase."],
+                ["💧 Air", "Kelebihan maupun kekurangan air dapat mengganggu pertumbuhan dan kualitas tanaman."],
+                ["🐛 Hama & penyakit", "Periksa daun secara berkala untuk menemukan gejala sedini mungkin."],
+                ["🍃 Panen", "Waktu panen daun perlu disesuaikan dengan varietas dan tingkat kematangan yang diinginkan."]
+            ],
+            "Jika kamu menyebutkan umur tembakau dan gejala pada daun, saya bisa membantu membuat diagnosis awal."
+        );
+    }
 
-    Coba tanyakan misalnya:
+    /* PERAWATAN UMUM */
+    if(hasAny(q,["merawat tanaman","perawatan tanaman","agar tanaman subur","tanaman sehat","tips bertani","cara merawat"])){
+        return answer(
+            "🌱 Prinsip Perawatan Tanaman Sehat",
+            "Tanaman sehat biasanya merupakan hasil dari pengelolaan yang seimbang, bukan hanya pemberian pupuk sebanyak mungkin.",
+            [
+                ["1. Kenali tanaman", "Ketahui kebutuhan cahaya, air, nutrisi, jarak tanam, dan fase pertumbuhannya."],
+                ["2. Periksa rutin", "Amati daun, batang, akar, tanah, dan buah secara berkala."],
+                ["3. Kelola air", "Sesuaikan penyiraman dengan kelembapan tanah dan cuaca."],
+                ["4. Kelola nutrisi", "Berikan nutrisi sesuai kebutuhan dan hindari pemupukan berlebihan."],
+                ["5. Jaga sanitasi", "Kurangi sumber penyakit dan tempat berkembangnya hama."],
+                ["6. Catat aktivitas", "Catatan budidaya membantu mengetahui hubungan antara perlakuan dan respons tanaman."]
+            ],
+            "Kalau ada masalah tertentu, jangan hanya tulis 'tanaman saya rusak'. Sebutkan gejala agar analisisnya lebih akurat."
+        );
+    }
 
-    <br>
+    /* TERIMA KASIH / PENUTUP */
+    if(hasAny(q,["terima kasih","makasih","thanks","oke","baik","sip"])){
+        return answer(
+            "😊 Sama-sama!",
+            "Senang bisa membantu. EcoAI siap menemani kamu memahami masalah pertanian langkah demi langkah.",
+            [
+                ["🌱 Jika ada masalah tanaman", "Sebutkan tanaman, umur, gejala, kondisi tanah, dan cuaca."],
+                ["📷 Jika ada gejala visual", "Foto tanaman dapat membantu memperjelas bentuk bercak, hama, perubahan warna, atau kondisi daun."],
+                ["💡 Jika ingin belajar", "Kamu bisa meminta penjelasan dari dasar sampai langkah praktik."]
+            ]
+        );
+    }
 
-    • Mengapa daun tanaman menguning?<br>
-    • Bagaimana membuat kompos?<br>
-    • Kapan padi bisa dipanen?<br>
-    • Bagaimana cara mengatur penyiraman?<br>
-    • Apa fungsi pupuk NPK?<br>
-    • Bagaimana mengatasi hama tanaman?<br>
-    • Berapa harga komoditas?<br>
-    • Apa fungsi pupuk Urea?<br>
-    • Bagaimana cara merawat tembakau?<br>
-    • Kapan tembakau bisa dipanen?
-    `;
-
+    /* FALLBACK CERDAS */
+    return answer(
+        "🤖 EcoAI — Mari kita analisis pertanyaanmu",
+        `Saya belum mendapatkan konteks yang cukup untuk memberikan jawaban yang benar-benar spesifik tentang <b>${escapeEcoAI(question)}</b>. Saya tetap bisa membantu menganalisisnya.`,
+        [
+            ["🔎 1. Tentukan masalah utama", "Jelaskan apakah pertanyaannya berkaitan dengan tanaman, tanah, pupuk, air, hama, penyakit, panen, limbah, Eco Coin, atau fitur EcoFarming."],
+            ["🌱 2. Berikan konteks", "Untuk pertanian, tuliskan nama tanaman, umur/fase tanaman, lokasi/lahan secara umum, kondisi tanah, cuaca, dan gejala yang terlihat."],
+            ["👀 3. Jelaskan gejala", "Sebutkan kapan masalah mulai muncul, bagian tanaman yang terdampak, apakah menyebar, dan perubahan apa yang terlihat."],
+            ["🛠️ 4. Hindari tindakan terburu-buru", "Jangan langsung menambah banyak pupuk atau pestisida sebelum penyebab masalah dipahami. Tindakan yang salah dapat memperparah masalah."],
+            ["💬 5. Contoh pertanyaan", "Kamu bisa bertanya: 'Kenapa daun cabai saya keriting dan ada serangga kecil?', 'Bagaimana membuat kompos?', 'Berapa sering tanaman disiram?', atau 'Apa perbedaan pupuk NPK dan urea?'."]
+        ],
+        "Jika kamu memberikan detail tersebut, saya akan menyusun jawaban dalam format penyebab → pemeriksaan → langkah penanganan → pencegahan."
+    );
 }
 
+async function getAIResponse(question){
+    const serverAnswer = await askEcoAIToServer(question);
+
+    if(serverAnswer){
+        return serverAnswer;
+    }
+
+    return getLocalEcoAIResponse(question);
+}
+
+/* sendAI diperbarui agar mendukung jawaban async */
+async function sendAI(){
+    const input = document.getElementById("aiInput");
+    const question = input.value.trim();
+
+    if(!question) return;
+
+    addMessage(escapeEcoAI(question),"user");
+    input.value = "";
+
+    const loadingId = "ecoai-loading-" + Date.now();
+
+    addMessage(
+        `<span id="${loadingId}">🤖 EcoAI sedang berpikir...</span>`,
+        "ai"
+    );
+
+    try{
+        const answer = await getAIResponse(question);
+
+        const loading = document.getElementById(loadingId);
+
+        if(loading){
+            loading.innerHTML = answer;
+        }else{
+            addMessage(answer,"ai");
+        }
+    }catch(error){
+        console.error(error);
+
+        const loading = document.getElementById(loadingId);
+
+        const fallback = `
+        ⚠️ Maaf, terjadi gangguan saat memproses pertanyaan.
+        <br><br>
+        Silakan coba lagi dengan kalimat yang lebih singkat
+        atau tambahkan nama tanaman dan masalahnya.
+        `;
+
+        if(loading){
+            loading.innerHTML = fallback;
+        }else{
+            addMessage(fallback,"ai");
+        }
+    }
+
+    user.aiUsed = true;
+    user.achievements = Math.max(user.achievements,4);
+
+    saveUser();
+    updateDashboard();
+}
+
+
+/* ================================
+   GRAFIK PENJUALAN TANAMAN
+   MUSIM & WILAYAH
+================================ */
+
+const salesSeasons = [
+    "Musim Hujan",
+    "Musim Kemarau",
+    "Pancaroba Awal",
+    "Pancaroba Akhir"
+];
+
+const salesRegions = [
+    "Bangkalan",
+    "Banyuwangi",
+    "Blitar",
+    "Bojonegoro",
+    "Bondowoso",
+    "Gresik",
+    "Jember",
+    "Jombang",
+    "Kediri",
+    "Lamongan",
+    "Lumajang",
+    "Madiun",
+    "Magetan",
+    "Malang",
+    "Mojokerto",
+    "Nganjuk",
+    "Ngawi",
+    "Pacitan",
+    "Pamekasan",
+    "Pasuruan",
+    "Ponorogo",
+    "Probolinggo",
+    "Sampang",
+    "Sidoarjo",
+    "Situbondo",
+    "Sumenep",
+    "Trenggalek",
+    "Tuban",
+    "Tulungagung",
+    "Banjarnegara",
+    "Banyumas",
+    "Batang",
+    "Blora",
+    "Boyolali",
+    "Brebes",
+    "Cilacap",
+    "Demak",
+    "Grobogan",
+    "Jepara",
+    "Karanganyar",
+    "Kebumen",
+    "Kendal",
+    "Klaten",
+    "Kudus",
+    "Magelang",
+    "Pati",
+    "Pekalongan",
+    "Pemalang",
+    "Purbalingga"
+];
+
+/*
+   Angka berikut adalah DATA CONTOH/SIMULASI.
+   Tujuannya untuk membuat grafik interaktif berdasarkan
+   tanaman, musim, dan wilayah.
+*/
+const salesBase = {
+    "Padi":  { "Musim Hujan": 82, "Musim Kemarau": 96, "Pancaroba Awal": 72, "Pancaroba Akhir": 68 },
+    "Jagung": { "Musim Hujan": 74, "Musim Kemarau": 91, "Pancaroba Awal": 78, "Pancaroba Akhir": 70 },
+    "Cabai": { "Musim Hujan": 58, "Musim Kemarau": 88, "Pancaroba Awal": 76, "Pancaroba Akhir": 64 },
+    "Kedelai": { "Musim Hujan": 61, "Musim Kemarau": 79, "Pancaroba Awal": 69, "Pancaroba Akhir": 63 },
+    "Bawang Merah": { "Musim Hujan": 55, "Musim Kemarau": 86, "Pancaroba Awal": 71, "Pancaroba Akhir": 60 },
+    "Tomat": { "Musim Hujan": 68, "Musim Kemarau": 81, "Pancaroba Awal": 73, "Pancaroba Akhir": 65 },
+    "Kentang": { "Musim Hujan": 63, "Musim Kemarau": 77, "Pancaroba Awal": 70, "Pancaroba Akhir": 66 },
+    "Mentimun": { "Musim Hujan": 72, "Musim Kemarau": 84, "Pancaroba Awal": 75, "Pancaroba Akhir": 69 },
+    "Semangka": { "Musim Hujan": 57, "Musim Kemarau": 93, "Pancaroba Awal": 74, "Pancaroba Akhir": 61 },
+    "Tembakau": { "Musim Hujan": 62, "Musim Kemarau": 92, "Pancaroba Awal": 78, "Pancaroba Akhir": 68 },
+    "Kangkung": { "Musim Hujan": 88, "Musim Kemarau": 82, "Pancaroba Awal": 86, "Pancaroba Akhir": 84 },
+};
+
+const salesRegionFactor = {
+    "Bangkalan": 0.93,
+    "Banyuwangi": 1.04,
+    "Blitar": 0.88,
+    "Bojonegoro": 0.97,
+    "Bondowoso": 0.86,
+    "Gresik": 1.03,
+    "Jember": 1.06,
+    "Jombang": 0.95,
+    "Kediri": 1.05,
+    "Lamongan": 0.99,
+    "Lumajang": 0.91,
+    "Madiun": 0.98,
+    "Magetan": 0.89,
+    "Malang": 1.18,
+    "Mojokerto": 0.94,
+    "Nganjuk": 0.92,
+    "Ngawi": 0.87,
+    "Pacitan": 0.84,
+    "Pamekasan": 0.90,
+    "Pasuruan": 1.02,
+    "Ponorogo": 0.96,
+    "Probolinggo": 0.90,
+    "Sampang": 0.85,
+    "Sidoarjo": 1.01,
+    "Situbondo": 0.88,
+    "Sumenep": 0.86,
+    "Trenggalek": 0.83,
+    "Tuban": 0.94,
+    "Tulungagung": 0.97,
+    "Banjarnegara": 0.91,
+    "Banyumas": 1.02,
+    "Batang": 0.95,
+    "Blora": 0.89,
+    "Boyolali": 1.01,
+    "Brebes": 0.98,
+    "Cilacap": 1.00,
+    "Demak": 1.04,
+    "Grobogan": 0.96,
+    "Jepara": 0.97,
+    "Karanganyar": 1.03,
+    "Kebumen": 0.94,
+    "Kendal": 1.00,
+    "Klaten": 1.05,
+    "Kudus": 1.06,
+    "Magelang": 1.02,
+    "Pati": 1.01,
+    "Pekalongan": 0.96,
+    "Pemalang": 0.95,
+    "Purbalingga": 0.93
+};
+
+
+const salesPrice = {
+    "Padi": 6500,
+    "Jagung": 5200,
+    "Cabai": 42000,
+    "Kedelai": 11000,
+    "Bawang Merah": 32000,
+    "Tomat": 9000,
+    "Kentang": 14000,
+    "Mentimun": 8000,
+    "Semangka": 6500,
+    "Tembakau": 38000,
+    "Kangkung": 6000
+};
+
+const salesSeasonFactor = {
+    "Musim Hujan": 1.00,
+    "Musim Kemarau": 1.00,
+    "Pancaroba Awal": 1.00,
+    "Pancaroba Akhir": 1.00
+};
+
+function getSalesValue(plant, region, season){
+    const base = salesBase[plant]?.[season] || 0;
+    const factor = region === "Semua Kota"
+        ? 1
+        : (salesRegionFactor[region] || 1);
+
+    return Math.round(base * factor * (salesSeasonFactor[season] || 1));
+}
+
+function getAllRegionSales(plant, season){
+    return salesRegions.reduce((total, region) => {
+        return total + getSalesValue(plant, region, season);
+    }, 0);
+}
+
+
+function searchSalesCityDirect(){
+    const input = document.getElementById("salesCitySearch");
+    const select = document.getElementById("salesRegion");
+    if(!input || !select) return;
+
+    const query = input.value.trim().toLowerCase();
+
+    // Kosong = tampilkan semua kota
+    if(query === "") {
+        select.value = "Semua Kota";
+        updateSalesChart();
+        return;
+    }
+
+    // Cari langsung dari daftar kota tanpa harus membuka opsi dropdown
+    const cities = Array.from(select.options).filter(option => option.value !== "Semua Kota");
+    const exact = cities.find(option => option.text.toLowerCase() === query);
+    const match = exact || cities.find(option => option.text.toLowerCase().includes(query));
+
+    if(match){
+        select.value = match.value;
+        updateSalesChart();
+    } else {
+        // Jika belum cocok, grafik tidak dipindahkan ke kota lain
+        // dan total dibuat nol agar hasil pencarian tidak menyesatkan.
+        updateSalesChart();
+    }
+}
+
+function updateSalesChart(){
+
+    const plantSelect = document.getElementById("salesPlant");
+    const regionSelect = document.getElementById("salesRegion");
+    const chart = document.getElementById("salesChart");
+    const totalEl = document.getElementById("salesTotal");
+    const captionEl = document.getElementById("salesCaption");
+    const highestEl = document.getElementById("salesHighest");
+    const priceEl = document.getElementById("salesPrice");
+    const summaryEl = document.getElementById("salesRegionSummary");
+
+    if(!plantSelect || !regionSelect || !chart) return;
+
+    const plant = plantSelect.value;
+    const region = regionSelect.value;
+
+    if(priceEl){
+        const price = salesPrice[plant] || 0;
+        priceEl.textContent = `Harga ${plant}: Rp ${price.toLocaleString("id-ID")} / kg`;
+    }
+
+
+    let values;
+
+    if(region === "Semua Kota"){
+        values = salesSeasons.map(season => ({
+            season,
+            value: getAllRegionSales(plant, season)
+        }));
+    }else{
+        values = salesSeasons.map(season => ({
+            season,
+            value: getSalesValue(plant, region, season)
+        }));
+    }
+
+    const maxValue = Math.max(...values.map(item => item.value), 1);
+    const total = values.reduce((sum, item) => sum + item.value, 0);
+    const highest = values.reduce((best, item) =>
+        item.value > best.value ? item : best
+    );
+
+    chart.innerHTML = values.map(item => {
+        const height = Math.max(8, (item.value / maxValue) * 100);
+
+        return `
+            <div class="sales-season">
+                <div class="sales-value">${item.value.toLocaleString("id-ID")}</div>
+                <div class="sales-bar-wrap">
+                    <div class="sales-bar" style="height:${height}%"></div>
+                </div>
+                <div class="sales-label">${item.season}</div>
+            </div>
+        `;
+    }).join("");
+
+    totalEl.textContent =
+        `Total: ${total.toLocaleString("id-ID")} tanaman`;
+
+    captionEl.textContent =
+        `📊 ${plant} • ${region} • data contoh/simulasi penjualan berdasarkan musim.`;
+
+    highestEl.textContent =
+        `Musim tertinggi: ${highest.season} (${highest.value.toLocaleString("id-ID")} tanaman)`;
+
+    if(region === "Semua Kota"){
+        summaryEl.innerHTML = salesRegions.map(regionName => {
+
+            const regionTotal = salesSeasons.reduce(
+                (sum, season) => sum + getSalesValue(plant, regionName, season),
+                0
+            );
+
+            return `
+                <div class="region-mini">
+                    <b>📍 ${regionName}</b>
+                    <span>${regionTotal.toLocaleString("id-ID")} tanaman</span>
+                </div>
+            `;
+        }).join("");
+    }else{
+        const regionValues = salesSeasons.map(season => ({
+            season,
+            value: getSalesValue(plant, region, season)
+        }));
+
+        summaryEl.innerHTML = regionValues.map(item => `
+            <div class="region-mini">
+                <b>🌱 ${item.season}</b>
+                <span>${item.value.toLocaleString("id-ID")} tanaman</span>
+            </div>
+        `).join("");
+    }
+}
+
+
 updateDashboard();
+updateSalesChart();
+
+document.getElementById("voucherModal")
+.addEventListener(
+    "click",
+    function(e){
+        if(e.target === this){
+            closeVoucher();
+        }
+    }
+);
 
 document.getElementById("rewardModal")
 .addEventListener(
