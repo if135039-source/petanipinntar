@@ -1,1309 +1,1389 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#168a4a">
-  <title>AGRI-SIAGA | Pertanian Tangguh Bencana</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --green: #168a4a;
-      --dark-green: #075b30;
-      --light-green: #e9f8ef;
-      --yellow: #f4b400;
-      --red: #e74c3c;
-      --blue: #168de2;
-      --purple: #7957d5;
-      --dark: #173124;
-      --gray: #66756c;
-      --light: #f5f8f6;
-      --white: #ffffff;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    /* NAVBAR */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #e4ebe6;
-    }
-
-    .nav-container {
-      max-width: 1150px;
-      margin: auto;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--dark-green);
-    }
-
-    .logo span {
-      font-size: 30px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 600;
-    }
-
-    .nav-links a:hover {
-      color: var(--green);
-    }
-
-    /* HERO */
-    .hero {
-      background:
-        linear-gradient(135deg, rgba(7,91,48,.96), rgba(22,138,74,.90)),
-        radial-gradient(circle at top right, #64d28e, transparent 40%);
-      color: white;
-      padding: 75px 20px;
-    }
-
-    .hero-container {
-      max-width: 1150px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap: 45px;
-      align-items: center;
-    }
-
-    .hero h1 {
-      font-size: clamp(40px, 6vw, 68px);
-      line-height: 1;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: #8ff0b4;
-    }
-
-    .hero p {
-      font-size: 18px;
-      max-width: 650px;
-      opacity: .94;
-      margin-bottom: 28px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 12px;
-      padding: 13px 20px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: .2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: white;
-      color: var(--dark-green);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,.14);
-      color: white;
-      border: 1px solid rgba(255,255,255,.4);
-    }
-
-    .hero-card {
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 25px;
-      padding: 28px;
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-card .big-icon {
-      font-size: 70px;
-      margin-bottom: 10px;
-    }
-
-    /* GENERAL */
-    section {
-      padding: 65px 20px;
-    }
-
-    .container {
-      max-width: 1150px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 38px;
-    }
-
-    .section-title h2 {
-      font-size: 34px;
-      margin-bottom: 8px;
-    }
-
-    .section-title p {
-      color: var(--gray);
-    }
-
-    /* STATUS */
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .status-card {
-      background: white;
-      padding: 25px;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      border-left: 6px solid var(--yellow);
-    }
-
-    .status-card.safe {
-      border-left-color: var(--green);
-    }
-
-    .status-card.danger {
-      border-left-color: var(--red);
-    }
-
-    .status-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .status-icon {
-      font-size: 35px;
-    }
-
-    .badge {
-      padding: 5px 10px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 800;
-      background: #fff3cd;
-      color: #946c00;
-    }
-
-    .badge.safe {
-      background: #dff6e7;
-      color: #11723c;
-    }
-
-    .badge.danger {
-      background: #fde4e1;
-      color: #a82c20;
-    }
-
-    /* BENCANA */
-    .disaster-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .disaster-card {
-      background: white;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      transition: .2s;
-    }
-
-    .disaster-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .disaster-icon {
-      width: 65px;
-      height: 65px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      font-size: 35px;
-      margin-bottom: 18px;
-    }
-
-    .dry {
-      background: #fff1cc;
-    }
-
-    .flood {
-      background: #dcefff;
-    }
-
-    .landslide {
-      background: #eee6dc;
-    }
-
-    .disaster-card h3 {
-      margin-bottom: 8px;
-      font-size: 23px;
-    }
-
-    .disaster-card p {
-      color: var(--gray);
-      margin-bottom: 18px;
-    }
-
-    .learn-btn {
-      width: 100%;
-      background: var(--light-green);
-      color: var(--dark-green);
-    }
-
-    /* GUIDANCE */
-    #guidance {
-      background: #edf7f0;
-    }
-
-    .guidance-box {
-      background: white;
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .guidance-header {
-      padding: 25px;
-      background: var(--dark-green);
-      color: white;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding: 20px;
-      border-bottom: 1px solid #e6ece8;
-    }
-
-    .tab {
-      border: none;
-      background: #edf3ef;
-      color: var(--dark);
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .tab.active {
-      background: var(--green);
-      color: white;
-    }
-
-    .guidance-content {
-      padding: 28px;
-    }
-
-    .guidance-content ul {
-      padding-left: 22px;
-    }
-
-    .guidance-content li {
-      margin: 10px 0;
-    }
-
-    /* IRIGASI */
-    .irrigation {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-      align-items: stretch;
-    }
-
-    .irrigation-card {
-      background: white;
-      padding: 30px;
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .meter {
-      height: 25px;
-      background: #e5ebe7;
-      border-radius: 50px;
-      overflow: hidden;
-      margin: 15px 0;
-    }
-
-    .meter-fill {
-      height: 100%;
-      width: 42%;
-      background: linear-gradient(90deg, #1c9c59, #6dd894);
-      transition: width .4s;
-    }
-
-    .irrigation-status {
-      padding: 15px;
-      border-radius: 12px;
-      background: var(--light-green);
-      color: var(--dark-green);
-      margin: 15px 0;
-      font-weight: 700;
-    }
-
-    .pump {
-      text-align: center;
-      font-size: 65px;
-      margin: 15px;
-      filter: grayscale(1);
-      transition: .3s;
-    }
-
-    .pump.on {
-      filter: none;
-      animation: pulse 1s infinite alternate;
-    }
-
-    @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.08); }
-    }
-
-    .range {
-      width: 100%;
-      accent-color: var(--green);
-    }
-
-    /* ALERT */
-    .alert-box {
-      background: linear-gradient(135deg, #fff8e1, #fff);
-      border: 1px solid #f2d27a;
-      padding: 25px;
-      border-radius: 20px;
-      margin-top: 25px;
-    }
-
-    .alert-box h3 {
-      margin-bottom: 8px;
-    }
-
-    /* CHECKLIST */
-    .checklist {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .check-card {
-      background: white;
-      padding: 25px;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .check-card h3 {
-      margin-bottom: 15px;
-    }
-
-    .check-card label {
-      display: block;
-      padding: 9px 0;
-      cursor: pointer;
-    }
-
-    .check-card input {
-      accent-color: var(--green);
-      margin-right: 8px;
-    }
-
-    /* FOOTER */
-    footer {
-      background: #082c1b;
-      color: white;
-      text-align: center;
-      padding: 35px 20px;
-    }
-
-    footer p {
-      opacity: .8;
-      margin-top: 8px;
-    }
-
-    /* MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.55);
-      z-index: 2000;
-      padding: 20px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-content {
-      background: white;
-      max-width: 600px;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
-      border-radius: 22px;
-      padding: 30px;
-      position: relative;
-    }
-
-    .close {
-      position: absolute;
-      top: 15px;
-      right: 18px;
-      border: none;
-      background: #f0f3f1;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 20px;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 800px) {
-      .hero-container,
-      .irrigation {
-        grid-template-columns: 1fr;
-      }
-
-      .status-grid,
-      .disaster-grid,
-      .checklist {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      section {
-        padding: 45px 15px;
-      }
-
-      .hero {
-        padding: 55px 15px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGRI-SIAGA 360°</title>
+
+<style>
+:root{
+  --green:#16a05d;
+  --dark:#073b25;
+  --light:#effaf4;
+  --yellow:#f5b700;
+  --orange:#f28c28;
+  --red:#e63946;
+  --blue:#168de2;
+  --white:#fff;
+  --gray:#66756d;
+  --shadow:0 12px 35px rgba(0,0,0,.09);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f8f6;
+  color:#173124;
+  line-height:1.6;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #e5ebe7;
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:21px;
+  font-weight:900;
+  color:var(--dark);
+}
+
+.logo span{
+  color:var(--green);
+}
+
+.nav-links{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#173124;
+  font-weight:700;
+}
+
+.nav-links a:hover{
+  color:var(--green);
+}
+
+.hero{
+  color:white;
+  background:
+  radial-gradient(circle at 85% 20%,rgba(120,240,165,.3),transparent 25%),
+  linear-gradient(135deg,#063b24,#16a05d);
+  padding:80px 20px;
+}
+
+.hero-inner{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:40px;
+  align-items:center;
+}
+
+.hero h1{
+  font-size:clamp(42px,7vw,75px);
+  line-height:1;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  color:#8ff0b4;
+}
+
+.hero p{
+  max-width:650px;
+  font-size:18px;
+  opacity:.95;
+  margin-bottom:28px;
+}
+
+.buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn{
+  border:none;
+  padding:13px 19px;
+  border-radius:12px;
+  font-weight:800;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn-white{
+  background:white;
+  color:var(--dark);
+}
+
+.btn-green{
+  background:var(--green);
+  color:white;
+}
+
+.btn-dark{
+  background:var(--dark);
+  color:white;
+}
+
+.hero-dashboard{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  padding:28px;
+  border-radius:25px;
+  backdrop-filter:blur(10px);
+}
+
+.big-risk{
+  text-align:center;
+  font-size:75px;
+  margin:8px;
+}
+
+.risk-pill{
+  text-align:center;
+  background:#ffe082;
+  color:#674e00;
+  padding:8px;
+  border-radius:50px;
+  font-weight:900;
+}
+
+section{
+  padding:65px 20px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:38px;
+}
+
+.title h2{
+  font-size:35px;
+  margin-bottom:7px;
+}
+
+.title p{
+  color:var(--gray);
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.card{
+  background:white;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.card-icon{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.card h3{
+  margin-bottom:6px;
+}
+
+.card p{
+  color:var(--gray);
+  font-size:14px;
+}
+
+.status{
+  display:inline-block;
+  margin-top:15px;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.safe{
+  background:#dcf7e7;
+  color:#10733d;
+}
+
+.warning{
+  background:#fff1c7;
+  color:#8a6500;
+}
+
+.danger{
+  background:#ffe0df;
+  color:#a32229;
+}
+
+.risk-section{
+  background:#edf8f1;
+}
+
+.risk-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.risk-box{
+  background:white;
+  border-radius:22px;
+  padding:30px;
+  box-shadow:var(--shadow);
+}
+
+.risk-meter{
+  height:28px;
+  background:#e8eee9;
+  border-radius:50px;
+  overflow:hidden;
+  margin:20px 0 10px;
+}
+
+.risk-fill{
+  height:100%;
+  width:45%;
+  background:linear-gradient(90deg,#16a05d,#f5b700,#e63946);
+  transition:.5s;
+}
+
+.risk-number{
+  font-size:45px;
+  font-weight:900;
+  color:var(--green);
+}
+
+.slider{
+  width:100%;
+  accent-color:var(--green);
+}
+
+.simulator{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.sim-card{
+  background:white;
+  border-radius:22px;
+  padding:30px;
+  box-shadow:var(--shadow);
+}
+
+.plant{
+  text-align:center;
+  font-size:95px;
+  margin:20px;
+  transition:.3s;
+}
+
+.plant.very-dry{
+  filter:grayscale(.5);
+  transform:rotate(5deg);
+}
+
+.plant.wet{
+  transform:scale(1.05);
+}
+
+.progress{
+  height:22px;
+  background:#e7ede9;
+  border-radius:50px;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+.progress-fill{
+  width:45%;
+  height:100%;
+  background:#16a05d;
+  transition:.4s;
+}
+
+.pump{
+  text-align:center;
+  font-size:70px;
+  filter:grayscale(1);
+  margin:20px;
+}
+
+.pump.on{
+  filter:none;
+  animation:pulse .8s infinite alternate;
+}
+
+@keyframes pulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.1)}
+}
+
+.action-box{
+  padding:18px;
+  background:#effaf4;
+  color:#075b30;
+  border-radius:13px;
+  margin-top:15px;
+  font-weight:700;
+}
+
+.forecast{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:10px;
+}
+
+.day{
+  background:white;
+  border-radius:16px;
+  padding:18px 8px;
+  text-align:center;
+  box-shadow:0 5px 18px rgba(0,0,0,.05);
+}
+
+.day .weather{
+  font-size:30px;
+  margin:8px 0;
+}
+
+.map{
+  height:350px;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  background:
+    linear-gradient(135deg,#c8eacb,#94d8a0 40%,#7ec8ed 40%,#b9e7fa);
+  box-shadow:var(--shadow);
+}
+
+.map-label{
+  position:absolute;
+  padding:8px 12px;
+  border-radius:30px;
+  background:white;
+  box-shadow:0 5px 15px rgba(0,0,0,.12);
+  font-size:13px;
+  font-weight:800;
+}
+
+.l1{left:12%;top:25%}
+.l2{left:55%;top:20%}
+.l3{left:35%;top:65%}
+.l4{right:10%;bottom:18%}
+
+.report{
+  background:white;
+  max-width:800px;
+  margin:auto;
+  padding:30px;
+  border-radius:22px;
+  box-shadow:var(--shadow);
+}
+
+.form-group{
+  margin-bottom:17px;
+}
+
+.form-group label{
+  display:block;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  border:1px solid #dce5df;
+  border-radius:10px;
+  padding:12px;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--green);
+}
+
+.points{
+  background:linear-gradient(135deg,#073b25,#16a05d);
+  color:white;
+  border-radius:24px;
+  padding:35px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+}
+
+.xp{
+  font-size:50px;
+  font-weight:900;
+}
+
+.level{
+  background:rgba(255,255,255,.15);
+  padding:15px 25px;
+  border-radius:15px;
+  text-align:center;
+}
+
+.check-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.check-card{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+}
+
+.check-card label{
+  display:block;
+  padding:9px 0;
+  cursor:pointer;
+}
+
+.check-card input{
+  accent-color:var(--green);
+  margin-right:8px;
+}
+
+footer{
+  background:#062d1b;
+  color:white;
+  padding:40px 20px;
+  text-align:center;
+}
+
+footer p{
+  opacity:.75;
+  margin-top:8px;
+}
+
+.toast{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  background:#073b25;
+  color:white;
+  padding:15px 20px;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  transform:translateY(120px);
+  transition:.3s;
+  z-index:5000;
+}
+
+.toast.show{
+  transform:translateY(0);
+}
+
+@media(max-width:900px){
+  .hero-inner,
+  .risk-grid,
+  .simulator{
+    grid-template-columns:1fr;
+  }
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .check-grid{
+    grid-template-columns:1fr;
+  }
+
+  .forecast{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
+
+@media(max-width:600px){
+  .nav-links{
+    display:none;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .forecast{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .points{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <div class="nav-container">
-      <div class="logo">
-        <span>🌱</span>
-        AGRI-SIAGA
-      </div>
+<nav>
+  <div class="nav">
+    <div class="logo">🌱 AGRI-<span>SIAGA 360°</span></div>
 
-      <ul class="nav-links">
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#bencana">Bencana</a></li>
-        <li><a href="#guidance">Panduan</a></li>
-        <li><a href="#irigasi">Irigasi</a></li>
-      </ul>
+    <ul class="nav-links">
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#risiko">Risiko</a></li>
+      <li><a href="#irigasi">Irigasi</a></li>
+      <li><a href="#lapor">Lapor</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<header class="hero">
+  <div class="hero-inner">
+
+    <div>
+      <h1>AGRI-<span>SIAGA</span> 360°</h1>
+
+      <p>
+        Platform digital untuk membantu generasi muda pertanian
+        mendeteksi risiko, mengambil tindakan, dan memulihkan
+        lahan setelah bencana.
+      </p>
+
+      <div class="buttons">
+        <a href="#dashboard">
+          <button class="btn btn-white">🚨 Cek Risiko</button>
+        </a>
+
+        <a href="#irigasi">
+          <button class="btn btn-green">💧 Simulasi Irigasi</button>
+        </a>
+      </div>
     </div>
-  </nav>
 
+    <div class="hero-dashboard">
+      <h3>🚦 RISK-O-METER</h3>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-container">
+      <div class="big-risk" id="heroIcon">⚠️</div>
 
-      <div>
-        <h1>AGRI-<span>SIAGA</span></h1>
-
-        <p>
-          Platform digital untuk membantu generasi muda pertanian
-          menghadapi kekeringan, banjir, longsor, dan berbagai risiko
-          bencana pada lahan pertanian.
-        </p>
-
-        <div class="hero-buttons">
-          <a href="#dashboard">
-            <button class="btn btn-primary">
-              📊 Lihat Status
-            </button>
-          </a>
-
-          <a href="#bencana">
-            <button class="btn btn-secondary">
-              🚨 Panduan Bencana
-            </button>
-          </a>
-        </div>
+      <div class="risk-pill" id="heroRisk">
+        WASPADA
       </div>
 
-      <div class="hero-card">
-        <div class="big-icon">🌾</div>
-        <h2>Pertanian Tangguh</h2>
-        <p>
-          Siaga sebelum bencana, tanggap saat bencana,
-          pulih setelah bencana.
-        </p>
-      </div>
-
+      <p style="margin-top:15px">
+        Sistem prototype mendeteksi kondisi
+        berdasarkan data simulasi.
+      </p>
     </div>
-  </header>
+
+  </div>
+</header>
 
 
-  <!-- DASHBOARD -->
-  <section id="dashboard">
-    <div class="container">
+<section id="dashboard">
+  <div class="container">
 
-      <div class="section-title">
-        <h2>📊 Dashboard Risiko</h2>
-        <p>Status simulasi kondisi pertanian saat ini.</p>
+    <div class="title">
+      <h2>📊 Dashboard Risiko</h2>
+      <p>Pantau berbagai ancaman terhadap pertanian.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">☀️</div>
+        <h3>Kekeringan</h3>
+        <p>Risiko akibat rendahnya ketersediaan air.</p>
+        <span class="status warning">WASPADA</span>
       </div>
 
-      <div class="status-grid">
-
-        <div class="status-card">
-          <div class="status-top">
-            <div class="status-icon">☀️</div>
-            <span class="badge">WASPADA</span>
-          </div>
-
-          <h3>Kekeringan</h3>
-          <p>Kelembapan tanah mulai menurun.</p>
-        </div>
-
-
-        <div class="status-card safe">
-          <div class="status-top">
-            <div class="status-icon">🌊</div>
-            <span class="badge safe">AMAN</span>
-          </div>
-
-          <h3>Banjir</h3>
-          <p>Tidak terdapat indikasi banjir pada simulasi.</p>
-        </div>
-
-
-        <div class="status-card">
-          <div class="status-top">
-            <div class="status-icon">⛰️</div>
-            <span class="badge">WASPADA</span>
-          </div>
-
-          <h3>Longsor</h3>
-          <p>Perhatikan kondisi tanah pada lahan miring.</p>
-        </div>
-
+      <div class="card">
+        <div class="card-icon">🌊</div>
+        <h3>Banjir</h3>
+        <p>Risiko genangan air yang dapat merusak tanaman.</p>
+        <span class="status safe">AMAN</span>
       </div>
 
-      <div class="alert-box">
-        <h3>⚠️ Pengingat</h3>
-        <p>
-          Data pada halaman ini merupakan <b>simulasi/prototipe</b>.
-          Untuk sistem peringatan dini nyata, data harus terhubung
-          dengan sensor dan sumber data resmi.
-        </p>
+      <div class="card">
+        <div class="card-icon">⛰️</div>
+        <h3>Longsor</h3>
+        <p>Risiko pergerakan tanah pada area lereng.</p>
+        <span class="status warning">WASPADA</span>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🔥</div>
+        <h3>Kebakaran</h3>
+        <p>Risiko kebakaran lahan terutama saat kondisi kering.</p>
+        <span class="status safe">AMAN</span>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- BENCANA -->
-  <section id="bencana">
-    <div class="container">
+<section id="risiko" class="risk-section">
+  <div class="container">
 
-      <div class="section-title">
-        <h2>🚨 Pilih Jenis Bencana</h2>
-        <p>Temukan langkah penanganan pertanian sesuai kondisi.</p>
+    <div class="title">
+      <h2>🚦 Risk-O-Meter</h2>
+      <p>Geser untuk melakukan simulasi tingkat risiko.</p>
+    </div>
+
+    <div class="risk-box">
+
+      <h3>Simulasi Risiko Kekeringan</h3>
+
+      <div class="risk-meter">
+        <div id="riskFill" class="risk-fill"></div>
       </div>
 
-      <div class="disaster-grid">
+      <div class="risk-number">
+        <span id="riskNumber">45</span>%
+      </div>
 
-        <div class="disaster-card">
-          <div class="disaster-icon dry">☀️</div>
+      <input
+        id="riskSlider"
+        class="slider"
+        type="range"
+        min="0"
+        max="100"
+        value="45">
 
-          <h3>Kekeringan</h3>
-
-          <p>
-            Kekurangan air dapat menghambat pertumbuhan
-            tanaman dan menurunkan hasil panen.
-          </p>
-
-          <button
-            class="btn learn-btn"
-            onclick="showGuidance('kekeringan')">
-            Lihat Penanganan
-          </button>
-        </div>
-
-
-        <div class="disaster-card">
-          <div class="disaster-icon flood">🌊</div>
-
-          <h3>Banjir</h3>
-
-          <p>
-            Genangan air berlebihan dapat merusak tanaman,
-            akar, dan struktur tanah.
-          </p>
-
-          <button
-            class="btn learn-btn"
-            onclick="showGuidance('banjir')">
-            Lihat Penanganan
-          </button>
-        </div>
-
-
-        <div class="disaster-card">
-          <div class="disaster-icon landslide">⛰️</div>
-
-          <h3>Longsor</h3>
-
-          <p>
-            Lahan miring membutuhkan pengelolaan untuk
-            mengurangi erosi dan risiko longsor.
-          </p>
-
-          <button
-            class="btn learn-btn"
-            onclick="showGuidance('longsor')">
-            Lihat Penanganan
-          </button>
-        </div>
-
+      <div id="riskText" class="action-box">
+        ⚠️ Kondisi WASPADA. Pantau ketersediaan air dan kelembapan tanah.
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- PANDUAN -->
-  <section id="guidance">
-    <div class="container">
+<section id="irigasi">
+  <div class="container">
 
-      <div class="section-title">
-        <h2>📚 Panduan Kesiapsiagaan</h2>
-        <p>Langkah yang dapat dilakukan pada setiap tahap bencana.</p>
-      </div>
-
-      <div class="guidance-box">
-
-        <div class="guidance-header">
-          <h2 id="guidanceTitle">☀️ Penanganan Kekeringan</h2>
-        </div>
-
-        <div class="tabs">
-
-          <button
-            class="tab active"
-            onclick="changeTab('sebelum', this)">
-            Sebelum
-          </button>
-
-          <button
-            class="tab"
-            onclick="changeTab('saat', this)">
-            Saat
-          </button>
-
-          <button
-            class="tab"
-            onclick="changeTab('setelah', this)">
-            Setelah
-          </button>
-
-        </div>
-
-        <div class="guidance-content">
-
-          <div id="sebelum">
-            <h3>🛡️ Sebelum Bencana</h3>
-
-            <ul>
-              <li>Menyiapkan penampungan air hujan.</li>
-              <li>Menggunakan mulsa untuk menjaga kelembapan tanah.</li>
-              <li>Memilih tanaman yang sesuai dengan kondisi lingkungan.</li>
-              <li>Memeriksa kondisi saluran irigasi secara berkala.</li>
-            </ul>
-          </div>
-
-        </div>
-
-      </div>
-
+    <div class="title">
+      <h2>💧 Smart Drip Irrigation</h2>
+      <p>
+        Simulasi irigasi tetes otomatis berbasis kelembapan tanah.
+      </p>
     </div>
-  </section>
 
+    <div class="simulator">
 
-  <!-- IRIGASI -->
-  <section id="irigasi">
-    <div class="container">
+      <div class="sim-card">
 
-      <div class="section-title">
-        <h2>💧 Simulasi Irigasi Tetes Otomatis</h2>
+        <h3>🌱 Kondisi Tanah</h3>
 
-        <p>
-          Simulasi sederhana sensor kelembapan tanah dan pompa.
-        </p>
-      </div>
+        <div class="plant" id="plant">🌱</div>
 
+        <h3>
+          Kelembapan:
+          <span id="moistureValue">45</span>%
+        </h3>
 
-      <div class="irrigation">
-
-        <div class="irrigation-card">
-
-          <h3>🌱 Kelembapan Tanah</h3>
-
-          <div class="meter">
-            <div
-              id="moistureBar"
-              class="meter-fill">
-            </div>
-          </div>
-
-          <h2>
-            <span id="moistureValue">42</span>%
-          </h2>
-
-          <input
-            id="moistureSlider"
-            class="range"
-            type="range"
-            min="0"
-            max="100"
-            value="42"
-            oninput="updateMoisture(this.value)">
-
+        <div class="progress">
           <div
-            id="irrigationStatus"
-            class="irrigation-status">
-            💧 Tanah cukup kering — pompa AKAN menyala.
+            id="moistureBar"
+            class="progress-fill">
           </div>
-
-          <p>
-            Sistem akan menyalakan pompa ketika kelembapan
-            berada di bawah batas tertentu.
-          </p>
-
         </div>
 
+        <input
+          id="moistureSlider"
+          class="slider"
+          type="range"
+          min="0"
+          max="100"
+          value="45">
 
-        <div class="irrigation-card">
-
-          <h3>🚿 Status Pompa</h3>
-
-          <div
-            id="pump"
-            class="pump">
-            🚿
-          </div>
-
-          <h2
-            id="pumpStatus"
-            style="text-align:center;">
-            POMPA MATI
-          </h2>
-
-          <button
-            id="pumpButton"
-            class="btn btn-primary"
-            style="width:100%; margin-top:20px;"
-            onclick="togglePump()">
-            Nyalakan Pompa Manual
-          </button>
-
+        <div
+          id="soilMessage"
+          class="action-box">
+          🌱 Kondisi tanah cukup baik.
         </div>
 
       </div>
 
-    </div>
-  </section>
 
+      <div class="sim-card">
 
-  <!-- CHECKLIST -->
-  <section>
-    <div class="container">
+        <h3>🚿 Pompa Irigasi</h3>
 
-      <div class="section-title">
-        <h2>✅ Checklist Petani Siaga</h2>
-        <p>
-          Tandai persiapan yang sudah dilakukan.
-        </p>
-      </div>
-
-      <div class="checklist">
-
-        <div class="check-card">
-
-          <h3>☀️ Kekeringan</h3>
-
-          <label>
-            <input type="checkbox">
-            Menyiapkan cadangan air
-          </label>
-
-          <label>
-            <input type="checkbox">
-            Memeriksa irigasi
-          </label>
-
-          <label>
-            <input type="checkbox">
-            Menyiapkan mulsa
-          </label>
-
+        <div
+          id="pump"
+          class="pump">
+          🚿
         </div>
 
+        <h2
+          id="pumpStatus"
+          style="text-align:center">
+          POMPA MATI
+        </h2>
 
-        <div class="check-card">
-
-          <h3>🌊 Banjir</h3>
-
-          <label>
-            <input type="checkbox">
-            Membersihkan drainase
-          </label>
-
-          <label>
-            <input type="checkbox">
-            Memeriksa ketinggian air
-          </label>
-
-          <label>
-            <input type="checkbox">
-            Menyiapkan jalur evakuasi
-          </label>
-
+        <div
+          id="pumpMessage"
+          class="action-box">
+          Pompa otomatis akan menyala ketika tanah terlalu kering.
         </div>
 
+        <button
+          id="pumpButton"
+          class="btn btn-green"
+          style="width:100%;margin-top:18px">
+          💧 Aktifkan Pompa Manual
+        </button>
 
-        <div class="check-card">
-
-          <h3>⛰️ Longsor</h3>
-
-          <label>
-            <input type="checkbox">
-            Menanam vegetasi penguat
-          </label>
-
-          <label>
-            <input type="checkbox">
-            Memeriksa retakan tanah
-          </label>
-
-          <label>
-            <input type="checkbox">
-            Menjaga drainase lereng
-          </label>
-
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- FOOTER -->
-  <footer>
-    <h2>🌱 AGRI-SIAGA</h2>
-
-    <p>
-      Inovasi digital untuk pertanian Gen Z yang
-      tangguh menghadapi bencana.
-    </p>
-
-    <p>
-      © 2026 AGRI-SIAGA — Prototype
-    </p>
-  </footer>
-
-
-  <!-- MODAL -->
-  <div
-    id="modal"
-    class="modal"
-    onclick="closeModal(event)">
-
-    <div class="modal-content">
-
-      <button
-        class="close"
-        onclick="closeModal()">
-        ×
-      </button>
-
-      <h2 id="modalTitle"></h2>
-
-      <div
-        id="modalBody"
-        style="margin-top:20px;">
       </div>
 
     </div>
 
   </div>
+</section>
 
 
-  <script>
+<section>
+  <div class="container">
 
-    /* =========================
-       DATA PANDUAN
-    ========================= */
+    <div class="title">
+      <h2>🌦️ Simulasi Kondisi 7 Hari</h2>
+      <p>Contoh tampilan informasi cuaca untuk prototype.</p>
+    </div>
 
-    const disasterData = {
+    <div class="forecast">
 
-      kekeringan: {
-        title: "☀️ Penanganan Kekeringan",
+      <div class="day">
+        <b>Sen</b>
+        <div class="weather">☀️</div>
+        <small>32°C</small>
+      </div>
 
-        sebelum: [
-          "Siapkan tandon atau tempat penampungan air hujan.",
-          "Periksa saluran dan pompa irigasi.",
-          "Gunakan mulsa untuk membantu mempertahankan kelembapan tanah.",
-          "Pilih varietas tanaman yang sesuai dengan kondisi lingkungan."
-        ],
+      <div class="day">
+        <b>Sel</b>
+        <div class="weather">☀️</div>
+        <small>33°C</small>
+      </div>
 
-        saat: [
-          "Gunakan irigasi secara efisien dan prioritaskan tanaman yang membutuhkan air.",
-          "Gunakan irigasi tetes untuk mengurangi pemborosan air.",
-          "Pantau kelembapan tanah secara berkala.",
-          "Hindari penggunaan air secara berlebihan."
-        ],
+      <div class="day">
+        <b>Rab</b>
+        <div class="weather">🌤️</div>
+        <small>31°C</small>
+      </div>
 
-        setelah: [
-          "Periksa kondisi tanaman dan tanah.",
-          "Pulihkan kelembapan tanah secara bertahap.",
-          "Tambahkan bahan organik sesuai kebutuhan tanah.",
-          "Catat dampak kekeringan sebagai evaluasi musim berikutnya."
-        ]
-      },
+      <div class="day">
+        <b>Kam</b>
+        <div class="weather">🌧️</div>
+        <small>28°C</small>
+      </div>
 
+      <div class="day">
+        <b>Jum</b>
+        <div class="weather">🌦️</div>
+        <small>29°C</small>
+      </div>
 
-      banjir: {
-        title: "🌊 Penanganan Banjir",
+      <div class="day">
+        <b>Sab</b>
+        <div class="weather">☀️</div>
+        <small>32°C</small>
+      </div>
 
-        sebelum: [
-          "Bersihkan saluran drainase secara berkala.",
-          "Buat saluran pembuangan air yang memadai.",
-          "Gunakan teknik budidaya yang sesuai dengan kondisi lahan.",
-          "Pantau prakiraan cuaca dan kondisi sungai setempat."
-        ],
+      <div class="day">
+        <b>Min</b>
+        <div class="weather">☀️</div>
+        <small>33°C</small>
+      </div>
 
-        saat: [
-          "Utamakan keselamatan manusia.",
-          "Jangan memasuki area banjir yang berarus deras.",
-          "Matikan peralatan listrik atau pompa yang berisiko terkena air.",
-          "Jika memungkinkan dan aman, arahkan air menuju saluran drainase."
-        ],
+    </div>
 
-        setelah: [
-          "Periksa tanaman yang terdampak.",
-          "Bersihkan lumpur dan sisa material dari lahan.",
-          "Periksa kondisi akar dan tanah.",
-          "Evaluasi sistem drainase agar lebih siap menghadapi hujan berikutnya."
-        ]
-      },
+  </div>
+</section>
 
 
-      longsor: {
-        title: "⛰️ Penanganan Longsor",
+<section>
+  <div class="container">
 
-        sebelum: [
-          "Perhatikan retakan tanah pada lahan miring.",
-          "Pertahankan vegetasi pada area yang rawan erosi.",
-          "Buat drainase yang sesuai untuk mengendalikan aliran air.",
-          "Hindari aktivitas yang dapat memperlemah lereng."
-        ],
+    <div class="title">
+      <h2>🗺️ Peta Risiko Pertanian</h2>
+      <p>Prototype visualisasi wilayah risiko.</p>
+    </div>
 
-        saat: [
-          "Segera menjauh dari area longsor.",
-          "Jangan berada di bawah lereng yang tidak stabil.",
-          "Utamakan keselamatan manusia.",
-          "Laporkan kondisi berbahaya kepada pihak terkait."
-        ],
+    <div class="map">
 
-        setelah: [
-          "Jangan langsung memasuki area longsor yang belum dinyatakan aman.",
-          "Periksa kerusakan lahan setelah kondisi aman.",
-          "Evaluasi penyebab erosi dan aliran air.",
-          "Lakukan pemulihan lahan dengan teknik konservasi yang sesuai."
-        ]
+      <div class="map-label l1">
+        🟢 Zona Aman
+      </div>
+
+      <div class="map-label l2">
+        🟡 Kekeringan
+      </div>
+
+      <div class="map-label l3">
+        🔵 Banjir
+      </div>
+
+      <div class="map-label l4">
+        🟠 Longsor
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="lapor" style="background:#edf8f1">
+
+  <div class="container">
+
+    <div class="title">
+      <h2>🆘 Laporkan Kondisi Lahan</h2>
+      <p>Simulasi formulir pelaporan bencana pertanian.</p>
+    </div>
+
+    <div class="report">
+
+      <div class="form-group">
+        <label>Nama Petani</label>
+        <input
+          id="farmerName"
+          type="text"
+          placeholder="Masukkan nama">
+      </div>
+
+      <div class="form-group">
+        <label>Jenis Bencana</label>
+
+        <select id="disasterType">
+          <option value="">Pilih bencana</option>
+          <option>Kekeringan</option>
+          <option>Banjir</option>
+          <option>Longsor</option>
+          <option>Kebakaran Lahan</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Deskripsi Kondisi</label>
+
+        <textarea
+          id="description"
+          rows="5"
+          placeholder="Jelaskan kondisi lahan..."></textarea>
+      </div>
+
+      <button
+        class="btn btn-green"
+        style="width:100%"
+        onclick="submitReport()">
+        📤 Kirim Laporan
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+
+    <div class="title">
+      <h2>🏆 Agri Points</h2>
+      <p>Gamifikasi untuk mendorong kebiasaan pertanian tangguh bencana.</p>
+    </div>
+
+    <div class="points">
+
+      <div>
+        <div class="xp">
+          <span id="xp">0</span> XP
+        </div>
+
+        <p>
+          Selesaikan checklist untuk mendapatkan poin.
+        </p>
+      </div>
+
+      <div class="level">
+        <div>LEVEL</div>
+        <strong id="level">1</strong>
+        <div>Petani Siaga</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+
+    <div class="title">
+      <h2>✅ Checklist Petani Siaga</h2>
+      <p>Setiap checklist yang selesai memberikan +20 XP.</p>
+    </div>
+
+    <div class="check-grid">
+
+      <div class="check-card">
+
+        <h3>☀️ Kekeringan</h3>
+
+        <label>
+          <input class="task" type="checkbox">
+          Menyiapkan cadangan air
+        </label>
+
+        <label>
+          <input class="task" type="checkbox">
+          Memeriksa sistem irigasi
+        </label>
+
+        <label>
+          <input class="task" type="checkbox">
+          Menyiapkan mulsa
+        </label>
+
+      </div>
+
+
+      <div class="check-card">
+
+        <h3>🌊 Banjir</h3>
+
+        <label>
+          <input class="task" type="checkbox">
+          Membersihkan drainase
+        </label>
+
+        <label>
+          <input class="task" type="checkbox">
+          Memantau ketinggian air
+        </label>
+
+        <label>
+          <input class="task" type="checkbox">
+          Menyiapkan jalur aman
+        </label>
+
+      </div>
+
+
+      <div class="check-card">
+
+        <h3>⛰️ Longsor</h3>
+
+        <label>
+          <input class="task" type="checkbox">
+          Memeriksa retakan tanah
+        </label>
+
+        <label>
+          <input class="task" type="checkbox">
+          Menjaga vegetasi
+        </label>
+
+        <label>
+          <input class="task" type="checkbox">
+          Memeriksa drainase lereng
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<footer>
+
+  <h2>🌱 AGRI-SIAGA 360°</h2>
+
+  <p>
+    Deteksi. Siaga. Selamatkan. Pulihkan.
+  </p>
+
+  <p>
+    Prototype Website Pertanian Tangguh Bencana © 2026
+  </p>
+
+</footer>
+
+
+<div id="toast" class="toast">
+  Berhasil!
+</div>
+
+
+<script>
+
+/* =========================
+   RISK-O-METER
+========================= */
+
+const riskSlider =
+  document.getElementById("riskSlider");
+
+riskSlider.addEventListener("input", function(){
+
+  const value = Number(this.value);
+
+  document.getElementById("riskNumber")
+    .innerText = value;
+
+  document.getElementById("riskFill")
+    .style.width = value + "%";
+
+  const text =
+    document.getElementById("riskText");
+
+  const heroRisk =
+    document.getElementById("heroRisk");
+
+  const heroIcon =
+    document.getElementById("heroIcon");
+
+  if(value < 30){
+
+    text.innerText =
+      "🟢 KONDISI AMAN — Tetap lakukan pemantauan rutin.";
+
+    heroRisk.innerText = "AMAN";
+    heroRisk.style.background = "#dff6e7";
+    heroRisk.style.color = "#11723c";
+    heroIcon.innerText = "🟢";
+
+  }else if(value < 70){
+
+    text.innerText =
+      "🟡 WASPADA — Pantau ketersediaan air dan kondisi tanaman.";
+
+    heroRisk.innerText = "WASPADA";
+    heroRisk.style.background = "#ffe082";
+    heroRisk.style.color = "#674e00";
+    heroIcon.innerText = "⚠️";
+
+  }else if(value < 90){
+
+    text.innerText =
+      "🟠 SIAGA — Segera lakukan penghematan air dan perlindungan tanaman.";
+
+    heroRisk.innerText = "SIAGA";
+    heroRisk.style.background = "#ffd0a8";
+    heroRisk.style.color = "#8a4300";
+    heroIcon.innerText = "🟠";
+
+  }else{
+
+    text.innerText =
+      "🔴 DARURAT — Prioritaskan keselamatan dan lakukan tindakan tanggap darurat.";
+
+    heroRisk.innerText = "DARURAT";
+    heroRisk.style.background = "#ffd4d4";
+    heroRisk.style.color = "#a32229";
+    heroIcon.innerText = "🔴";
+  }
+
+});
+
+
+/* =========================
+   SMART IRRIGATION
+========================= */
+
+const moistureSlider =
+  document.getElementById("moistureSlider");
+
+const moistureValue =
+  document.getElementById("moistureValue");
+
+const moistureBar =
+  document.getElementById("moistureBar");
+
+const soilMessage =
+  document.getElementById("soilMessage");
+
+const plant =
+  document.getElementById("plant");
+
+const pump =
+  document.getElementById("pump");
+
+const pumpStatus =
+  document.getElementById("pumpStatus");
+
+const pumpMessage =
+  document.getElementById("pumpMessage");
+
+let manualPump = false;
+
+moistureSlider.addEventListener("input",function(){
+
+  const value = Number(this.value);
+
+  moistureValue.innerText = value;
+
+  moistureBar.style.width = value + "%";
+
+  plant.classList.remove("very-dry","wet");
+
+  if(value < 25){
+
+    plant.innerText = "🥀";
+    plant.classList.add("very-dry");
+
+    soilMessage.innerText =
+      "🚨 Tanah sangat kering! Sistem otomatis menyalakan pompa.";
+
+    if(!manualPump){
+      setPump(true);
+    }
+
+  }else if(value < 40){
+
+    plant.innerText = "🌱";
+
+    soilMessage.innerText =
+      "⚠️ Tanah mulai kering. Irigasi perlu dilakukan.";
+
+    if(!manualPump){
+      setPump(true);
+    }
+
+  }else if(value <= 70){
+
+    plant.innerText = "🌿";
+    plant.classList.add("wet");
+
+    soilMessage.innerText =
+      "🟢 Kelembapan tanah cukup baik.";
+
+    if(!manualPump){
+      setPump(false);
+    }
+
+  }else{
+
+    plant.innerText = "🌿";
+    plant.classList.add("wet");
+
+    soilMessage.innerText =
+      "🌧️ Tanah sangat lembap. Pompa dihentikan.";
+
+    if(!manualPump){
+      setPump(false);
+    }
+  }
+
+});
+
+
+function setPump(on){
+
+  pump.classList.toggle("on",on);
+
+  if(on){
+
+    pumpStatus.innerText =
+      "POMPA MENYALA";
+
+    pumpStatus.style.color =
+      "#16a05d";
+
+    pumpMessage.innerText =
+      "💧 Air sedang dialirkan melalui sistem irigasi tetes.";
+
+  }else{
+
+    pumpStatus.innerText =
+      "POMPA MATI";
+
+    pumpStatus.style.color =
+      "#173124";
+
+    pumpMessage.innerText =
+      "💧 Pompa berhenti karena kelembapan tanah sudah cukup.";
+  }
+}
+
+
+document
+  .getElementById("pumpButton")
+  .addEventListener("click",function(){
+
+    manualPump = !manualPump;
+
+    setPump(manualPump);
+
+    this.innerText =
+      manualPump
+      ? "⛔ Matikan Pompa Manual"
+      : "💧 Aktifkan Pompa Manual";
+
+  });
+
+
+/* =========================
+   AGRI POINTS
+========================= */
+
+let xp = 0;
+
+document
+  .querySelectorAll(".task")
+  .forEach(task => {
+
+    task.addEventListener("change",function(){
+
+      if(this.checked){
+
+        xp += 20;
+
+      }else{
+
+        xp -= 20;
+
       }
 
-    };
-
-
-    /* =========================
-       PANDUAN BENCANA
-    ========================= */
-
-    let currentDisaster = "kekeringan";
-
-    function showGuidance(type) {
-
-      currentDisaster = type;
-
-      const data = disasterData[type];
-
-      document.getElementById("guidanceTitle").innerText =
-        data.title;
-
-      document.getElementById("guidance").scrollIntoView({
-        behavior: "smooth"
-      });
-
-      renderGuidance("sebelum");
-
-    }
-
-
-    function changeTab(stage, button) {
-
-      document
-        .querySelectorAll(".tab")
-        .forEach(tab => tab.classList.remove("active"));
-
-      button.classList.add("active");
-
-      renderGuidance(stage);
-    }
-
-
-    function renderGuidance(stage) {
-
-      const data = disasterData[currentDisaster];
-
-      const items = data[stage];
-
-      const content =
-        document.querySelector(".guidance-content");
-
-      content.innerHTML = `
-        <h3>${getStageIcon(stage)} ${getStageTitle(stage)}</h3>
-
-        <ul>
-          ${items.map(item => `<li>${item}</li>`).join("")}
-        </ul>
-      `;
-    }
-
-
-    function getStageTitle(stage) {
-
-      if (stage === "sebelum") return "Sebelum Bencana";
-      if (stage === "saat") return "Saat Bencana";
-      return "Setelah Bencana";
-    }
-
-
-    function getStageIcon(stage) {
-
-      if (stage === "sebelum") return "🛡️";
-      if (stage === "saat") return "🚨";
-      return "🌱";
-    }
-
-
-    /* =========================
-       IRIGASI
-    ========================= */
-
-    let manualPump = false;
-
-    function updateMoisture(value) {
-
-      document.getElementById("moistureValue")
-        .innerText = value;
-
-      document.getElementById("moistureBar")
-        .style.width = value + "%";
-
-      if (!manualPump) {
-
-        if (Number(value) < 40) {
-          setPump(true);
-        } else {
-          setPump(false);
-        }
-
+      if(xp < 0){
+        xp = 0;
       }
 
-      updateIrrigationMessage(value);
-    }
+      document.getElementById("xp")
+        .innerText = xp;
+
+      const level =
+        Math.floor(xp / 100) + 1;
+
+      document.getElementById("level")
+        .innerText = level;
+
+      showToast(
+        this.checked
+        ? "+20 XP! 🌱"
+        : "-20 XP"
+      );
+
+    });
+
+  });
 
 
-    function updateIrrigationMessage(value) {
+/* =========================
+   LAPORAN
+========================= */
 
-      const status =
-        document.getElementById("irrigationStatus");
+function submitReport(){
 
-      if (value < 30) {
+  const name =
+    document.getElementById("farmerName").value;
 
-        status.innerText =
-          "🚨 Tanah sangat kering — pompa otomatis menyala.";
+  const type =
+    document.getElementById("disasterType").value;
 
-      } else if (value < 40) {
+  const description =
+    document.getElementById("description").value;
 
-        status.innerText =
-          "💧 Tanah cukup kering — pompa otomatis menyala.";
+  if(!name || !type || !description){
 
-      } else if (value < 70) {
+    showToast(
+      "⚠️ Lengkapi semua data terlebih dahulu."
+    );
 
-        status.innerText =
-          "🌱 Kelembapan tanah cukup.";
+    return;
+  }
 
-      } else {
+  showToast(
+    "✅ Laporan berhasil disimpan sebagai simulasi!"
+  );
 
-        status.innerText =
-          "🌧️ Tanah sangat lembap — pompa dihentikan.";
-
-      }
-    }
-
-
-    function togglePump() {
-
-      manualPump = !manualPump;
-
-      setPump(manualPump);
-
-      const button =
-        document.getElementById("pumpButton");
-
-      button.innerText = manualPump
-        ? "Matikan Pompa Manual"
-        : "Nyalakan Pompa Manual";
-    }
+  document.getElementById("farmerName").value = "";
+  document.getElementById("disasterType").value = "";
+  document.getElementById("description").value = "";
+}
 
 
-    function setPump(on) {
+/* =========================
+   TOAST
+========================= */
 
-      const pump =
-        document.getElementById("pump");
+function showToast(message){
 
-      const status =
-        document.getElementById("pumpStatus");
+  const toast =
+    document.getElementById("toast");
 
-      pump.classList.toggle("on", on);
+  toast.innerText = message;
 
-      if (on) {
+  toast.classList.add("show");
 
-        status.innerText = "POMPA MENYALA";
-        status.style.color = "#168a4a";
+  setTimeout(() => {
 
-      } else {
+    toast.classList.remove("show");
 
-        status.innerText = "POMPA MATI";
-        status.style.color = "#173124";
+  },3000);
 
-      }
-    }
+}
 
 
-    /* =========================
-       MODAL
-    ========================= */
+/* =========================
+   DEFAULT STATE
+========================= */
 
-    function openModal(title, body) {
+moistureSlider.dispatchEvent(
+  new Event("input")
+);
 
-      document.getElementById("modalTitle")
-        .innerText = title;
+riskSlider.dispatchEvent(
+  new Event("input")
+);
 
-      document.getElementById("modalBody")
-        .innerHTML = body;
-
-      document.getElementById("modal")
-        .classList.add("show");
-    }
-
-
-    function closeModal(event) {
-
-      if (
-        !event ||
-        event.target.id === "modal" ||
-        event.target.classList.contains("close")
-      ) {
-
-        document.getElementById("modal")
-          .classList.remove("show");
-      }
-    }
-
-
-    /* =========================
-       SIMULASI DATA DINAMIS
-    ========================= */
-
-    function randomWeatherSimulation() {
-
-      const moisture =
-        Math.floor(Math.random() * 61) + 20;
-
-      document.getElementById("moistureSlider")
-        .value = moisture;
-
-      updateMoisture(moisture);
-    }
-
-
-    // Jalankan simulasi pertama
-    updateMoisture(42);
-
-  </script>
+</script>
 
 </body>
 </html>
+```
