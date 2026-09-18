@@ -1,5831 +1,1309 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#198754">
-<meta name="description" content="Smart Farming Technology - Smart Farming dan Pengolahan Limbah Organik">
-<title>Smart Farming Technology</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#168a4a">
+  <title>AGRI-SIAGA | Pertanian Tangguh Bencana</title>
 
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --green:#198754;
-    --green-dark:#11643d;
-    --green-light:#dff7e8;
-    --mint:#effcf4;
-    --white:#fff;
-    --text:#183528;
-    --muted:#6b7d73;
-    --gold:#f5b942;
-    --orange:#f28c28;
-    --yellow:#e7c84a;
-    --brown:#8b5e34;
-    --red:#e85d5d;
-    --blue:#3d8ed0;
-    --shadow:0 12px 35px rgba(25,135,84,.10);
-    --radius:22px;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4fbf6;
-    color:var(--text);
-    min-height:100vh;
-}
-
-button,
-input,
-select{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(255,255,255,.95);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #e5f1e9;
-}
-
-.navbar{
-    max-width:1250px;
-    margin:auto;
-    padding:14px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:22px;
-    font-weight:800;
-    color:var(--green-dark);
-    white-space:nowrap;
-}
-
-.logo-icon{
-    width:42px;
-    height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--green-light);
-    border-radius:14px;
-    font-size:24px;
-}
-
-.nav-menu{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-}
-
-.nav-btn{
-    border:0;
-    background:transparent;
-    color:#52655b;
-    padding:10px 12px;
-    border-radius:12px;
-    font-size:13px;
-    font-weight:700;
-    transition:.2s;
-}
-
-.nav-btn:hover,
-.nav-btn.active{
-    background:var(--green-light);
-    color:var(--green-dark);
-}
-
-.page{
-    display:none;
-    max-width:1250px;
-    margin:auto;
-    padding:25px 20px 60px;
-}
-
-.page.active{
-    display:block;
-}
-
-.hero{
-    position:relative;
-    overflow:hidden;
-    min-height:250px;
-    padding:38px;
-    border-radius:30px;
-    background:
-        linear-gradient(120deg,rgba(25,135,84,.94),rgba(17,100,61,.90)),
-        #198754;
-    color:white;
-    box-shadow:var(--shadow);
-    margin-bottom:22px;
-}
-
-.hero::before,
-.hero::after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
-}
-
-.hero::before{
-    width:280px;
-    height:280px;
-    right:-80px;
-    top:-120px;
-}
-
-.hero::after{
-    width:180px;
-    height:180px;
-    right:180px;
-    bottom:-110px;
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-    max-width:720px;
-}
-
-.hero h1{
-    font-size:36px;
-    margin-bottom:12px;
-}
-
-.hero p{
-    line-height:1.7;
-    color:#eaf9f0;
-}
-
-.leaf{
-    position:absolute;
-    opacity:.18;
-    font-size:80px;
-    animation:floatLeaf 6s ease-in-out infinite;
-}
-
-.leaf.one{
-    right:8%;
-    bottom:15px;
-}
-
-.leaf.two{
-    right:24%;
-    top:15px;
-    font-size:55px;
-    animation-delay:1s;
-}
-
-.leaf.three{
-    right:38%;
-    bottom:10px;
-    font-size:45px;
-    animation-delay:2s;
-}
-
-@keyframes floatLeaf{
-    0%,100%{
-        transform:translateY(0) rotate(-5deg);
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    50%{
-        transform:translateY(-14px) rotate(5deg);
-    }
-}
-
-.card{
-    background:white;
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    border:1px solid #e8f2eb;
-    padding:22px;
-}
-
-.section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    margin:28px 0 15px;
-}
-
-.section-title h2{
-    font-size:21px;
-}
-
-.section-title span{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.profile-grid{
-    display:grid;
-    grid-template-columns:1fr 1.4fr;
-    gap:18px;
-}
-
-.profile-card{
-    display:flex;
-    align-items:center;
-    gap:17px;
-}
-
-.avatar{
-    width:70px;
-    height:70px;
-    border-radius:22px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--green-light);
-    font-size:38px;
-}
-
-.profile-info h3{
-    margin-bottom:6px;
-}
-
-.level{
-    color:var(--green);
-    font-size:13px;
-    font-weight:800;
-}
-
-.xp-bar{
-    height:9px;
-    background:#e8f1eb;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:9px;
-}
-
-.xp-fill{
-    height:100%;
-    background:linear-gradient(90deg,#198754,#49b878);
-    border-radius:20px;
-    transition:width .5s;
-}
-
-.coin-card{
-    background:#198754;
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    margin-bottom:18px;
-    overflow:hidden;
-    position:relative;
-}
-
-.coin-card::after{
-    content:"🪙";
-    position:absolute;
-    right:20px;
-    bottom:-30px;
-    font-size:100px;
-    opacity:.12;
-}
-
-.coin-label{
-    font-size:13px;
-    font-weight:700;
-    opacity:.9;
-}
-
-.coin-value{
-    font-size:32px;
-    font-weight:900;
-    margin-top:5px;
-}
-
-.coin-icon{
-    width:65px;
-    height:65px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(255,255,255,.17);
-    font-size:34px;
-    z-index:2;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.stat{
-    background:white;
-    border-radius:18px;
-    padding:18px;
-    border:1px solid #e8f2eb;
-}
-
-.stat-icon{
-    font-size:25px;
-    margin-bottom:9px;
-}
-
-.stat-value{
-    font-size:25px;
-    font-weight:900;
-}
-
-.stat-label{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
-}
-
-.missions{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.mission{
-    position:relative;
-}
-
-.mission-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:13px;
-}
-
-.mission-icon{
-    font-size:27px;
-}
-
-.badge{
-    background:#fff3cf;
-    color:#9b7210;
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:800;
-}
-
-.mission h3{
-    font-size:15px;
-    margin-bottom:7px;
-}
-
-.mission p{
-    font-size:12px;
-    color:var(--muted);
-    line-height:1.5;
-}
-
-.progress{
-    margin-top:15px;
-    height:8px;
-    background:#edf3ef;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.progress div{
-    height:100%;
-    background:var(--green);
-    border-radius:20px;
-}
-
-.journey{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:10px;
-}
-
-.level-box{
-    text-align:center;
-    padding:18px 10px;
-    border-radius:17px;
-    background:#f5f9f6;
-    border:2px solid transparent;
-}
-
-.level-box.current{
-    border-color:var(--green);
-    background:var(--green-light);
-}
-
-.level-box .num{
-    width:40px;
-    height:40px;
-    margin:0 auto 8px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:white;
-    border-radius:50%;
-    font-weight:900;
-    color:var(--green);
-}
-
-.level-box small{
-    display:block;
-    color:var(--muted);
-    font-size:10px;
-    margin-top:4px;
-}
-
-.smart-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.smart-card{
-    min-height:180px;
-}
-
-.smart-icon{
-    font-size:35px;
-    margin-bottom:10px;
-}
-
-.smart-result{
-    margin-top:15px;
-    padding:14px;
-    border-radius:14px;
-    background:var(--mint);
-    line-height:1.6;
-    font-size:13px;
-}
-
-.commodity-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:17px;
-}
-
-.commodity-card{
-    background:white;
-    border-radius:20px;
-    border:1px solid #e5eee8;
-    overflow:hidden;
-    box-shadow:0 8px 25px rgba(25,135,84,.08);
-    transition:.25s;
-}
-
-.commodity-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 14px 30px rgba(25,135,84,.14);
-}
-
-.commodity-image{
-    height:145px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:75px;
-    background:
-        radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),transparent 35%),
-        linear-gradient(135deg,#e4f8e9,#f5fcf7);
-    position:relative;
-}
-
-.commodity-image::after{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    background:rgba(25,135,84,.06);
-}
-
-.commodity-emoji{
-    position:relative;
-    z-index:2;
-    filter:drop-shadow(0 7px 7px rgba(0,0,0,.08));
-}
-
-.commodity-info{
-    padding:17px;
-}
-
-.commodity-info h3{
-    font-size:16px;
-    margin-bottom:6px;
-}
-
-.commodity-price{
-    font-size:22px;
-    color:var(--green-dark);
-    font-weight:900;
-    margin:8px 0;
-}
-
-.commodity-unit{
-    font-size:11px;
-    color:var(--muted);
-}
-
-.status{
-    display:inline-block;
-    margin-top:10px;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:10px;
-    font-weight:800;
-    background:#e8f7ed;
-    color:var(--green);
-}
-
-.price-note{
-    margin-top:18px;
-    padding:13px 15px;
-    border-radius:14px;
-    background:#f5faf7;
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.6;
-}
-
-.fertilizer-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:17px;
-}
-
-.fertilizer-card{
-    background:white;
-    border:1px solid #e5eee8;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 8px 25px rgba(25,135,84,.08);
-    transition:.25s;
-}
-
-.fertilizer-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 14px 30px rgba(25,135,84,.14);
-}
-
-.fertilizer-image{
-    height:145px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#eaf8ee,#f9fcfa);
-    position:relative;
-}
-
-.fertilizer-bag{
-    width:95px;
-    height:105px;
-    border-radius:12px 12px 16px 16px;
-    background:white;
-    border:3px solid #d8e9dd;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:4px;
-    box-shadow:0 8px 15px rgba(0,0,0,.08);
-    position:relative;
-    z-index:2;
-}
-
-.fertilizer-bag .bag-icon{
-    font-size:37px;
-}
-
-.fertilizer-bag b{
-    font-size:13px;
-    color:var(--green-dark);
-}
-
-.fertilizer-info{
-    padding:17px;
-}
-
-.fertilizer-info h3{
-    font-size:16px;
-    margin-bottom:7px;
-}
-
-.fertilizer-price{
-    font-size:21px;
-    color:#a2760e;
-    font-weight:900;
-    margin:9px 0;
-}
-
-.fertilizer-info p{
-    color:var(--muted);
-    font-size:12px;
-    line-height:1.5;
-}
-
-.het-badge{
-    display:inline-block;
-    margin-top:10px;
-    padding:5px 10px;
-    border-radius:20px;
-    background:#fff3d1;
-    color:#92700e;
-    font-size:10px;
-    font-weight:800;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
-    display:block;
-    margin-bottom:7px;
-    font-weight:700;
-    font-size:13px;
-}
-
-input,
-select{
-    width:100%;
-    padding:13px 14px;
-    border:1px solid #dce9e0;
-    border-radius:13px;
-    outline:none;
-    background:white;
-    color:var(--text);
-}
-
-input:focus,
-select:focus{
-    border-color:var(--green);
-    box-shadow:0 0 0 3px rgba(25,135,84,.1);
-}
-
-.btn{
-    border:0;
-    padding:12px 17px;
-    border-radius:13px;
-    font-weight:800;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-green{
-    background:var(--green);
-    color:white;
-}
-
-.btn-light{
-    background:var(--green-light);
-    color:var(--green-dark);
-}
-
-.btn-gold{
-    background:#fff1c7;
-    color:#936c0d;
-}
-
-.btn-reset{
-    background:#ffe5e5;
-    color:#b83232;
-}
-
-.btn-reset:hover{
-    background:#ffd2d2;
-}
-
-.waste-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:20px;
-}
-
-.waste-option{
-    border:2px solid #e5eee8;
-    padding:15px;
-    border-radius:15px;
-    background:white;
-    transition:.2s;
-    text-align:left;
-}
-
-.waste-option:hover,
-.waste-option.selected{
-    border-color:var(--green);
-    background:var(--green-light);
-}
-
-.waste-option span{
-    font-size:24px;
-    display:block;
-    margin-bottom:7px;
-}
-
-.preview{
-    padding:18px;
-    border-radius:17px;
-    background:#f5faf7;
-    margin-top:10px;
-}
-
-.reward-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:17px;
-}
-
-.reward-card{
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-}
-
-.reward-image{
-    height:130px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--green-light);
-    border-radius:17px;
-    font-size:60px;
-    margin-bottom:15px;
-}
-
-.reward-card h3{
-    margin-bottom:7px;
-}
-
-.reward-card p{
-    font-size:12px;
-    color:var(--muted);
-    line-height:1.5;
-    min-height:38px;
-}
-
-.cost{
-    margin:13px 0;
-    font-size:18px;
-    color:#a2760e;
-    font-weight:900;
-}
-
-.camera-box{
-    background:#17251e;
-    border-radius:20px;
-    padding:15px;
-    text-align:center;
-}
-
-video,
-canvas{
-    width:100%;
-    max-height:450px;
-    object-fit:cover;
-    border-radius:14px;
-    background:#0d1611;
-}
-
-.camera-controls{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:13px;
-    flex-wrap:wrap;
-}
-
-.analysis{
-    margin-top:18px;
-    padding:18px;
-    border-radius:17px;
-    background:var(--mint);
-    line-height:1.7;
-}
-
-.harvest-result{
-    margin-top:20px;
-    padding:20px;
-    border-radius:18px;
-    background:var(--green-light);
-    display:none;
-}
-
-.harvest-result.show{
-    display:block;
-}
-
-.days{
-    font-size:38px;
-    font-weight:900;
-    color:var(--green-dark);
-}
-
-.ai-chat{
-    min-height:450px;
-    display:flex;
-    flex-direction:column;
-}
-
-.chat-messages{
-    flex:1;
-    max-height:450px;
-    overflow-y:auto;
-    padding:5px;
-}
-
-.message{
-    display:flex;
-    margin-bottom:13px;
-}
-
-.message.user{
-    justify-content:flex-end;
-}
-
-.bubble{
-    max-width:80%;
-    padding:12px 15px;
-    border-radius:16px;
-    line-height:1.6;
-    font-size:13px;
-}
-
-.message.ai .bubble{
-    background:#eef8f1;
-    border-bottom-left-radius:4px;
-}
-
-.message.user .bubble{
-    background:var(--green);
-    color:white;
-    border-bottom-right-radius:4px;
-}
-
-.chat-input{
-    display:flex;
-    gap:8px;
-    margin-top:15px;
-}
-
-.chat-input input{
-    flex:1;
-}
-
-.history-summary{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    margin-bottom:18px;
-}
-
-.history-stat{
-    background:var(--mint);
-    border:1px solid #d9efe1;
-    border-radius:18px;
-    padding:18px;
-}
-
-.history-stat-icon{
-    font-size:27px;
-    margin-bottom:7px;
-}
-
-.history-stat-value{
-    font-size:23px;
-    font-weight:900;
-    color:var(--green-dark);
-}
-
-.history-stat-label{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
-}
-
-.history-list{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.history-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    padding:17px;
-    border:1px solid #e4eee7;
-    border-radius:17px;
-    background:white;
-    transition:.2s;
-}
-
-.history-item:hover{
-    border-color:#bde1ca;
-    transform:translateY(-2px);
-}
-
-.history-left{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    min-width:0;
-}
-
-.history-icon{
-    width:52px;
-    height:52px;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:27px;
-    flex-shrink:0;
-}
-
-.history-icon.deposit{
-    background:#e1f7e9;
-}
-
-.history-icon.reward{
-    background:#fff3d0;
-}
-
-.history-info{
-    min-width:0;
-}
-
-.history-info h3{
-    font-size:14px;
-    margin-bottom:5px;
-}
-
-.history-info p{
-    font-size:12px;
-    color:var(--muted);
-    line-height:1.5;
-}
-
-.history-right{
-    text-align:right;
-    flex-shrink:0;
-}
-
-.history-coins{
-    font-size:15px;
-    font-weight:900;
-}
-
-.history-coins.plus{
-    color:var(--green);
-}
-
-.history-coins.minus{
-    color:#d36c3c;
-}
-
-.history-date{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:5px;
-}
-
-.history-empty{
-    text-align:center;
-    padding:45px 20px;
-    color:var(--muted);
-}
-
-.history-empty-icon{
-    font-size:55px;
-    margin-bottom:12px;
-}
-
-.history-actions{
-    display:flex;
-    justify-content:flex-end;
-    gap:10px;
-    margin-top:17px;
-    flex-wrap:wrap;
-}
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(9,25,17,.6);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:3000;
-    padding:20px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-content{
-    width:min(430px,100%);
-    background:white;
-    border-radius:24px;
-    padding:25px;
-    text-align:center;
-    animation:pop .25s ease;
-}
-
-@keyframes pop{
-    from{
-        transform:scale(.85);
-        opacity:0;
+    :root {
+      --green: #168a4a;
+      --dark-green: #075b30;
+      --light-green: #e9f8ef;
+      --yellow: #f4b400;
+      --red: #e74c3c;
+      --blue: #168de2;
+      --purple: #7957d5;
+      --dark: #173124;
+      --gray: #66756c;
+      --light: #f5f8f6;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
     }
 
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
-
-.modal-icon{
-    font-size:55px;
-    margin-bottom:10px;
-}
-
-.confetti{
-    position:fixed;
-    width:8px;
-    height:14px;
-    top:-20px;
-    z-index:10000;
-    animation:fall 2.5s linear forwards;
-    border-radius:2px;
-}
-
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(720deg);
-        opacity:0;
-    }
-}
-
-.surprise-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(8,45,25,.65);
-    backdrop-filter:blur(8px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    opacity:0;
-    visibility:hidden;
-    transition:.3s ease;
-    padding:20px;
-}
-
-.surprise-overlay.show{
-    opacity:1;
-    visibility:visible;
-}
-
-.surprise-box{
-    width:min(430px,100%);
-    background:linear-gradient(145deg,#ffffff,#effcf4);
-    border-radius:30px;
-    padding:32px 25px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-    box-shadow:
-        0 25px 80px rgba(0,0,0,.30),
-        0 0 0 1px rgba(255,255,255,.5);
-    transform:scale(.65) rotate(-4deg);
-    transition:.5s cubic-bezier(.2,1.5,.4,1);
-}
-
-.surprise-overlay.show .surprise-box{
-    transform:scale(1) rotate(0);
-}
-
-.surprise-box::before{
-    content:"";
-    position:absolute;
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    background:rgba(25,135,84,.08);
-    top:-80px;
-    left:-70px;
-}
-
-.surprise-box::after{
-    content:"";
-    position:absolute;
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    background:rgba(245,185,66,.10);
-    bottom:-80px;
-    right:-60px;
-}
-
-.surprise-icon{
-    width:100px;
-    height:100px;
-    margin:0 auto 13px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(145deg,#dff7e8,#ffffff);
-    font-size:62px;
-    position:relative;
-    z-index:2;
-    box-shadow:0 12px 30px rgba(25,135,84,.15);
-    animation:surpriseBounce .8s ease-in-out infinite alternate;
-}
-
-@keyframes surpriseBounce{
-    from{
-        transform:translateY(0) rotate(-5deg);
+    html {
+      scroll-behavior: smooth;
     }
 
-    to{
-        transform:translateY(-9px) rotate(5deg);
-    }
-}
-
-.surprise-tag{
-    display:inline-block;
-    background:#fff1c7;
-    color:#98700d;
-    padding:6px 13px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:1px;
-    margin-bottom:10px;
-    position:relative;
-    z-index:2;
-}
-
-.surprise-box h2{
-    color:var(--green-dark);
-    font-size:25px;
-    margin-bottom:9px;
-    position:relative;
-    z-index:2;
-}
-
-.surprise-message{
-    color:var(--muted);
-    line-height:1.6;
-    font-size:13px;
-    position:relative;
-    z-index:2;
-}
-
-.surprise-value{
-    margin:18px 0;
-    padding:15px;
-    border-radius:18px;
-    background:var(--green-light);
-    color:var(--green-dark);
-    font-size:20px;
-    font-weight:900;
-    position:relative;
-    z-index:2;
-    animation:valuePop .6s ease .2s both;
-}
-
-.surprise-value small{
-    display:block;
-    margin-top:5px;
-    font-size:13px;
-    color:var(--green);
-}
-
-@keyframes valuePop{
-    from{
-        transform:scale(.5);
-        opacity:0;
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
     }
 
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
-
-.surprise-close{
-    position:relative;
-    z-index:3;
-    min-width:150px;
-}
-
-.surprise-spark{
-    position:absolute;
-    font-size:22px;
-    pointer-events:none;
-    z-index:1;
-    animation:sparkFloat 2s ease-out forwards;
-}
-
-@keyframes sparkFloat{
-    0%{
-        transform:translateY(20px) scale(.4) rotate(0);
-        opacity:0;
+    button {
+      font: inherit;
     }
 
-    20%{
-        opacity:1;
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e4ebe6;
     }
 
-    100%{
-        transform:translateY(-190px) scale(1.3) rotate(220deg);
-        opacity:0;
-    }
-}
-
-.surprise-close:active{
-    transform:scale(.95);
-}
-
-.footer{
-    text-align:center;
-    padding:25px;
-    color:#7c8c83;
-    font-size:12px;
-}
-
-.empty{
-    text-align:center;
-    padding:35px;
-    color:var(--muted);
-}
-
-
-/* GRAFIK PENJUALAN TANAMAN BERDASARKAN MUSIM & WILAYAH */
-.sales-chart-card{
-    margin-top:22px;
-    overflow:hidden;
-}
-
-.sales-chart-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-    margin-bottom:18px;
-}
-
-.sales-chart-head h3{
-    font-size:18px;
-    margin-bottom:5px;
-}
-
-.sales-chart-head p{
-    color:var(--muted);
-    font-size:12px;
-    line-height:1.6;
-}
-
-.sales-total{
-    background:var(--green-light);
-    color:var(--green-dark);
-    padding:10px 14px;
-    border-radius:14px;
-    font-weight:900;
-    font-size:14px;
-    white-space:nowrap;
-}
-
-.sales-filters{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-bottom:18px;
-}
-
-.sales-filter label{
-    display:block;
-    margin-bottom:6px;
-    font-size:11px;
-    font-weight:800;
-    color:var(--muted);
-}
-
-.sales-filter select{
-    padding:11px 12px;
-    border-radius:12px;
-    font-size:12px;
-}
-
-.sales-chart{
-    min-height:280px;
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-around;
-    gap:14px;
-    padding:20px 12px 0;
-    border-bottom:2px solid #dfece4;
-    background:
-        linear-gradient(to top,rgba(25,135,84,.035) 1px,transparent 1px);
-    background-size:100% 52px;
-}
-
-.sales-season{
-    height:100%;
-    flex:1;
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    align-items:center;
-    gap:8px;
-}
-
-.sales-value{
-    font-size:11px;
-    font-weight:800;
-    color:var(--green-dark);
-    text-align:center;
-}
-
-.sales-bar-wrap{
-    width:100%;
-    height:190px;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-}
-
-.sales-bar{
-    width:min(58px,72%);
-    min-height:8px;
-    background:linear-gradient(180deg,#49b878,#198754);
-    border-radius:10px 10px 3px 3px;
-    box-shadow:0 7px 16px rgba(25,135,84,.16);
-    transition:.3s ease;
-}
-
-.sales-season:hover .sales-bar{
-    transform:translateY(-5px);
-    filter:brightness(1.05);
-}
-
-.sales-label{
-    font-size:11px;
-    color:var(--muted);
-    font-weight:700;
-    text-align:center;
-}
-
-.sales-caption{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    margin-top:14px;
-    font-size:11px;
-    color:var(--muted);
-    line-height:1.5;
-}
-
-.sales-caption strong{
-    color:var(--green);
-}
-
-.sales-region-summary{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:16px;
-}
-
-.region-mini{
-    background:#f5faf7;
-    border:1px solid #e0eee5;
-    border-radius:13px;
-    padding:11px;
-}
-
-.region-mini b{
-    display:block;
-    font-size:11px;
-    margin-bottom:4px;
-}
-
-.region-mini span{
-    font-size:12px;
-    color:var(--green-dark);
-    font-weight:900;
-}
-
-@media(max-width:650px){
-    .sales-filters{
-        grid-template-columns:1fr;
+    .nav-container {
+      max-width: 1150px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .sales-chart{
-        min-height:245px;
-        gap:6px;
-        padding-left:3px;
-        padding-right:3px;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark-green);
     }
 
-    .sales-bar-wrap{
-        height:155px;
+    .logo span {
+      font-size: 30px;
     }
 
-    .sales-bar{
-        width:32px;
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
     }
 
-    .sales-total{
-        font-size:12px;
-        padding:8px 10px;
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
     }
 
-    .sales-chart-head{
-        flex-direction:column;
+    .nav-links a:hover {
+      color: var(--green);
     }
 
-    .sales-region-summary{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:950px){
-
-    .nav-menu{
-        overflow-x:auto;
-        justify-content:flex-start;
-        padding-bottom:2px;
+    /* HERO */
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(7,91,48,.96), rgba(22,138,74,.90)),
+        radial-gradient(circle at top right, #64d28e, transparent 40%);
+      color: white;
+      padding: 75px 20px;
     }
 
-    .navbar{
-        flex-direction:column;
-        align-items:stretch;
+    .hero-container {
+      max-width: 1150px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 45px;
+      align-items: center;
     }
 
-    .logo{
-        justify-content:center;
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1;
+      margin-bottom: 20px;
     }
 
-    .profile-grid,
-    .smart-grid{
-        grid-template-columns:1fr;
+    .hero h1 span {
+      color: #8ff0b4;
     }
 
-    .stats{
-        grid-template-columns:repeat(2,1fr);
+    .hero p {
+      font-size: 18px;
+      max-width: 650px;
+      opacity: .94;
+      margin-bottom: 28px;
     }
 
-    .missions{
-        grid-template-columns:1fr 1fr;
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .reward-grid,
-    .commodity-grid,
-    .fertilizer-grid{
-        grid-template-columns:1fr 1fr;
-    }
-}
-
-
-/* E-VOUCHER DARI RIWAYAT PENUKARAN */
-.history-item.reward-clickable{
-    cursor:pointer;
-}
-.history-item.reward-clickable:hover{
-    border-color:var(--green);
-    box-shadow:0 10px 28px rgba(25,135,84,.12);
-}
-.history-voucher-hint{
-    display:inline-block;
-    margin-top:7px;
-    padding:5px 9px;
-    border-radius:10px;
-    background:var(--green-light);
-    color:var(--green-dark);
-    font-size:10px;
-    font-weight:800;
-}
-.voucher-modal{
-    position:fixed;
-    inset:0;
-    background:rgba(9,25,17,.68);
-    backdrop-filter:blur(6px);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:5000;
-    padding:18px;
-}
-.voucher-modal.show{display:flex;}
-.voucher-card{
-    width:min(470px,100%);
-    background:white;
-    border-radius:26px;
-    overflow:hidden;
-    box-shadow:0 25px 80px rgba(0,0,0,.28);
-    animation:pop .25s ease;
-}
-.voucher-head{
-    position:relative;
-    padding:22px 24px;
-    color:white;
-    background:linear-gradient(135deg,#198754,#11643d);
-    text-align:center;
-}
-.voucher-head .voucher-logo{font-size:34px;margin-bottom:5px;}
-.voucher-head h2{font-size:22px;margin-bottom:4px;}
-.voucher-head p{font-size:11px;opacity:.9;}
-.voucher-close{
-    position:absolute;
-    top:10px;
-    right:10px;
-    width:34px;
-    height:34px;
-    border:0;
-    border-radius:50%;
-    background:rgba(255,255,255,.18);
-    color:white;
-    font-size:20px;
-    cursor:pointer;
-}
-.voucher-body{padding:24px;}
-.voucher-reward{
-    text-align:center;
-    padding:18px;
-    border:2px dashed #bfe4ca;
-    border-radius:18px;
-    background:#f7fcf8;
-}
-.voucher-reward .voucher-icon{font-size:48px;margin-bottom:7px;}
-.voucher-reward h3{color:var(--green-dark);font-size:20px;margin-bottom:5px;}
-.voucher-reward p{color:var(--muted);font-size:12px;}
-.voucher-code-box{
-    margin:18px 0;
-    padding:15px;
-    border-radius:15px;
-    background:#fff7dc;
-    border:1px solid #f0d98c;
-    text-align:center;
-}
-.voucher-code-label{color:#8c6b12;font-size:10px;font-weight:800;letter-spacing:1px;}
-.voucher-code{margin-top:5px;font-size:24px;letter-spacing:3px;font-weight:900;color:#70540b;}
-.voucher-details{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:18px;
-}
-.voucher-detail{padding:11px;border-radius:13px;background:#f5faf7;}
-.voucher-detail span{display:block;color:var(--muted);font-size:10px;margin-bottom:4px;}
-.voucher-detail b{font-size:12px;color:var(--text);}
-.voucher-validity{background:#fff8e8;border:1px solid #f0d98c;}
-.voucher-validity b{color:#9a7410;}
-.voucher-actions{display:flex;gap:9px;flex-wrap:wrap;}
-.voucher-actions .btn{flex:1;min-width:130px;}
-.voucher-note{margin-top:14px;text-align:center;color:var(--muted);font-size:10px;line-height:1.5;}
-@media(max-width:650px){
-    .voucher-details{grid-template-columns:1fr;}
-}
-
-@media(max-width:650px){
-
-    .page{
-        padding:15px 12px 40px;
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 20px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .2s;
     }
 
-    .hero{
-        padding:27px 22px;
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
-    .hero h1{
-        font-size:27px;
+    .btn-primary {
+      background: white;
+      color: var(--dark-green);
     }
 
-    .stats,
-    .missions,
-    .reward-grid,
-    .form-grid,
-    .waste-grid,
-    .commodity-grid,
-    .fertilizer-grid,
-    .history-summary{
-        grid-template-columns:1fr;
+    .btn-secondary {
+      background: rgba(255,255,255,.14);
+      color: white;
+      border: 1px solid rgba(255,255,255,.4);
     }
 
-    .journey{
-        grid-template-columns:repeat(2,1fr);
+    .hero-card {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 25px;
+      padding: 28px;
+      backdrop-filter: blur(10px);
     }
 
-    .coin-value{
-        font-size:27px;
+    .hero-card .big-icon {
+      font-size: 70px;
+      margin-bottom: 10px;
     }
 
-    .section-title{
-        align-items:flex-start;
-        flex-direction:column;
+    /* GENERAL */
+    section {
+      padding: 65px 20px;
     }
 
-    .history-item{
-        align-items:flex-start;
+    .container {
+      max-width: 1150px;
+      margin: auto;
     }
 
-    .history-right{
-        text-align:left;
+    .section-title {
+      text-align: center;
+      margin-bottom: 38px;
     }
 
-    .history-left{
-        align-items:flex-start;
+    .section-title h2 {
+      font-size: 34px;
+      margin-bottom: 8px;
     }
 
-    .history-actions{
-        justify-content:stretch;
+    .section-title p {
+      color: var(--gray);
     }
 
-    .history-actions .btn{
-        width:100%;
+    /* STATUS */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
-    .surprise-box{
-        padding:27px 20px;
+    .status-card {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border-left: 6px solid var(--yellow);
     }
 
-    .surprise-icon{
-        width:85px;
-        height:85px;
-        font-size:52px;
+    .status-card.safe {
+      border-left-color: var(--green);
     }
 
-    .surprise-box h2{
-        font-size:22px;
+    .status-card.danger {
+      border-left-color: var(--red);
     }
 
-}
+    .status-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
 
-</style>
-<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+    .status-icon {
+      font-size: 35px;
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #fff3cd;
+      color: #946c00;
+    }
+
+    .badge.safe {
+      background: #dff6e7;
+      color: #11723c;
+    }
+
+    .badge.danger {
+      background: #fde4e1;
+      color: #a82c20;
+    }
+
+    /* BENCANA */
+    .disaster-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .disaster-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: .2s;
+    }
+
+    .disaster-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .disaster-icon {
+      width: 65px;
+      height: 65px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 35px;
+      margin-bottom: 18px;
+    }
+
+    .dry {
+      background: #fff1cc;
+    }
+
+    .flood {
+      background: #dcefff;
+    }
+
+    .landslide {
+      background: #eee6dc;
+    }
+
+    .disaster-card h3 {
+      margin-bottom: 8px;
+      font-size: 23px;
+    }
+
+    .disaster-card p {
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+
+    .learn-btn {
+      width: 100%;
+      background: var(--light-green);
+      color: var(--dark-green);
+    }
+
+    /* GUIDANCE */
+    #guidance {
+      background: #edf7f0;
+    }
+
+    .guidance-box {
+      background: white;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .guidance-header {
+      padding: 25px;
+      background: var(--dark-green);
+      color: white;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 20px;
+      border-bottom: 1px solid #e6ece8;
+    }
+
+    .tab {
+      border: none;
+      background: #edf3ef;
+      color: var(--dark);
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .tab.active {
+      background: var(--green);
+      color: white;
+    }
+
+    .guidance-content {
+      padding: 28px;
+    }
+
+    .guidance-content ul {
+      padding-left: 22px;
+    }
+
+    .guidance-content li {
+      margin: 10px 0;
+    }
+
+    /* IRIGASI */
+    .irrigation {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      align-items: stretch;
+    }
+
+    .irrigation-card {
+      background: white;
+      padding: 30px;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .meter {
+      height: 25px;
+      background: #e5ebe7;
+      border-radius: 50px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 42%;
+      background: linear-gradient(90deg, #1c9c59, #6dd894);
+      transition: width .4s;
+    }
+
+    .irrigation-status {
+      padding: 15px;
+      border-radius: 12px;
+      background: var(--light-green);
+      color: var(--dark-green);
+      margin: 15px 0;
+      font-weight: 700;
+    }
+
+    .pump {
+      text-align: center;
+      font-size: 65px;
+      margin: 15px;
+      filter: grayscale(1);
+      transition: .3s;
+    }
+
+    .pump.on {
+      filter: none;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+
+    .range {
+      width: 100%;
+      accent-color: var(--green);
+    }
+
+    /* ALERT */
+    .alert-box {
+      background: linear-gradient(135deg, #fff8e1, #fff);
+      border: 1px solid #f2d27a;
+      padding: 25px;
+      border-radius: 20px;
+      margin-top: 25px;
+    }
+
+    .alert-box h3 {
+      margin-bottom: 8px;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .check-card {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .check-card h3 {
+      margin-bottom: 15px;
+    }
+
+    .check-card label {
+      display: block;
+      padding: 9px 0;
+      cursor: pointer;
+    }
+
+    .check-card input {
+      accent-color: var(--green);
+      margin-right: 8px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #082c1b;
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+    }
+
+    footer p {
+      opacity: .8;
+      margin-top: 8px;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      z-index: 2000;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 22px;
+      padding: 30px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      border: none;
+      background: #f0f3f1;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      .hero-container,
+      .irrigation {
+        grid-template-columns: 1fr;
+      }
+
+      .status-grid,
+      .disaster-grid,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 45px 15px;
+      }
+
+      .hero {
+        padding: 55px 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="header">
-
-<nav class="navbar">
-
-<div class="logo">
-
-<div class="logo-icon">
-🌱
-</div>
-
-<span>
-Smart Farming Technology
-</span>
-
-</div>
-
-<div class="nav-menu">
-
-<button class="nav-btn active"
-onclick="showPage('dashboard',this)">
-🏠 Dashboard
-</button>
-
-<button class="nav-btn"
-onclick="showPage('commodity',this)">
-📈 Harga Komoditas
-</button>
-
-<button class="nav-btn"
-onclick="showPage('fertilizer',this)">
-🌱 Harga Pupuk
-</button>
-
-<button class="nav-btn"
-onclick="showPage('sales',this)">
-📈 Grafik Penjualan
-</button>
-
-<button class="nav-btn"
-onclick="showPage('deposit',this)">
-♻️ Setor Limbah
-</button>
-
-<button class="nav-btn"
-onclick="showPage('reward',this)">
-🎁 Reward
-</button>
-
-<button class="nav-btn"
-onclick="showPage('history',this)">
-📋 Riwayat
-</button>
-
-<button class="nav-btn"
-onclick="showPage('camera',this)">
-📷 Kamera Tanaman
-</button>
-
-<button class="nav-btn"
-onclick="showPage('harvest',this)">
-🌾 Prediksi Panen
-</button>
-
-<button class="nav-btn"
-onclick="showPage('irrigation',this)">
-💧 Irigasi Pintar
-</button>
-
-<button class="nav-btn"
-onclick="showPage('ai',this)">
-🤖 EcoAI
-</button>
-
-</div>
-
-</nav>
-
-</header>
-
-<section id="dashboard" class="page active">
-
-<div class="hero">
-
-<div class="leaf one">🌿</div>
-<div class="leaf two">🍃</div>
-<div class="leaf three">🌱</div>
-
-<div class="hero-content">
-
-<h1>
-Smart Farming Technology 🌱
-</h1>
-
-<p>
-Platform pertanian pintar yang membantu petani mengelola limbah,
-mendapatkan Eco Coin, memantau tanaman, memprediksi panen,
-dan mendapatkan informasi pertanian.
-</p>
-
-</div>
-
-</div>
-
-<div class="profile-grid">
-
-<div class="card profile-card">
-
-<div class="avatar">👨‍🌾</div>
-
-<div class="profile-info">
-
-<h3 id="usernameDisplay">
-Petani Smart
-</h3>
-
-<div class="level" id="levelDisplay">
-Level 1 • Pemula
-</div>
-
-<div class="xp-bar">
-
-<div class="xp-fill"
-id="xpFill"
-style="width:0%">
-</div>
-
-</div>
-
-<small id="xpText">
-0 / 100 XP
-</small>
-
-</div>
-
-</div>
-
-<div class="card coin-card">
-
-<div>
-
-<div class="coin-label">
-COIN
-</div>
-
-<div class="coin-value"
-id="coinDisplay">
-0
-</div>
-
-<small>
-Gunakan Eco Coin untuk menukar reward
-</small>
-
-</div>
-
-<div class="coin-icon">
-🪙
-</div>
-
-</div>
-
-</div>
-
-<div class="section-title">
-<h2>📊 Statistik Anda</h2>
-<span>Data tersimpan otomatis</span>
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<div class="stat-icon">♻️</div>
-<div class="stat-value" id="wasteDisplay">0</div>
-<div class="stat-label">Kg Limbah Disetor</div>
-</div>
-
-<div class="stat">
-<div class="stat-icon">🪙</div>
-<div class="stat-value" id="coinStat">0</div>
-<div class="stat-label">Eco Coin</div>
-</div>
-
-<div class="stat">
-<div class="stat-icon">🎁</div>
-<div class="stat-value" id="exchangeDisplay">0</div>
-<div class="stat-label">Reward Ditukar</div>
-</div>
-
-<div class="stat">
-<div class="stat-icon">🏆</div>
-<div class="stat-value" id="achievementDisplay">0</div>
-<div class="stat-label">Pencapaian</div>
-</div>
-
-</div>
-
-
-<div class="section-title">
-<h2>🎯 Misi Harian</h2>
-<span>Dapatkan XP tambahan</span>
-</div>
-
-<div class="missions">
-
-<div class="card mission">
-
-<div class="mission-top">
-<div class="mission-icon">♻️</div>
-<div class="badge">+20 XP</div>
-</div>
-
-<h3>Setor Limbah</h3>
-
-<p>
-Setorkan minimal 1 kg limbah organik.
-</p>
-
-<div class="progress">
-<div id="missionWaste" style="width:0%"></div>
-</div>
-
-</div>
-
-<div class="card mission">
-
-<div class="mission-top">
-<div class="mission-icon">📷</div>
-<div class="badge">+15 XP</div>
-</div>
-
-<h3>Cek Tanaman</h3>
-
-<p>
-Gunakan kamera tanaman untuk melakukan pengecekan.
-</p>
-
-<div class="progress">
-<div id="missionCamera" style="width:0%"></div>
-</div>
-
-</div>
-
-<div class="card mission">
-
-<div class="mission-top">
-<div class="mission-icon">🤖</div>
-<div class="badge">+15 XP</div>
-</div>
-
-<h3>Tanya EcoAI</h3>
-
-<p>
-Tanyakan sesuatu tentang tanaman atau pertanian.
-</p>
-
-<div class="progress">
-<div id="missionAI" style="width:0%"></div>
-</div>
-
-</div>
-
-</div>
-
-<div class="section-title">
-<h2>🌱 Perjalanan Level</h2>
-</div>
-
-<div class="journey">
-
-<div class="level-box current" id="lvl1">
-<div class="num">1</div>
-<b>Pemula</b>
-<small>0 XP</small>
-</div>
-
-<div class="level-box" id="lvl2">
-<div class="num">2</div>
-<b>Petani Muda</b>
-<small>100 XP</small>
-</div>
-
-<div class="level-box" id="lvl3">
-<div class="num">3</div>
-<b>Petani Aktif</b>
-<small>250 XP</small>
-</div>
-
-<div class="level-box" id="lvl4">
-<div class="num">4</div>
-<b>Petani Hebat</b>
-<small>500 XP</small>
-</div>
-
-<div class="level-box" id="lvl5">
-<div class="num">5</div>
-<b>Master Farming</b>
-<small>1000 XP</small>
-</div>
-
-</div>
-
-<div class="section-title">
-<h2>🧠 Fitur Pintar</h2>
-</div>
-
-<div class="smart-grid">
-
-<div class="card smart-card">
-
-<div class="smart-icon">🌾</div>
-
-<h3>Prediksi Panen</h3>
-
-<p style="color:var(--muted);margin-top:7px">
-Hitung perkiraan waktu panen berdasarkan jenis tanaman
-dan kondisi pertumbuhannya.
-</p>
-
-<button class="btn btn-green"
-style="margin-top:15px"
-onclick="showPage('harvest')">
-Buka Prediksi
-</button>
-
-</div>
-
-<div class="card smart-card">
-
-<div class="smart-icon">💧</div>
-
-<h3>Irigasi Pintar</h3>
-
-<p style="color:var(--muted);margin-top:7px">
-Dapatkan rekomendasi penyiraman berdasarkan kelembapan tanah,
-suhu, cuaca, dan fase pertumbuhan.
-</p>
-
-<button class="btn btn-green"
-style="margin-top:15px"
-onclick="showPage('irrigation')">
-Cek Irigasi
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<section id="commodity" class="page">
-
-<div class="section-title">
-<h2>📈 Harga Komoditas Pertanian</h2>
-<span>Contoh harga produsen</span>
-</div>
-
-<div class="commodity-grid">
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🌾</span>
-</div>
-<div class="commodity-info">
-<h3>Padi / Gabah</h3>
-<div class="commodity-price">Rp6.500</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">✓ Stabil</span>
-</div>
-</div>
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🌽</span>
-</div>
-<div class="commodity-info">
-<h3>Jagung</h3>
-<div class="commodity-price">Rp5.500</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">✓ Stabil</span>
-</div>
-</div>
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🫘</span>
-</div>
-<div class="commodity-info">
-<h3>Kedelai</h3>
-<div class="commodity-price">Rp10.000</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">✓ Normal</span>
-</div>
-</div>
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🌶️</span>
-</div>
-<div class="commodity-info">
-<h3>Cabai Merah</h3>
-<div class="commodity-price">Rp35.000</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">↕ Naik Turun</span>
-</div>
-</div>
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🧅</span>
-</div>
-<div class="commodity-info">
-<h3>Bawang Merah</h3>
-<div class="commodity-price">Rp28.000</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">↕ Naik Turun</span>
-</div>
-</div>
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🍅</span>
-</div>
-<div class="commodity-info">
-<h3>Tomat</h3>
-<div class="commodity-price">Rp7.000</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">✓ Normal</span>
-</div>
-</div>
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🥔</span>
-</div>
-<div class="commodity-info">
-<h3>Kentang</h3>
-<div class="commodity-price">Rp15.000</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">✓ Normal</span>
-</div>
-</div>
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🥒</span>
-</div>
-<div class="commodity-info">
-<h3>Mentimun</h3>
-<div class="commodity-price">Rp6.000</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">✓ Normal</span>
-</div>
-</div>
-
-<div class="commodity-card">
-<div class="commodity-image">
-<span class="commodity-emoji">🍉</span>
-</div>
-<div class="commodity-info">
-<h3>Semangka</h3>
-<div class="commodity-price">Rp7.000</div>
-<div class="commodity-unit">per kg</div>
-<span class="status">✓ Normal</span>
-</div>
-</div>
-
-</div>
-
-<div class="price-note">
-
-💡 <b>Catatan harga:</b>
-Harga di atas merupakan contoh/perkiraan
-untuk tampilan aplikasi. Harga komoditas sebenarnya dapat berbeda
-berdasarkan wilayah, kualitas, musim, pasokan, permintaan,
-dan kondisi pasar.
-
-</div>
-
-</section>
-
-<section id="fertilizer" class="page">
-
-<div class="section-title">
-<h2>🌱 Informasi Harga Pupuk</h2>
-<span>Contoh harga/HET</span>
-</div>
-
-<div class="fertilizer-grid">
-
-<div class="fertilizer-card">
-
-<div class="fertilizer-image">
-
-<div class="fertilizer-bag">
-<div class="bag-icon">🌿</div>
-<b>UREA</b>
-<small>N</small>
-</div>
-
-</div>
-
-<div class="fertilizer-info">
-
-<h3>Pupuk Urea</h3>
-
-<div class="fertilizer-price">
-Rp2.250/kg
-</div>
-
-<p>
-Digunakan sebagai sumber nitrogen
-untuk mendukung pertumbuhan vegetatif tanaman.
-</p>
-
-<span class="het-badge">
-HET Contoh
-</span>
-
-</div>
-
-</div>
-
-<div class="fertilizer-card">
-
-<div class="fertilizer-image">
-
-<div class="fertilizer-bag">
-<div class="bag-icon">🌱</div>
-<b>NPK</b>
-<small>N-P-K</small>
-</div>
-
-</div>
-
-<div class="fertilizer-info">
-
-<h3>Pupuk NPK</h3>
-
-<div class="fertilizer-price">
-Rp2.300/kg
-</div>
-
-<p>
-Menyediakan unsur hara makro nitrogen,
-fosfor, dan kalium bagi tanaman.
-</p>
-
-<span class="het-badge">
-HET Contoh
-</span>
-
-</div>
-
-</div>
-
-<div class="fertilizer-card">
-
-<div class="fertilizer-image">
-
-<div class="fertilizer-bag">
-<div class="bag-icon">🍃</div>
-<b>ORGANIK</b>
-<small>ECO</small>
-</div>
-
-</div>
-
-<div class="fertilizer-info">
-
-<h3>Pupuk Organik</h3>
-
-<div class="fertilizer-price">
-Rp1.000–Rp2.000/kg
-</div>
-
-<p>
-Membantu menambah bahan organik
-dan memperbaiki kondisi tanah.
-</p>
-
-<span class="het-badge">
-Perkiraan
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="price-note">
-
-🌿 <b>Catatan pupuk:</b>
-Harga pupuk dapat berbeda berdasarkan
-jenis, merek, kemasan, wilayah, dan kebijakan harga yang berlaku.
-
-</div>
-
-</section>
-
-<section id="sales" class="page">
-
-<div class="section-title">
-<h2>📈 Grafik Penjualan Tanaman</h2>
-<span>Musim • wilayah • komoditas</span>
-</div>
-
-<div class="card sales-chart-card">
-
-    <div class="sales-chart-head">
-        <div>
-            <h3>Penjualan Tanaman Berdasarkan Musim</h3>
-            <p>
-                Bandingkan jumlah tanaman terjual pada beberapa musim
-                di berbagai wilayah Indonesia. Data yang ditampilkan
-                adalah data contoh/simulasi untuk dashboard.
-            </p>
-        </div>
-
-        <div class="sales-total" id="salesTotal">
-            Total: 0 tanaman
-        </div>
-    </div>
-
-    <div class="sales-filters">
-
-        <div class="sales-filter">
-            <label for="salesPlant">🌱 Pilih tanaman</label>
-            <select id="salesPlant" onchange="updateSalesChart()">
-                <option value="Padi">Padi</option>
-                <option value="Jagung">Jagung</option>
-                <option value="Cabai">Cabai</option>
-                <option value="Kedelai">Kedelai</option>
-                <option value="Bawang Merah">Bawang Merah</option>
-                <option value="Tomat">Tomat</option>
-                <option value="Kentang">Kentang</option>
-                <option value="Mentimun">Mentimun</option>
-                <option value="Semangka">Semangka</option>
-                <option value="Tembakau">Tembakau</option>
-                <option value="Kangkung">Kangkung</option>
-            </select>
-        </div>
-
-        <div class="sales-filter">
-            <label for="salesCitySearch">📍 Cari kota/wilayah</label>
-            <div class="sales-search" style="margin-bottom:10px;">
-                <input
-                    type="text"
-                    id="salesCitySearch"
-                    placeholder="🔎 Ketik nama kota, misalnya Malang..."
-                    oninput="searchSalesCityDirect()"
-                    autocomplete="off"
-                    style="width:100%;padding:10px 12px;border:1px solid #d7e4d8;border-radius:10px;box-sizing:border-box;"
-                >
-            </div>
-            <select id="salesRegion" onchange="updateSalesChart()" style="display:none;">
-        <option value="Semua Kota">Semua Kota</option>
-        <option value="Bangkalan">Bangkalan</option>
-        <option value="Banyuwangi">Banyuwangi</option>
-        <option value="Blitar">Blitar</option>
-        <option value="Bojonegoro">Bojonegoro</option>
-        <option value="Bondowoso">Bondowoso</option>
-        <option value="Gresik">Gresik</option>
-        <option value="Jember">Jember</option>
-        <option value="Jombang">Jombang</option>
-        <option value="Kediri">Kediri</option>
-        <option value="Lamongan">Lamongan</option>
-        <option value="Lumajang">Lumajang</option>
-        <option value="Madiun">Madiun</option>
-        <option value="Magetan">Magetan</option>
-        <option value="Malang">Malang</option>
-        <option value="Mojokerto">Mojokerto</option>
-        <option value="Nganjuk">Nganjuk</option>
-        <option value="Ngawi">Ngawi</option>
-        <option value="Pacitan">Pacitan</option>
-        <option value="Pamekasan">Pamekasan</option>
-        <option value="Pasuruan">Pasuruan</option>
-        <option value="Ponorogo">Ponorogo</option>
-        <option value="Probolinggo">Probolinggo</option>
-        <option value="Sampang">Sampang</option>
-        <option value="Sidoarjo">Sidoarjo</option>
-        <option value="Situbondo">Situbondo</option>
-        <option value="Sumenep">Sumenep</option>
-        <option value="Trenggalek">Trenggalek</option>
-        <option value="Tuban">Tuban</option>
-        <option value="Tulungagung">Tulungagung</option>
-        <option value="Banjarnegara">Banjarnegara</option>
-        <option value="Banyumas">Banyumas</option>
-        <option value="Batang">Batang</option>
-        <option value="Blora">Blora</option>
-        <option value="Boyolali">Boyolali</option>
-        <option value="Brebes">Brebes</option>
-        <option value="Cilacap">Cilacap</option>
-        <option value="Demak">Demak</option>
-        <option value="Grobogan">Grobogan</option>
-        <option value="Jepara">Jepara</option>
-        <option value="Karanganyar">Karanganyar</option>
-        <option value="Kebumen">Kebumen</option>
-        <option value="Kendal">Kendal</option>
-        <option value="Klaten">Klaten</option>
-        <option value="Kudus">Kudus</option>
-        <option value="Magelang">Magelang</option>
-        <option value="Pati">Pati</option>
-        <option value="Pekalongan">Pekalongan</option>
-        <option value="Pemalang">Pemalang</option>
-        <option value="Purbalingga">Purbalingga</option>
-</select>
-        </div>
-
-    </div>
-
-    <div class="sales-chart" id="salesChart"></div>
-
-    <div class="sales-caption">
-        <span id="salesCaption">
-            📊 Menampilkan simulasi penjualan Padi di semua kota.
-        </span>
-        <strong id="salesPrice" style="display:block;margin-top:6px;">Harga: -</strong>
-        <strong id="salesHighest">
-            Musim tertinggi: -
-        </strong>
-    </div>
-
-    <div class="sales-region-summary" id="salesRegionSummary"></div>
-
-</div>
-
-
-</section>
-
-<section id="deposit" class="page">
-
-<div class="section-title">
-<h2>♻️ Setor Limbah Organik</h2>
-<span>Ubah limbah menjadi Eco Coin</span>
-</div>
-
-<div class="card">
-
-<h3 style="margin-bottom:15px">
-Pilih Jenis Limbah
-</h3>
-
-<div class="waste-grid">
-
-<button class="waste-option"
-onclick="selectWaste(this,'Sisa Sayuran')">
-<span>🥬</span>
-Sisa Sayuran
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Kulit Buah')">
-<span>🍊</span>
-Kulit Buah
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Jerami')">
-<span>🌾</span>
-Jerami
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Daun Kering')">
-<span>🍂</span>
-Daun Kering
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Batang Tanaman')">
-<span>🌿</span>
-Batang Tanaman
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Sisa Jagung')">
-<span>🌽</span>
-Sisa Jagung
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Sekam Padi')">
-<span>🌾</span>
-Sekam Padi
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Tongkol Jagung')">
-<span>🌽</span>
-Tongkol Jagung
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Ampas Sayuran')">
-<span>🥕</span>
-Ampas Sayuran
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Limbah Buah')">
-<span>🍎</span>
-Limbah Buah
-</button>
-
-<button class="waste-option"
-onclick="selectWaste(this,'Limbah Organik Lain')">
-<span>♻️</span>
-Limbah Organik Lain
-</button>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Berat Limbah (kg)
-</label>
-
-<input
-id="wasteWeight"
-type="number"
-min="0"
-step="0.1"
-placeholder="Contoh: 2.5"
-oninput="previewWaste">
-
-</div>
-
-<div class="preview">
-
-<b>Preview Setoran</b>
-
-<p
-id="wastePreview"
-style="margin-top:8px;color:var(--muted)">
-Pilih jenis limbah dan masukkan beratnya.
-</p>
-
-</div>
-
-<button
-class="btn btn-green"
-style="margin-top:15px"
-onclick="depositWaste()">
-♻️ Setorkan Limbah
-</button>
-
-</div>
-
-</section>
-
-<section id="reward" class="page">
-
-<div class="section-title">
-
-<h2>
-🎁 Reward Smart Farming Technology
-</h2>
-
-<span id="rewardCoinText">
-Eco Coin: 0
-</span>
-
-</div>
-
-<div class="reward-grid">
-
-<div class="card reward-card">
-
-<div class="reward-image">
-🌱
-</div>
-
-<h3>Pupuk Organik</h3>
-
-<p>
-Pupuk organik untuk membantu memperbaiki kondisi tanah.
-</p>
-
-<div class="cost">
-🪙 100 Coin
-</div>
-
-<button
-class="btn btn-green"
-onclick="exchangeReward('Pupuk Organik',100)">
-Tukar
-</button>
-
-</div>
-
-<div class="card reward-card">
-
-<div class="reward-image">
-🍃
-</div>
-
-<h3>Kompos Organik</h3>
-
-<p>
-Kompos yang dapat dimanfaatkan sebagai bahan pembenah tanah.
-</p>
-
-<div class="cost">
-🪙 250 Coin
-</div>
-
-<button
-class="btn btn-green"
-onclick="exchangeReward('Kompos Organik',250)">
-Tukar
-</button>
-
-</div>
-
-<div class="card reward-card">
-
-<div class="reward-image">
-🌿
-</div>
-
-<h3>Pupuk Organik Premium</h3>
-
-<p>
-Paket pupuk organik dengan nilai penukaran lebih tinggi.
-</p>
-
-<div class="cost">
-🪙 500 Coin
-</div>
-
-<button
-class="btn btn-green"
-onclick="exchangeReward('Pupuk Organik Premium',500)">
-Tukar
-</button>
-
-</div>
-
-<div class="card reward-card">
-
-<div class="reward-image">
-🌱
-</div>
-
-<h3>Paket Pupuk + Kompos</h3>
-
-<p>
-Kombinasi pupuk dan kompos untuk kebutuhan pertanian.
-</p>
-
-<div class="cost">
-🪙 1.000 Coin
-</div>
-
-<button
-class="btn btn-green"
-onclick="exchangeReward('Paket Pupuk + Kompos',1000)">
-Tukar
-</button>
-
-</div>
-
-<div class="card reward-card">
-
-<div class="reward-image">
-🎁
-</div>
-
-<h3>Paket Pupuk Lengkap</h3>
-
-<p>
-Paket reward dengan kebutuhan pertanian yang lebih lengkap.
-</p>
-
-<div class="cost">
-🪙 2.000 Coin
-</div>
-
-<button
-class="btn btn-green"
-onclick="exchangeReward('Paket Pupuk Lengkap',2000)">
-Tukar
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="history" class="page">
-
-<div class="section-title">
-
-<h2>
-📋 Riwayat Aktivitas
-</h2>
-
-<span>
-Setoran limbah & penukaran reward
-</span>
-
-</div>
-
-<div class="history-summary">
-
-<div class="history-stat">
-
-<div class="history-stat-icon">
-♻️
-</div>
-
-<div
-class="history-stat-value"
-id="historyDepositCount">
-0
-</div>
-
-<div class="history-stat-label">
-Total Setoran
-</div>
-
-</div>
-
-<div class="history-stat">
-
-<div class="history-stat-icon">
-🎁
-</div>
-
-<div
-class="history-stat-value"
-id="historyRewardCount">
-0
-</div>
-
-<div class="history-stat-label">
-Reward Ditukar
-</div>
-
-</div>
-
-<div class="history-stat">
-
-<div class="history-stat-icon">
-🪙
-</div>
-
-<div
-class="history-stat-value"
-id="historyCoinTotal">
-0
-</div>
-
-<div class="history-stat-label">
-Total Coin dari Setoran
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div
-id="historyList"
-class="history-list">
-</div>
-
-<div class="history-actions">
-
-<button
-class="btn btn-light"
-onclick="clearHistory()">
-🗑️ Hapus Semua Riwayat
-</button>
-
-<button
-class="btn btn-reset"
-onclick="resetEcoFarming()">
-🔄 Reset Data
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="camera" class="page">
-<div class="section-title">
-<h2>📷 Kamera Pendeteksi</h2>
-<span>Analisis visual tanaman dari kamera atau foto</span>
-</div>
-<div class="card">
-<div class="camera-box">
-<video id="video" autoplay playsinline></video>
-<canvas id="canvas" style="display:none"></canvas>
-<div class="camera-controls">
-<button class="btn btn-green" onclick="startCamera()">📷 Aktifkan Kamera</button>
-<button class="btn btn-light" onclick="capturePlant()">📸 Ambil Gambar</button>
-<button class="btn btn-light" onclick="document.getElementById('plantImageFile').click()">🖼️ Pilih Gambar dari Perangkat</button>
-<button class="btn btn-light" onclick="stopCamera()">⏹️ Matikan Kamera</button>
-<input id="plantImageFile" type="file" accept="*/*" style="display:none" onchange="analyzeUploadedPlant(event)">
-</div>
-<div id="capturedPreview" style="display:none;margin-top:15px;text-align:center;padding:12px;border-radius:14px;background:#f4fbf6;border:1px solid #cfe9d7">
-<div style="font-weight:700;color:#11643d;margin-bottom:10px">🖼️ Gambar yang digunakan</div>
-<img id="capturedImage" alt="Gambar tanaman yang diambil" style="display:block;max-width:100%;max-height:420px;margin:auto;border-radius:12px;object-fit:contain">
-</div>
-</div>
-<div id="cameraAnalysis" class="analysis">
-<b>🔎 Kamera Pendeteksi</b><br><br>
-Arahkan kamera ke tanaman lalu tekan tombol <b>Ambil Gambar</b>. Smart Farming Technology akan memeriksa ciri visual seperti bentuk/warna daun, lubang atau bercak pada daun, keberadaan objek kecil menyerupai serangga, serta vegetasi yang berbeda dari tanaman utama.<br><br>
-<small>Catatan: deteksi ini adalah skrining visual. Hasil dapat keliru jika foto buram, terlalu gelap, atau objek terlalu jauh.</small>
-</div>
-</div>
-</section>
-
-<section id="harvest" class="page">
-
-<div class="section-title">
-
-<h2>
-🌾 Prediksi Panen
-</h2>
-
-<span>
-Perkiraan berdasarkan umur tanaman
-</span>
-
-</div>
-
-<div class="card">
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>
-Jenis Tanaman
-</label>
-
-<select id="plantType">
-
-<option value="padi">🌾 Padi</option>
-<option value="jagung">🌽 Jagung</option>
-<option value="kedelai">🫘 Kedelai</option>
-<option value="cabai">🌶️ Cabai</option>
-<option value="tomat">🍅 Tomat</option>
-<option value="kentang">🥔 Kentang</option>
-<option value="bawang">🧅 Bawang Merah</option>
-<option value="kacang">🥜 Kacang Tanah</option>
-<option value="mentimun">🥒 Mentimun</option>
-<option value="semangka">🍉 Semangka</option>
-<option value="melon">🍈 Melon</option>
-<option value="pepaya">🍈 Pepaya</option>
-<option value="tembakau">🌿 Tembakau</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Kondisi Pertumbuhan
-</label>
-
-<select id="growthCondition">
-
-<option value="normal">Normal</option>
-<option value="cepat">Cepat</option>
-<option value="lambat">Lambat</option>
-
-</select>
-
-</div>
-
-</div>
-
-<button
-class="btn btn-green"
-onclick="predictHarvest()">
-🌾 Prediksi Waktu Panen
-</button>
-
-<div
-id="harvestResult"
-class="harvest-result">
-</div>
-
-</div>
-
-</section>
-
-<section id="irrigation" class="page">
-
-<div class="section-title">
-
-<h2>
-💧 Irigasi Pintar
-</h2>
-
-<span>
-Rekomendasi penyiraman
-</span>
-
-</div>
-
-<div class="card">
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>
-Jenis Tanaman
-</label>
-
-<select id="irPlant">
-
-<option value="Padi">🌾 Padi</option>
-<option value="Jagung">🌽 Jagung</option>
-<option value="Cabai">🌶️ Cabai</option>
-<option value="Tomat">🍅 Tomat</option>
-<option value="Tembakau">🌿 Tembakau</option>
-<option value="Sayuran">🥬 Sayuran</option>
-<option value="Buah-buahan">🍉 Buah-buahan</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Kelembapan Tanah (%)
-</label>
-
-<input
-id="soilMoisture"
-type="number"
-min="0"
-max="100"
-placeholder="Contoh: 40">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Suhu (°C)
-</label>
-
-<input
-id="temperature"
-type="number"
-placeholder="Contoh: 30">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Cuaca
-</label>
-
-<select id="weather">
-
-<option value="cerah">Cerah</option>
-<option value="berawan">Berawan</option>
-<option value="hujan">Hujan</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Fase Tanaman
-</label>
-
-<select id="plantPhase">
-
-<option>Persemaian</option>
-<option>Pertumbuhan</option>
-<option>Berbunga</option>
-<option>Pembuahan</option>
-<option>Menjelang Panen</option>
-
-</select>
-
-</div>
-
-</div>
-
-<button
-class="btn btn-green"
-onclick="checkIrrigation()">
-💧 Buat Rekomendasi
-</button>
-
-<div
-id="irrigationResult"
-class="smart-result"
-style="display:none">
-</div>
-
-</div>
-
-</section>
-
-<section id="ai" class="page">
-
-<div class="section-title">
-
-<h2>
-🤖 EcoAI
-</h2>
-
-<span>
-Asisten pertanian Smart Farming Technology
-</span>
-
-</div>
-
-<div class="card ai-chat">
-
-<div
-class="chat-messages"
-id="chatMessages">
-
-<div class="message ai">
-
-<div class="bubble">
-
-👋 Halo! Saya EcoAI.
-
-<br><br>
-
-Kamu bisa bertanya tentang tanaman, pupuk, hama,
-penyiraman, kompos, limbah organik, panen,
-harga komoditas, atau pertanian secara umum.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="chat-input">
-
-<input
-id="aiInput"
-placeholder="Tulis pertanyaan..."
-onkeydown="if(event.key==='Enter')sendAI()">
-
-<button
-class="btn btn-green"
-onclick="sendAI()">
-Kirim
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER YANG SUDAH DIGANTI -->
-
-<footer class="footer">
-
-🌱 Smart Farming Technology • Dikembangkan oleh Taniotentik.id
-
-</footer>
-
-<div
-class="modal"
-id="rewardModal">
-
-<div class="modal-content">
-
-<div class="modal-icon">
-🎉
-</div>
-
-<h2>
-Penukaran Berhasil!
-</h2>
-
-<p
-id="modalText"
-style="color:var(--muted);line-height:1.6;margin:12px 0 20px">
-</p>
-
-<button
-class="btn btn-green"
-onclick="closeModal()">
-Tutup
-</button>
-
-</div>
-
-</div>
-
-
-<div class="voucher-modal" id="voucherModal">
-    <div class="voucher-card">
-        <div class="voucher-head">
-            <button class="voucher-close" onclick="closeVoucher()" aria-label="Tutup">×</button>
-            <div class="voucher-logo">🌱</div>
-            <h2>E-VOUCHER ECOFARMING</h2>
-            <p>Voucher reward hasil penukaran Eco Coin</p>
-        </div>
-        <div class="voucher-body">
-            <div class="voucher-reward">
-                <div class="voucher-icon" id="voucherIcon">🎁</div>
-                <h3 id="voucherRewardName">Pupuk Organik</h3>
-                <p>Voucher ini merupakan bukti penukaran reward Smart Farming Technology.</p>
-            </div>
-            <div class="voucher-code-box">
-                <div class="voucher-code-label">KODE VOUCHER</div>
-                <div class="voucher-code" id="voucherCode">ECO-XXXXXX</div>
-            </div>
-            <div class="voucher-details">
-                <div class="voucher-detail">
-                    <span>👤 Pemilik</span>
-                    <b id="voucherOwner">Petani Smart</b>
-                </div>
-                <div class="voucher-detail">
-                    <span>🪙 Nilai Penukaran</span>
-                    <b id="voucherCost">100 Coin</b>
-                </div>
-                <div class="voucher-detail">
-                    <span>📅 Tanggal Penukaran</span>
-                    <b id="voucherDate">-</b>
-                </div>
-                <div class="voucher-detail voucher-validity">
-                    <span>⏳ Berlaku Sampai</span>
-                    <b id="voucherExpiry">-</b>
-                </div>
-                <div class="voucher-detail">
-                    <span>✅ Status</span>
-                    <b style="color:var(--green)">Voucher Diperoleh</b>
-                </div>
-            </div>
-            <div class="voucher-actions">
-                <button class="btn btn-green" onclick="downloadVoucher()">⬇️ Unduh E-Voucher</button>
-                <button class="btn btn-light" onclick="closeVoucher()">Tutup</button>
-            </div>
-            <div class="voucher-note">
-                Tunjukkan kode voucher ini saat mengambil reward pupuk/kompos.
-            </div>
-        </div>
-    </div>
-</div>
-
-<div
-class="surprise-overlay"
-id="surpriseOverlay">
-
-<div class="surprise-box">
-
-<div
-class="surprise-icon"
-id="surpriseIcon">
-🎉
-</div>
-
-<div class="surprise-tag">
-✨ SURPRISE! ✨
-</div>
-
-<h2 id="surpriseTitle">
-Berhasil!
-</h2>
-
-<p
-class="surprise-message"
-id="surpriseMessage">
-</p>
-
-<div
-class="surprise-value"
-id="surpriseValue">
-</div>
-
-<button
-class="btn btn-green surprise-close"
-onclick="closeSurprise()">
-Mantap! 🌱
-</button>
-
-</div>
-
-</div>
-
-<script>
-
-let user =
-JSON.parse(localStorage.getItem("ecoFarmingUser")) || {
-
-username:"Petani Smart",
-coins:0,
-xp:0,
-waste:0,
-exchanges:0,
-achievements:0,
-cameraUsed:false,
-aiUsed:false,
-history:[],
-harvest:null,
-irrigation:null
-
-};
-
-if(!Array.isArray(user.history)){
-    user.history = [];
-}
-
-let selectedWaste = "";
-let stream = null;
-
-const plantDays = {
-
-padi:115,
-jagung:100,
-kedelai:90,
-cabai:90,
-tomat:75,
-kentang:100,
-bawang:65,
-kacang:100,
-mentimun:50,
-semangka:75,
-melon:70,
-pepaya:240,
-tembakau:100
-
-};
-
-function saveUser(){
-
-    localStorage.setItem(
-        "ecoFarmingUser",
-        JSON.stringify(user)
-    );
-
-}
-
-function getLevel(xp){
-
-    if(xp >= 1000)
-        return {
-            level:5,
-            name:"Master Farming",
-            min:1000,
-            next:1500
-        };
-
-    if(xp >= 500)
-        return {
-            level:4,
-            name:"Petani Hebat",
-            min:500,
-            next:1000
-        };
-
-    if(xp >= 250)
-        return {
-            level:3,
-            name:"Petani Aktif",
-            min:250,
-            next:500
-        };
-
-    if(xp >= 100)
-        return {
-            level:2,
-            name:"Petani Muda",
-            min:100,
-            next:250
-        };
-
-    return {
-        level:1,
-        name:"Pemula",
-        min:0,
-        next:100
-    };
-
-}
-
-function updateDashboard(){
-
-    const level = getLevel(user.xp);
-
-    document.getElementById("usernameDisplay")
-        .textContent = user.username;
-
-    document.getElementById("levelDisplay")
-        .textContent =
-        `Level ${level.level} • ${level.name}`;
-
-    document.getElementById("coinDisplay")
-        .textContent =
-        user.coins.toLocaleString("id-ID");
-
-    document.getElementById("coinStat")
-        .textContent =
-        user.coins.toLocaleString("id-ID");
-
-    document.getElementById("wasteDisplay")
-        .textContent =
-        Number(user.waste).toFixed(1);
-
-    document.getElementById("exchangeDisplay")
-        .textContent =
-        user.exchanges;
-
-    document.getElementById("achievementDisplay")
-        .textContent =
-        user.achievements;
-
-    let currentXP =
-        user.xp - level.min;
-
-    let requiredXP =
-        level.next - level.min;
-
-    let percentage =
-        Math.min(
-            100,
-            (currentXP / requiredXP) * 100
-        );
-
-    document.getElementById("xpFill")
-        .style.width =
-        percentage + "%";
-
-    document.getElementById("xpText")
-        .textContent =
-        `${currentXP} / ${requiredXP} XP`;
-
-    document.getElementById("rewardCoinText")
-        .textContent =
-        "Eco Coin: " +
-        user.coins.toLocaleString("id-ID");
-
-    document.getElementById("missionWaste")
-        .style.width =
-        Math.min(100,user.waste * 100) + "%";
-
-    document.getElementById("missionCamera")
-        .style.width =
-        user.cameraUsed ? "100%" : "0%";
-
-    document.getElementById("missionAI")
-        .style.width =
-        user.aiUsed ? "100%" : "0%";
-
-    for(let i=1;i<=5;i++){
-
-        const box =
-            document.getElementById("lvl"+i);
-
-        if(box){
-
-            box.classList.toggle(
-                "current",
-                i === level.level
-            );
-
-        }
-
-    }
-
-    renderHistory();
-
-}
-
-function showPage(pageId,button){
-
-    document.querySelectorAll(".page")
-        .forEach(page=>{
-            page.classList.remove("active");
-        });
-
-    const target =
-        document.getElementById(pageId);
-
-    if(target){
-        target.classList.add("active");
-    }
-
-    document.querySelectorAll(".nav-btn")
-        .forEach(btn=>{
-            btn.classList.remove("active");
-        });
-
-    if(button){
-        button.classList.add("active");
-    }
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-    updateDashboard();
-
-}
-
-function selectWaste(element,type){
-
-    document.querySelectorAll(".waste-option")
-        .forEach(item=>{
-            item.classList.remove("selected");
-        });
-
-    element.classList.add("selected");
-
-    selectedWaste = type;
-
-    previewWaste();
-
-}
-
-function previewWaste(){
-
-    const weight =
-        parseFloat(
-            document.getElementById("wasteWeight").value
-        ) || 0;
-
-    const preview =
-        document.getElementById("wastePreview");
-
-    if(!selectedWaste){
-
-        preview.textContent =
-            "Pilih jenis limbah dan masukkan beratnya.";
-
-        return;
-
-    }
-
-    if(weight <= 0){
-
-        preview.textContent =
-            `${selectedWaste} dipilih. Masukkan berat limbah.`;
-
-        return;
-
-    }
-
-    const coins =
-        Math.floor(weight * 20);
-
-    const xp =
-        Math.floor(weight * 10);
-
-    preview.innerHTML =
-    `
-    Jenis limbah:
-    <b>${selectedWaste}</b>
-
-    <br>
-
-    Berat:
-    <b>${weight} kg</b>
-
-    <br>
-
-    Eco Coin yang didapat:
-    <b>🪙 ${coins}</b>
-
-    <br>
-
-    XP yang didapat:
-    <b>⭐ ${xp} XP</b>
-    `;
-
-}
-
-function depositWaste(){
-
-    const weight =
-        parseFloat(
-            document.getElementById("wasteWeight").value
-        ) || 0;
-
-    if(!selectedWaste){
-
-        alert(
-            "Silakan pilih jenis limbah terlebih dahulu."
-        );
-
-        return;
-
-    }
-
-    if(weight <= 0){
-
-        alert(
-            "Masukkan berat limbah yang valid."
-        );
-
-        return;
-
-    }
-
-    const coins =
-        Math.floor(weight * 20);
-
-    const xp =
-        Math.floor(weight * 10);
-
-    user.waste += weight;
-    user.coins += coins;
-    user.xp += xp;
-
-    user.history.push({
-
-        type:"deposit",
-        wasteType:selectedWaste,
-        weight:weight,
-        coins:coins,
-        date:new Date().toLocaleString("id-ID")
-
-    });
-
-    if(user.waste >= 1){
-
-        user.achievements =
-            Math.max(
-                user.achievements,
-                1
-            );
-
-    }
-
-    saveUser();
-    updateDashboard();
-
-    showSurprise(
-        "deposit",
-        {
-            wasteType:selectedWaste,
-            weight:weight,
-            coins:coins,
-            xp:xp
-        }
-    );
-
-    document.getElementById("wasteWeight")
-        .value = "";
-
-    selectedWaste = "";
-
-    document.querySelectorAll(".waste-option")
-        .forEach(item=>{
-            item.classList.remove("selected");
-        });
-
-    previewWaste();
-
-}
-
-function exchangeReward(name,cost){
-
-    if(user.coins < cost){
-
-        alert(
-            `Eco Coin kamu belum cukup.\n` +
-            `Dibutuhkan: ${cost} Coin\n` +
-            `Coin kamu: ${user.coins}`
-        );
-
-        return;
-
-    }
-
-    user.coins -= cost;
-    user.exchanges++;
-
-    const voucherHistoryIndex = user.history.length;
-
-    user.history.push({
-
-        type:"reward",
-        rewardName:name,
-        cost:cost,
-        date:new Date().toLocaleString("id-ID"),
-        voucherCode:generateVoucherCode(),
-        voucherExpiry:calculateVoucherExpiry(new Date())
-
-    });
-
-    if(user.exchanges >= 1){
-
-        user.achievements =
-            Math.max(
-                user.achievements,
-                2
-            );
-
-    }
-
-    saveUser();
-    updateDashboard();
-
-    showSurprise(
-        "reward",
-        {
-            name:name,
-            cost:cost
-        }
-    );
-
-    // Setelah notifikasi sukses tampil sebentar, langsung buka E-Voucher.
-    setTimeout(()=>{
-        closeSurprise();
-        openVoucher(voucherHistoryIndex);
-    }, 1200);
-
-}
-
-
-function generateVoucherCode(){
-    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    let code = "ECO-";
-    for(let i=0;i<6;i++){
-        code += chars[Math.floor(Math.random()*chars.length)];
-    }
-    return code;
-}
-
-function calculateVoucherExpiry(date){
-    const expiry = new Date(date);
-    expiry.setDate(expiry.getDate() + 1);
-    return expiry.toLocaleDateString("id-ID", {
-        day:"2-digit",
-        month:"long",
-        year:"numeric"
-    });
-}
-
-function getVoucherExpiry(item){
-    if(item.voucherExpiry) return item.voucherExpiry;
-
-    // Riwayat lama: masa berlaku dihitung 1 hari sejak penukaran.
-    const match = String(item.date || "").match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
-    if(match){
-        const d = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
-        if(!isNaN(d.getTime())){
-            item.voucherExpiry = calculateVoucherExpiry(d);
-            saveUser();
-            return item.voucherExpiry;
-        }
-    }
-
-    return "1 hari sejak penukaran";
-}
-
-function getVoucherIcon(name){
-    const n = String(name || "").toLowerCase();
-    if(n.includes("kompos")) return "🍃";
-    if(n.includes("pupuk")) return "🌱";
-    if(n.includes("paket")) return "🎁";
-    return "🎟️";
-}
-
-function openVoucher(historyIndex){
-    const item = user.history[historyIndex];
-
-    if(!item || item.type !== "reward") return;
-
-    // Riwayat lama tetap bisa dibuka: kode dibuat otomatis dan disimpan.
-    if(!item.voucherCode){
-        item.voucherCode = generateVoucherCode();
-        saveUser();
-    }
-
-    document.getElementById("voucherIcon").textContent =
-        getVoucherIcon(item.rewardName);
-
-    document.getElementById("voucherRewardName").textContent =
-        item.rewardName || "Reward Smart Farming Technology";
-
-    document.getElementById("voucherCode").textContent =
-        item.voucherCode;
-
-    document.getElementById("voucherOwner").textContent =
-        user.username || "Petani Smart";
-
-    document.getElementById("voucherCost").textContent =
-        `${Number(item.cost || 0).toLocaleString("id-ID")} Coin`;
-
-    document.getElementById("voucherDate").textContent =
-        item.date || "-";
-
-    document.getElementById("voucherExpiry").textContent =
-        getVoucherExpiry(item);
-
-    document.getElementById("voucherModal").classList.add("show");
-}
-
-function closeVoucher(){
-    document.getElementById("voucherModal").classList.remove("show");
-}
-
-function downloadVoucher(){
-    const name = document.getElementById("voucherRewardName").textContent;
-    const code = document.getElementById("voucherCode").textContent;
-    const owner = document.getElementById("voucherOwner").textContent;
-    const cost = document.getElementById("voucherCost").textContent;
-    const date = document.getElementById("voucherDate").textContent;
-    const expiry = document.getElementById("voucherExpiry").textContent;
-
-    const html = `<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>E-Voucher EcoFarming - ${code}</title>
-<style>
-body{margin:0;padding:30px 15px;background:#eef8f1;font-family:Arial,Helvetica,sans-serif;color:#183528}
-.voucher{max-width:520px;margin:auto;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.15)}
-.head{padding:28px;text-align:center;color:#fff;background:linear-gradient(135deg,#198754,#11643d)}
-.icon{font-size:48px} h1{font-size:23px;margin:8px 0 4px}.sub{font-size:12px;opacity:.9}
-.body{padding:28px}.reward{padding:20px;text-align:center;border:2px dashed #bfe4ca;border-radius:18px;background:#f7fcf8}
-.reward-icon{font-size:55px}h2{color:#11643d;margin:8px 0;font-size:21px}
-.code{margin:20px 0;padding:18px;text-align:center;border-radius:16px;background:#fff7dc;border:1px solid #f0d98c}
-.label{font-size:10px;font-weight:800;letter-spacing:1px;color:#8c6b12}.code b{display:block;margin-top:7px;font-size:28px;letter-spacing:4px;color:#70540b}
-.detail{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid #e8f2eb;font-size:13px}
-.detail span{color:#6b7d73}.status{color:#198754;font-weight:800}
-.note{margin-top:20px;padding:13px;border-radius:13px;background:#effcf4;color:#52655b;font-size:11px;line-height:1.6;text-align:center}
-</style>
-</head>
-<body>
-<div class="voucher">
-<div class="head"><div class="icon">🌱</div><h1>E-VOUCHER ECOFARMING</h1><div class="sub">Bukti penukaran reward Eco Coin</div></div>
-<div class="body">
-<div class="reward"><div class="reward-icon">${getVoucherIcon(name)}</div><h2>${name}</h2><div>Reward berhasil diperoleh melalui Smart Farming Technology.</div></div>
-<div class="code"><div class="label">KODE VOUCHER</div><b>${code}</b></div>
-<div class="detail"><span>Pemilik</span><b>${owner}</b></div>
-<div class="detail"><span>Nilai Penukaran</span><b>${cost}</b></div>
-<div class="detail"><span>Tanggal Penukaran</span><b>${date}</b></div>
-<div class="detail"><span>Berlaku Sampai</span><b>${expiry}</b></div>
-<div class="detail"><span>Status</span><b class="status">Voucher Diperoleh</b></div>
-<div class="note">Voucher berlaku sampai 1 hari setelah tanggal penukaran. Tunjukkan kode voucher ini saat mengambil reward pupuk/kompos. Simpan file ini sebagai bukti penukaran.</div>
-</div>
-</div>
-</body>
-</html>`;
-
-    const blob = new Blob([html], {type:"text/html;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `E-Voucher-Smart-Farming-Technology-${code}.html`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-
-function showSurprise(type,data={}){
-
-    const overlay =
-        document.getElementById("surpriseOverlay");
-
-    const icon =
-        document.getElementById("surpriseIcon");
-
-    const title =
-        document.getElementById("surpriseTitle");
-
-    const message =
-        document.getElementById("surpriseMessage");
-
-    const value =
-        document.getElementById("surpriseValue");
-
-    if(type === "deposit"){
-
-        icon.textContent = "♻️";
-
-        title.textContent =
-            "Setoran Berhasil!";
-
-        message.innerHTML =
-            `Limbah <b>${data.wasteType}</b>
-            berhasil disetor dan diubah
-            menjadi Eco Coin.`;
-
-        value.innerHTML =
-            `🪙 +${Number(data.coins)
-                .toLocaleString("id-ID")} Eco Coin
-
-            <small>
-            ⭐ +${data.xp} XP
-            </small>`;
-
-    }
-
-    if(type === "reward"){
-
-        icon.textContent = "🎁";
-
-        title.textContent =
-            "Reward Berhasil Dibuka!";
-
-        message.innerHTML =
-            `Kamu berhasil menukarkan Eco Coin
-            dengan <b>${data.name}</b>.`;
-
-        value.innerHTML =
-            `🌱 ${data.name}
-
-            <small>
-            🪙 Sisa ${user.coins
-                .toLocaleString("id-ID")} Eco Coin
-            </small>`;
-
-    }
-
-    overlay.classList.add("show");
-
-    createConfetti();
-    createSurpriseSparkles();
-
-}
-
-function closeSurprise(){
-
-    document.getElementById("surpriseOverlay")
-        .classList.remove("show");
-
-}
-
-function createSurpriseSparkles(){
-
-    const overlay =
-        document.getElementById("surpriseOverlay");
-
-    const symbols = [
-        "✨",
-        "🌿",
-        "🍃",
-        "⭐",
-        "💚",
-        "🎉",
-        "🌱",
-        "💫"
-    ];
-
-    for(let i=0;i<22;i++){
-
-        const spark =
-            document.createElement("span");
-
-        spark.className =
-            "surprise-spark";
-
-        spark.textContent =
-            symbols[
-                Math.floor(
-                    Math.random()*symbols.length
-                )
-            ];
-
-        spark.style.left =
-            (8 + Math.random()*84) + "%";
-
-        spark.style.bottom =
-            (5 + Math.random()*25) + "%";
-
-        spark.style.animationDelay =
-            (Math.random()*.7) + "s";
-
-        overlay.appendChild(spark);
-
-        setTimeout(()=>{
-            spark.remove();
-        },2500);
-
-    }
-
-}
-
-function createConfetti(){
-
-    const confettiSymbols = [
-        "🌿",
-        "🍃",
-        "✨",
-        "⭐",
-        "💚",
-        "🎉",
-        "🪙"
-    ];
-
-    for(let i=0;i<80;i++){
-
-        const piece =
-            document.createElement("div");
-
-        piece.className =
-            "confetti";
-
-        piece.textContent =
-            Math.random() > .65
-            ? confettiSymbols[
-                Math.floor(
-                    Math.random()*confettiSymbols.length
-                )
-              ]
-            : "";
-
-        piece.style.left =
-            Math.random()*100 + "vw";
-
-        piece.style.animationDelay =
-            Math.random()*1.5 + "s";
-
-        piece.style.transform =
-            `rotate(${Math.random()*360}deg)`;
-
-        piece.style.background =
-            Math.random() > .5
-            ? "#198754"
-            : "#f5b942";
-
-        document.body.appendChild(piece);
-
-        setTimeout(()=>{
-            piece.remove();
-        },3000);
-
-    }
-
-}
-
-function closeModal(){
-
-    document.getElementById("rewardModal")
-        .classList.remove("show");
-
-}
-
-function renderHistory(){
-
-    const list =
-        document.getElementById("historyList");
-
-    if(!list)
-        return;
-
-    const depositCount =
-        user.history.filter(
-            item=>item.type === "deposit"
-        ).length;
-
-    const rewardCount =
-        user.history.filter(
-            item=>item.type === "reward"
-        ).length;
-
-    const totalCoin =
-        user.history
-        .filter(
-            item=>item.type === "deposit"
-        )
-        .reduce(
-            (total,item)=>
-                total + Number(item.coins || 0),
-            0
-        );
-
-    document.getElementById("historyDepositCount")
-        .textContent =
-        depositCount;
-
-    document.getElementById("historyRewardCount")
-        .textContent =
-        rewardCount;
-
-    document.getElementById("historyCoinTotal")
-        .textContent =
-        totalCoin.toLocaleString("id-ID");
-
-    if(user.history.length === 0){
-
-        list.innerHTML =
-        `
-        <div class="history-empty">
-
-            <div class="history-empty-icon">
-                📋
-            </div>
-
-            <h3>
-                Belum Ada Riwayat
-            </h3>
-
-            <p style="margin-top:7px">
-                Setor limbah atau tukarkan reward
-                untuk melihat aktivitas kamu di sini.
-            </p>
-
-        </div>
-        `;
-
-        return;
-
-    }
-
-    const sortedHistory =
-        user.history
-        .map((item,_historyIndex)=>({
-            ...item,
-            _historyIndex
-        }))
-        .reverse();
-
-    list.innerHTML =
-        sortedHistory.map((item,index)=>{
-
-            if(item.type === "deposit"){
-
-                return `
-                <div class="history-item">
-
-                    <div class="history-left">
-
-                        <div class="history-icon deposit">
-                            ♻️
-                        </div>
-
-                        <div class="history-info">
-
-                            <h3>
-                                Setor Limbah
-                            </h3>
-
-                            <p>
-
-                                ${item.wasteType}
-                                •
-                                <b>
-                                ${Number(item.weight).toFixed(1)} kg
-                                </b>
-
-                                <br>
-
-                                Mendapatkan
-                                ${Number(item.coins)
-                                    .toLocaleString("id-ID")}
-                                Eco Coin
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="history-right">
-
-                        <div class="history-coins plus">
-
-                            +${Number(item.coins)
-                                .toLocaleString("id-ID")}
-                            🪙
-
-                        </div>
-
-                        <div class="history-date">
-                            ${item.date}
-                        </div>
-
-                    </div>
-
-                </div>
-                `;
-
-            }
-
-            if(item.type === "reward"){
-
-                return `
-                <div class="history-item reward-clickable"
-                     onclick="openVoucher(${item._historyIndex})"
-                     title="Klik untuk melihat E-Voucher">
-
-                    <div class="history-left">
-
-                        <div class="history-icon reward">
-                            🎁
-                        </div>
-
-                        <div class="history-info">
-
-                            <h3>
-                                Tukar Reward
-                            </h3>
-
-                            <p>
-
-                                ${item.rewardName}
-
-                                <br>
-
-                                Menggunakan
-                                ${Number(item.cost)
-                                    .toLocaleString("id-ID")}
-                                Eco Coin
-
-                                <br>
-                                <span class="history-voucher-hint">
-                                    🎟️ Klik untuk lihat E-Voucher
-                                </span>
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="history-right">
-
-                        <div class="history-coins minus">
-
-                            -${Number(item.cost)
-                                .toLocaleString("id-ID")}
-                            🪙
-
-                        </div>
-
-                        <div class="history-date">
-                            ${item.date}
-                        </div>
-
-                    </div>
-
-                </div>
-                `;
-
-            }
-
-            return "";
-
-        }).join("");
-
-}
-
-function clearHistory(){
-
-    if(user.history.length === 0){
-
-        alert(
-            "Belum ada riwayat yang bisa dihapus."
-        );
-
-        return;
-
-    }
-
-    const confirmDelete =
-        confirm(
-            "Yakin ingin menghapus semua riwayat aktivitas?"
-        );
-
-    if(!confirmDelete)
-        return;
-
-    user.history = [];
-
-    saveUser();
-
-    renderHistory();
-
-    alert(
-        "Semua riwayat berhasil dihapus."
-    );
-
-}
-
-function resetEcoFarming(){
-
-    const yakin =
-        confirm(
-
-            "⚠️ Yakin ingin mereset semua data EcoFarming?\n\n" +
-
-            "Semua data berikut akan dihapus:\n\n" +
-
-            "• Eco Coin\n" +
-            "• XP dan Level\n" +
-            "• Total limbah\n" +
-            "• Reward yang ditukar\n" +
-            "• Pencapaian\n" +
-            "• Riwayat aktivitas\n" +
-            "• Data kamera\n" +
-            "• Data prediksi panen\n" +
-            "• Data irigasi\n\n" +
-
-            "Data yang sudah di-reset tidak dapat dikembalikan."
-
-        );
-
-    if(!yakin)
-        return;
-
-    user = {
-
-        username:"Petani Smart",
-        coins:0,
-        xp:0,
-        waste:0,
-        exchanges:0,
-        achievements:0,
-        cameraUsed:false,
-        aiUsed:false,
-        history:[],
-        harvest:null,
-        irrigation:null
-
-    };
-
-    selectedWaste = "";
-
-    localStorage.removeItem(
-        "ecoFarmingUser"
-    );
-
-    saveUser();
-
-    updateDashboard();
-
-    const wasteInput =
-        document.getElementById("wasteWeight");
-
-    if(wasteInput)
-        wasteInput.value = "";
-
-    document.querySelectorAll(".waste-option")
-        .forEach(item=>{
-            item.classList.remove("selected");
-        });
-
-    const harvestResult =
-        document.getElementById("harvestResult");
-
-    if(harvestResult){
-
-        harvestResult.classList.remove("show");
-        harvestResult.innerHTML = "";
-
-    }
-
-    const irrigationResult =
-        document.getElementById("irrigationResult");
-
-    if(irrigationResult){
-
-        irrigationResult.style.display = "none";
-        irrigationResult.innerHTML = "";
-
-    }
-
-    const cameraAnalysis =
-        document.getElementById("cameraAnalysis");
-
-    if(cameraAnalysis){
-
-        cameraAnalysis.innerHTML = `
-            Kamera dapat digunakan untuk mengambil gambar tanaman.
-            <br>
-            <small>
-            Catatan: fitur ini hanya melakukan analisis visual sederhana
-            dan bukan alat diagnosis penyakit tanaman.
-            </small>
-        `;
-
-    }
-
-    if(stream){
-
-        stream.getTracks()
-            .forEach(track=>track.stop());
-
-        stream = null;
-
-        document.getElementById("video")
-            .srcObject = null;
-
-    }
-
-    const chatMessages =
-        document.getElementById("chatMessages");
-
-    if(chatMessages){
-
-        chatMessages.innerHTML = `
-            <div class="message ai">
-                <div class="bubble">
-
-                    👋 Halo! Saya EcoAI.
-
-                    <br><br>
-
-                    Kamu bisa bertanya tentang tanaman,
-                    pupuk, hama, penyiraman, kompos,
-                    limbah organik, panen, harga komoditas,
-                    atau pertanian secara umum.
-
-                </div>
-            </div>
-        `;
-
-    }
-
-    closeSurprise();
-
-    previewWaste();
-
-    alert(
-        "✅ Semua data EcoFarming berhasil di-reset.\n\n" +
-        "Kamu kembali ke Level 1 • Pemula dengan 0 Eco Coin."
-    );
-
-}
-
-async function startCamera(){
-    try{
-        if(window.stream){ stopCamera(); }
-        window.stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
-        const video=document.getElementById("video");
-        video.srcObject=window.stream;
-        await video.play();
-        document.getElementById("cameraAnalysis").innerHTML=`<b>📷 Kamera aktif.</b><br><br>Arahkan kamera sedekat mungkin ke daun dan batang tanaman. Pastikan objek terang dan fokus, lalu tekan <b>Ambil Gambar</b> untuk mengambil foto dan menganalisisnya.`;
-    }catch(error){
-        alert("Kamera tidak dapat digunakan. Pastikan izin kamera diberikan dan gunakan HTTPS/localhost.");
-    }
-}
-function stopCamera(){
-    if(window.stream){ window.stream.getTracks().forEach(t=>t.stop()); window.stream=null; }
-    const video=document.getElementById("video");
-    if(video) video.srcObject=null;
-}
-function showCapturedPreview(src){
-    const wrap=document.getElementById("capturedPreview");
-    const image=document.getElementById("capturedImage");
-    if(!wrap || !image) return;
-    image.src=src;
-    wrap.style.display="block";
-}
-function capturePlant(){
-    const video=document.getElementById("video"), canvas=document.getElementById("canvas");
-    if(!video || !video.videoWidth){ alert("Aktifkan kamera terlebih dahulu sebelum mengambil gambar."); return; }
-    canvas.width=video.videoWidth; canvas.height=video.videoHeight;
-    canvas.getContext("2d").drawImage(video,0,0,canvas.width,canvas.height);
-    canvas.toBlob(blob=>{
-        const previewUrl=URL.createObjectURL(blob);
-        showCapturedPreview(previewUrl);
-        analyzePlantBlob(blob);
-    },"image/jpeg",0.92);
-}
-async function analyzeUploadedPlant(event){
-    const file=event.target.files && event.target.files[0];
-    if(!file) return;
-
-    // File picker menerima gambar dari Galeri/Foto/Dokumen tanpa membatasi ekstensi.
-    // Beberapa HP menyimpan foto sebagai HEIC/HEIF; format tersebut dikonversi ke JPEG
-    // terlebih dahulu agar bisa diproses browser.
-    const name=(file.name||"").toLowerCase();
-    const isHeic = /\.(heic|heif)$/.test(name) || /image\/(heic|heif)/i.test(file.type||"");
-
-    try {
-        let source=file;
-        if(isHeic){
-            if(typeof heic2any !== "function"){
-                throw new Error("Konverter HEIC belum tersedia");
-            }
-            const converted=await heic2any({blob:file, type:"image/jpeg", quality:0.9});
-            source=Array.isArray(converted) ? converted[0] : converted;
-        }
-
-        const previewUrl=URL.createObjectURL(source);
-        showCapturedPreview(previewUrl);
-        analyzePlantBlob(source);
-    } catch(err) {
-        console.error(err);
-        // Tetap tampilkan file yang dipilih jika perangkat/browser bisa menampilkannya.
-        try { showCapturedPreview(URL.createObjectURL(file)); } catch(e) {}
-        document.getElementById("cameraAnalysis").innerHTML=`
-          <div style="padding:14px;border-radius:12px;background:#fff8df;border:1px solid #eadb9a">
-            <b>⚠️ Gambar berhasil dipilih, tetapi belum bisa dianalisis di browser ini.</b><br><br>
-            Foto tetap ditampilkan di atas. Untuk analisis, coba JPG/PNG/WEBP atau ambil gambar langsung dengan tombol <b>Ambil Gambar</b>.
-          </div>`;
-    } finally {
-        event.target.value="";
-    }
-}
-function analyzePlantBlob(blob){
-    const img=new Image();
-    img.onload=()=>{
-        analyzePlantImage(img);
-        URL.revokeObjectURL(img.src);
-    };
-    img.onerror=()=>{
-        document.getElementById("cameraAnalysis").innerHTML=`
-          <div style="padding:14px;border-radius:12px;background:#fff8df;border:1px solid #eadb9a">
-            <b>⚠️ Gambar sudah dipilih dan ditampilkan, tetapi format ini tidak dapat dibaca untuk analisis oleh browser.</b><br><br>
-            Pilih gambar dari perangkat atau ambil gambar langsung dari kamera.
-          </div>`;
-        try { URL.revokeObjectURL(img.src); } catch(e) {}
-    };
-    img.src=URL.createObjectURL(blob);
-}
-function analyzePlantImage(img){
-    const canvas=document.getElementById("canvas"), max=900;
-    const scale=Math.min(1,max/Math.max(img.width,img.height));
-    canvas.width=Math.max(1,Math.round(img.width*scale)); canvas.height=Math.max(1,Math.round(img.height*scale));
-    const ctx=canvas.getContext("2d",{willReadFrequently:true}); ctx.drawImage(img,0,0,canvas.width,canvas.height);
-    const d=ctx.getImageData(0,0,canvas.width,canvas.height).data;
-    let green=0,yellow=0,brown=0,dark=0,bright=0,red=0,total=0;
-    for(let i=0;i<d.length;i+=16){
-        const r=d[i],g=d[i+1],b=d[i+2]; total++;
-        const mx=Math.max(r,g,b), mn=Math.min(r,g,b);
-        if(g>r*1.12 && g>b*1.05 && g>70) green++;
-        if(r>105 && g>85 && b<90 && r>g*0.9) yellow++;
-        if(r>75 && g<95 && b<75) brown++;
-        if(mx<55) dark++;
-        if(mx>220) bright++;
-        if(r>g*1.35 && r>b*1.3) red++;
-    }
-    const pct=x=>Math.round(x/total*100);
-    const greenP=pct(green), yellowP=pct(yellow), brownP=pct(brown), darkP=pct(dark), redP=pct(red);
-    let findings=[];
-    if(greenP<18 && (yellowP+brownP)>15) findings.push({type:"warning",title:"Tanaman tampak mengalami perubahan warna",detail:"Bagian hijau yang rendah disertai warna kuning/cokelat dapat berkaitan dengan stres, kekurangan nutrisi, gangguan akar, kekurangan/kelebihan air, atau penyakit. Periksa daun tua dan muda secara terpisah."});
-    if(brownP>10) findings.push({type:"warning",title:"Ada area cokelat/nekrosis yang perlu diperiksa",detail:"Bercak cokelat dapat muncul akibat penyakit, jaringan rusak, kekeringan, atau luka. Periksa apakah bercak berbentuk bulat, menyebar, memiliki tepi jelas, atau disertai jamur."});
-    if(yellowP>12) findings.push({type:"warning",title:"Ada area kekuningan",detail:"Daun menguning dapat dipengaruhi kekurangan nitrogen, masalah akar, penyiraman berlebih, atau penyakit. Jangan langsung menambah pupuk sebelum kondisi tanah dan pola penyiraman diperiksa."});
-    if(darkP>8) findings.push({type:"pest",title:"Ada area gelap/objek kecil yang perlu diperiksa untuk hama",detail:"Periksa bagian bawah daun, pucuk, batang, dan celah daun. Cari kutu daun, thrips, tungau, ulat, telur, kotoran hama, atau jaring halus. Foto jarak dekat diperlukan untuk memastikan jenisnya."});
-    if(greenP>20) findings.push({type:"plant",title:"Vegetasi hijau terdeteksi",detail:"Foto menunjukkan cukup banyak area hijau. Untuk membedakan tanaman utama dengan gulma, ambil foto yang memperlihatkan pangkal tanaman dan permukaan tanah sehingga bentuk gulma dapat dibandingkan dengan tanaman utama."});
-    if(redP>8) findings.push({type:"check",title:"Ada area kemerahan",detail:"Area merah dapat berasal dari buah, bunga, tanah, objek lain, atau perubahan jaringan tanaman. Periksa objek secara langsung sebelum menyimpulkan adanya penyakit atau hama."});
-    if(!findings.length) findings.push({type:"check",title:"Belum ada indikasi visual yang cukup kuat",detail:"Foto belum memberikan ciri yang cukup untuk menentukan hama atau gulma. Ambil foto lebih dekat, fokus pada daun yang rusak dan pangkal tanaman, dengan pencahayaan merata."});
-    const hama=findings.filter(x=>x.type==="pest").length;
-    const gulma=(greenP>20 && greenP<75) ? 1 : 0;
-    const status=hama?"⚠️ Perlu pemeriksaan hama lebih lanjut":gulma?"🌿 Perlu pemeriksaan gulma di sekitar tanaman":"🔎 Belum terdeteksi kuat";
-    document.getElementById("cameraAnalysis").innerHTML=`
-      <div style="padding:15px;border-radius:16px;background:#f4fbf6;border:1px solid #cfe9d7">
-      <h3 style="margin:0 0 8px;color:#11643d">${status}</h3>
-      <p style="margin:0 0 14px;color:#52655b">Analisis visual awal berdasarkan foto. Ini bukan diagnosis pasti.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:15px">
-        <div style="padding:10px;background:white;border-radius:10px"><b>${greenP}%</b><br><small>area hijau</small></div>
-        <div style="padding:10px;background:white;border-radius:10px"><b>${yellowP}%</b><br><small>area kuning</small></div>
-        <div style="padding:10px;background:white;border-radius:10px"><b>${brownP}%</b><br><small>area cokelat</small></div>
-        <div style="padding:10px;background:white;border-radius:10px"><b>${darkP}%</b><br><small>area gelap</small></div>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <span>🌱</span>
+        AGRI-SIAGA
       </div>
-      <h4 style="margin:8px 0">📋 Temuan & langkah pemeriksaan</h4>
-      ${findings.map((f,i)=>`<div style="padding:12px 0;border-bottom:1px solid #e5efe8"><b>${i+1}. ${f.title}</b><br><span>${f.detail}</span></div>`).join("")}
-      <div style="margin-top:15px;padding:14px;border-radius:12px;background:#eef9f1;border:1px solid #cfe9d7">
-        <h4 style="margin:0 0 10px;color:#11643d">🌱 Rekomendasi Perawatan Tanaman</h4>
-        <div style="margin-bottom:10px"><b>💧 Cara Perawatan:</b><br>Jaga kelembapan tanah sesuai kebutuhan tanaman, pastikan drainase baik, bersihkan gulma di sekitar tanaman, dan lakukan pemeriksaan daun, batang, serta pangkal tanaman secara rutin.</div>
-        <div style="margin-bottom:10px"><b>🛡️ Pencegahan Hama:</b><br>Periksa bagian bawah daun dan pucuk secara berkala, buang bagian tanaman yang terserang berat, jaga kebersihan lahan, gunakan perangkap atau pengendalian yang sesuai, dan hindari penyemprotan pestisida tanpa mengetahui penyebab serangan.</div>
-        <div><b>🌿 Pemberian Pupuk:</b><br>Berikan pupuk sesuai jenis dan umur tanaman serta kondisi tanah. Gunakan dosis sesuai petunjuk produk dan jangan menambah pupuk hanya karena daun menguning sebelum penyebabnya diperiksa.</div>
+
+      <ul class="nav-links">
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#bencana">Bencana</a></li>
+        <li><a href="#guidance">Panduan</a></li>
+        <li><a href="#irigasi">Irigasi</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-container">
+
+      <div>
+        <h1>AGRI-<span>SIAGA</span></h1>
+
+        <p>
+          Platform digital untuk membantu generasi muda pertanian
+          menghadapi kekeringan, banjir, longsor, dan berbagai risiko
+          bencana pada lahan pertanian.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#dashboard">
+            <button class="btn btn-primary">
+              📊 Lihat Status
+            </button>
+          </a>
+
+          <a href="#bencana">
+            <button class="btn btn-secondary">
+              🚨 Panduan Bencana
+            </button>
+          </a>
+        </div>
       </div>
-      <div style="margin-top:15px;padding:12px;border-radius:12px;background:#fff8df;color:#6d5a16"><b>🌱 Cara mendapatkan hasil lebih akurat:</b><br>1) Foto seluruh tanaman untuk melihat gulma. 2) Foto close-up daun yang rusak untuk hama. 3) Foto bagian bawah daun. 4) Foto pangkal tanaman dan permukaan tanah. 5) Gunakan cahaya cukup dan hindari foto buram.</div>
-      </div>`;
-    user.cameraUsed=true; user.achievements=Math.max(user.achievements,3); saveUser(); updateDashboard();
-}
 
-function predictHarvest(){
+      <div class="hero-card">
+        <div class="big-icon">🌾</div>
+        <h2>Pertanian Tangguh</h2>
+        <p>
+          Siaga sebelum bencana, tanggap saat bencana,
+          pulih setelah bencana.
+        </p>
+      </div>
 
-    const plant =
-        document.getElementById("plantType")
-            .value;
-
-    const condition =
-        document.getElementById("growthCondition")
-            .value;
-
-    let days =
-        plantDays[plant];
-
-    if(condition === "cepat")
-        days -= 7;
-
-    if(condition === "lambat")
-        days += 14;
-
-    const today =
-        new Date();
-
-    const harvestDate =
-        new Date(today);
-
-    harvestDate.setDate(
-        today.getDate() + days
-    );
-
-    const result =
-        document.getElementById("harvestResult");
-
-    result.classList.add("show");
-
-    let icon =
-        "🌾";
-
-    if(plant === "tembakau"){
-        icon = "🌿";
-    }
-
-    result.innerHTML =
-    `
-    <div>
-        ${icon}
-        Perkiraan waktu panen
     </div>
+  </header>
 
-    <div class="days">
-        ${days} hari
+
+  <!-- DASHBOARD -->
+  <section id="dashboard">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>📊 Dashboard Risiko</h2>
+        <p>Status simulasi kondisi pertanian saat ini.</p>
+      </div>
+
+      <div class="status-grid">
+
+        <div class="status-card">
+          <div class="status-top">
+            <div class="status-icon">☀️</div>
+            <span class="badge">WASPADA</span>
+          </div>
+
+          <h3>Kekeringan</h3>
+          <p>Kelembapan tanah mulai menurun.</p>
+        </div>
+
+
+        <div class="status-card safe">
+          <div class="status-top">
+            <div class="status-icon">🌊</div>
+            <span class="badge safe">AMAN</span>
+          </div>
+
+          <h3>Banjir</h3>
+          <p>Tidak terdapat indikasi banjir pada simulasi.</p>
+        </div>
+
+
+        <div class="status-card">
+          <div class="status-top">
+            <div class="status-icon">⛰️</div>
+            <span class="badge">WASPADA</span>
+          </div>
+
+          <h3>Longsor</h3>
+          <p>Perhatikan kondisi tanah pada lahan miring.</p>
+        </div>
+
+      </div>
+
+      <div class="alert-box">
+        <h3>⚠️ Pengingat</h3>
+        <p>
+          Data pada halaman ini merupakan <b>simulasi/prototipe</b>.
+          Untuk sistem peringatan dini nyata, data harus terhubung
+          dengan sensor dan sumber data resmi.
+        </p>
+      </div>
+
     </div>
+  </section>
 
-    <p>
-        Tanaman:
-        <b>
-        ${getPlantName(plant)}
-        </b>
-    </p>
 
-    <p>
-        Kondisi pertumbuhan:
-        <b>
-        ${capitalize(condition)}
-        </b>
-    </p>
+  <!-- BENCANA -->
+  <section id="bencana">
+    <div class="container">
 
-    <p>
-        Perkiraan tanggal:
-        <b>
-        ${harvestDate.toLocaleDateString(
-            "id-ID",
-            {
-                day:"numeric",
-                month:"long",
-                year:"numeric"
-            }
-        )}
-        </b>
-    </p>
+      <div class="section-title">
+        <h2>🚨 Pilih Jenis Bencana</h2>
+        <p>Temukan langkah penanganan pertanian sesuai kondisi.</p>
+      </div>
 
-    ${
-        plant === "tembakau"
-        ?
-        `
-        <div
-        style="
-        margin-top:15px;
-        padding:13px;
-        border-radius:14px;
-        background:#f5faf7;
-        ">
+      <div class="disaster-grid">
 
-        🌿 <b>Catatan Tembakau:</b>
+        <div class="disaster-card">
+          <div class="disaster-icon dry">☀️</div>
 
-        <br>
+          <h3>Kekeringan</h3>
 
-        Waktu panen tembakau dapat berbeda menurut
-        jenis atau varietas, umur tanaman, kondisi lahan,
-        cuaca, dan tingkat kematangan daun.
+          <p>
+            Kekurangan air dapat menghambat pertumbuhan
+            tanaman dan menurunkan hasil panen.
+          </p>
+
+          <button
+            class="btn learn-btn"
+            onclick="showGuidance('kekeringan')">
+            Lihat Penanganan
+          </button>
+        </div>
+
+
+        <div class="disaster-card">
+          <div class="disaster-icon flood">🌊</div>
+
+          <h3>Banjir</h3>
+
+          <p>
+            Genangan air berlebihan dapat merusak tanaman,
+            akar, dan struktur tanah.
+          </p>
+
+          <button
+            class="btn learn-btn"
+            onclick="showGuidance('banjir')">
+            Lihat Penanganan
+          </button>
+        </div>
+
+
+        <div class="disaster-card">
+          <div class="disaster-icon landslide">⛰️</div>
+
+          <h3>Longsor</h3>
+
+          <p>
+            Lahan miring membutuhkan pengelolaan untuk
+            mengurangi erosi dan risiko longsor.
+          </p>
+
+          <button
+            class="btn learn-btn"
+            onclick="showGuidance('longsor')">
+            Lihat Penanganan
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PANDUAN -->
+  <section id="guidance">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>📚 Panduan Kesiapsiagaan</h2>
+        <p>Langkah yang dapat dilakukan pada setiap tahap bencana.</p>
+      </div>
+
+      <div class="guidance-box">
+
+        <div class="guidance-header">
+          <h2 id="guidanceTitle">☀️ Penanganan Kekeringan</h2>
+        </div>
+
+        <div class="tabs">
+
+          <button
+            class="tab active"
+            onclick="changeTab('sebelum', this)">
+            Sebelum
+          </button>
+
+          <button
+            class="tab"
+            onclick="changeTab('saat', this)">
+            Saat
+          </button>
+
+          <button
+            class="tab"
+            onclick="changeTab('setelah', this)">
+            Setelah
+          </button>
 
         </div>
-        `
-        :
-        ""
-    }
 
-    <small
-    style="display:block;margin-top:15px">
+        <div class="guidance-content">
 
-        Hasil ini merupakan perkiraan.
-        Waktu panen sebenarnya dapat dipengaruhi
-        varietas, cuaca, air, nutrisi, hama,
-        penyakit, dan kondisi lahan.
+          <div id="sebelum">
+            <h3>🛡️ Sebelum Bencana</h3>
 
-    </small>
-    `;
+            <ul>
+              <li>Menyiapkan penampungan air hujan.</li>
+              <li>Menggunakan mulsa untuk menjaga kelembapan tanah.</li>
+              <li>Memilih tanaman yang sesuai dengan kondisi lingkungan.</li>
+              <li>Memeriksa kondisi saluran irigasi secara berkala.</li>
+            </ul>
+          </div>
 
-    user.harvest = {
-        plant,
-        days,
-        date:harvestDate.toISOString()
-    };
+        </div>
 
-    saveUser();
+      </div>
 
-}
+    </div>
+  </section>
 
-function getPlantName(plant){
 
-    const names = {
+  <!-- IRIGASI -->
+  <section id="irigasi">
+    <div class="container">
 
-        padi:"Padi",
-        jagung:"Jagung",
-        kedelai:"Kedelai",
-        cabai:"Cabai",
-        tomat:"Tomat",
-        kentang:"Kentang",
-        bawang:"Bawang Merah",
-        kacang:"Kacang Tanah",
-        mentimun:"Mentimun",
-        semangka:"Semangka",
-        melon:"Melon",
-        pepaya:"Pepaya",
-        tembakau:"Tembakau"
+      <div class="section-title">
+        <h2>💧 Simulasi Irigasi Tetes Otomatis</h2>
 
-    };
+        <p>
+          Simulasi sederhana sensor kelembapan tanah dan pompa.
+        </p>
+      </div>
 
-    return names[plant]
-        || capitalize(plant);
 
-}
+      <div class="irrigation">
 
-function capitalize(text){
+        <div class="irrigation-card">
 
-    return text.charAt(0).toUpperCase()
-        + text.slice(1);
+          <h3>🌱 Kelembapan Tanah</h3>
 
-}
+          <div class="meter">
+            <div
+              id="moistureBar"
+              class="meter-fill">
+            </div>
+          </div>
 
-function checkIrrigation(){
+          <h2>
+            <span id="moistureValue">42</span>%
+          </h2>
 
-    const moisture =
-        parseFloat(
-            document.getElementById("soilMoisture")
-                .value
-        );
+          <input
+            id="moistureSlider"
+            class="range"
+            type="range"
+            min="0"
+            max="100"
+            value="42"
+            oninput="updateMoisture(this.value)">
 
-    const temp =
-        parseFloat(
-            document.getElementById("temperature")
-                .value
-        );
+          <div
+            id="irrigationStatus"
+            class="irrigation-status">
+            💧 Tanah cukup kering — pompa AKAN menyala.
+          </div>
 
-    const weather =
-        document.getElementById("weather")
-            .value;
+          <p>
+            Sistem akan menyalakan pompa ketika kelembapan
+            berada di bawah batas tertentu.
+          </p>
 
-    const plant =
-        document.getElementById("irPlant")
-            .value;
+        </div>
 
-    const phase =
-        document.getElementById("plantPhase")
-            .value;
 
-    if(isNaN(moisture) || isNaN(temp)){
+        <div class="irrigation-card">
 
-        alert(
-            "Masukkan kelembapan tanah dan suhu."
-        );
+          <h3>🚿 Status Pompa</h3>
 
-        return;
+          <div
+            id="pump"
+            class="pump">
+            🚿
+          </div>
 
-    }
+          <h2
+            id="pumpStatus"
+            style="text-align:center;">
+            POMPA MATI
+          </h2>
 
-    let recommendation = "";
+          <button
+            id="pumpButton"
+            class="btn btn-primary"
+            style="width:100%; margin-top:20px;"
+            onclick="togglePump()">
+            Nyalakan Pompa Manual
+          </button>
 
-    if(plant === "Tembakau"){
+        </div>
 
-        if(weather === "hujan"){
+      </div>
 
-            recommendation =
-            "🌧️ <b>Tembakau:</b> penyiraman sebaiknya " +
-            "dikurangi atau ditunda karena sedang hujan. " +
-            "Pastikan drainase lahan berjalan baik dan " +
-            "hindari genangan air.";
+    </div>
+  </section>
 
-        }
 
-        else if(moisture < 30){
+  <!-- CHECKLIST -->
+  <section>
+    <div class="container">
 
-            recommendation =
-            "🌿 <b>Tembakau:</b> tanah cukup kering. " +
-            "Tanaman kemungkinan membutuhkan penyiraman " +
-            "secukupnya. Berikan air secara bertahap dan " +
-            "hindari membuat tanah terlalu becek.";
+      <div class="section-title">
+        <h2>✅ Checklist Petani Siaga</h2>
+        <p>
+          Tandai persiapan yang sudah dilakukan.
+        </p>
+      </div>
 
-        }
+      <div class="checklist">
 
-        else if(moisture < 50){
+        <div class="check-card">
 
-            recommendation =
-            "🌿 <b>Tembakau:</b> kelembapan tanah sedang. " +
-            "Pertahankan kelembapan secara stabil dan " +
-            "pantau kembali kondisi tanah sebelum penyiraman berikutnya.";
+          <h3>☀️ Kekeringan</h3>
 
-        }
+          <label>
+            <input type="checkbox">
+            Menyiapkan cadangan air
+          </label>
 
-        else if(moisture < 70){
+          <label>
+            <input type="checkbox">
+            Memeriksa irigasi
+          </label>
 
-            recommendation =
-            "✅ <b>Tembakau:</b> kelembapan tanah cukup baik. " +
-            "Belum perlu menambah banyak air. Pertahankan " +
-            "drainase agar tanah tidak terlalu basah.";
+          <label>
+            <input type="checkbox">
+            Menyiapkan mulsa
+          </label>
 
-        }
+        </div>
 
-        else{
 
-            recommendation =
-            "⚠️ <b>Tembakau:</b> kelembapan tanah cukup tinggi. " +
-            "Kurangi penyiraman dan pastikan air dapat mengalir " +
-            "dengan baik karena tembakau tidak cocok dengan kondisi tanah tergenang.";
+        <div class="check-card">
 
-        }
+          <h3>🌊 Banjir</h3>
 
-        if(temp >= 33 && weather === "cerah"){
+          <label>
+            <input type="checkbox">
+            Membersihkan drainase
+          </label>
 
-            recommendation +=
-            "<br><br>☀️ Suhu cukup tinggi. Pantau kondisi daun " +
-            "dan kelembapan tanah lebih sering. Jika tanah mulai " +
-            "terlalu kering, lakukan penyiraman secukupnya.";
+          <label>
+            <input type="checkbox">
+            Memeriksa ketinggian air
+          </label>
 
-        }
+          <label>
+            <input type="checkbox">
+            Menyiapkan jalur evakuasi
+          </label>
 
-        if(
-            phase === "Pertumbuhan" ||
-            phase === "Berbunga" ||
-            phase === "Pembuahan"
-        ){
+        </div>
 
-            recommendation +=
-            "<br><br>🌱 Pada fase pertumbuhan aktif, " +
-            "ketersediaan air perlu dijaga tetap stabil " +
-            "tanpa menyebabkan genangan.";
 
-        }
+        <div class="check-card">
 
-        if(phase === "Menjelang Panen"){
+          <h3>⛰️ Longsor</h3>
 
-            recommendation +=
-            "<br><br>🌿 Menjelang panen, perhatikan kondisi " +
-            "kelembapan dan jangan melakukan penyiraman berlebihan. " +
-            "Sesuaikan dengan kondisi lahan dan cuaca.";
+          <label>
+            <input type="checkbox">
+            Menanam vegetasi penguat
+          </label>
 
-        }
+          <label>
+            <input type="checkbox">
+            Memeriksa retakan tanah
+          </label>
 
-    }
+          <label>
+            <input type="checkbox">
+            Menjaga drainase lereng
+          </label>
 
-    else{
+        </div>
 
-        if(weather === "hujan"){
+      </div>
 
-            recommendation =
-                "🌧️ Penyiraman sebaiknya dikurangi atau ditunda karena sedang hujan.";
+    </div>
+  </section>
 
-        }
 
-        else if(moisture < 30){
+  <!-- FOOTER -->
+  <footer>
+    <h2>🌱 AGRI-SIAGA</h2>
 
-            recommendation =
-                "💧 Tanah cukup kering. Tanaman kemungkinan membutuhkan penyiraman.";
+    <p>
+      Inovasi digital untuk pertanian Gen Z yang
+      tangguh menghadapi bencana.
+    </p>
 
-        }
+    <p>
+      © 2026 AGRI-SIAGA — Prototype
+    </p>
+  </footer>
 
-        else if(moisture < 50){
 
-            recommendation =
-                "🌱 Kelembapan sedang. Lakukan penyiraman secukupnya dan pantau kembali.";
+  <!-- MODAL -->
+  <div
+    id="modal"
+    class="modal"
+    onclick="closeModal(event)">
 
-        }
+    <div class="modal-content">
 
-        else{
+      <button
+        class="close"
+        onclick="closeModal()">
+        ×
+      </button>
 
-            recommendation =
-                "✅ Kelembapan tanah cukup tinggi. Hindari penyiraman berlebihan.";
+      <h2 id="modalTitle"></h2>
 
-        }
+      <div
+        id="modalBody"
+        style="margin-top:20px;">
+      </div>
 
-        if(temp >= 33 && weather === "cerah"){
+    </div>
 
-            recommendation +=
-                " Suhu cukup tinggi, sehingga tanaman dapat membutuhkan perhatian lebih terhadap kehilangan air.";
+  </div>
 
-        }
 
-        if(
-            phase === "Berbunga" ||
-            phase === "Pembuahan"
-        ){
+  <script>
 
-            recommendation +=
-                " Pada fase ini, kestabilan ketersediaan air penting untuk mendukung pertumbuhan.";
+    /* =========================
+       DATA PANDUAN
+    ========================= */
 
-        }
+    const disasterData = {
 
-    }
+      kekeringan: {
+        title: "☀️ Penanganan Kekeringan",
 
-    const result =
-        document.getElementById("irrigationResult");
-
-    result.style.display =
-        "block";
-
-    result.innerHTML =
-    `
-    <b>
-        💧 Rekomendasi untuk ${plant}
-    </b>
-
-    <br><br>
-
-    ${recommendation}
-
-    <br><br>
-
-    <b>Kelembapan:</b>
-    ${moisture}%
-
-    <br>
-
-    <b>Suhu:</b>
-    ${temp}°C
-
-    <br>
-
-    <b>Cuaca:</b>
-    ${capitalize(weather)}
-
-    <br>
-
-    <b>Fase:</b>
-    ${phase}
-    `;
-
-    user.irrigation = {
-        plant,
-        moisture,
-        temp,
-        weather,
-        phase
-    };
-
-    saveUser();
-
-}
-
-function sendAI(){
-
-    const input =
-        document.getElementById("aiInput");
-
-    const question =
-        input.value.trim();
-
-    if(!question)
-        return;
-
-    addMessage(
-        question,
-        "user"
-    );
-
-    input.value = "";
-
-    const answer =
-        getAIResponse(question);
-
-    setTimeout(()=>{
-
-        addMessage(
-            answer,
-            "ai"
-        );
-
-    },400);
-
-    user.aiUsed = true;
-
-    user.achievements =
-        Math.max(
-            user.achievements,
-            4
-        );
-
-    saveUser();
-
-    updateDashboard();
-
-}
-
-function addMessage(text,type){
-
-    const messages =
-        document.getElementById("chatMessages");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "message " + type;
-
-    const bubble =
-        document.createElement("div");
-
-    bubble.className =
-        "bubble";
-
-    bubble.innerHTML =
-        text;
-
-    message.appendChild(
-        bubble
-    );
-
-    messages.appendChild(
-        message
-    );
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-}
-
-/* =========================================================
-   ECOAI - MESIN JAWABAN YANG LEBIH LENGKAP
-   ---------------------------------------------------------
-   Catatan:
-   - Versi ini dapat menjawab jauh lebih banyak variasi
-     pertanyaan tanpa harus memakai kata kunci yang persis sama.
-   - Untuk benar-benar menjawab pertanyaan apa pun seperti
-     ChatGPT, sambungkan fungsi askEcoAIToServer() ke backend
-     AI milik Anda. Jangan menaruh API key rahasia di HTML.
-========================================================= */
-
-const ECOAI_API_URL = ""; 
-// Contoh jika nanti punya backend:
-// const ECOAI_API_URL = "/api/ecoai";
-
-function escapeEcoAI(text){
-    return String(text).replace(/[&<>"']/g, m => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",
-        '"':"&quot;","'":"&#039;"
-    }[m]));
-}
-
-function normalizeEcoQuestion(question){
-    return question
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
-        .replace(/[^\w\s?%°.-]/g," ")
-        .replace(/\s+/g," ")
-        .trim();
-}
-
-function hasAny(q, words){
-    return words.some(w => q.includes(w));
-}
-
-function getPlantName(q){
-    const plants = [
-        ["padi","Padi 🌾"],["jagung","Jagung 🌽"],["cabai","Cabai 🌶️"],
-        ["tomat","Tomat 🍅"],["tembakau","Tembakau 🌿"],
-        ["kedelai","Kedelai 🫘"],["bawang merah","Bawang Merah 🧅"],
-        ["kentang","Kentang 🥔"],["mentimun","Mentimun 🥒"],
-        ["semangka","Semangka 🍉"],["kangkung","Kangkung 🥬"],
-        ["terong","Terong 🍆"],["sawi","Sawi 🥬"],
-        ["bayam","Bayam 🥬"],["wortel","Wortel 🥕"],
-        ["singkong","Singkong"],["ubi","Ubi"],
-        ["tebu","Tebu"],["kacang","Kacang"]
-    ];
-    const found = plants.find(([key]) => q.includes(key));
-    return found ? found[1] : null;
-}
-
-/*
- * Jika backend AI tersedia, fungsi ini menjadi jalur utama.
- * Backend menerima {message, context} dan mengembalikan:
- * { answer: "..." }
- */
-async function askEcoAIToServer(question){
-    if(!ECOAI_API_URL) return null;
-
-    try{
-        const response = await fetch(ECOAI_API_URL,{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({
-                message:question,
-                context:{
-                    app:"Smart Farming Technology",
-                    language:"id",
-                    username:user?.username || "Petani Smart",
-                    coins:user?.coins || 0,
-                    level:user?.xp || 0
-                }
-            })
-        });
-
-        if(!response.ok) return null;
-
-        const data = await response.json();
-
-        if(data && data.answer){
-            return String(data.answer)
-                .replace(/\n/g,"<br>");
-        }
-    }catch(error){
-        console.warn("EcoAI backend tidak tersedia:",error);
-    }
-
-    return null;
-}
-
-/* Jawaban lokal sebagai fallback agar EcoAI tetap berjalan
-   walaupun website hanya berupa HTML di GitHub Pages. */
-function getLocalEcoAIResponse(question){
-    const q = normalizeEcoQuestion(question);
-    const plant = getPlantName(q);
-
-    // EcoAI lokal dibuat lebih rinci: setiap jawaban memiliki
-    // penjelasan, kemungkinan penyebab, langkah penanganan,
-    // pencegahan, dan pertanyaan lanjutan yang relevan.
-
-    const answer = (title, intro, sections=[], closing="") => {
-        let html = `<b>${title}</b><br><br>${intro}`;
-        sections.forEach(sec => {
-            html += `<br><br><b>${sec[0]}</b><br>${sec[1]}`;
-        });
-        if(closing) html += `<br><br><i>${closing}</i>`;
-        return html;
-    };
-
-    /* SAPAAN */
-    if(hasAny(q,["halo","hai","hello","hi","selamat pagi","selamat siang","selamat sore","selamat malam","apa kabar"])){
-        return answer(
-            "👋 Halo! Saya EcoAI 🌱",
-            "Saya siap membantu kamu memahami masalah pertanian secara lebih rinci.",
-            [
-                ["🌱 Tanaman", "Menjelaskan cara menanam, pemeliharaan, pemupukan, gejala tanaman, penyakit, hama, dan panen."],
-                ["🧪 Pupuk & tanah", "Membantu memahami NPK, urea, pupuk organik, pH tanah, bahan organik, dan pemupukan."],
-                ["💧 Air & irigasi", "Membantu menentukan kebutuhan penyiraman berdasarkan kondisi tanah, cuaca, fase tanaman, dan jenis tanaman."],
-                ["♻️ Limbah & kompos", "Menjelaskan pengolahan sisa tanaman dan sampah organik menjadi kompos atau bahan bernilai."],
-                ["🐛 Hama & penyakit", "Membantu mengenali kemungkinan penyebab berdasarkan gejala dan memberikan langkah pengendalian yang aman."],
-                ["📊 Panen & komoditas", "Menjelaskan indikator panen, penanganan setelah panen, dan faktor yang memengaruhi harga."]
-            ],
-            "Agar jawaban semakin tepat, tuliskan nama tanaman dan ceritakan gejala, umur tanaman, kondisi tanah, serta cuaca jika berkaitan."
-        );
-    }
-
-    /* IDENTITAS ECOFARMING */
-    if(hasAny(q,["ecofarming","eco farming","fitur","aplikasi ini","website ini","platform ini","tentang aplikasi","apa itu ecoai","siapa kamu"])){
-        return answer(
-            "🤖 Tentang EcoAI & Smart Farming Technology",
-            "EcoAI adalah asisten pertanian di dalam Smart Farming Technology. Fungsinya membantu pengguna memperoleh penjelasan dan panduan praktis terkait aktivitas pertanian.",
-            [
-                ["🏠 Dashboard", "Menampilkan ringkasan aktivitas dan informasi yang tersedia di Smart Farming Technology."],
-                ["♻️ Setor Limbah", "Digunakan untuk aktivitas pengelolaan atau penyetoran limbah yang terhubung dengan sistem Eco Coin."],
-                ["🎁 Reward", "Eco Coin dapat digunakan untuk menukarkan reward yang tersedia."],
-                ["📋 Riwayat", "Menyimpan riwayat aktivitas penukaran sehingga pengguna dapat melihat kembali voucher yang diperoleh."],
-                ["📷 Kamera Tanaman", "Mendukung alur pemeriksaan tanaman yang tersedia pada aplikasi."],
-                ["🌾 Prediksi Panen", "Membantu memperkirakan waktu panen berdasarkan data yang dimasukkan ke sistem."],
-                ["💧 Irigasi Pintar", "Memberikan rekomendasi penyiraman berdasarkan jenis tanaman, kelembapan tanah, suhu, cuaca, dan fase tanaman."],
-                ["💬 EcoAI", "Menjadi tempat bertanya mengenai pertanian dengan penjelasan yang lebih mudah dipahami."]
-            ],
-            "Gunakan pertanyaan yang spesifik agar saya dapat memberikan langkah yang lebih terarah."
-        );
-    }
-
-    /* ECO COIN / REWARD / VOUCHER */
-    if(hasAny(q,["eco coin","ecocoin","koin","poin","reward","hadiah","voucher","e voucher","e-voucher","penukaran"])){
-        return answer(
-            "🎁 Eco Coin, Reward & E-Voucher",
-            "Eco Coin pada Smart Farming Technology digunakan sebagai bagian dari mekanisme reward. Ketika saldo mencukupi, pengguna dapat melakukan penukaran terhadap reward yang tersedia.",
-            [
-                ["💰 Eco Coin", "Perhatikan jumlah saldo sebelum menukarkan reward. Pastikan jumlah koin yang dibutuhkan sesuai dengan reward yang dipilih."],
-                ["🎟️ E-Voucher", "Setelah penukaran berhasil, sistem dapat menampilkan kode voucher beserta informasi pemilik, nilai penukaran, tanggal penukaran, dan masa berlaku."],
-                ["📅 Masa berlaku", "Pada sistem saat ini, voucher dirancang berlaku sampai 1 hari setelah tanggal penukaran. Periksa tanggal yang ditampilkan pada voucher sebelum digunakan."],
-                ["📋 Riwayat", "Riwayat penukaran dapat digunakan untuk membuka kembali detail voucher yang pernah diperoleh."],
-                ["⚠️ Jika voucher tidak muncul", "Periksa riwayat penukaran, pastikan penukaran benar-benar berhasil, kemudian buka item riwayat tersebut untuk melihat detail voucher."]
-            ],
-            "Jika kamu ingin mengetahui proses penukaran, tanyakan misalnya: 'bagaimana cara menukar Eco Coin menjadi voucher?'"
-        );
-    }
-
-    /* KOMPOS / LIMBAH */
-    if(hasAny(q,["kompos","limbah","sampah organik","sisa dapur","sisa makanan","daun kering","pupuk kompos"])){
-        return answer(
-            "♻️ Cara Mengolah Limbah Organik Menjadi Kompos",
-            "Kompos dibuat dengan menguraikan bahan organik secara terkendali. Bahan perlu memiliki keseimbangan antara bahan kaya karbon dan bahan kaya nitrogen serta kelembapan dan aerasi yang cukup.",
-            [
-                ["1. Pilih bahan", "Gunakan daun kering, rumput, sisa sayuran, sisa buah, dan bahan organik lain yang sesuai. Hindari bahan yang mengandung bahan kimia berbahaya."],
-                ["2. Seimbangkan bahan", "Campurkan bahan kering/cokelat sebagai sumber karbon dengan bahan hijau/basah sebagai sumber nitrogen. Jika terlalu basah, tambahkan bahan kering."],
-                ["3. Atur kelembapan", "Bahan sebaiknya lembap tetapi tidak tergenang. Kondisi terlalu basah dapat menurunkan aerasi dan menimbulkan bau."],
-                ["4. Beri udara", "Aduk atau balik kompos secara berkala agar oksigen masuk dan proses penguraian berlangsung lebih baik."],
-                ["5. Periksa kematangan", "Kompos matang umumnya berwarna gelap, teksturnya remah, suhunya sudah turun, dan bau menyengat berkurang."],
-                ["6. Gunakan", "Kompos matang dapat digunakan sebagai bahan organik untuk memperbaiki kondisi tanah dan mendukung pertumbuhan tanaman."]
-            ],
-            "Kalau komposmu bau, terlalu basah, atau tidak kunjung terurai, jelaskan kondisinya agar penyebabnya bisa dianalisis."
-        );
-    }
-
-    /* MAGGOT / BSF */
-    if(hasAny(q,["maggot","bsf","black soldier fly","lalat tentara hitam"])){
-        return answer(
-            "🪰 Panduan Dasar Budidaya Maggot BSF",
-            "Maggot BSF (Black Soldier Fly) banyak dimanfaatkan untuk membantu mengolah bahan organik sekaligus menghasilkan biomassa yang bernilai.",
-            [
-                ["1. Siapkan wadah", "Gunakan wadah yang aman, memiliki sirkulasi udara baik, dan mudah dibersihkan."],
-                ["2. Siapkan media pakan", "Gunakan bahan organik yang sesuai dan tidak tercampur bahan berbahaya. Pakan jangan diberikan dalam jumlah berlebihan sekaligus."],
-                ["3. Jaga kondisi media", "Media terlalu basah dapat menimbulkan bau dan masalah lingkungan pemeliharaan. Atur jumlah pakan dan kelembapan."],
-                ["4. Pantau pertumbuhan", "Amati ukuran, aktivitas, bau, dan kondisi media secara rutin."],
-                ["5. Panen", "Maggot dapat dipanen sesuai tujuan pemanfaatannya. Sebagian populasi dapat dipertahankan untuk keberlanjutan siklus budidaya."]
-            ],
-            "Jika kamu ingin, tanyakan 'cara budidaya maggot dari telur sampai panen' untuk panduan berdasarkan tahap."
-        );
-    }
-
-    /* PUPUK */
-    if(hasAny(q,["pupuk","urea","npk","nitrogen","fosfor","kalium","kcl","za","dolomit","pemupukan"])){
-        return answer(
-            "🧪 Panduan Pemupukan Tanaman",
-            "Pemupukan bertujuan menyediakan unsur hara yang dibutuhkan tanaman. Dosis dan jenis pupuk tidak boleh disamaratakan karena kebutuhan tanaman dipengaruhi jenis tanaman, umur, kondisi tanah, dan tujuan budidaya.",
-            [
-                ["🌿 Nitrogen (N)", "Berperan penting dalam pertumbuhan vegetatif dan pembentukan daun. Kekurangan N dapat menyebabkan pertumbuhan kurang subur dan daun tua cenderung menguning."],
-                ["🌸 Fosfor (P)", "Berhubungan dengan perkembangan akar dan proses reproduktif tanaman, termasuk pembungaan dan pembentukan hasil."],
-                ["🍅 Kalium (K)", "Mendukung berbagai proses fisiologis tanaman dan berkaitan dengan kualitas serta ketahanan tanaman terhadap kondisi lingkungan tertentu."],
-                ["🌱 Pupuk organik", "Membantu menambah bahan organik dan mendukung kondisi fisik, kimia, serta biologis tanah."],
-                ["⚖️ Jangan berlebihan", "Pupuk berlebihan tidak otomatis membuat tanaman tumbuh lebih cepat. Kelebihan unsur atau garam pupuk dapat mengganggu akar dan lingkungan tanah."],
-                ["📌 Cara menentukan dosis", "Gunakan rekomendasi berdasarkan komoditas, umur/fase tanaman, kondisi tanah, dan label produk. Jika tersedia, hasil analisis tanah akan membantu menentukan pemupukan dengan lebih tepat."]
-            ],
-            "Sebutkan nama tanaman, umur tanaman, luas lahan, dan jenis pupuk yang tersedia jika kamu ingin dibuatkan contoh strategi pemupukan."
-        );
-    }
-
-    /* DAUN KUNING */
-    if(hasAny(q,["daun kuning","daunnya kuning","daun menguning","menguning","klorosis"])){
-        return answer(
-            "🍃 Mengapa Daun Tanaman Menguning?",
-            "Daun menguning bukan hanya disebabkan kekurangan pupuk. Penyebabnya dapat berasal dari nutrisi, air, akar, penyakit, hama, atau kondisi lingkungan.",
-            [
-                ["1. Kekurangan nitrogen", "Sering terlihat pada daun yang lebih tua terlebih dahulu karena nitrogen dapat dipindahkan dari jaringan tua ke jaringan muda."],
-                ["2. Terlalu banyak air", "Media yang terus-menerus jenuh dapat mengurangi oksigen di sekitar akar sehingga akar terganggu. Daun dapat menguning dan pertumbuhan melambat."],
-                ["3. Kekurangan air", "Tanaman yang kekurangan air dapat layu dan menunjukkan gejala stres, termasuk perubahan warna daun."],
-                ["4. Masalah akar", "Akar yang rusak, busuk, atau terganggu dapat mengurangi kemampuan tanaman menyerap air dan nutrisi."],
-                ["5. Hama atau penyakit", "Periksa permukaan dan bagian bawah daun, batang, serta akar. Cari bercak, lubang, serangga, lapisan seperti jamur, atau pola perubahan warna yang tidak biasa."],
-                ["6. Kondisi lingkungan", "Suhu ekstrem, cahaya yang tidak sesuai, dan kondisi tanah yang kurang baik juga dapat memengaruhi warna daun."],
-                ["🔎 Pemeriksaan awal", "Lihat daun mana yang menguning, mulai dari mana, apakah tanah basah/kering, dan apakah ada bercak atau hama. Jangan langsung menambah pupuk sebelum penyebabnya diketahui."]
-            ],
-            "Untuk diagnosis yang lebih tepat, tuliskan tanaman apa, umur tanaman, daun tua atau muda yang menguning, kondisi tanah, dan apakah ada bercak/hama."
-        );
-    }
-
-    /* LAYU */
-    if(hasAny(q,["layu","tanaman layu","daun lemas","daun lemas","tidak segar"])){
-        return answer(
-            "💧 Tanaman Layu: Penyebab dan Penanganan",
-            "Layu berarti keseimbangan air tanaman terganggu, tetapi penyebabnya tidak selalu kekurangan air.",
-            [
-                ["💧 Kekurangan air", "Periksa kelembapan tanah. Jika media sangat kering, tanaman mungkin mengalami stres kekeringan."],
-                ["🌧️ Kelebihan air", "Tanah yang terlalu basah dapat mengganggu akar karena kurang oksigen. Dalam kondisi tertentu tanaman justru layu meskipun tanah basah."],
-                ["🌱 Kerusakan akar", "Akar yang rusak atau membusuk dapat membuat tanaman tidak mampu menyerap air dengan baik."],
-                ["☀️ Panas berlebih", "Penguapan tinggi dapat membuat kehilangan air lebih cepat daripada kemampuan akar memasok air."],
-                ["🐛 Penyakit/hama", "Beberapa gangguan pada akar, batang, atau pembuluh tanaman dapat menyebabkan layu."],
-                ["✅ Langkah awal", "Periksa tanah, akar bila memungkinkan, batang, daun, dan kondisi cuaca. Sesuaikan penyiraman berdasarkan kondisi nyata, bukan hanya jadwal."]
-            ],
-            "Jangan langsung menyiram terus-menerus sebelum memeriksa apakah tanah sebenarnya sudah terlalu basah."
-        );
-    }
-
-    /* HAMA */
-    if(hasAny(q,["hama","ulat","kutu","thrips","trips","aphid","kutu daun","wereng","belalang","penggerek","serangga"])){
-        return answer(
-            "🐛 Mengatasi Hama Tanaman Secara Terpadu",
-            "Pengendalian hama sebaiknya dimulai dengan identifikasi. Mengetahui jenis hama dan bagian tanaman yang diserang membantu menentukan tindakan yang tepat.",
-            [
-                ["1. Amati gejala", "Cari lubang pada daun, daun keriting, bekas gigitan, serangga kecil, telur, kotoran hama, atau kerusakan pada batang/buah."],
-                ["2. Periksa bagian bawah daun", "Banyak hama berukuran kecil bersembunyi di bagian bawah daun atau pada pucuk tanaman."],
-                ["3. Kendalikan secara mekanis", "Jika serangan ringan, hama tertentu dapat diambil secara manual atau bagian tanaman yang terserang berat dapat dipangkas secara tepat."],
-                ["4. Jaga kebersihan kebun", "Buang bagian tanaman yang terserang sesuai kebutuhan dan kurangi tempat yang mendukung perkembangan hama."],
-                ["5. Gunakan pengendalian biologis", "Musuh alami dapat membantu menekan populasi hama dan perlu dijaga keberadaannya."],
-                ["6. Pestisida sebagai pilihan terukur", "Jika diperlukan, gunakan produk yang sesuai label, sasaran, dosis, interval, dan aturan keselamatan. Jangan mencampur produk sembarangan."]
-            ],
-            "Kalau kamu bisa menyebutkan bentuk serangganya dan gejalanya, saya dapat membantu mempersempit kemungkinan hama."
-        );
-    }
-
-    /* PENYAKIT */
-    if(hasAny(q,["penyakit tanaman","jamur","busuk","bercak","antraknosa","layu fusarium","virus","bakteri","embun","mosaik","bercak daun"])){
-        return answer(
-            "🦠 Mengenali Penyakit Tanaman",
-            "Penyakit tanaman dapat disebabkan oleh jamur, bakteri, virus, atau faktor non-patogen. Gejalanya bisa mirip sehingga identifikasi perlu dilakukan secara hati-hati.",
-            [
-                ["🔍 Perhatikan pola gejala", "Catat apakah bercak berbentuk bulat, tidak beraturan, basah, kering, meluas dari tepi daun, atau mengikuti tulang daun."],
-                ["🌿 Periksa bagian lain", "Periksa daun, batang, buah, dan akar. Kondisi akar dan pangkal batang sering memberikan petunjuk penting."],
-                ["💧 Kelola kelembapan", "Kelembapan tinggi dan daun yang lama basah dapat mendukung perkembangan sebagian penyakit."],
-                ["✂️ Sanitasi", "Buang bagian tanaman yang terserang berat sesuai kebutuhan dan hindari penyebaran melalui alat atau bahan tanaman yang terkontaminasi."],
-                ["🧪 Pengendalian", "Gunakan pengendalian yang sesuai dengan penyebab yang diduga dan ikuti label produk. Hindari penggunaan fungisida/bakterisida secara membabi buta."]
-            ],
-            "Jika ada foto tanaman, gejala visual dapat membantu proses identifikasi, tetapi diagnosis pasti tetap memerlukan pemeriksaan yang memadai."
-        );
-    }
-
-    /* AIR / IRIGASI */
-    if(hasAny(q,["air","siram","penyiraman","irigasi","kelembapan","tanah kering","berapa kali siram"])){
-        return answer(
-            "💧 Cara Menentukan Kebutuhan Penyiraman",
-            "Tidak ada satu jadwal penyiraman yang cocok untuk semua tanaman. Kebutuhan air dipengaruhi jenis tanaman, umur/fase, jenis media, cuaca, suhu, kelembapan tanah, dan drainase.",
-            [
-                ["🌱 Persemaian", "Bibit biasanya memerlukan perhatian lebih terhadap kelembapan karena akar masih terbatas. Hindari media tergenang."],
-                ["🌿 Pertumbuhan", "Kebutuhan air meningkat seiring pertumbuhan, tetapi tetap harus disesuaikan dengan kondisi tanah."],
-                ["🌸 Berbunga & berbuah", "Kebutuhan air perlu stabil dan tidak boleh mengalami stres berat akibat kekeringan atau genangan."],
-                ["🌧️ Saat hujan", "Kurangi atau tunda penyiraman jika media sudah cukup lembap. Pastikan drainase berjalan baik."],
-                ["☀️ Saat panas", "Pantau media lebih sering karena penguapan meningkat. Jangan hanya mengikuti jadwal tanpa memeriksa kelembapan."],
-                ["📏 Praktik sederhana", "Periksa kelembapan tanah pada kedalaman zona akar dan lihat respons tanaman. Untuk lahan yang lebih besar, sensor kelembapan dapat membantu."]
-            ],
-            "EcoFarming juga memiliki fitur Irigasi Pintar yang menggunakan jenis tanaman, kelembapan tanah, suhu, cuaca, dan fase tanaman sebagai data rekomendasi."
-        );
-    }
-
-    /* TANAH */
-    if(hasAny(q,["tanah","ph tanah","pH","tanah masam","tanah asam","tanah basa","drainase","subur","kesuburan tanah"])){
-        return answer(
-            "🌱 Cara Menjaga Kesuburan Tanah",
-            "Tanah yang produktif bukan hanya soal banyaknya pupuk. Struktur, bahan organik, pH, air, udara, dan aktivitas biologis semuanya berpengaruh.",
-            [
-                ["🧪 Periksa pH", "pH memengaruhi ketersediaan unsur hara. Jika pH terlalu rendah atau terlalu tinggi, beberapa unsur dapat menjadi kurang tersedia bagi tanaman."],
-                ["♻️ Tambahkan bahan organik", "Kompos dan bahan organik yang matang dapat membantu memperbaiki kondisi fisik dan biologis tanah."],
-                ["💧 Perbaiki drainase", "Air yang menggenang terlalu lama dapat mengganggu akar. Pastikan saluran atau struktur media memungkinkan kelebihan air keluar."],
-                ["🌿 Kurangi kerusakan struktur", "Pengolahan tanah yang berlebihan dapat merusak struktur dan kehidupan biologis tanah."],
-                ["🔬 Analisis tanah", "Untuk keputusan pemupukan yang lebih akurat, analisis tanah jauh lebih baik daripada menebak kebutuhan unsur hara."]
-            ],
-            "Jika kamu mengetahui hasil pH atau analisis tanah, masukkan nilainya dan saya dapat membantu menjelaskan artinya."
-        );
-    }
-
-    /* MENANAM */
-    if(hasAny(q,["cara menanam","menanam","tanam","bibit","benih","persemaian","budidaya"])){
-        return answer(
-            `🌱 Panduan Dasar Menanam${plant ? " " + plant : " Tanaman"}`,
-            "Keberhasilan budidaya dimulai dari benih/bibit yang baik, media yang sesuai, air yang cukup, nutrisi seimbang, dan pengamatan rutin.",
-            [
-                ["1. Tentukan komoditas dan tujuan", "Pilih tanaman yang sesuai dengan kondisi lingkungan, musim, lahan, dan kebutuhan pasar."],
-                ["2. Siapkan benih/bibit", "Gunakan bahan tanam yang sehat dan sesuai varietas. Bibit yang lemah atau terserang penyakit dapat meningkatkan risiko masalah sejak awal."],
-                ["3. Siapkan media/tanah", "Pastikan struktur cukup baik, memiliki bahan organik yang memadai, dan drainase tidak buruk."],
-                ["4. Atur jarak tanam", "Jarak harus menyesuaikan komoditas dan sistem budidaya agar tanaman mendapatkan ruang, cahaya, serta sirkulasi udara yang sesuai."],
-                ["5. Kelola air", "Jaga kelembapan sesuai fase tanaman dan hindari kekeringan maupun genangan berkepanjangan."],
-                ["6. Lakukan pemupukan terukur", "Sesuaikan jenis dan jumlah pupuk dengan kebutuhan tanaman serta kondisi tanah."],
-                ["7. Pantau hama dan penyakit", "Lakukan pemeriksaan rutin agar masalah dapat diketahui ketika masih ringan."],
-                ["8. Catat perkembangan", "Catatan tanggal tanam, pemupukan, penyiraman, cuaca, dan gejala tanaman akan membantu pengambilan keputusan."]
-            ],
-            "Jika kamu menyebutkan jenis tanaman dan luas lahan, panduan dapat dibuat lebih spesifik."
-        );
-    }
-
-    /* PANEN */
-    if(hasAny(q,["panen","kapan panen","siap panen","ciri panen","umur panen"])){
-        return answer(
-            "🌾 Menentukan Waktu Panen",
-            "Waktu panen tidak sebaiknya ditentukan hanya berdasarkan jumlah hari setelah tanam. Gunakan umur tanaman bersama indikator fisik dan tujuan pemasaran.",
-            [
-                ["📅 Umur tanaman", "Gunakan umur varietas sebagai acuan awal, tetapi kondisi lapangan dapat membuat waktu panen berbeda."],
-                ["👀 Warna dan bentuk", "Banyak komoditas memiliki perubahan warna, ukuran, tekstur, atau bentuk tertentu ketika mendekati matang."],
-                ["🌾 Kondisi bagian hasil", "Periksa biji, buah, umbi, atau bagian yang dipanen sesuai komoditas."],
-                ["💰 Tujuan pasar", "Tingkat kematangan yang optimal untuk konsumsi langsung dapat berbeda dari hasil yang akan dikirim atau disimpan."],
-                ["📦 Setelah panen", "Tangani hasil dengan hati-hati, kurangi benturan dan paparan kondisi yang mempercepat kerusakan."]
-            ],
-            "Sebutkan tanaman dan umur setelah tanam jika kamu ingin saya jelaskan indikator panennya."
-        );
-    }
-
-    /* HARGA */
-    if(hasAny(q,["harga","harga cabai","harga padi","harga jagung","harga komoditas","pasar","jual hasil","harga jual"])){
-        return answer(
-            "📊 Faktor yang Memengaruhi Harga Komoditas",
-            "Harga pertanian berubah karena interaksi antara pasokan, permintaan, musim, distribusi, kualitas, biaya produksi, dan kondisi pasar.",
-            [
-                ["📈 Pasokan", "Ketika produksi banyak sementara permintaan relatif tetap, harga dapat tertekan. Sebaliknya, pasokan yang terbatas dapat mendorong harga naik."],
-                ["🛒 Permintaan", "Perubahan kebutuhan konsumen, industri, atau pasar tertentu dapat memengaruhi harga."],
-                ["🌧️ Musim & cuaca", "Cuaca ekstrem dapat mengurangi produksi atau mengganggu distribusi sehingga memengaruhi harga."],
-                ["🚚 Distribusi", "Biaya transportasi, jarak pasar, dan kondisi logistik memengaruhi harga yang diterima petani."],
-                ["⭐ Kualitas", "Ukuran, tingkat kematangan, kebersihan, dan kondisi hasil dapat memengaruhi harga jual."],
-                ["💡 Strategi petani", "Pencatatan biaya produksi dan survei beberapa saluran pemasaran membantu menentukan keputusan penjualan."]
-            ],
-            "Jika kamu menanyakan harga terkini, data harga perlu diambil dari sumber pasar yang diperbarui karena harga berubah dari waktu ke waktu."
-        );
-    }
-
-    /* TANAMAN SPESIFIK */
-    if(q.includes("padi") || q.includes("beras")){
-        return answer(
-            "🌾 Panduan Dasar Budidaya Padi",
-            "Budidaya padi membutuhkan pengelolaan varietas, persemaian, air, nutrisi, gulma, hama, penyakit, dan waktu panen secara terpadu.",
-            [
-                ["🌱 Awal tanam", "Gunakan benih sehat dan atur persemaian dengan baik. Bibit perlu dipindahkan pada kondisi dan umur yang sesuai sistem budidaya."],
-                ["💧 Air", "Pengelolaan air perlu mengikuti fase tanaman dan kondisi lahan. Hindari genangan atau kekeringan yang tidak sesuai kebutuhan."],
-                ["🧪 Nutrisi", "Padi membutuhkan unsur hara makro dan mikro. Pemupukan sebaiknya mengikuti kondisi lahan dan rekomendasi setempat."],
-                ["🐛 Hama", "Pantau wereng, penggerek batang, dan organisme pengganggu lain sesuai kondisi lapangan."],
-                ["🦠 Penyakit", "Perhatikan perubahan warna, bercak, busuk, atau gejala khas pada daun dan malai."],
-                ["🌾 Panen", "Gunakan warna dan kondisi gabah/malai serta umur varietas sebagai indikator bersama untuk menentukan waktu panen."]
-            ],
-            "Sebutkan umur padi dan masalah yang sedang terjadi jika ingin diagnosis lebih spesifik."
-        );
-    }
-
-    if(q.includes("jagung")){
-        return answer(
-            "🌽 Panduan Dasar Budidaya Jagung",
-            "Jagung membutuhkan benih yang baik, tanah dengan drainase memadai, nutrisi seimbang, pengelolaan air, serta pengawasan hama dan penyakit.",
-            [
-                ["🌱 Penanaman", "Gunakan benih sehat dan atur jarak tanam sesuai varietas serta sistem budidaya."],
-                ["💧 Air", "Jaga kelembapan terutama pada fase kritis pertumbuhan dan pembentukan hasil, tanpa membuat tanah tergenang."],
-                ["🧪 Nutrisi", "Nitrogen, fosfor, kalium, dan unsur lain dibutuhkan dalam jumlah berbeda sepanjang pertumbuhan."],
-                ["🐛 Hama", "Periksa pucuk, daun, dan tongkol secara rutin untuk mendeteksi serangan lebih awal."],
-                ["🌽 Panen", "Tanda kematangan berbeda untuk jagung konsumsi segar dan jagung biji, sehingga tujuan panen perlu diperjelas."]
-            ],
-            "Sebutkan apakah jagungmu untuk konsumsi muda atau untuk biji agar panduannya lebih tepat."
-        );
-    }
-
-    if(q.includes("cabai")){
-        return answer(
-            "🌶️ Panduan Dasar Budidaya Cabai",
-            "Cabai membutuhkan drainase baik, penyiraman stabil, nutrisi seimbang, dan pengawasan ketat terhadap hama serta penyakit.",
-            [
-                ["🌱 Bibit", "Gunakan bibit sehat dan hindari media yang terlalu basah."],
-                ["💧 Penyiraman", "Jaga kelembapan tanah tetap stabil dan sesuaikan dengan cuaca serta fase tanaman."],
-                ["🧪 Nutrisi", "Pemupukan harus seimbang dan disesuaikan fase vegetatif, berbunga, serta berbuah."],
-                ["🐛 Hama", "Kutu daun, trips, tungau, dan beberapa hama lain dapat menyebabkan keriting, perubahan warna, atau kerusakan buah."],
-                ["🦠 Penyakit", "Perhatikan bercak daun, busuk buah, layu, dan gejala lain. Sanitasi dan pengelolaan kelembapan penting."],
-                ["🌶️ Panen", "Tingkat kematangan dipilih berdasarkan kebutuhan pasar dan tujuan penggunaan."]
-            ],
-            "Jika daun cabai keriting, menguning, atau buah busuk, jelaskan gejalanya agar penyebabnya bisa dipersempit."
-        );
-    }
-
-    if(q.includes("tomat")){
-        return answer(
-            "🍅 Panduan Dasar Budidaya Tomat",
-            "Tomat membutuhkan media dengan drainase baik, cahaya cukup, nutrisi seimbang, serta pengelolaan air yang konsisten.",
-            [
-                ["🌱 Penanaman", "Gunakan bibit sehat dan berikan ruang tumbuh serta penyangga sesuai tipe tanaman."],
-                ["💧 Air", "Hindari perubahan kelembapan yang terlalu ekstrem dan genangan berkepanjangan."],
-                ["🧪 Nutrisi", "Kebutuhan nutrisi berubah sepanjang pertumbuhan. Hindari pemupukan berlebihan tanpa mengetahui kebutuhan tanaman."],
-                ["🐛 Hama", "Periksa pucuk dan bagian bawah daun secara rutin."],
-                ["🦠 Penyakit", "Kelembapan tinggi dan daun yang lama basah dapat meningkatkan risiko beberapa penyakit."],
-                ["🍅 Panen", "Tentukan tingkat kematangan berdasarkan kebutuhan konsumsi atau tujuan distribusi."]
-            ],
-            "Jika tomatmu mengalami daun keriting, bercak, atau buah pecah/busuk, jelaskan gejalanya."
-        );
-    }
-
-    if(q.includes("tembakau")){
-        return answer(
-            "🌿 Panduan Dasar Budidaya Tembakau",
-            "Tembakau membutuhkan pengelolaan persemaian, tanah, air, nutrisi, hama, penyakit, dan waktu panen yang disesuaikan dengan varietas serta tujuan produksi.",
-            [
-                ["🌱 Persemaian", "Gunakan bibit sehat dan media yang memiliki drainase baik. Hindari kondisi terlalu basah."],
-                ["🌱 Pertumbuhan", "Pantau pertumbuhan daun dan kondisi tanaman secara rutin. Kebutuhan air dan nutrisi perlu disesuaikan dengan fase."],
-                ["💧 Air", "Kelebihan maupun kekurangan air dapat mengganggu pertumbuhan dan kualitas tanaman."],
-                ["🐛 Hama & penyakit", "Periksa daun secara berkala untuk menemukan gejala sedini mungkin."],
-                ["🍃 Panen", "Waktu panen daun perlu disesuaikan dengan varietas dan tingkat kematangan yang diinginkan."]
-            ],
-            "Jika kamu menyebutkan umur tembakau dan gejala pada daun, saya bisa membantu membuat diagnosis awal."
-        );
-    }
-
-    /* PERAWATAN UMUM */
-    if(hasAny(q,["merawat tanaman","perawatan tanaman","agar tanaman subur","tanaman sehat","tips bertani","cara merawat"])){
-        return answer(
-            "🌱 Prinsip Perawatan Tanaman Sehat",
-            "Tanaman sehat biasanya merupakan hasil dari pengelolaan yang seimbang, bukan hanya pemberian pupuk sebanyak mungkin.",
-            [
-                ["1. Kenali tanaman", "Ketahui kebutuhan cahaya, air, nutrisi, jarak tanam, dan fase pertumbuhannya."],
-                ["2. Periksa rutin", "Amati daun, batang, akar, tanah, dan buah secara berkala."],
-                ["3. Kelola air", "Sesuaikan penyiraman dengan kelembapan tanah dan cuaca."],
-                ["4. Kelola nutrisi", "Berikan nutrisi sesuai kebutuhan dan hindari pemupukan berlebihan."],
-                ["5. Jaga sanitasi", "Kurangi sumber penyakit dan tempat berkembangnya hama."],
-                ["6. Catat aktivitas", "Catatan budidaya membantu mengetahui hubungan antara perlakuan dan respons tanaman."]
-            ],
-            "Kalau ada masalah tertentu, jangan hanya tulis 'tanaman saya rusak'. Sebutkan gejala agar analisisnya lebih akurat."
-        );
-    }
-
-    /* TERIMA KASIH / PENUTUP */
-    if(hasAny(q,["terima kasih","makasih","thanks","oke","baik","sip"])){
-        return answer(
-            "😊 Sama-sama!",
-            "Senang bisa membantu. EcoAI siap menemani kamu memahami masalah pertanian langkah demi langkah.",
-            [
-                ["🌱 Jika ada masalah tanaman", "Sebutkan tanaman, umur, gejala, kondisi tanah, dan cuaca."],
-                ["📷 Jika ada gejala visual", "Foto tanaman dapat membantu memperjelas bentuk bercak, hama, perubahan warna, atau kondisi daun."],
-                ["💡 Jika ingin belajar", "Kamu bisa meminta penjelasan dari dasar sampai langkah praktik."]
-            ]
-        );
-    }
-
-    /* FALLBACK CERDAS */
-    return answer(
-        "🤖 EcoAI — Mari kita analisis pertanyaanmu",
-        `Saya belum mendapatkan konteks yang cukup untuk memberikan jawaban yang benar-benar spesifik tentang <b>${escapeEcoAI(question)}</b>. Saya tetap bisa membantu menganalisisnya.`,
-        [
-            ["🔎 1. Tentukan masalah utama", "Jelaskan apakah pertanyaannya berkaitan dengan tanaman, tanah, pupuk, air, hama, penyakit, panen, limbah, Eco Coin, atau fitur EcoFarming."],
-            ["🌱 2. Berikan konteks", "Untuk pertanian, tuliskan nama tanaman, umur/fase tanaman, lokasi/lahan secara umum, kondisi tanah, cuaca, dan gejala yang terlihat."],
-            ["👀 3. Jelaskan gejala", "Sebutkan kapan masalah mulai muncul, bagian tanaman yang terdampak, apakah menyebar, dan perubahan apa yang terlihat."],
-            ["🛠️ 4. Hindari tindakan terburu-buru", "Jangan langsung menambah banyak pupuk atau pestisida sebelum penyebab masalah dipahami. Tindakan yang salah dapat memperparah masalah."],
-            ["💬 5. Contoh pertanyaan", "Kamu bisa bertanya: 'Kenapa daun cabai saya keriting dan ada serangga kecil?', 'Bagaimana membuat kompos?', 'Berapa sering tanaman disiram?', atau 'Apa perbedaan pupuk NPK dan urea?'."]
+        sebelum: [
+          "Siapkan tandon atau tempat penampungan air hujan.",
+          "Periksa saluran dan pompa irigasi.",
+          "Gunakan mulsa untuk membantu mempertahankan kelembapan tanah.",
+          "Pilih varietas tanaman yang sesuai dengan kondisi lingkungan."
         ],
-        "Jika kamu memberikan detail tersebut, saya akan menyusun jawaban dalam format penyebab → pemeriksaan → langkah penanganan → pencegahan."
-    );
-}
 
-async function getAIResponse(question){
-    const serverAnswer = await askEcoAIToServer(question);
+        saat: [
+          "Gunakan irigasi secara efisien dan prioritaskan tanaman yang membutuhkan air.",
+          "Gunakan irigasi tetes untuk mengurangi pemborosan air.",
+          "Pantau kelembapan tanah secara berkala.",
+          "Hindari penggunaan air secara berlebihan."
+        ],
 
-    if(serverAnswer){
-        return serverAnswer;
-    }
-
-    return getLocalEcoAIResponse(question);
-}
-
-/* sendAI diperbarui agar mendukung jawaban async */
-async function sendAI(){
-    const input = document.getElementById("aiInput");
-    const question = input.value.trim();
-
-    if(!question) return;
-
-    addMessage(escapeEcoAI(question),"user");
-    input.value = "";
-
-    const loadingId = "ecoai-loading-" + Date.now();
-
-    addMessage(
-        `<span id="${loadingId}">🤖 EcoAI sedang berpikir...</span>`,
-        "ai"
-    );
-
-    try{
-        const answer = await getAIResponse(question);
-
-        const loading = document.getElementById(loadingId);
-
-        if(loading){
-            loading.innerHTML = answer;
-        }else{
-            addMessage(answer,"ai");
-        }
-    }catch(error){
-        console.error(error);
-
-        const loading = document.getElementById(loadingId);
-
-        const fallback = `
-        ⚠️ Maaf, terjadi gangguan saat memproses pertanyaan.
-        <br><br>
-        Silakan coba lagi dengan kalimat yang lebih singkat
-        atau tambahkan nama tanaman dan masalahnya.
-        `;
-
-        if(loading){
-            loading.innerHTML = fallback;
-        }else{
-            addMessage(fallback,"ai");
-        }
-    }
-
-    user.aiUsed = true;
-    user.achievements = Math.max(user.achievements,4);
-
-    saveUser();
-    updateDashboard();
-}
+        setelah: [
+          "Periksa kondisi tanaman dan tanah.",
+          "Pulihkan kelembapan tanah secara bertahap.",
+          "Tambahkan bahan organik sesuai kebutuhan tanah.",
+          "Catat dampak kekeringan sebagai evaluasi musim berikutnya."
+        ]
+      },
 
 
-/* ================================
-   GRAFIK PENJUALAN TANAMAN
-   MUSIM & WILAYAH
-================================ */
+      banjir: {
+        title: "🌊 Penanganan Banjir",
 
-const salesSeasons = [
-    "Musim Hujan",
-    "Musim Kemarau",
-    "Pancaroba Awal",
-    "Pancaroba Akhir"
-];
+        sebelum: [
+          "Bersihkan saluran drainase secara berkala.",
+          "Buat saluran pembuangan air yang memadai.",
+          "Gunakan teknik budidaya yang sesuai dengan kondisi lahan.",
+          "Pantau prakiraan cuaca dan kondisi sungai setempat."
+        ],
 
-const salesRegions = [
-    "Bangkalan",
-    "Banyuwangi",
-    "Blitar",
-    "Bojonegoro",
-    "Bondowoso",
-    "Gresik",
-    "Jember",
-    "Jombang",
-    "Kediri",
-    "Lamongan",
-    "Lumajang",
-    "Madiun",
-    "Magetan",
-    "Malang",
-    "Mojokerto",
-    "Nganjuk",
-    "Ngawi",
-    "Pacitan",
-    "Pamekasan",
-    "Pasuruan",
-    "Ponorogo",
-    "Probolinggo",
-    "Sampang",
-    "Sidoarjo",
-    "Situbondo",
-    "Sumenep",
-    "Trenggalek",
-    "Tuban",
-    "Tulungagung",
-    "Banjarnegara",
-    "Banyumas",
-    "Batang",
-    "Blora",
-    "Boyolali",
-    "Brebes",
-    "Cilacap",
-    "Demak",
-    "Grobogan",
-    "Jepara",
-    "Karanganyar",
-    "Kebumen",
-    "Kendal",
-    "Klaten",
-    "Kudus",
-    "Magelang",
-    "Pati",
-    "Pekalongan",
-    "Pemalang",
-    "Purbalingga"
-];
+        saat: [
+          "Utamakan keselamatan manusia.",
+          "Jangan memasuki area banjir yang berarus deras.",
+          "Matikan peralatan listrik atau pompa yang berisiko terkena air.",
+          "Jika memungkinkan dan aman, arahkan air menuju saluran drainase."
+        ],
 
-/*
-   Angka berikut adalah DATA CONTOH/SIMULASI.
-   Tujuannya untuk membuat grafik interaktif berdasarkan
-   tanaman, musim, dan wilayah.
-*/
-const salesBase = {
-    "Padi":  { "Musim Hujan": 82, "Musim Kemarau": 96, "Pancaroba Awal": 72, "Pancaroba Akhir": 68 },
-    "Jagung": { "Musim Hujan": 74, "Musim Kemarau": 91, "Pancaroba Awal": 78, "Pancaroba Akhir": 70 },
-    "Cabai": { "Musim Hujan": 58, "Musim Kemarau": 88, "Pancaroba Awal": 76, "Pancaroba Akhir": 64 },
-    "Kedelai": { "Musim Hujan": 61, "Musim Kemarau": 79, "Pancaroba Awal": 69, "Pancaroba Akhir": 63 },
-    "Bawang Merah": { "Musim Hujan": 55, "Musim Kemarau": 86, "Pancaroba Awal": 71, "Pancaroba Akhir": 60 },
-    "Tomat": { "Musim Hujan": 68, "Musim Kemarau": 81, "Pancaroba Awal": 73, "Pancaroba Akhir": 65 },
-    "Kentang": { "Musim Hujan": 63, "Musim Kemarau": 77, "Pancaroba Awal": 70, "Pancaroba Akhir": 66 },
-    "Mentimun": { "Musim Hujan": 72, "Musim Kemarau": 84, "Pancaroba Awal": 75, "Pancaroba Akhir": 69 },
-    "Semangka": { "Musim Hujan": 57, "Musim Kemarau": 93, "Pancaroba Awal": 74, "Pancaroba Akhir": 61 },
-    "Tembakau": { "Musim Hujan": 62, "Musim Kemarau": 92, "Pancaroba Awal": 78, "Pancaroba Akhir": 68 },
-    "Kangkung": { "Musim Hujan": 88, "Musim Kemarau": 82, "Pancaroba Awal": 86, "Pancaroba Akhir": 84 },
-};
-
-const salesRegionFactor = {
-    "Bangkalan": 0.93,
-    "Banyuwangi": 1.04,
-    "Blitar": 0.88,
-    "Bojonegoro": 0.97,
-    "Bondowoso": 0.86,
-    "Gresik": 1.03,
-    "Jember": 1.06,
-    "Jombang": 0.95,
-    "Kediri": 1.05,
-    "Lamongan": 0.99,
-    "Lumajang": 0.91,
-    "Madiun": 0.98,
-    "Magetan": 0.89,
-    "Malang": 1.18,
-    "Mojokerto": 0.94,
-    "Nganjuk": 0.92,
-    "Ngawi": 0.87,
-    "Pacitan": 0.84,
-    "Pamekasan": 0.90,
-    "Pasuruan": 1.02,
-    "Ponorogo": 0.96,
-    "Probolinggo": 0.90,
-    "Sampang": 0.85,
-    "Sidoarjo": 1.01,
-    "Situbondo": 0.88,
-    "Sumenep": 0.86,
-    "Trenggalek": 0.83,
-    "Tuban": 0.94,
-    "Tulungagung": 0.97,
-    "Banjarnegara": 0.91,
-    "Banyumas": 1.02,
-    "Batang": 0.95,
-    "Blora": 0.89,
-    "Boyolali": 1.01,
-    "Brebes": 0.98,
-    "Cilacap": 1.00,
-    "Demak": 1.04,
-    "Grobogan": 0.96,
-    "Jepara": 0.97,
-    "Karanganyar": 1.03,
-    "Kebumen": 0.94,
-    "Kendal": 1.00,
-    "Klaten": 1.05,
-    "Kudus": 1.06,
-    "Magelang": 1.02,
-    "Pati": 1.01,
-    "Pekalongan": 0.96,
-    "Pemalang": 0.95,
-    "Purbalingga": 0.93
-};
+        setelah: [
+          "Periksa tanaman yang terdampak.",
+          "Bersihkan lumpur dan sisa material dari lahan.",
+          "Periksa kondisi akar dan tanah.",
+          "Evaluasi sistem drainase agar lebih siap menghadapi hujan berikutnya."
+        ]
+      },
 
 
-const salesPrice = {
-    "Padi": 6500,
-    "Jagung": 5200,
-    "Cabai": 42000,
-    "Kedelai": 11000,
-    "Bawang Merah": 32000,
-    "Tomat": 9000,
-    "Kentang": 14000,
-    "Mentimun": 8000,
-    "Semangka": 6500,
-    "Tembakau": 38000,
-    "Kangkung": 6000
-};
+      longsor: {
+        title: "⛰️ Penanganan Longsor",
 
-const salesSeasonFactor = {
-    "Musim Hujan": 1.00,
-    "Musim Kemarau": 1.00,
-    "Pancaroba Awal": 1.00,
-    "Pancaroba Akhir": 1.00
-};
+        sebelum: [
+          "Perhatikan retakan tanah pada lahan miring.",
+          "Pertahankan vegetasi pada area yang rawan erosi.",
+          "Buat drainase yang sesuai untuk mengendalikan aliran air.",
+          "Hindari aktivitas yang dapat memperlemah lereng."
+        ],
 
-function getSalesValue(plant, region, season){
-    const base = salesBase[plant]?.[season] || 0;
-    const factor = region === "Semua Kota"
-        ? 1
-        : (salesRegionFactor[region] || 1);
+        saat: [
+          "Segera menjauh dari area longsor.",
+          "Jangan berada di bawah lereng yang tidak stabil.",
+          "Utamakan keselamatan manusia.",
+          "Laporkan kondisi berbahaya kepada pihak terkait."
+        ],
 
-    return Math.round(base * factor * (salesSeasonFactor[season] || 1));
-}
+        setelah: [
+          "Jangan langsung memasuki area longsor yang belum dinyatakan aman.",
+          "Periksa kerusakan lahan setelah kondisi aman.",
+          "Evaluasi penyebab erosi dan aliran air.",
+          "Lakukan pemulihan lahan dengan teknik konservasi yang sesuai."
+        ]
+      }
 
-function getAllRegionSales(plant, season){
-    return salesRegions.reduce((total, region) => {
-        return total + getSalesValue(plant, region, season);
-    }, 0);
-}
+    };
 
 
-function searchSalesCityDirect(){
-    const input = document.getElementById("salesCitySearch");
-    const select = document.getElementById("salesRegion");
-    if(!input || !select) return;
+    /* =========================
+       PANDUAN BENCANA
+    ========================= */
 
-    const query = input.value.trim().toLowerCase();
+    let currentDisaster = "kekeringan";
 
-    // Kosong = tampilkan semua kota
-    if(query === "") {
-        select.value = "Semua Kota";
-        updateSalesChart();
-        return;
-    }
+    function showGuidance(type) {
 
-    // Cari langsung dari daftar kota tanpa harus membuka opsi dropdown
-    const cities = Array.from(select.options).filter(option => option.value !== "Semua Kota");
-    const exact = cities.find(option => option.text.toLowerCase() === query);
-    const match = exact || cities.find(option => option.text.toLowerCase().includes(query));
+      currentDisaster = type;
 
-    if(match){
-        select.value = match.value;
-        updateSalesChart();
-    } else {
-        // Jika belum cocok, grafik tidak dipindahkan ke kota lain
-        // dan total dibuat nol agar hasil pencarian tidak menyesatkan.
-        updateSalesChart();
-    }
-}
+      const data = disasterData[type];
 
-function updateSalesChart(){
+      document.getElementById("guidanceTitle").innerText =
+        data.title;
 
-    const plantSelect = document.getElementById("salesPlant");
-    const regionSelect = document.getElementById("salesRegion");
-    const chart = document.getElementById("salesChart");
-    const totalEl = document.getElementById("salesTotal");
-    const captionEl = document.getElementById("salesCaption");
-    const highestEl = document.getElementById("salesHighest");
-    const priceEl = document.getElementById("salesPrice");
-    const summaryEl = document.getElementById("salesRegionSummary");
+      document.getElementById("guidance").scrollIntoView({
+        behavior: "smooth"
+      });
 
-    if(!plantSelect || !regionSelect || !chart) return;
+      renderGuidance("sebelum");
 
-    const plant = plantSelect.value;
-    const region = regionSelect.value;
-
-    if(priceEl){
-        const price = salesPrice[plant] || 0;
-        priceEl.textContent = `Harga ${plant}: Rp ${price.toLocaleString("id-ID")} / kg`;
     }
 
 
-    let values;
+    function changeTab(stage, button) {
 
-    if(region === "Semua Kota"){
-        values = salesSeasons.map(season => ({
-            season,
-            value: getAllRegionSales(plant, season)
-        }));
-    }else{
-        values = salesSeasons.map(season => ({
-            season,
-            value: getSalesValue(plant, region, season)
-        }));
+      document
+        .querySelectorAll(".tab")
+        .forEach(tab => tab.classList.remove("active"));
+
+      button.classList.add("active");
+
+      renderGuidance(stage);
     }
 
-    const maxValue = Math.max(...values.map(item => item.value), 1);
-    const total = values.reduce((sum, item) => sum + item.value, 0);
-    const highest = values.reduce((best, item) =>
-        item.value > best.value ? item : best
-    );
 
-    chart.innerHTML = values.map(item => {
-        const height = Math.max(8, (item.value / maxValue) * 100);
+    function renderGuidance(stage) {
 
-        return `
-            <div class="sales-season">
-                <div class="sales-value">${item.value.toLocaleString("id-ID")}</div>
-                <div class="sales-bar-wrap">
-                    <div class="sales-bar" style="height:${height}%"></div>
-                </div>
-                <div class="sales-label">${item.season}</div>
-            </div>
-        `;
-    }).join("");
+      const data = disasterData[currentDisaster];
 
-    totalEl.textContent =
-        `Total: ${total.toLocaleString("id-ID")} tanaman`;
+      const items = data[stage];
 
-    captionEl.textContent =
-        `📊 ${plant} • ${region} • data contoh/simulasi penjualan berdasarkan musim.`;
+      const content =
+        document.querySelector(".guidance-content");
 
-    highestEl.textContent =
-        `Musim tertinggi: ${highest.season} (${highest.value.toLocaleString("id-ID")} tanaman)`;
+      content.innerHTML = `
+        <h3>${getStageIcon(stage)} ${getStageTitle(stage)}</h3>
 
-    if(region === "Semua Kota"){
-        summaryEl.innerHTML = salesRegions.map(regionName => {
-
-            const regionTotal = salesSeasons.reduce(
-                (sum, season) => sum + getSalesValue(plant, regionName, season),
-                0
-            );
-
-            return `
-                <div class="region-mini">
-                    <b>📍 ${regionName}</b>
-                    <span>${regionTotal.toLocaleString("id-ID")} tanaman</span>
-                </div>
-            `;
-        }).join("");
-    }else{
-        const regionValues = salesSeasons.map(season => ({
-            season,
-            value: getSalesValue(plant, region, season)
-        }));
-
-        summaryEl.innerHTML = regionValues.map(item => `
-            <div class="region-mini">
-                <b>🌱 ${item.season}</b>
-                <span>${item.value.toLocaleString("id-ID")} tanaman</span>
-            </div>
-        `).join("");
+        <ul>
+          ${items.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+      `;
     }
-}
 
 
-updateDashboard();
-updateSalesChart();
+    function getStageTitle(stage) {
 
-document.getElementById("voucherModal")
-.addEventListener(
-    "click",
-    function(e){
-        if(e.target === this){
-            closeVoucher();
-        }
+      if (stage === "sebelum") return "Sebelum Bencana";
+      if (stage === "saat") return "Saat Bencana";
+      return "Setelah Bencana";
     }
-);
 
-document.getElementById("rewardModal")
-.addEventListener(
-    "click",
-    function(e){
 
-        if(e.target === this){
-            closeModal();
+    function getStageIcon(stage) {
+
+      if (stage === "sebelum") return "🛡️";
+      if (stage === "saat") return "🚨";
+      return "🌱";
+    }
+
+
+    /* =========================
+       IRIGASI
+    ========================= */
+
+    let manualPump = false;
+
+    function updateMoisture(value) {
+
+      document.getElementById("moistureValue")
+        .innerText = value;
+
+      document.getElementById("moistureBar")
+        .style.width = value + "%";
+
+      if (!manualPump) {
+
+        if (Number(value) < 40) {
+          setPump(true);
+        } else {
+          setPump(false);
         }
 
+      }
+
+      updateIrrigationMessage(value);
     }
-);
 
-document.getElementById("surpriseOverlay")
-.addEventListener(
-    "click",
-    function(e){
 
-        if(e.target === this){
-            closeSurprise();
-        }
+    function updateIrrigationMessage(value) {
 
+      const status =
+        document.getElementById("irrigationStatus");
+
+      if (value < 30) {
+
+        status.innerText =
+          "🚨 Tanah sangat kering — pompa otomatis menyala.";
+
+      } else if (value < 40) {
+
+        status.innerText =
+          "💧 Tanah cukup kering — pompa otomatis menyala.";
+
+      } else if (value < 70) {
+
+        status.innerText =
+          "🌱 Kelembapan tanah cukup.";
+
+      } else {
+
+        status.innerText =
+          "🌧️ Tanah sangat lembap — pompa dihentikan.";
+
+      }
     }
-);
 
-</script>
+
+    function togglePump() {
+
+      manualPump = !manualPump;
+
+      setPump(manualPump);
+
+      const button =
+        document.getElementById("pumpButton");
+
+      button.innerText = manualPump
+        ? "Matikan Pompa Manual"
+        : "Nyalakan Pompa Manual";
+    }
+
+
+    function setPump(on) {
+
+      const pump =
+        document.getElementById("pump");
+
+      const status =
+        document.getElementById("pumpStatus");
+
+      pump.classList.toggle("on", on);
+
+      if (on) {
+
+        status.innerText = "POMPA MENYALA";
+        status.style.color = "#168a4a";
+
+      } else {
+
+        status.innerText = "POMPA MATI";
+        status.style.color = "#173124";
+
+      }
+    }
+
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    function openModal(title, body) {
+
+      document.getElementById("modalTitle")
+        .innerText = title;
+
+      document.getElementById("modalBody")
+        .innerHTML = body;
+
+      document.getElementById("modal")
+        .classList.add("show");
+    }
+
+
+    function closeModal(event) {
+
+      if (
+        !event ||
+        event.target.id === "modal" ||
+        event.target.classList.contains("close")
+      ) {
+
+        document.getElementById("modal")
+          .classList.remove("show");
+      }
+    }
+
+
+    /* =========================
+       SIMULASI DATA DINAMIS
+    ========================= */
+
+    function randomWeatherSimulation() {
+
+      const moisture =
+        Math.floor(Math.random() * 61) + 20;
+
+      document.getElementById("moistureSlider")
+        .value = moisture;
+
+      updateMoisture(moisture);
+    }
+
+
+    // Jalankan simulasi pertama
+    updateMoisture(42);
+
+  </script>
 
 </body>
 </html>
