@@ -1,529 +1,490 @@
-```javascript
-// ==========================================
-// AGRI-SIAGA
-// Deteksi lokasi pengguna otomatis
-// ==========================================
+<script>
+/* =========================================
+   AGRI-SIAGA - SISTEM INFORMASI MUSIM
+   ========================================= */
 
-let latitude = null;
-let longitude = null;
+/* DATA WILAYAH */
+const wilayahJawaTimur = {
+    "Kabupaten Jombang": {
+        musim: "Peralihan",
+        curahHujan: 145,
+        suhu: 28,
+        kelembapan: 78
+    },
+    "Kabupaten Kediri": {
+        musim: "Cenderung Basah",
+        curahHujan: 180,
+        suhu: 27,
+        kelembapan: 82
+    },
+    "Kabupaten Malang": {
+        musim: "Cenderung Basah",
+        curahHujan: 210,
+        suhu: 25,
+        kelembapan: 85
+    },
+    "Kabupaten Mojokerto": {
+        musim: "Peralihan",
+        curahHujan: 155,
+        suhu: 28,
+        kelembapan: 79
+    },
+    "Kabupaten Nganjuk": {
+        musim: "Cenderung Kering",
+        curahHujan: 90,
+        suhu: 29,
+        kelembapan: 70
+    },
+    "Kabupaten Madiun": {
+        musim: "Cenderung Kering",
+        curahHujan: 85,
+        suhu: 30,
+        kelembapan: 68
+    },
+    "Kabupaten Ponorogo": {
+        musim: "Peralihan",
+        curahHujan: 135,
+        suhu: 28,
+        kelembapan: 75
+    },
+    "Kabupaten Banyuwangi": {
+        musim: "Cenderung Basah",
+        curahHujan: 225,
+        suhu: 26,
+        kelembapan: 86
+    },
+    "Kabupaten Blitar": {
+        musim: "Peralihan",
+        curahHujan: 150,
+        suhu: 27,
+        kelembapan: 79
+    },
+    "Kabupaten Tulungagung": {
+        musim: "Peralihan",
+        curahHujan: 140,
+        suhu: 28,
+        kelembapan: 77
+    }
+};
 
 
-// ==========================================
-// Memulai aplikasi
-// ==========================================
+/* =========================================
+   ELEMEN HTML
+   ========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+const wilayahSelect =
+    document.getElementById("wilayah") ||
+    document.getElementById("kabupaten") ||
+    document.getElementById("kota");
 
-    const tombolLokasi =
-        document.getElementById("btnLokasi");
+const hasilMusim = document.getElementById("hasilMusim");
+const statusMusim = document.getElementById("statusMusim");
+const curahHujan = document.getElementById("curahHujan");
+const suhu = document.getElementById("suhu");
+const kelembapan = document.getElementById("kelembapan");
+const rekomendasi = document.getElementById("rekomendasi");
 
-    if (tombolLokasi) {
-        tombolLokasi.addEventListener(
-            "click",
-            ambilLokasi
-        );
+
+/* =========================================
+   FUNGSI MENENTUKAN IKON
+   ========================================= */
+
+function getIconMusim(musim) {
+
+    if (musim === "Cenderung Basah") {
+        return "🌧️";
     }
 
-    // Coba meminta lokasi otomatis
-    ambilLokasi();
-});
+    if (musim === "Cenderung Kering") {
+        return "☀️";
+    }
+
+    return "🌤️";
+}
 
 
-// ==========================================
-// Meminta izin lokasi pengguna
-// ==========================================
+/* =========================================
+   FUNGSI REKOMENDASI
+   ========================================= */
 
-function ambilLokasi() {
+function getRekomendasi(musim) {
 
-    const status =
-        document.getElementById("statusLokasi");
+    if (musim === "Cenderung Basah") {
 
-    if (!navigator.geolocation) {
+        return `
+            <strong>🌱 Rekomendasi Pertanian</strong>
+            <p>
+                Kondisi wilayah cenderung basah. 
+                Perhatikan drainase lahan dan hindari genangan air.
+                Pantau kemungkinan penyakit tanaman yang berkembang
+                pada kondisi lembap.
+            </p>
+            <ul>
+                <li>Periksa saluran drainase.</li>
+                <li>Hindari penyiraman berlebihan.</li>
+                <li>Pantau penyakit akibat kelembapan tinggi.</li>
+            </ul>
+        `;
+    }
 
-        if (status) {
-            status.textContent =
-                "❌ Browser tidak mendukung lokasi.";
-        }
+    if (musim === "Cenderung Kering") {
 
+        return `
+            <strong>🌾 Rekomendasi Pertanian</strong>
+            <p>
+                Kondisi wilayah cenderung kering. 
+                Ketersediaan air perlu diperhatikan agar tanaman
+                tetap mendapatkan kebutuhan air yang cukup.
+            </p>
+            <ul>
+                <li>Periksa kelembapan tanah.</li>
+                <li>Gunakan irigasi secara efisien.</li>
+                <li>Manfaatkan penampungan air.</li>
+            </ul>
+        `;
+    }
+
+    return `
+        <strong>🌿 Rekomendasi Pertanian</strong>
+        <p>
+            Wilayah berada pada kondisi peralihan. 
+            Pantau perubahan cuaca dan kondisi tanah secara berkala
+            sebelum menentukan kegiatan budidaya.
+        </p>
+        <ul>
+            <li>Pantau prakiraan hujan.</li>
+            <li>Periksa kelembapan tanah.</li>
+            <li>Sesuaikan penyiraman dengan kondisi lahan.</li>
+        </ul>
+    `;
+}
+
+
+/* =========================================
+   TAMPILKAN DATA WILAYAH
+   ========================================= */
+
+function tampilkanDataWilayah(namaWilayah) {
+
+    const data = wilayahJawaTimur[namaWilayah];
+
+    if (!data) {
+        alert("Silakan pilih wilayah terlebih dahulu.");
         return;
     }
 
-    if (status) {
-        status.textContent =
-            "📍 Meminta izin lokasi...";
+    const icon = getIconMusim(data.musim);
+
+    if (hasilMusim) {
+        hasilMusim.style.display = "block";
     }
 
-    navigator.geolocation.getCurrentPosition(
+    if (statusMusim) {
+        statusMusim.innerHTML =
+            `${icon} ${data.musim}`;
+    }
 
-        // Jika berhasil
-        posisiBerhasil,
+    if (curahHujan) {
+        curahHujan.innerHTML =
+            `${data.curahHujan} mm`;
+    }
 
-        // Jika gagal
-        posisiGagal,
+    if (suhu) {
+        suhu.innerHTML =
+            `${data.suhu}°C`;
+    }
 
-        {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 300000
-        }
-    );
+    if (kelembapan) {
+        kelembapan.innerHTML =
+            `${data.kelembapan}%`;
+    }
+
+    if (rekomendasi) {
+        rekomendasi.innerHTML =
+            getRekomendasi(data.musim);
+    }
+
+    /* Animasi hasil */
+    if (hasilMusim) {
+        hasilMusim.classList.remove("hasil-muncul");
+
+        setTimeout(() => {
+            hasilMusim.classList.add("hasil-muncul");
+        }, 50);
+    }
 }
 
 
-// ==========================================
-// Lokasi berhasil didapatkan
-// ==========================================
+/* =========================================
+   EVENT PILIH WILAYAH
+   ========================================= */
 
-function posisiBerhasil(position) {
+if (wilayahSelect) {
 
-    latitude =
-        position.coords.latitude;
+    wilayahSelect.addEventListener("change", function () {
 
-    longitude =
-        position.coords.longitude;
-
-    console.log("Latitude:", latitude);
-    console.log("Longitude:", longitude);
-
-    const status =
-        document.getElementById("statusLokasi");
-
-    if (status) {
-        status.textContent =
-            "✅ Lokasi berhasil ditemukan";
-    }
-
-    // Tampilkan koordinat
-    const koordinat =
-        document.getElementById("koordinat");
-
-    if (koordinat) {
-
-        koordinat.textContent =
-            `📍 ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
-    }
-
-    // Cari nama daerah
-    cariNamaLokasi(latitude, longitude);
-
-    // Ambil data cuaca
-    ambilCuaca(latitude, longitude);
-}
-
-
-// ==========================================
-// Lokasi gagal
-// ==========================================
-
-function posisiGagal(error) {
-
-    const status =
-        document.getElementById("statusLokasi");
-
-    let pesan =
-        "❌ Lokasi tidak dapat ditemukan.";
-
-    switch (error.code) {
-
-        case error.PERMISSION_DENIED:
-            pesan =
-                "❌ Izin lokasi ditolak. Silakan aktifkan lokasi di browser.";
-            break;
-
-        case error.POSITION_UNAVAILABLE:
-            pesan =
-                "❌ Informasi lokasi tidak tersedia.";
-            break;
-
-        case error.TIMEOUT:
-            pesan =
-                "❌ Waktu pencarian lokasi habis.";
-            break;
-    }
-
-    if (status) {
-        status.textContent = pesan;
-    }
-
-    console.error(
-        "Geolocation error:",
-        error.message
-    );
-}
-
-
-// ==========================================
-// Mencari nama daerah dari koordinat
-// ==========================================
-
-async function cariNamaLokasi(lat, lon) {
-
-    try {
-
-        const url =
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&addressdetails=1`;
-
-        const response =
-            await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(
-                "Gagal mendapatkan nama lokasi"
-            );
-        }
-
-        const data =
-            await response.json();
-
-        const address =
-            data.address || {};
-
-        const kabupaten =
-            address.county ||
-            address.city ||
-            address.town ||
-            address.municipality ||
-            "Tidak diketahui";
-
-        const provinsi =
-            address.state ||
-            "Tidak diketahui";
-
-        tampilkanLokasi(
-            kabupaten,
-            provinsi
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Reverse geocoding error:",
-            error
-        );
-
-        const namaWilayah =
-            document.getElementById("namaWilayah");
+        const namaWilayah = this.value;
 
         if (namaWilayah) {
-            namaWilayah.textContent =
-                "Lokasi ditemukan";
-        }
-    }
-}
-
-
-// ==========================================
-// Menampilkan nama lokasi
-// ==========================================
-
-function tampilkanLokasi(
-    wilayah,
-    provinsi
-) {
-
-    const nama =
-        document.getElementById("namaWilayah");
-
-    const prov =
-        document.getElementById("provinsi");
-
-    if (nama) {
-        nama.textContent = wilayah;
-    }
-
-    if (prov) {
-        prov.textContent = provinsi;
-    }
-}
-
-
-// ==========================================
-// Mengambil data cuaca
-// ==========================================
-//
-// Menggunakan Open-Meteo.
-// Tidak membutuhkan API key untuk penggunaan
-// non-komersial tertentu.
-// ==========================================
-
-async function ambilCuaca(lat, lon) {
-
-    const statusCuaca =
-        document.getElementById("statusCuaca");
-
-    if (statusCuaca) {
-        statusCuaca.textContent =
-            "🌦️ Mengambil data cuaca...";
-    }
-
-    try {
-
-        const url =
-            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,rain,weather_code&daily=precipitation_sum&timezone=auto`;
-
-        const response =
-            await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(
-                "Gagal mengambil data cuaca"
-            );
+            tampilkanDataWilayah(namaWilayah);
         }
 
-        const data =
-            await response.json();
+    });
 
-        const current =
-            data.current;
+}
 
-        const daily =
-            data.daily;
 
-        // Suhu
-        const suhu =
-            current.temperature_2m;
+/* =========================================
+   TOMBOL CEK MUSIM
+   ========================================= */
 
-        // Kelembapan
-        const kelembapan =
-            current.relative_humidity_2m;
+const tombolCek =
+    document.getElementById("cekMusim") ||
+    document.getElementById("btnCekMusim");
 
-        // Hujan saat ini
-        const hujan =
-            current.precipitation;
+if (tombolCek) {
 
-        // Total prediksi hujan beberapa hari
-        const curahHujan =
-            daily.precipitation_sum;
+    tombolCek.addEventListener("click", function () {
 
-        tampilkanCuaca(
-            suhu,
-            kelembapan,
-            hujan,
-            curahHujan
-        );
+        if (!wilayahSelect || !wilayahSelect.value) {
 
-        analisisMusim(
-            curahHujan,
-            suhu,
-            kelembapan
-        );
+            alert("🌱 Silakan pilih wilayah terlebih dahulu.");
 
-        if (statusCuaca) {
-            statusCuaca.textContent =
-                "✅ Data cuaca berhasil diperbarui";
+            return;
         }
 
-    } catch (error) {
+        tampilkanDataWilayah(wilayahSelect.value);
 
-        console.error(
-            "Weather API error:",
-            error
-        );
+    });
 
-        if (statusCuaca) {
-            statusCuaca.textContent =
-                "❌ Data cuaca gagal diambil.";
+}
+
+
+/* =========================================
+   DATA MANUAL
+   Jika pengguna memasukkan data sendiri
+   ========================================= */
+
+function analisisDataManual(hujan, suhuData, kelembapanData) {
+
+    hujan = Number(hujan);
+    suhuData = Number(suhuData);
+    kelembapanData = Number(kelembapanData);
+
+    let musim;
+
+    if (hujan >= 170 || kelembapanData >= 82) {
+
+        musim = "Cenderung Basah";
+
+    } else if (hujan <= 100 || kelembapanData <= 70) {
+
+        musim = "Cenderung Kering";
+
+    } else {
+
+        musim = "Peralihan";
+
+    }
+
+    return {
+        musim: musim,
+        hujan: hujan,
+        suhu: suhuData,
+        kelembapan: kelembapanData
+    };
+}
+
+
+/* =========================================
+   FUNGSI TOMBOL ANALISIS DATA
+   ========================================= */
+
+const tombolAnalisis =
+    document.getElementById("analisisData");
+
+if (tombolAnalisis) {
+
+    tombolAnalisis.addEventListener("click", function () {
+
+        const inputHujan =
+            document.getElementById("inputCurahHujan");
+
+        const inputSuhu =
+            document.getElementById("inputSuhu");
+
+        const inputKelembapan =
+            document.getElementById("inputKelembapan");
+
+        if (
+            !inputHujan ||
+            !inputSuhu ||
+            !inputKelembapan
+        ) {
+            return;
         }
-    }
-}
 
+        if (
+            inputHujan.value === "" ||
+            inputSuhu.value === "" ||
+            inputKelembapan.value === ""
+        ) {
 
-// ==========================================
-// Menampilkan data cuaca
-// ==========================================
+            alert("Lengkapi semua data terlebih dahulu.");
 
-function tampilkanCuaca(
-    suhu,
-    kelembapan,
-    hujan,
-    curahHujan
-) {
+            return;
+        }
 
-    const suhuElement =
-        document.getElementById("suhu");
-
-    const kelembapanElement =
-        document.getElementById("kelembapan");
-
-    const hujanElement =
-        document.getElementById("hujan");
-
-    const curahElement =
-        document.getElementById("curahHujan");
-
-    if (suhuElement) {
-        suhuElement.textContent =
-            `${suhu} °C`;
-    }
-
-    if (kelembapanElement) {
-        kelembapanElement.textContent =
-            `${kelembapan}%`;
-    }
-
-    if (hujanElement) {
-        hujanElement.textContent =
-            `${hujan} mm`;
-    }
-
-    if (curahElement) {
-
-        const total =
-            curahHujan.reduce(
-                (a, b) => a + b,
-                0
-            );
-
-        curahElement.textContent =
-            `${total.toFixed(1)} mm`;
-    }
-}
-
-
-// ==========================================
-// Analisis kondisi
-// ==========================================
-
-function analisisMusim(
-    curahHujan,
-    suhu,
-    kelembapan
-) {
-
-    const totalHujan =
-        curahHujan.reduce(
-            (a, b) => a + b,
-            0
+        const hasil = analisisDataManual(
+            inputHujan.value,
+            inputSuhu.value,
+            inputKelembapan.value
         );
 
-    let kondisi;
-    let icon;
-    let warna;
-    let rekomendasi;
+        if (statusMusim) {
+            statusMusim.innerHTML =
+                `${getIconMusim(hasil.musim)} ${hasil.musim}`;
+        }
 
+        if (curahHujan) {
+            curahHujan.innerHTML =
+                `${hasil.hujan} mm`;
+        }
 
-    // Kondisi basah
-    if (totalHujan >= 100) {
+        if (suhu) {
+            suhu.innerHTML =
+                `${hasil.suhu}°C`;
+        }
 
-        kondisi =
-            "Cenderung Basah";
+        if (kelembapan) {
+            kelembapan.innerHTML =
+                `${hasil.kelembapan}%`;
+        }
 
-        icon =
-            "🌧️";
+        if (rekomendasi) {
+            rekomendasi.innerHTML =
+                getRekomendasi(hasil.musim);
+        }
 
-        warna =
-            "#2196f3";
+        if (hasilMusim) {
+            hasilMusim.style.display = "block";
+        }
+    });
 
-        rekomendasi =
-            "Pantau genangan air, pastikan drainase berjalan baik, dan perhatikan risiko penyakit tanaman akibat kelembapan tinggi.";
-    }
-
-    // Kondisi peralihan
-    else if (totalHujan >= 40) {
-
-        kondisi =
-            "Peralihan";
-
-        icon =
-            "🌤️";
-
-        warna =
-            "#ff9800";
-
-        rekomendasi =
-            "Kondisi cuaca sedang berubah. Pantau hujan dan sesuaikan penyiraman dengan kebutuhan tanaman.";
-    }
-
-    // Kondisi kering
-    else {
-
-        kondisi =
-            "Cenderung Kering";
-
-        icon =
-            "☀️";
-
-        warna =
-            "#f44336";
-
-        rekomendasi =
-            "Curah hujan relatif rendah. Perhatikan ketersediaan air dan lakukan penyiraman secara efisien.";
-    }
-
-
-    tampilkanAnalisis(
-        kondisi,
-        icon,
-        warna,
-        rekomendasi
-    );
 }
 
 
-// ==========================================
-// Menampilkan hasil analisis
-// ==========================================
+/* =========================================
+   DATA WILAYAH OTOMATIS KE SELECT
+   ========================================= */
 
-function tampilkanAnalisis(
-    kondisi,
-    icon,
-    warna,
-    rekomendasi
-) {
+function isiWilayahOtomatis() {
 
-    const kondisiElement =
-        document.getElementById("kondisi");
+    if (!wilayahSelect) return;
 
-    const iconElement =
-        document.getElementById("iconMusim");
+    /*
+       Hanya mengisi jika select masih kosong.
+       Jadi tidak merusak pilihan yang sudah
+       dibuat di HTML.
+    */
 
-    const rekomendasiElement =
-        document.getElementById("rekomendasi");
+    if (wilayahSelect.options.length <= 1) {
 
+        Object.keys(wilayahJawaTimur).forEach(
+            function(namaWilayah) {
 
-    if (kondisiElement) {
+                const option =
+                    document.createElement("option");
 
-        kondisiElement.textContent =
-            kondisi;
+                option.value = namaWilayah;
+                option.textContent = namaWilayah;
 
-        kondisiElement.style.color =
-            warna;
-    }
-
-
-    if (iconElement) {
-        iconElement.textContent =
-            icon;
-    }
-
-
-    if (rekomendasiElement) {
-
-        rekomendasiElement.textContent =
-            rekomendasi;
+                wilayahSelect.appendChild(option);
+            }
+        );
     }
 }
 
 
-// ==========================================
-// Tombol refresh lokasi
-// ==========================================
+/* =========================================
+   ANIMASI CARD
+   ========================================= */
 
-function refreshLokasi() {
+const cards =
+    document.querySelectorAll(".card, .weather-card, .stat-card");
 
-    const status =
-        document.getElementById("statusLokasi");
+cards.forEach(function(card, index) {
 
-    if (status) {
-        status.textContent =
-            "🔄 Memperbarui lokasi...";
-    }
+    card.style.opacity = "0";
+    card.style.transform = "translateY(15px)";
 
-    ambilLokasi();
+    setTimeout(function() {
+
+        card.style.transition =
+            "all 0.5s ease";
+
+        card.style.opacity = "1";
+        card.style.transform =
+            "translateY(0)";
+
+    }, index * 100);
+
+});
+
+
+/* =========================================
+   NOTIFIKASI
+   ========================================= */
+
+function notifikasiAGRI(pesan) {
+
+    const box =
+        document.createElement("div");
+
+    box.innerHTML =
+        `🌱 ${pesan}`;
+
+    box.style.position = "fixed";
+    box.style.bottom = "25px";
+    box.style.right = "25px";
+    box.style.padding = "15px 20px";
+    box.style.background = "#198754";
+    box.style.color = "white";
+    box.style.borderRadius = "15px";
+    box.style.boxShadow =
+        "0 8px 25px rgba(0,0,0,.2)";
+    box.style.zIndex = "9999";
+    box.style.fontWeight = "600";
+
+    document.body.appendChild(box);
+
+    setTimeout(function() {
+        box.style.opacity = "0";
+        box.style.transition =
+            "opacity .5s ease";
+
+        setTimeout(function() {
+            box.remove();
+        }, 500);
+
+    }, 3000);
 }
 
 
-// Agar bisa dipanggil dari HTML
-window.refreshLokasi =
-    refreshLokasi;
-```
+/* =========================================
+   INISIALISASI
+   ========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        isiWilayahOtomatis();
+
+        console.log(
+            "🌱 AGRI-SIAGA berhasil dijalankan!"
+        );
+
+    }
+);
+</script>
