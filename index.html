@@ -1,101 +1,751 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#198754">
+<meta name="description" content="AGRI-SIAGA - Sistem Informasi Kondisi Musim dan Rekomendasi Pertanian">
+<title>AGRI-SIAGA | Smart Agriculture</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        linear-gradient(rgba(230,248,237,.92),rgba(245,255,248,.96)),
+        radial-gradient(circle at 20% 20%,#b8e6c8 0,transparent 25%),
+        radial-gradient(circle at 80% 70%,#a7dcb8 0,transparent 25%);
+    color:#173b29;
+    min-height:100vh;
+}
+
+/* NAVBAR */
+nav{
+    width:100%;
+    background:#11643d;
+    color:white;
+    padding:16px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#baf5c9;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#baf5c9;
+}
+
+/* HERO */
+.hero{
+    max-width:1150px;
+    margin:35px auto 20px;
+    padding:45px 30px;
+    border-radius:30px;
+    background:
+        linear-gradient(135deg,rgba(17,100,61,.95),rgba(25,135,84,.88));
+    color:white;
+    box-shadow:0 15px 40px rgba(17,100,61,.2);
+    text-align:center;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    line-height:1.7;
+    opacity:.95;
+}
+
+/* CONTAINER */
+.container{
+    width:90%;
+    max-width:1150px;
+    margin:30px auto 60px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,.94);
+    border-radius:24px;
+    padding:28px;
+    margin-bottom:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    border:1px solid #d7eee0;
+}
+
+.card h2{
+    margin-bottom:10px;
+    color:#11643d;
+}
+
+.subtitle{
+    color:#678171;
+    margin-bottom:20px;
+    line-height:1.6;
+}
+
+/* FORM */
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+select,
+input{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:2px solid #d6eade;
+    background:#f9fffb;
+    font-size:15px;
+    outline:none;
+}
+
+select:focus,
+input:focus{
+    border-color:#198754;
+}
+
+/* BUTTON */
+button{
+    border:none;
+    border-radius:14px;
+    padding:14px 22px;
+    background:#198754;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    background:#11643d;
+    box-shadow:0 8px 20px rgba(17,100,61,.2);
+}
+
+.btn-wrap{
+    margin-top:20px;
+    text-align:center;
+}
+
+/* RESULT */
+#hasilMusim{
+    display:none;
+}
+
+.status{
+    padding:25px;
+    border-radius:20px;
+    background:#e9f8ef;
+    text-align:center;
+    margin:20px 0;
+}
+
+.status h3{
+    font-size:28px;
+    color:#11643d;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.stat{
+    padding:25px;
+    background:#f5fff8;
+    border:1px solid #d9eee1;
+    border-radius:20px;
+    text-align:center;
+}
+
+.stat-icon{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.stat h4{
+    color:#678171;
+    margin-bottom:7px;
+}
+
+.stat strong{
+    font-size:25px;
+    color:#11643d;
+}
+
+/* REKOMENDASI */
+.rekomendasi{
+    margin-top:20px;
+    padding:22px;
+    background:#f0faf3;
+    border-left:6px solid #198754;
+    border-radius:16px;
+    line-height:1.7;
+}
+
+.rekomendasi strong{
+    color:#11643d;
+    font-size:19px;
+}
+
+.rekomendasi ul{
+    margin:12px 0 0 20px;
+}
+
+/* MANUAL */
+.manual-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.manual-result{
+    margin-top:20px;
+    padding:20px;
+    border-radius:18px;
+    background:#eefaf2;
+    display:none;
+}
+
+/* INFO */
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.info-box{
+    padding:22px;
+    border-radius:20px;
+    background:#f8fffa;
+    border:1px solid #dcefe2;
+}
+
+.info-box .icon{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.info-box h3{
+    color:#11643d;
+    margin-bottom:8px;
+}
+
+.info-box p{
+    color:#64766a;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* FOOTER */
+footer{
+    background:#11643d;
+    color:white;
+    text-align:center;
+    padding:25px;
+    line-height:1.7;
+}
+
+footer span{
+    color:#baf5c9;
+    font-weight:bold;
+}
+
+/* ANIMATION */
+.hasil-muncul{
+    animation:muncul .5s ease;
+}
+
+@keyframes muncul{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+
+    nav{
+        padding:15px 5%;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+    .hero{
+        margin:20px 5% 20px;
+        padding:35px 20px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .form-grid,
+    .stats,
+    .manual-grid,
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        width:90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">🌱 AGRI-<span>SIAGA</span></div>
+
+    <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#cek">Cek Musim</a></li>
+        <li><a href="#manual">Analisis</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+    </ul>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="beranda">
+    <h1>🌾 AGRI-SIAGA</h1>
+
+    <p>
+        Sistem Informasi Pertanian Pintar untuk membantu petani
+        mengetahui kondisi musim, memantau cuaca, dan mendapatkan
+        rekomendasi pengelolaan pertanian berdasarkan kondisi wilayah.
+    </p>
+</section>
+
+
+<main class="container">
+
+<!-- PILIH WILAYAH -->
+<section class="card" id="cek">
+
+    <h2>📍 Cek Kondisi Musim Wilayah</h2>
+
+    <p class="subtitle">
+        Pilih wilayah untuk melihat contoh kondisi curah hujan,
+        suhu, kelembapan, dan rekomendasi pertanian.
+    </p>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label for="wilayah">Kabupaten / Kota</label>
+
+            <select id="wilayah">
+                <option value="">-- Pilih Wilayah --</option>
+
+                <option value="Kabupaten Jombang">
+                    Kabupaten Jombang
+                </option>
+
+                <option value="Kabupaten Kediri">
+                    Kabupaten Kediri
+                </option>
+
+                <option value="Kabupaten Malang">
+                    Kabupaten Malang
+                </option>
+
+                <option value="Kabupaten Mojokerto">
+                    Kabupaten Mojokerto
+                </option>
+
+                <option value="Kabupaten Nganjuk">
+                    Kabupaten Nganjuk
+                </option>
+
+                <option value="Kabupaten Madiun">
+                    Kabupaten Madiun
+                </option>
+
+                <option value="Kabupaten Ponorogo">
+                    Kabupaten Ponorogo
+                </option>
+
+                <option value="Kabupaten Banyuwangi">
+                    Kabupaten Banyuwangi
+                </option>
+
+                <option value="Kabupaten Blitar">
+                    Kabupaten Blitar
+                </option>
+
+                <option value="Kabupaten Tulungagung">
+                    Kabupaten Tulungagung
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="btn-wrap">
+        <button id="cekMusim">
+            🌦️ Cek Kondisi Musim
+        </button>
+    </div>
+
+</section>
+
+
+<!-- HASIL -->
+<section class="card" id="hasilMusim">
+
+    <h2>📊 Hasil Analisis Wilayah</h2>
+
+    <div class="status">
+        <p>Kondisi wilayah saat ini</p>
+        <h3 id="statusMusim">
+            🌤️ Belum dianalisis
+        </h3>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-icon">🌧️</div>
+            <h4>Curah Hujan</h4>
+            <strong id="curahHujan">-</strong>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🌡️</div>
+            <h4>Suhu</h4>
+            <strong id="suhu">-</strong>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">💧</div>
+            <h4>Kelembapan</h4>
+            <strong id="kelembapan">-</strong>
+        </div>
+
+    </div>
+
+    <div class="rekomendasi" id="rekomendasi">
+        Pilih wilayah untuk melihat rekomendasi.
+    </div>
+
+</section>
+
+
+<!-- ANALISIS MANUAL -->
+<section class="card" id="manual">
+
+    <h2>🧠 Analisis Data Pertanian</h2>
+
+    <p class="subtitle">
+        Masukkan data curah hujan, suhu, dan kelembapan secara manual.
+        AGRI-SIAGA akan mengelompokkan kondisi menjadi
+        cenderung basah, cenderung kering, atau peralihan.
+    </p>
+
+    <div class="manual-grid">
+
+        <div class="form-group">
+            <label>🌧️ Curah Hujan (mm)</label>
+            <input
+                type="number"
+                id="inputCurahHujan"
+                placeholder="Contoh: 150"
+                min="0">
+        </div>
+
+        <div class="form-group">
+            <label>🌡️ Suhu (°C)</label>
+            <input
+                type="number"
+                id="inputSuhu"
+                placeholder="Contoh: 28"
+                min="-10"
+                max="60">
+        </div>
+
+        <div class="form-group">
+            <label>💧 Kelembapan (%)</label>
+            <input
+                type="number"
+                id="inputKelembapan"
+                placeholder="Contoh: 78"
+                min="0"
+                max="100">
+        </div>
+
+    </div>
+
+    <div class="btn-wrap">
+        <button id="analisisData">
+            🤖 Analisis Data
+        </button>
+    </div>
+
+    <div class="manual-result" id="hasilManual">
+        <h3 id="hasilManualJudul"></h3>
+        <p id="hasilManualText"></p>
+    </div>
+
+</section>
+
+
+<!-- TENTANG -->
+<section class="card" id="tentang">
+
+    <h2>🌱 Tentang AGRI-SIAGA</h2>
+
+    <p class="subtitle">
+        AGRI-SIAGA dirancang sebagai konsep sistem pertanian digital
+        yang membantu pengguna memahami kondisi lingkungan pertanian
+        sebelum melakukan kegiatan budidaya.
+    </p>
+
+    <div class="info-grid">
+
+        <div class="info-box">
+            <div class="icon">🌦️</div>
+
+            <h3>Informasi Musim</h3>
+
+            <p>
+                Menampilkan klasifikasi kondisi wilayah berdasarkan
+                data curah hujan dan kelembapan.
+            </p>
+        </div>
+
+
+        <div class="info-box">
+            <div class="icon">📊</div>
+
+            <h3>Analisis Data</h3>
+
+            <p>
+                Pengguna dapat memasukkan data lingkungan secara
+                manual untuk mendapatkan hasil analisis.
+            </p>
+        </div>
+
+
+        <div class="info-box">
+            <div class="icon">🌾</div>
+
+            <h3>Rekomendasi</h3>
+
+            <p>
+                Memberikan saran umum mengenai pengelolaan lahan
+                berdasarkan kondisi basah, kering, atau peralihan.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+    <div>🌱 <span>AGRI-SIAGA</span></div>
+    <div>Sistem Informasi Pertanian Pintar</div>
+    <div>© 2026 AGRI-SIAGA</div>
+</footer>
+
+
 <script>
+
 /* =========================================
-   AGRI-SIAGA - SISTEM INFORMASI MUSIM
+   DATA WILAYAH
    ========================================= */
 
-/* DATA WILAYAH */
-const wilayahJawaTimur = {
-    "Kabupaten Jombang": {
-        musim: "Peralihan",
-        curahHujan: 145,
-        suhu: 28,
-        kelembapan: 78
+const wilayahData = {
+
+    "Kabupaten Jombang":{
+        musim:"Peralihan",
+        curahHujan:145,
+        suhu:28,
+        kelembapan:78
     },
-    "Kabupaten Kediri": {
-        musim: "Cenderung Basah",
-        curahHujan: 180,
-        suhu: 27,
-        kelembapan: 82
+
+    "Kabupaten Kediri":{
+        musim:"Cenderung Basah",
+        curahHujan:180,
+        suhu:27,
+        kelembapan:82
     },
-    "Kabupaten Malang": {
-        musim: "Cenderung Basah",
-        curahHujan: 210,
-        suhu: 25,
-        kelembapan: 85
+
+    "Kabupaten Malang":{
+        musim:"Cenderung Basah",
+        curahHujan:210,
+        suhu:25,
+        kelembapan:85
     },
-    "Kabupaten Mojokerto": {
-        musim: "Peralihan",
-        curahHujan: 155,
-        suhu: 28,
-        kelembapan: 79
+
+    "Kabupaten Mojokerto":{
+        musim:"Peralihan",
+        curahHujan:155,
+        suhu:28,
+        kelembapan:79
     },
-    "Kabupaten Nganjuk": {
-        musim: "Cenderung Kering",
-        curahHujan: 90,
-        suhu: 29,
-        kelembapan: 70
+
+    "Kabupaten Nganjuk":{
+        musim:"Cenderung Kering",
+        curahHujan:90,
+        suhu:29,
+        kelembapan:70
     },
-    "Kabupaten Madiun": {
-        musim: "Cenderung Kering",
-        curahHujan: 85,
-        suhu: 30,
-        kelembapan: 68
+
+    "Kabupaten Madiun":{
+        musim:"Cenderung Kering",
+        curahHujan:85,
+        suhu:30,
+        kelembapan:68
     },
-    "Kabupaten Ponorogo": {
-        musim: "Peralihan",
-        curahHujan: 135,
-        suhu: 28,
-        kelembapan: 75
+
+    "Kabupaten Ponorogo":{
+        musim:"Peralihan",
+        curahHujan:135,
+        suhu:28,
+        kelembapan:75
     },
-    "Kabupaten Banyuwangi": {
-        musim: "Cenderung Basah",
-        curahHujan: 225,
-        suhu: 26,
-        kelembapan: 86
+
+    "Kabupaten Banyuwangi":{
+        musim:"Cenderung Basah",
+        curahHujan:225,
+        suhu:26,
+        kelembapan:86
     },
-    "Kabupaten Blitar": {
-        musim: "Peralihan",
-        curahHujan: 150,
-        suhu: 27,
-        kelembapan: 79
+
+    "Kabupaten Blitar":{
+        musim:"Peralihan",
+        curahHujan:150,
+        suhu:27,
+        kelembapan:79
     },
-    "Kabupaten Tulungagung": {
-        musim: "Peralihan",
-        curahHujan: 140,
-        suhu: 28,
-        kelembapan: 77
+
+    "Kabupaten Tulungagung":{
+        musim:"Peralihan",
+        curahHujan:140,
+        suhu:28,
+        kelembapan:77
     }
 };
 
 
 /* =========================================
-   ELEMEN HTML
+   AMBIL ELEMENT
    ========================================= */
 
 const wilayahSelect =
-    document.getElementById("wilayah") ||
-    document.getElementById("kabupaten") ||
-    document.getElementById("kota");
+    document.getElementById("wilayah");
 
-const hasilMusim = document.getElementById("hasilMusim");
-const statusMusim = document.getElementById("statusMusim");
-const curahHujan = document.getElementById("curahHujan");
-const suhu = document.getElementById("suhu");
-const kelembapan = document.getElementById("kelembapan");
-const rekomendasi = document.getElementById("rekomendasi");
+const hasilMusim =
+    document.getElementById("hasilMusim");
+
+const statusMusim =
+    document.getElementById("statusMusim");
+
+const curahHujan =
+    document.getElementById("curahHujan");
+
+const suhu =
+    document.getElementById("suhu");
+
+const kelembapan =
+    document.getElementById("kelembapan");
+
+const rekomendasi =
+    document.getElementById("rekomendasi");
+
+const cekMusim =
+    document.getElementById("cekMusim");
+
+const analisisDataButton =
+    document.getElementById("analisisData");
+
+const hasilManual =
+    document.getElementById("hasilManual");
+
+const hasilManualJudul =
+    document.getElementById("hasilManualJudul");
+
+const hasilManualText =
+    document.getElementById("hasilManualText");
 
 
 /* =========================================
-   FUNGSI MENENTUKAN IKON
+   IKON MUSIM
    ========================================= */
 
-function getIconMusim(musim) {
+function iconMusim(musim){
 
-    if (musim === "Cenderung Basah") {
+    if(musim === "Cenderung Basah"){
         return "🌧️";
     }
 
-    if (musim === "Cenderung Kering") {
+    if(musim === "Cenderung Kering"){
         return "☀️";
     }
 
@@ -104,132 +754,109 @@ function getIconMusim(musim) {
 
 
 /* =========================================
-   FUNGSI REKOMENDASI
+   REKOMENDASI
    ========================================= */
 
-function getRekomendasi(musim) {
+function buatRekomendasi(musim){
 
-    if (musim === "Cenderung Basah") {
+    if(musim === "Cenderung Basah"){
 
         return `
-            <strong>🌱 Rekomendasi Pertanian</strong>
-            <p>
-                Kondisi wilayah cenderung basah. 
-                Perhatikan drainase lahan dan hindari genangan air.
-                Pantau kemungkinan penyakit tanaman yang berkembang
-                pada kondisi lembap.
-            </p>
-            <ul>
-                <li>Periksa saluran drainase.</li>
-                <li>Hindari penyiraman berlebihan.</li>
-                <li>Pantau penyakit akibat kelembapan tinggi.</li>
-            </ul>
+        <strong>🌧️ Rekomendasi Kondisi Basah</strong>
+
+        <p>
+        Kondisi wilayah cenderung basah.
+        Perhatikan drainase dan potensi genangan
+        pada lahan pertanian.
+        </p>
+
+        <ul>
+            <li>Periksa saluran drainase.</li>
+            <li>Hindari penyiraman berlebihan.</li>
+            <li>Pantau kondisi penyakit tanaman.</li>
+            <li>Perhatikan kondisi tanah setelah hujan.</li>
+        </ul>
         `;
     }
 
-    if (musim === "Cenderung Kering") {
+
+    if(musim === "Cenderung Kering"){
 
         return `
-            <strong>🌾 Rekomendasi Pertanian</strong>
-            <p>
-                Kondisi wilayah cenderung kering. 
-                Ketersediaan air perlu diperhatikan agar tanaman
-                tetap mendapatkan kebutuhan air yang cukup.
-            </p>
-            <ul>
-                <li>Periksa kelembapan tanah.</li>
-                <li>Gunakan irigasi secara efisien.</li>
-                <li>Manfaatkan penampungan air.</li>
-            </ul>
+        <strong>☀️ Rekomendasi Kondisi Kering</strong>
+
+        <p>
+        Kondisi wilayah cenderung kering.
+        Ketersediaan air perlu diperhatikan
+        selama kegiatan budidaya.
+        </p>
+
+        <ul>
+            <li>Periksa kelembapan tanah.</li>
+            <li>Gunakan air secara efisien.</li>
+            <li>Perhatikan kebutuhan irigasi.</li>
+            <li>Manfaatkan penampungan air.</li>
+        </ul>
         `;
     }
+
 
     return `
-        <strong>🌿 Rekomendasi Pertanian</strong>
-        <p>
-            Wilayah berada pada kondisi peralihan. 
-            Pantau perubahan cuaca dan kondisi tanah secara berkala
-            sebelum menentukan kegiatan budidaya.
-        </p>
-        <ul>
-            <li>Pantau prakiraan hujan.</li>
-            <li>Periksa kelembapan tanah.</li>
-            <li>Sesuaikan penyiraman dengan kondisi lahan.</li>
-        </ul>
+    <strong>🌤️ Rekomendasi Kondisi Peralihan</strong>
+
+    <p>
+    Wilayah berada pada kondisi peralihan.
+    Pantau perubahan cuaca sebelum menentukan
+    kegiatan pertanian.
+    </p>
+
+    <ul>
+        <li>Pantau prakiraan hujan.</li>
+        <li>Periksa kelembapan tanah.</li>
+        <li>Sesuaikan penyiraman.</li>
+        <li>Perhatikan perubahan cuaca.</li>
+    </ul>
     `;
 }
 
 
 /* =========================================
-   TAMPILKAN DATA WILAYAH
+   TAMPILKAN HASIL WILAYAH
    ========================================= */
 
-function tampilkanDataWilayah(namaWilayah) {
+function tampilkanWilayah(nama){
 
-    const data = wilayahJawaTimur[namaWilayah];
+    const data = wilayahData[nama];
 
-    if (!data) {
+    if(!data){
         alert("Silakan pilih wilayah terlebih dahulu.");
         return;
     }
 
-    const icon = getIconMusim(data.musim);
+    statusMusim.innerHTML =
+        iconMusim(data.musim) + " " + data.musim;
 
-    if (hasilMusim) {
-        hasilMusim.style.display = "block";
-    }
+    curahHujan.innerHTML =
+        data.curahHujan + " mm";
 
-    if (statusMusim) {
-        statusMusim.innerHTML =
-            `${icon} ${data.musim}`;
-    }
+    suhu.innerHTML =
+        data.suhu + "°C";
 
-    if (curahHujan) {
-        curahHujan.innerHTML =
-            `${data.curahHujan} mm`;
-    }
+    kelembapan.innerHTML =
+        data.kelembapan + "%";
 
-    if (suhu) {
-        suhu.innerHTML =
-            `${data.suhu}°C`;
-    }
+    rekomendasi.innerHTML =
+        buatRekomendasi(data.musim);
 
-    if (kelembapan) {
-        kelembapan.innerHTML =
-            `${data.kelembapan}%`;
-    }
+    hasilMusim.style.display = "block";
 
-    if (rekomendasi) {
-        rekomendasi.innerHTML =
-            getRekomendasi(data.musim);
-    }
+    hasilMusim.classList.remove("hasil-muncul");
 
-    /* Animasi hasil */
-    if (hasilMusim) {
-        hasilMusim.classList.remove("hasil-muncul");
+    setTimeout(function(){
 
-        setTimeout(() => {
-            hasilMusim.classList.add("hasil-muncul");
-        }, 50);
-    }
-}
+        hasilMusim.classList.add("hasil-muncul");
 
-
-/* =========================================
-   EVENT PILIH WILAYAH
-   ========================================= */
-
-if (wilayahSelect) {
-
-    wilayahSelect.addEventListener("change", function () {
-
-        const namaWilayah = this.value;
-
-        if (namaWilayah) {
-            tampilkanDataWilayah(namaWilayah);
-        }
-
-    });
+    },50);
 
 }
 
@@ -238,253 +865,196 @@ if (wilayahSelect) {
    TOMBOL CEK MUSIM
    ========================================= */
 
-const tombolCek =
-    document.getElementById("cekMusim") ||
-    document.getElementById("btnCekMusim");
+cekMusim.addEventListener("click",function(){
 
-if (tombolCek) {
+    const wilayah =
+        wilayahSelect.value;
 
-    tombolCek.addEventListener("click", function () {
+    if(wilayah === ""){
 
-        if (!wilayahSelect || !wilayahSelect.value) {
-
-            alert("🌱 Silakan pilih wilayah terlebih dahulu.");
-
-            return;
-        }
-
-        tampilkanDataWilayah(wilayahSelect.value);
-
-    });
-
-}
-
-
-/* =========================================
-   DATA MANUAL
-   Jika pengguna memasukkan data sendiri
-   ========================================= */
-
-function analisisDataManual(hujan, suhuData, kelembapanData) {
-
-    hujan = Number(hujan);
-    suhuData = Number(suhuData);
-    kelembapanData = Number(kelembapanData);
-
-    let musim;
-
-    if (hujan >= 170 || kelembapanData >= 82) {
-
-        musim = "Cenderung Basah";
-
-    } else if (hujan <= 100 || kelembapanData <= 70) {
-
-        musim = "Cenderung Kering";
-
-    } else {
-
-        musim = "Peralihan";
-
-    }
-
-    return {
-        musim: musim,
-        hujan: hujan,
-        suhu: suhuData,
-        kelembapan: kelembapanData
-    };
-}
-
-
-/* =========================================
-   FUNGSI TOMBOL ANALISIS DATA
-   ========================================= */
-
-const tombolAnalisis =
-    document.getElementById("analisisData");
-
-if (tombolAnalisis) {
-
-    tombolAnalisis.addEventListener("click", function () {
-
-        const inputHujan =
-            document.getElementById("inputCurahHujan");
-
-        const inputSuhu =
-            document.getElementById("inputSuhu");
-
-        const inputKelembapan =
-            document.getElementById("inputKelembapan");
-
-        if (
-            !inputHujan ||
-            !inputSuhu ||
-            !inputKelembapan
-        ) {
-            return;
-        }
-
-        if (
-            inputHujan.value === "" ||
-            inputSuhu.value === "" ||
-            inputKelembapan.value === ""
-        ) {
-
-            alert("Lengkapi semua data terlebih dahulu.");
-
-            return;
-        }
-
-        const hasil = analisisDataManual(
-            inputHujan.value,
-            inputSuhu.value,
-            inputKelembapan.value
+        alert(
+            "🌱 Silakan pilih kabupaten atau kota terlebih dahulu."
         );
 
-        if (statusMusim) {
-            statusMusim.innerHTML =
-                `${getIconMusim(hasil.musim)} ${hasil.musim}`;
-        }
-
-        if (curahHujan) {
-            curahHujan.innerHTML =
-                `${hasil.hujan} mm`;
-        }
-
-        if (suhu) {
-            suhu.innerHTML =
-                `${hasil.suhu}°C`;
-        }
-
-        if (kelembapan) {
-            kelembapan.innerHTML =
-                `${hasil.kelembapan}%`;
-        }
-
-        if (rekomendasi) {
-            rekomendasi.innerHTML =
-                getRekomendasi(hasil.musim);
-        }
-
-        if (hasilMusim) {
-            hasilMusim.style.display = "block";
-        }
-    });
-
-}
-
-
-/* =========================================
-   DATA WILAYAH OTOMATIS KE SELECT
-   ========================================= */
-
-function isiWilayahOtomatis() {
-
-    if (!wilayahSelect) return;
-
-    /*
-       Hanya mengisi jika select masih kosong.
-       Jadi tidak merusak pilihan yang sudah
-       dibuat di HTML.
-    */
-
-    if (wilayahSelect.options.length <= 1) {
-
-        Object.keys(wilayahJawaTimur).forEach(
-            function(namaWilayah) {
-
-                const option =
-                    document.createElement("option");
-
-                option.value = namaWilayah;
-                option.textContent = namaWilayah;
-
-                wilayahSelect.appendChild(option);
-            }
-        );
+        return;
     }
-}
 
-
-/* =========================================
-   ANIMASI CARD
-   ========================================= */
-
-const cards =
-    document.querySelectorAll(".card, .weather-card, .stat-card");
-
-cards.forEach(function(card, index) {
-
-    card.style.opacity = "0";
-    card.style.transform = "translateY(15px)";
-
-    setTimeout(function() {
-
-        card.style.transition =
-            "all 0.5s ease";
-
-        card.style.opacity = "1";
-        card.style.transform =
-            "translateY(0)";
-
-    }, index * 100);
+    tampilkanWilayah(wilayah);
 
 });
 
 
 /* =========================================
-   NOTIFIKASI
+   ANALISIS DATA MANUAL
    ========================================= */
 
-function notifikasiAGRI(pesan) {
+function analisisManual(hujan,suhuData,kelembapanData){
 
-    const box =
-        document.createElement("div");
+    let musim;
 
-    box.innerHTML =
-        `🌱 ${pesan}`;
+    /*
+       Aturan klasifikasi sederhana.
+       Data ini merupakan simulasi/demo,
+       bukan pengganti data meteorologi resmi.
+    */
 
-    box.style.position = "fixed";
-    box.style.bottom = "25px";
-    box.style.right = "25px";
-    box.style.padding = "15px 20px";
-    box.style.background = "#198754";
-    box.style.color = "white";
-    box.style.borderRadius = "15px";
-    box.style.boxShadow =
-        "0 8px 25px rgba(0,0,0,.2)";
-    box.style.zIndex = "9999";
-    box.style.fontWeight = "600";
+    if(
+        hujan >= 170 ||
+        kelembapanData >= 82
+    ){
 
-    document.body.appendChild(box);
+        musim = "Cenderung Basah";
 
-    setTimeout(function() {
-        box.style.opacity = "0";
-        box.style.transition =
-            "opacity .5s ease";
+    }
 
-        setTimeout(function() {
-            box.remove();
-        }, 500);
+    else if(
+        hujan <= 100 ||
+        kelembapanData <= 70
+    ){
 
-    }, 3000);
+        musim = "Cenderung Kering";
+
+    }
+
+    else{
+
+        musim = "Peralihan";
+
+    }
+
+    return musim;
 }
 
 
 /* =========================================
-   INISIALISASI
+   TOMBOL ANALISIS MANUAL
    ========================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+analisisDataButton.addEventListener(
+    "click",
+    function(){
 
-        isiWilayahOtomatis();
+        const hujan =
+            Number(
+                document.getElementById(
+                    "inputCurahHujan"
+                ).value
+            );
 
-        console.log(
-            "🌱 AGRI-SIAGA berhasil dijalankan!"
+        const suhuData =
+            Number(
+                document.getElementById(
+                    "inputSuhu"
+                ).value
+            );
+
+        const kelembapanData =
+            Number(
+                document.getElementById(
+                    "inputKelembapan"
+                ).value
+            );
+
+
+        if(
+            document.getElementById(
+                "inputCurahHujan"
+            ).value === "" ||
+
+            document.getElementById(
+                "inputSuhu"
+            ).value === "" ||
+
+            document.getElementById(
+                "inputKelembapan"
+            ).value === ""
+        ){
+
+            alert(
+                "⚠️ Lengkapi semua data terlebih dahulu."
+            );
+
+            return;
+        }
+
+
+        if(
+            kelembapanData < 0 ||
+            kelembapanData > 100
+        ){
+
+            alert(
+                "Kelembapan harus berada antara 0 sampai 100%."
+            );
+
+            return;
+        }
+
+
+        const musim =
+            analisisManual(
+                hujan,
+                suhuData,
+                kelembapanData
+            );
+
+
+        hasilManual.style.display = "block";
+
+        hasilManualJudul.innerHTML =
+            iconMusim(musim) +
+            " Hasil: " +
+            musim;
+
+        hasilManualText.innerHTML =
+            buatRekomendasi(musim);
+
+        hasilManual.classList.remove(
+            "hasil-muncul"
         );
+
+        setTimeout(function(){
+
+            hasilManual.classList.add(
+                "hasil-muncul"
+            );
+
+        },50);
 
     }
 );
+
+
+/* =========================================
+   AUTO ANALISIS SAAT PILIH WILAYAH
+   ========================================= */
+
+wilayahSelect.addEventListener(
+    "change",
+    function(){
+
+        if(this.value !== ""){
+
+            tampilkanWilayah(
+                this.value
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   KONSOLE
+   ========================================= */
+
+console.log(
+    "🌱 AGRI-SIAGA berhasil dijalankan."
+);
+
 </script>
+
+</body>
+</html>
+```
